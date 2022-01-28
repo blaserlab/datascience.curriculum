@@ -6,4 +6,7 @@ use_readme_md()
 use_news_md()
 use_git()
 use_github(private = TRUE)
-use_data_raw()
+use_vignette("week_1")
+
+
+document()
