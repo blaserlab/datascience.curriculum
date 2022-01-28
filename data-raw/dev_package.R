@@ -10,3 +10,5 @@ use_vignette("week_1")
 
 
 document()
+# commit and push
+devtools::install_github("blaserlab/datascience.curriculum", build_vignettes = T, force = TRUE)

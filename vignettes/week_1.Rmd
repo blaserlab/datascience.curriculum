@@ -2,7 +2,7 @@
 title: "Week 1"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{week_1}
+  %\VignetteIndexEntry{Week 1:  Setting Up}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
