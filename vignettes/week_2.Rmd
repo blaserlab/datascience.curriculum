@@ -47,9 +47,8 @@ Data should exist as a fixed, unchanging file on your hard drive.  You want to r
 # attach the packages we will need
 library(tidyverse)
 # read in an example data file
-# substitute a file path to your own data
-# readr::read_csv(file = system.file("extdata/demo_iris_data.csv", package = "datascience.curriculum"))
-read_csv("inst/extdata/demo_iris_data.csv")
+# or substitute a file path to your own data
+read_csv(file = "https://raw.githubusercontent.com/blaserlab/datascience.curriculum/main/inst/extdata/demo_iris_data.csv")
 ```
 
 These data are from a collection of sample datasets provided with R.  As provided, it lacks a useful "key" column, so I added the observation column in the first position.  The data indicate measurements for various species of iris flower.
@@ -58,10 +57,7 @@ When read into R, the read_csv command infers the data types from the values pro
 
 
 ```{r}
-# read in an example data file
-# substitute a file path to your own data
-# readr::read_csv(file = system.file("extdata/demo_iris_data.csv", package = "datascience.curriculum"))
-read_csv("inst/extdata/demo_iris_data.csv", col_types = "fddddc")
+read_csv(file = "https://raw.githubusercontent.com/blaserlab/datascience.curriculum/main/inst/extdata/demo_iris_data.csv", col_types = "fddddc")
 ```
 
 The string "fddddc" tells R to interpret the columns as "factor", "double" or "character".
@@ -82,8 +78,7 @@ An important advantage of using a programming language to analyze data is the co
 ```{r}
 # assign the data to the variable, demo_data
 # readr::read_csv(file = system.file("extdata/demo_iris_data.csv", package = "datascience.curriculum"))
-demo_data <- read_csv("inst/extdata/demo_iris_data.csv", col_types = "fddddc")
-
+demo_data <- read_csv(file = "https://raw.githubusercontent.com/blaserlab/datascience.curriculum/main/inst/extdata/demo_iris_data.csv", col_types = "fddddc")
 demo_data
 ```
 
