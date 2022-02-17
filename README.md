@@ -1,10 +1,3 @@
----
-title: "Curriculum"
-author: "Brad Blaser"
-date: "January 28 2022" 
-output: html_document
----
-
 ### Welcome and Motivation
 
 Welcome to this Computational Data Analysis Course!
