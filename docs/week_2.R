@@ -40,10 +40,10 @@ c(1, "b", "charlie")
 
 ## -----------------------------------------------------------------------------
 # extract a column by position
-demo_data[,2]
+demo_data[[2]]
 
 # extract a column by name
-demo_data["Species"]
+demo_data[["Species"]]
 
 # another way to extract a column by name
 demo_data$Species
@@ -62,6 +62,25 @@ names(demo_list) <- c("a_number", "a_letter", "a_name")
 demo_list$a_number
 demo_list$a_letter
 demo_list$a_name
+
+
+## -----------------------------------------------------------------------------
+# subset using dataframe[row,colum] syntax
+# subset a dataframe to get the second and third columns only
+demo_data[,2:3]
+
+# subset a dataframe to get the first and second rows only
+demo_data[1:2,]
+
+# subset to include columns by name 
+demo_data[c("Species", "observation")]
+
+# subset a list to return a smaller list
+# return the first two elements
+demo_list[1:2]
+
+# subset a list by name
+demo_list["a_name"]
 
 
 ## -----------------------------------------------------------------------------
