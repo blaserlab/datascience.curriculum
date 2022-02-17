@@ -53,7 +53,7 @@ All of the code will be made available to you.  You should try running everythin
 
 ### Topics
 
-####	[Week 1:  Setting up your computing environment](../vignettes/week_1.Rmd)
+####	[Week 1:  Setting up your computing environment](/vignettes/week_1.Rmd)
 
 * Intro to R/Rstudio
 * Packages

@@ -1,0 +1,216 @@
+---
+title: "Week 6"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{week_6}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+library(datascience.curriculum)
+```
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  warning = FALSE,
+  message = FALSE
+)
+```
+
+## Introduction
+
+This lecture is on building R data packages.  This is a relatively advanced topic, but I think it is important and can be learned quickly.  This lecture assumes you have a good working knowledge of R and your computer file system.  You do not need to be an expert in R to do this.
+
+Why would you want to build a data package?  Here are the stages your data will pass through:
+
+* raw data:  should be unchanged after creation.  Can be entirely contained within an R data package if it is a lightweight text file.  Larger files should be archived on a shared network drive.
+* processed data: these are data that have been processed into a form that can be used for plotting or statistical analysis with only a few lines of code and a second or two of computation time.
+* analyzed data:  the final tables or figures that convey the results of your experiment to your reader.
+
+The data package is meant to hold processed data and the code you used to generate it from the raw data.  Since these two things are related, it is natural to keep them together in the same digital file.  Often data processing is computer resource or time-intensive and so you don't want to repeat it every time you interact with your work.  Some analyses (like single cell RNAseq dimension reduction) are not absolutely reproducible in the strictest sense and so saving a processed data object means you are always starting from the same place with your subsequent analysis.
+
+What should and shouldn't be in a data package?  This you will have to decide for yourself.  There is some overhead (effort) to making a data package, so you won't want to save things that can be very rapidly calculated or derived from other data objects.  Generally you want a data package to be no more than a few GB in size so you may need to be selective with what you save.  If it takes more than 3-4 seconds to calculate data for a table or figure, then I will usually put it in the data package.  Here are the types of things I do and don't include
+
+Do include:
+* processed tabular data for generating statistics or plots
+* single cell data objects (e.g. cellDataSet or Seurat objects)
+* qc files for single cell analysis
+* genomic ranges objects 
+
+Do not include:
+* raw sequencing data, genomic features files, or cell-barcode matrices
+* subsets of any object already in the data package
+* plots
+
+In summary, the benefits of using a data package are:
+* Your processed data is linked to the code used to generate it
+* All processed data and code are in a single file that can be distributed and used by collaborators or reviewers
+* Data objects are documented so you have a better chance of recalling what they are and how they were generated at any point in the future
+* Data objects are version-controlled and not easy to change inadvertently.  
+
+
+## Saving R objects
+
+Once you have identified a data object you would like to put into a package, you first need to save it to disk as a ```.rda``` file.  Usually you are going to be starting from within an analysis project.  Here are some rules/best practices:
+
+* create a new directory called "data" to hold your data object
+* save only 1 object per file.  R will let you save more but this is not a desirable way to go.
+* give the file the same name as the object.
+* use compression to make the file size as small as possible
+
+```{r eval = FALSE}
+# some demo data to save
+demo_iris_data <- iris
+
+# make a data directory
+dir.create("data")
+
+# save the data as a .rda file
+save(demo_iris_data, 
+     file = "data/demo_iris_data.rda", 
+     compress = "bzip2")
+
+
+```
+
+The bzip2 compression algorithm is usually the most efficient.  Sometimes gzip may produce smaller files. 
+
+At this point you could just stop and then read in the data later when needed using ```load("data/demo_iris_data.rda")```.  But it is better to put this into a package and then install the package in your project for the reasons mentioned above.
+
+## Setting up the package
+
+I have the following lines saved in a script that I use whenever I make a new data package.
+
+```{r eval = FALSE}
+# create the package and make it the active project 
+usethis::create_package("datascience.demopkg")
+
+# make a license file
+usethis::use_mit_license("Brad Blaser")
+
+# make a readme file.  Use this to explain how to install and use your data package.
+usethis::use_readme_md()
+
+# make a news file.  Use this to make notes on changes between versions of your data package.
+usethis::use_news_md()
+
+# initialize git and github (recommended)
+usethis::use_git()
+usethis::use_github(private = TRUE)
+
+```
+
+These commands will set up a very specific file and folder structure in your project.  
+
+![Package structure](images/package_structure.png){ width=100% }
+
+Some important things to note
+* DESCRIPTION:  This is the file that indicates to R that this is a package.  The most important line for you to interact with is version.  Every time you make a new version of the package (add, delete or edit data), you should increment the version number.  Title and description can be edited to provide a general description of the purpose of the package but these are not critical.  You should leave the other lines as-is.
+* R/:  This directory should contain R files.  If you were building a package with functions, this is where they would go.  For a data-only package, you will create a single R file here called "data.R".
+* NAMESPACE:  This is not used by data-only packages.  Do not edit.
+* README.md and NEWS.md are text files you can edit as described above.
+* The other files mostly boilerplate configuration files which should be left alone.
+
+## Adding data
+
+This is very simple.  Just move the data directory from the analysis project into the root directory of the new data package.  If you are editing an existing package, just copy the new .rda files.  You can only have 1 data directory.
+
+![Data directory added](images/data_directory.png){ width=100% }
+
+## Adding data-processing code
+
+It is good to keep the processed data with the code you used to process it.  That way if there is a problem you can track it down easily.  This code should go in a new directory called "data-raw".  This is an unfortunate name because there is no data in there, only code.
+
+You need to enclose this in a directory called "inst".  Everything in the inst directory gets installed with your package.
+
+```{r eval = FALSE}
+dir.create("inst")
+dir.create("inst/data-raw")
+# now move the data processing scripts into data-raw
+```
+
+### Option:  include raw data
+
+If you want to actually include the raw data or other files with your package, make a directory called "inst/extdata" and put them in there.
+
+## Documenting data
+
+Documenting your data is useful to yourself and others.  
+
+All objects in your data folder need to have a documentation entry.  Documentation is done in a structured text language called Roxygen which is very easy to work with.
+
+```{r eval = FALSE}
+# make a data.R file
+file.create("R/data.R")
+
+# make sure the "sinew" package is installed and attached
+library("sinew")
+
+```
+
+This will give you an "Addin" to Rstudio.  
+
+![Sinew addin](images/sinew.png){ width=100% }
+
+
+The best way to go from here is to 
+* load all of your new data objects into the global environment.  In this case there is only 1.
+* type the name in your data.R script
+* highlight the entire name of the object
+* click Addins > createOxygen
+* you should get this:
+
+## Finish up the data package
+
+Now you need to tell R to generate the documentation files and build the binary data package.
+
+```{r eval=FALSE}
+# generate the formatted documentation manuals
+devtools::document()
+
+# optionally you can now commit and push to github using the terminal
+
+# build the binary data package
+devtools::build()
+
+```
+That's it.  When you run the last command, a .tar.gz file will be generated in the directory enclosing your data package code.  You can move that wherever you like.  Better yet you can provide a file path where R will save the binary package.  I usually save to network storage.  You want to be sure to increment your version number each time you make changes so you don't overwrite old versions of your data.  It is always good to be able to go back in time if needed.
+
+The package can easily be shared inside your firewall with local collaborators.  For external collaborators or reviewers, OSU provides access to the [Dryad](https://datadryad.org/stash/) data repository.  There is a very straightforward web interface and the option to keep data private until the manuscript is published.
+
+##  Installing the Data Package
+
+The packages we make may be a little different from typical R packages.  They have no functions which is somewhat unusual but the biggest difference is size.  If you are working with single cell data, it is likely that the size of your data package will exceed what R can handle with its normal mechanisms for loading data.
+
+Instead we use functions from a couple of packages to load the data into your R session as a digital "pointer".  Until you ask R to reference a particular data item, it will reside in memory as a tiny digital address to an area on your hard drive.  When you ask R to reference those data with you code, it is then loaded into memory to be used.   This has the additional advantage of reducing memory requirements for your work. 
+
+```{r eval = FALSE}
+# load the packages we need
+library("blaseRtools")
+library("lazyData")
+
+# install the data package
+bb_renv_datapkg(<path to directory containing data package>)
+
+requireData(<name of the data package without version number>)
+
+```
+The bb_renv_datapkg function will go to the directory where your data lives, check for the latest version, and install it if necessary.  This is the recommended way to go because you almost always want the latest version and you don't want to waste time installing it if necessary.  You can also install it with ```renv::install()``` though.  
+
+The requireData command is what loads the digital pointers into your R session.  Check out the environment dropdown menu to see for yourself.
+
+## Conclusion
+
+If you have been working in parallel with your own data, you will hopefully have come to appreciate the benefits 
+
+
+
+
+
+
+
+
+
