@@ -61,63 +61,56 @@ All of the code will be made available to you.  You should try running everythin
 ### Topics
 
 ####	Week 1:  Setting Up 
-  Intro to R/Rstudio
-	Packages
-  Projects
-	Project initialization
-	Renv environments
-	Package installation
-	Basic Git for the single user
+
+* Intro to R/Rstudio
+* Packages
+* Projects
+* Project initialization
+* Renv environments
+* Package installation
+* Basic Git for the single user
 
 ####     Week 2:  Basics of working with data in R
-	Input/output
-        Variable assignment
-        Basic Data structures:  Vectors, lists, matrices, dataframes, and tibbles
-        Subsetting and combining
-	Data operations
-	Dplyr: join, filter, select, summarize, mutate, gather
-        Pipes
-	Booleans
+
+* Proper data format
+* Input/output
+  * Variable assignment
+  * Basic Data structures:  Vectors, lists, matrices, dataframes, and tibbles
+  * Subsetting and combining
+* Data operations
+* Dplyr
+  * pivot
+  * join
+  * filter
+  * select
+  * summarize
+  * mutate
+* Pipes
+* Booleans
 
 ####	Week 3:  More advanced concepts in R
-    Scope
-    Writing Custom Functions
-    Map/Apply
-    Logic
-    Plots
+
+* Scope
+* Writing Custom Functions
+* Map/Apply
+* Plots
 
 ####	Week 4: blaseRtools scRNA-seq tutorial 1
-    Advanced data structures:  cds
-        General form
-        Extracting what you want
-            Clusters
-            Partitions
-        Pseudotime
-        Subsetting
-        Joining on new column data
-    Visualization
-    Regression
+
+* Advanced data structures:  cds
 
 ####	Week 5: blaseRtools scRNA-seq tutorial 2
-    Advanced data structures:  cds
-        General form
-        Extracting what you want
-            Clusters
-            Partitions
-        Pseudotime
-        Subsetting
-        Joining on new column data
-    Visualization
-    Regression
 
 #### Week 6:  Building and using data packages
-  Projects vs Packages
-  Initialization
-  DESCRIPTION
-  LazyData
-  NEWS
-  R
-  data
-  inst/data-raw
-  inst/extdata
+
+* Projects vs Packages
+* Initialization
+* DESCRIPTION
+* LazyData
+* NEWS
+* R
+* data
+* inst/data-raw
+* inst/extdata
+* Dryad
   

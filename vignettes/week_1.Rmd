@@ -7,7 +7,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r setup}
+```{r setup, include=FALSE}
 library(datascience.curriculum)
 ```
 
@@ -22,13 +22,15 @@ knitr::opts_chunk$set(
 
 ## Introduction
 
-This is a very basic introduction to working with R and R studio.  There are many detailed resources out there for you.  Too many, in fact.  Here I will try to show you what I view as best data practices for rigorous and reproducible biological research.  If you encounter unexpected errors or want to read more, just google wisely and you will find the answer.  This is the best way to learn.
+This course will focus on what I believe are the essential skills necessary for a laboratory-based scienties to use R and Rstudio in an effective way.  There are many other detailed resources out there for you.  [Software carpentry](https://software-carpentry.org/lessons/previous/) has very good tutorials for R, python, git and working with the command line.  These are good if you want to extend your knowledge beyond what we cover here.  I will try to show you what I view as best data practices for rigorous and reproducible biological research.  
+
+Learning R at times will seem like learning a foreign language.  You will make errors.  **Always remember that you will never be the first person to encounter an error.  Learn how to google the error message and 99% of the time you will find your answer in the first 3 hits**.  This is how you learn. 
 
 ## R and Rstudio
 
-R is a statistical programming language.  It is like the engine for an automobile.  In some places you might see it referred to as a "kernel".  Around the kernel is a shell.  The shell provides all of the ways we are able to interact with the kernel.  RStudio is the shell.  Another name is integrated development environment or IDE.  R can be accessed from different shells, but Rstudio is the best so look no further.  
+R is a statistical programming language.  It is like the engine for an automobile.  RStudio is like the rest of the automobile.  Rstudio is known as an integrated development environment or IDE.  
 
-Rstudio provides two ways of interacting with R:  directly via the R Console and via R scripts.
+Rstudio provides two main ways of interacting with R:  directly via the R Console and via R scripts.
 
 * R console:  you type in commands and output is usually returned to the console.  The commands are logged in a history file if you really need them, but this is inconvenient.  A better option is to use scripts.  
   
@@ -38,11 +40,7 @@ Rstudio provides two ways of interacting with R:  directly via the R Console and
 
   **You always want your programs to error in obvious ways so you don't carry on with incorrect data.**
 
-![Rstudio IDE](rstudio_capture.png){width=100%}
-
-* R jobs:  Let's say you put together an analysis R script that you want to run from scratch but maybe it takes a while to do.  You can source it as a background job so you can do other things while it is running.  Not often used but worth knowing about. 
-
-Rstudio provides a number of standard panes that display critical information.  We will review these in class or you can explore them on your own.
+Rstudio provides a number of standard panes that display useful information.  We will review these in class or you can explore them on your own.
 
 ## Packages
 
@@ -52,73 +50,65 @@ Packages are most often stored and distributed as compressed binary files via st
 
 **What happens when we "install" packages?**
 
-R connects to the package binary (if source code, it is downloaded and compiled to binary locally) and then unpacks it in a library directory.  You can find most of the original source files if you know where your R package library is stored (more on this when we discuss Renv).
+R downloads the compressed file and then unpacks it in a library directory on your computer or server.  You can find the original source files if you know where your R package library is stored (more on this when we discuss Renv).  If you want to know how a function is working, this is one way to find it.
 
-The base function to do this is ```install.packages("<package name>")``` which is most useful for official CRAN packages. For a more versatile tool, install renv with ```install.packages("renv")``` and then run ```renv::install("<package name>")```.  Using install from Renv will handle CRAN, bioconductor (prefix package name with bioc::), github, and local sources pretty easily, so this is the recommended approach.
+The function you use to install packages is ```install.packages("<package name>")```.  This is most useful for official CRAN packages. For a more versatile tool, install renv with ```install.packages("renv")``` and then run ```renv::install("<package name>")```.  Using install from Renv will handle CRAN, bioconductor (prefix package name with bioc::), github, and local sources pretty easily, so this is the recommended approach.
 
-**If you ever get an error that says a function or package is unavailable, the first thing you want to do is make sure the package is installed.**
+**If you ever get an error that says a function or package is unavailable, the first thing you want to do is make sure the package is installed.**  You may not recognize what it is but it may be required by another package you wish to use.  This is called a dependency.
 
-Once you have installed a package its public functions are available to be called using the package name followed by 2 colons such as ```blaseRtools::bb_var_umap(cds)```. But this is not always the best way to go.  
+Once you have installed a package its functions are available to be called using the package name followed by 2 colons such as ```blaseRtools::bb_var_umap(cds)```. But this is not always the best way to go.  
 
-Let's say ```function_A``` from ```package_X``` requires ```function_B``` from ```package_X``` to run but ```function_B``` does not require ```function_A```.  ```package_X::function_A``` will fail but ```package_X::function_B``` will run. Alternatively you can attach packages to your R session like so: 
+You may need functions from one package for a different package to work.  To make these available you need to run ```library("<package name>")```.  This will attach all of the functions from that package to your session.   
 
-```{r}
-# attach the packages we will need
-library("tidyverse")
-```
-
-What this does is create a private environment for all of the functions for each of those packages.  They can all operate together in that environment without interfering with each other, so ```package_A``` will run correctly.  But if you attach too many packages R may get confused about which environment you are referring to so try to attach only what you need.   
+Beware of attaching more packages than you actually need though because there could be "namespace conflicts".  This happens when the same term applies to two different functions from two different packages.  R picks one and goes with it without clearly indicating that it is doing so.  This is a common source of errors.
 
 ## Projects
 
-A project is a self-contained group of files for your R data analysis.  This should align conceptually with your experiments.  If you have a set of single cell data and imaging data related to the same scientific concept then it can all go in the same project.
+A project is a self-contained group of files for your R data analysis.  This should align conceptually with your experiments.  If you have a set of single cell data and imaging data related to the same scientific concept or paper then it can all go in the same project.
 
-Projects automatically define their working directory to be the root of the projects.  That means you can reference any file in the root directory by typing its name like so: "file.R".  If that file was one directory down, it would be "directory/file.R". There is no reason ever to change this behavior.
+Projects automatically define their working directory to be the root of the projects.  That means you can reference any file in the root directory by typing its name like so: "file.R".  If that file was one directory down, it would be "directory/file.R". There is almost no reason ever to change this behavior.
 
 You always want to be working in a project.
 
 ### Setting up a project
 
-The best way to do this is through automated commands.  I have the few lines saved in a script I always use.
+The best way to do this is through automated commands, rather than through the program menus.  I have these lines saved in a script I always use to initialize a project.  This way all of my projects are structured the same way.
 
 ```{r eval=FALSE}
 # create a project called rclass_example in your home directory
 usethis::create_project("rclass_example")
+
 # generate a standard license file for your work 
 usethis::use_mit_license("Brad Blaser")
+
 # generate a readme file so you can document your work
 usethis::use_readme_md()
+
 # use git and set up a private remote repository on github
 # these will fail unless you have git installed on your computer and 
-# have a github account.  We will discuss in detail in a separate lecture so 
-# you can omit the following for now.
+# have a github account.
 usethis::use_git()
 usethis::use_github(private = TRUE)
 ```
 
 You can open or close projects by selecting from the dropdown menu in the top right of Rstudio 
 
-![Rstudio IDE](rstudio_capture.png){width=100%}
-
 Be aware: any time you close or switch projects, the R session is restarted and you will lose all objects in your Global Environment.
 
 ## Global Environment
 
-Environment is a very overloaded word in R, by which I mean it is used to name too many separate concepts, and so is difficult to learn.
+Environment is a very overloaded word in R, by which I mean it is used to name too many separate concepts, and so is difficult to learn.  It is also referred to as "workspace" which is a much better term.
 
-Chances are that you are familiar with the global environment panel.  I mention it now because it gets refreshed every time you change projects.  
+The global environment is like short-term memory.  It holds values and the names we give to these values in order to reference them.  You may think of the names as "variables".  Values can be data or code (functions).  Fundamentally, the global environment is a set of name-value relationships.
 
-The global environment is closely related to the programming concept of "scope".  Scope is the way in which names refer to values in computer programming.  The global environment is the set of all name:value relationships defined in our interactive R session.  
-
-Let's say I attach package_X which has function_A which performs some calculation.  Maybe I am unaware of this and I define my own function_A to perform a different function.  My new function and any other variables I define live in the global environment.  function_A from package_X lives in the package_X environment.  You can see all of the different active environments like so:    
+R maintains many different environments concurrently.  Each package you attach with the ```library``` command gets its own environment.  The term "global" is even more confusing because it is not really global in the sense that it encompasses all other environments.  Rather, it is the highest priority environment.  If you enter a variable name into R, it always looks in the global environment first and then goes down the line until it hits the package:base environment.  So if I write a function in my R script called "mean" that for some reason calculates the median of a set of numbers (not a great idea), R will store that in the global environment.  Later on if I ask R to use the "mean" function, it will use the version from the global environment and not the version from the base environment.  It will calculate the median instead of the mean in this case.
 
 ```{r}
+# produce a list of all environments
 search()
 ```
 
-R always looks in the global environment first and then goes down the line until it hits the package:base environment.  So if I call function_A in my R script, R will use the version I defined in the current session, not the version from package_X
-
-Since the global environment gets wiped out every time you change projects you have to have a way to save what you want in permanent storage and to recreate the rest as needed from code.  We will discuss this more when we talk about building packages. 
+Since the global environment gets wiped out every time you change projects or restart R, you have to have a way to save what you want in permanent storage and to recreate the rest as needed from code.  We will discuss this more when we talk about building packages. 
 
 ## Renv environment
 
@@ -132,15 +122,41 @@ What happens is Renv discovers all of the packages you use in your code, copies 
 
 This action changes the package library for your project to the renv directory within the project itslef.  
 
+```{r eval=FALSE}
+# initiate an Renv environment in a new project
+renv::init()
 
-* initiate an Renv environment in a *new project* with ```renv::init()```
-* If you clone a repository from a source like github, the lock file will be there but packages themselves will not be included.  So you need to install packages listed in the lockfile with ```renv::restore()```
+# install packages listed in the lockfile
+renv::restore()
 
-99% of the problems that occur with Renv can be fixed by installing or reinstalling the missing software with ```renv::install()```.
+# install any packages that get missed
+renv::install()
+```
 
 ## Project organization
 
-For a simple data analysis project, you can structure the files/folders within the project however you like.  But for the sake of organization I keep all of my R scripts in a directory called "R".  The rules become more strict when we build packages.   
+I keep all of my R scripts in a directory called "R".  The root directory of the project I reserve for files related to the "software development" aspect of the project.  This is relatively flexible for simple data analysis projects; the rules become more strict when we build packages.   
+
+## Extra credit:  Basic git operation for the single user
+
+You want to try to use git and github.  There is a vast array of resources for you to read about git and troubleshoot issues.  Briefly, it is a program that tracks changes to text files.  Since all of the code you will write is text-based this is a great resource for you to keep track of your progress on your work.
+
+Git tracks changes to files in a repository and github is simply a website that hosts a copy of your repository on the web.  This is how you will share your work with journal reviewers and editors and others.
+
+Assuming the commands above have run properly you should be ready to use git.  Working in the terminal is the recommended approach.  It is just easier.
+
+The basic rules are these:
+
+* when you have reached a convenient "save point" for your work, in the terminal run ```git add .```  Git scans everything you did and indexes the changes to all of your files.
+* run ```git status``` to check and be sure you haven't accidentally added large binary files (like images, r data files etc).  You should only have text-based files like .csv, .R, or .Rmd
+* run ```git commit -m "<insert a brief message here>"``` to save or "commit" your work.  For the message, try to explain what the changes represent in just a few words.
+* run ```git push``` to send the changes up to github.
+
+I have a standard [.gitignore](https://github.com/blaserlab/development/blob/main/.gitignore) file which you can use to prevent accidentally committing .rda files.  Just save it in the top level directory of your git-enabled project. 
+
+If you run into problems, the error messages are usually informative.  If you have trouble understanding an error or it isn't helpful, just google it.
+
+Git is designed to facilitate collaboration and there are many strategies for handling this.  This subject is outside the scope of this course, but if you would like additional information for my recommended practices please let me know.
 
 ## Exercises
 
@@ -152,7 +168,8 @@ For a simple data analysis project, you can structure the files/folders within t
 
 4.  Initiate renv in your new project.
 
-5.  Use ```renv::install()``` to install the following packages: "blaserlab/blaseRdata", "blaserlab/blaseRtools", "tidyverse".
+5.  Use ```renv::install()``` to install "tidyverse".
 
 6.  Try attaching the packages to your session using ```library()```.  If there are missing package dependencies (other packages that these three depend on) install those as well.
 
+7.  Extra credit:  save your commands from 4, 5 and 6 to dependencies.R, then add, commit, and push to your github site.
