@@ -114,10 +114,10 @@ We can use some R operators to extract the columns as vectors.
 
 ```{r}
 # extract a column by position
-demo_data[,2]
+demo_data[[2]]
 
 # extract a column by name
-demo_data["Species"]
+demo_data[["Species"]]
 
 # another way to extract a column by name
 demo_data$Species
@@ -142,11 +142,39 @@ demo_list$a_letter
 demo_list$a_name
 
 ```
+
 Lists are very flexible and useful objects for holding your data.
+
+## Subsetting with base R functions
+
+I think this syntax is confusing and generally suboptimal compared to Dplyr syntax, but for some advanced data objects you need to know it.  
+
+For subsetting you use a single bracket rather than the double bracket for extracting data.  This returns an object of the same class, only smaller.  
+
+```{r}
+# subset using dataframe[row,colum] syntax
+# subset a dataframe to get the second and third columns only
+demo_data[,2:3]
+
+# subset a dataframe to get the first and second rows only
+demo_data[1:2,]
+
+# subset to include columns by name 
+demo_data[c("Species", "observation")]
+
+# subset a list to return a smaller list
+# return the first two elements
+demo_list[1:2]
+
+# subset a list by name
+demo_list["a_name"]
+
+```
+
 
 ## Data operations
 
-In R everything is treated as a vector.  A single value is a vector of length 1.  Many functions are optimized to work on the entire vector at once.
+In R the fundamental data structure is a vector.  A single value is a vector of length 1.  Many functions are optimized to work on the entire vector at once.
 
 ```{r}
 # get the mean of the sepal length
