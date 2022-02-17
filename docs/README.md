@@ -53,7 +53,7 @@ All of the code will be made available to you.  You should try running everythin
 
 ### Topics
 
-####	[Week 1:  Setting up your computing environment](/vignettes/week_1.Rmd)
+####	[Week 1:  Setting up your computing environment](week_1.html)
 
 * Intro to R/Rstudio
 * Packages
@@ -63,7 +63,7 @@ All of the code will be made available to you.  You should try running everythin
 * Package installation
 * Basic Git for the single user
 
-####     Week 2:  Basics of working with data in R
+####     [Week 2:  Basics of working with data in R](week_2.html)
 
 * Proper data format
 * Input/output
@@ -81,7 +81,7 @@ All of the code will be made available to you.  You should try running everythin
 * Pipes
 * Booleans
 
-####	Week 3:  More advanced concepts in R
+####	[Week 3:  More advanced concepts in R](week_3.html)
 
 * Scope
 * Writing Custom Functions
@@ -94,7 +94,7 @@ All of the code will be made available to you.  You should try running everythin
 
 ####	Week 5: blaseRtools scRNA-seq tutorial 2
 
-#### Week 6:  Building and using data packages
+#### Week 6:  [Building and using data packages](week_6.html)
 
 * Projects vs Packages
 * Initialization
