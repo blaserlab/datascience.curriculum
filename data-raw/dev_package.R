@@ -14,6 +14,7 @@
 
 document()
 
+# make the documents for the website
 purrr::walk(.x = list.files(path = "vignettes", pattern = "*.Rmd", full.names = FALSE),
      .f = function(x) {
        rmarkdown::render(input = file.path("vignettes", x), output_dir = "docs", output_format = "html_document")
@@ -23,4 +24,3 @@ purrr::walk(.x = list.files(path = "vignettes", pattern = "*.Rmd", full.names = 
 
 # commit and push
 devtools::install_github("blaserlab/datascience.curriculum", build_vignettes = T, force = TRUE)
-build()

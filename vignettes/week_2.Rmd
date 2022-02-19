@@ -176,7 +176,7 @@ demo_list["a_name"]
 
 In R the fundamental data structure is a vector.  A single value is a vector of length 1.  Many functions are optimized to work on the entire vector at once.
 
-```{r}
+```{r warning=TRUE}
 # get the mean of the sepal length
 mean(demo_data$Sepal.Length)
 
@@ -235,6 +235,18 @@ demo_data %>%
   select(c(Species, Sepal.Length))
 ```
 
+Use ```filter``` to select rows based on conditional test(s):
+
+```{r}
+# filter rows satisfying a logical test
+demo_data %>%
+  filter(Species == "setosa")
+
+demo_data %>%
+  filter(Species %in% c("setosa", "versicolor"))
+
+```
+
 In some cases it may be useful to have the data in "long form" as opposed to "wide form". Here you use ```pivot_longer``` and you are going to tell R which columns to convert to long form.  These should all be of the same type because they will end up in the same column.  The selected column names get repeated in a "name" column and the values end up in a "value" column.  The columns you don't select will be retained as additional attributes for the values. 
 
 ```{r}
@@ -248,7 +260,6 @@ long_data %>%
   pivot_wider(names_from = "name", values_from = "value")
 
 ```
-### Joins
 
 Sometimes you have two tibbles with related information you want to join together.  This is a powerful tool for adding new attributes onto existing data.  
 
