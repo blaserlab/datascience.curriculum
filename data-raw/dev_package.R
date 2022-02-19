@@ -23,4 +23,8 @@ purrr::walk(.x = list.files(path = "vignettes", pattern = "*.Rmd", full.names = 
      })
 
 # commit and push
+gert::git_add("*")
+gert::git_commit("updated docs")
+gert::git_push()
+
 devtools::install_github("blaserlab/datascience.curriculum", build_vignettes = T, force = TRUE)
