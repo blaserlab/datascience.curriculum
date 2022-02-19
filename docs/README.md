@@ -115,7 +115,7 @@ All of the code is available at the course website.  You should try running ever
 
 #### [Week 6:  Building and using data packages](week_6.html)
 
-
+* [Week 6 R script](https://raw.githubusercontent.com/blaserlab/datascience.curriculum/main/docs/week_6.R)
 * Content
   * Saving R Objects
   * Setting up the Package
@@ -125,13 +125,4 @@ All of the code is available at the course website.  You should try running ever
   * Documentation
   * Finishing Up
   * Loading the Data Package
-* Initialization
-* DESCRIPTION
-* LazyData
-* NEWS
-* R
-* data
-* inst/data-raw
-* inst/extdata
-* Dryad
   
