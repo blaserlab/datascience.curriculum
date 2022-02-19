@@ -88,7 +88,7 @@ All of the code is available at the course website.  You should try running ever
 
 ####	[Week 4: blaseRtools scRNA-seq tutorial 1](https://blaserlab.github.io/blaseRtools/pages/scRNAseq.html)
 
-* [Week 4/5 R script]()
+* [Week 4/5 R script](https://raw.githubusercontent.com/blaserlab/blaseRtools/master/docs/pages/scRNAseq.R)
 * Content
   * Data Management
   * Preprocessing Data in the Cloud
@@ -104,7 +104,7 @@ All of the code is available at the course website.  You should try running ever
 
 ####	[Week 5: blaseRtools scRNA-seq tutorial 2](https://blaserlab.github.io/blaseRtools/pages/scRNAseq.html)
 
-* [Week 4/5 R script]()
+* [Week 4/5 R script](https://raw.githubusercontent.com/blaserlab/blaseRtools/master/docs/pages/scRNAseq.R)
 * Content
   * Cell Assignments
   * UMAP Plots
@@ -113,7 +113,7 @@ All of the code is available at the course website.  You should try running ever
     * Pseudobulk
     * Regression
 
-#### Week 6:  [Building and using data packages](week_6.html)
+#### [Week 6:  Building and using data packages](week_6.html)
 
 
 * Content
