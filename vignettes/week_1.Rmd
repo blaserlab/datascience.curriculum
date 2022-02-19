@@ -143,7 +143,26 @@ You want to try to use git and github.  There is a vast array of resources for y
 
 Git tracks changes to files in a repository and github is simply a website that hosts a copy of your repository on the web.  This is how you will share your work with journal reviewers and editors and others.
 
-Assuming the commands above have run properly you should be ready to use git.  Working in the terminal is the recommended approach.  It is just easier.
+### Setting up github from R
+
+```{r eval = FALSE}
+# make sure you have an account and are signed in
+
+# create a personal access token at the github website
+usethis::create_github_token()
+
+# run this and enter your token at the prompt
+gitcreds::gitcreds_set()
+
+# if you encounter errors you may have an old token stored elsewhere on your system.
+# to fix this, run this command, delete the PAT line, save, restart R and try again.
+usethis::edit_r_environ()
+
+```
+
+The necessary permissions should be set automatically by these commands.  By default, the token expires after 30 days, but you can override this.  
+
+Assuming the commands above have run properly you should be ready to use git and github.  Working in the terminal is the recommended approach.  It is just easier.
 
 The basic rules are these:
 
@@ -157,6 +176,7 @@ I have a standard [.gitignore](https://github.com/blaserlab/development/blob/mai
 If you run into problems, the error messages are usually informative.  If you have trouble understanding an error or it isn't helpful, just google it.
 
 Git is designed to facilitate collaboration and there are many strategies for handling this.  This subject is outside the scope of this course, but if you would like additional information for my recommended practices please let me know.
+
 
 ## Exercises
 

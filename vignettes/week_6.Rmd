@@ -35,17 +35,20 @@ The data package is meant to hold processed data and the code you used to genera
 What should and shouldn't be in a data package?  This you will have to decide for yourself.  There is some overhead (effort) to making a data package, so you won't want to save things that can be very rapidly calculated or derived from other data objects.  Generally you want a data package to be no more than a few GB in size so you may need to be selective with what you save.  If it takes more than 3-4 seconds to calculate data for a table or figure, then I will usually put it in the data package.  Here are the types of things I do and don't include
 
 Do include:
+
 * processed tabular data for generating statistics or plots
 * single cell data objects (e.g. cellDataSet or Seurat objects)
 * qc files for single cell analysis
 * genomic ranges objects 
 
 Do not include:
+
 * raw sequencing data, genomic features files, or cell-barcode matrices
 * subsets of any object already in the data package
 * plots
 
 In summary, the benefits of using a data package are:
+
 * Your processed data is linked to the code used to generate it
 * All processed data and code are in a single file that can be distributed and used by collaborators or reviewers
 * Data objects are documented so you have a better chance of recalling what they are and how they were generated at any point in the future
@@ -108,6 +111,7 @@ These commands will set up a very specific file and folder structure in your pro
 ![Package structure](images/package_structure.png){ width=100% }
 
 Some important things to note
+
 * DESCRIPTION:  This is the file that indicates to R that this is a package.  The most important line for you to interact with is version.  Every time you make a new version of the package (add, delete or edit data), you should increment the version number.  Title and description can be edited to provide a general description of the purpose of the package but these are not critical.  You should leave the other lines as-is.
 * R/:  This directory should contain R files.  If you were building a package with functions, this is where they would go.  For a data-only package, you will create a single R file here called "data.R".
 * NAMESPACE:  This is not used by data-only packages.  Do not edit.
@@ -157,6 +161,7 @@ This will give you an "Addin" to Rstudio.
 
 
 The best way to go from here is to 
+
 * load all of your new data objects into the global environment.  In this case there is only 1.
 * type the name in your data.R script
 * highlight the entire name of the object
@@ -202,9 +207,13 @@ The bb_renv_datapkg function will go to the directory where your data lives, che
 
 The requireData command is what loads the digital pointers into your R session.  Check out the environment dropdown menu to see for yourself.
 
-## Conclusion
+## Exercises
 
-If you have been working in parallel with your own data, you will hopefully have come to appreciate the benefits 
+By now you should be comfortable setting up an R project, analyzing your data and making figures for a manuscript or presentation.  
+
+* Make an R data package with your own processed experimental data and the processing code you used
+* Save it to a network (archival) drive
+* Load the data package back into your project using ```bb_renv_datapkg()``` and ```requireData()```.
 
 
 
