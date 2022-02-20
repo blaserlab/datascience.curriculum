@@ -62,7 +62,7 @@ read_csv(file = "https://raw.githubusercontent.com/blaserlab/datascience.curricu
 
 The string "fddddc" tells R to interpret the columns as "factor", "double" or "character".
 
-You should always check that the data types are correct when you import your data in order to prevent errors.
+**You should always check that the data types are correct when you import your data in order to prevent errors.**
 
 ### More on data types
 
@@ -88,7 +88,7 @@ Any valid R object (data, functions etc) can be stored under a variable name.  B
 
 ## Data structures
 
-Dataframes and tibbles are essentially lists of vectors with some rules attached.  Ignoring the rules, what are lists and vectors?
+Dataframes and tibbles are essentially lists of vectors with some rules attached. So what are lists and vectors?
 
 A vector is the fundamental data structure in R.  It is a collection of data values, all of which must be the same data type.
 
@@ -114,18 +114,20 @@ We can use some R operators to extract the columns as vectors.
 
 ```{r}
 # extract a column by position
-demo_data[[2]]
+# the head command prints the first few values only
+# omit head() if you want the whole thing
+head(demo_data[[2]])
 
 # extract a column by name
-demo_data[["Species"]]
+head(demo_data[["Species"]])
 
 # another way to extract a column by name
-demo_data$Species
+head(demo_data$Species)
 
 ```
 Usually you want to use the ```$``` operator to extract a column by name.  
 
-A list is a more general form of data object.  It can hold any type of valid R object.  This is how you make a list:
+A list is a more general form of data object.  It can hold any combination of R data types.  This is how you make a list:
 
 ```{r}
 # make the list
@@ -201,6 +203,8 @@ Logical operators return a value of TRUE or FALSE.
 
 1 != 3
 
+2 <= 1
+
 ```
 
 ## Dplyr 
@@ -213,16 +217,16 @@ Dplyr functions are also vectorized so they are computationally efficient and ca
 
 ```{r}
 # add a new column with mutate
+# then group by a useful categorical variable
+# then summarize the new value we calculated by mean according to group
 demo_data %>%
   mutate(sepal_l_w = Sepal.Length + Sepal.Width) %>%
-# group by a useful categorial variable
   group_by(Species) %>%
-# summarize the new value we calculated by mean according to group
   summarise(mean_sepal_l_w = mean(sepal_l_w))
 
 ```
 
-You can use any built in or custom function in mutate or summarise.  Functions for mutate must return a vector of the same length as the input vector; functions for summarise must return a vector of length 1. 
+You can use any built-in or custom function in mutate or summarise.  Functions for mutate must return a vector of the same length as the input vector; functions for summarise must return a vector of length 1. 
 
 Sometimes you may find it useful to select or de-select columns from a tibble:
 
@@ -296,4 +300,4 @@ For more information on these operations see this useful [cheat sheet](https://w
 * try running the example code here in your own project
 * take data from your own experiments, reformat by hand in a csv if necessary and read into R
 * explore different data manipulations with base R and dplyr functions
-* try comparing groups using simple statistical tests like t.test and wilcox.test.  Hint:  you just need to feed numeric vectors with your data into these functions.
+* try comparing groups using simple statistical tests like ```t.test()``` and ```wilcox.test()```.  Hint:  you just need to feed numeric vectors with your data into these functions.

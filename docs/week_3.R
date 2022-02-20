@@ -65,6 +65,27 @@ two_averages(x = c(1, 2, 3, 4, 5.5))
 
 
 ## --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+unsafe_divide <- function(x, y) {
+  result <- x/y
+  return(result)
+}
+
+# returns Infinity which is not a useful value
+unsafe_divide(x = 1, y = 0)
+
+safe_divide <- function(x, y) {
+  if (y == 0) {
+    result <- "You can't divide by 0"
+  } else {
+    result <- x/y
+  }
+  return(result)
+}
+
+safe_divide(x = 1, y = 0)
+
+
+## --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # attach the packages we will need
 library(tidyverse)
 
@@ -184,7 +205,7 @@ ggplot(data = iris, mapping = aes(x = Species, y = Sepal.Length, color = Species
 
 ## --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ggplot(data = iris, mapping = aes(x = Species, y = Sepal.Length, color = Species, fill = Species)) +
-  geom_jitter(shape = 21, alpha = 0.4, size = 3) +
+  geom_jitter(shape = 21, alpha = 0.4, size = 2) +
   stat_summary(fun.data = mean_se, 
                geom = "crossbar", 
                color = "black", 
@@ -204,7 +225,7 @@ ggplot(data = iris, mapping = aes(x = Species, y = Sepal.Length, color = Species
 ## --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 library(cowplot)
 ggplot(data = iris, mapping = aes(x = Species, y = Sepal.Length, color = Species, fill = Species)) +
-  geom_jitter(shape = 21, alpha = 0.4, size = 3) +
+  geom_jitter(shape = 21, alpha = 0.4, size = 2) +
   stat_summary(fun.data = mean_se, 
                geom = "crossbar", 
                color = "black", 

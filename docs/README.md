@@ -82,6 +82,7 @@ All of the code is available at the course website.  You should try running ever
 * Content
   * Scope
   * Writing Custom Functions
+  * Conditionals
   * Map/Apply
   * Plotting
   * Statistical Testing

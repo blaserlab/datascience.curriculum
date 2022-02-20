@@ -194,19 +194,20 @@ pre code {
 <p>The function you use to install packages is <code>install.packages(&quot;&lt;package name&gt;&quot;)</code>. This is most useful for official CRAN packages. For a more versatile tool, install renv with <code>install.packages(&quot;renv&quot;)</code> and then run <code>renv::install(&quot;&lt;package name&gt;&quot;)</code>. Using install from Renv will handle CRAN, bioconductor (prefix package name with bioc::), github, and local sources pretty easily, so this is the recommended approach.</p>
 <p><strong>If you ever get an error that says a function or package is unavailable, the first thing you want to do is make sure the package is installed.</strong> You may not recognize what it is but it may be required by another package you wish to use. This is called a dependency.</p>
 <p>Once you have installed a package its functions are available to be called using the package name followed by 2 colons such as <code>blaseRtools::bb_var_umap(cds)</code>. But this is not always the best way to go.</p>
-<p>You may need functions from one package for a different package to work. To make these available you need to run <code>library(&quot;&lt;package name&gt;&quot;)</code>. This will attach all of the functions from that package to your session.</p>
+<p>To make all of the functions from a package available, you need to run <code>library(&quot;&lt;package name&gt;&quot;)</code>. This will attach all of the functions from that package to your session.</p>
 <p>Beware of attaching more packages than you actually need though because there could be “namespace conflicts”. This happens when the same term applies to two different functions from two different packages. R picks one and goes with it without clearly indicating that it is doing so. This is a common source of errors.</p>
 </div>
 <div id="projects" class="section level2">
 <h2>Projects</h2>
 <p>A project is a self-contained group of files for your R data analysis. This should align conceptually with your experiments. If you have a set of single cell data and imaging data related to the same scientific concept or paper then it can all go in the same project.</p>
 <p>Projects automatically define their working directory to be the root of the projects. That means you can reference any file in the root directory by typing its name like so: “file.R”. If that file was one directory down, it would be “directory/file.R”. There is almost no reason ever to change this behavior.</p>
+<p>Packages are self-contained. You can put them where you want and move them without breaking anything inside.</p>
 <p>You always want to be working in a project.</p>
 <div id="setting-up-a-project" class="section level3">
 <h3>Setting up a project</h3>
 <p>The best way to do this is through automated commands, rather than through the program menus. I have these lines saved in a script I always use to initialize a project. This way all of my projects are structured the same way.</p>
 <pre class="r"><code># create a project called rclass_example in your home directory
-usethis::create_project(&quot;rclass_example&quot;)
+usethis::create_project(&quot;~/rclass_example&quot;)
 
 # generate a standard license file for your work 
 usethis::use_mit_license(&quot;Brad Blaser&quot;)
@@ -230,9 +231,12 @@ usethis::use_github(private = TRUE)</code></pre>
 <p>R maintains many different environments concurrently. Each package you attach with the <code>library</code> command gets its own environment. The term “global” is even more confusing because it is not really global in the sense that it encompasses all other environments. Rather, it is the highest priority environment. If you enter a variable name into R, it always looks in the global environment first and then goes down the line until it hits the package:base environment. So if I write a function in my R script called “mean” that for some reason calculates the median of a set of numbers (not a great idea), R will store that in the global environment. Later on if I ask R to use the “mean” function, it will use the version from the global environment and not the version from the base environment. It will calculate the median instead of the mean in this case.</p>
 <pre class="r"><code># produce a list of all environments
 search()
-#&gt;  [1] &quot;.GlobalEnv&quot;                     &quot;devtools_shims&quot;                 &quot;package:datascience.curriculum&quot; &quot;tools:rstudio&quot;                  &quot;package:stats&quot;                 
-#&gt;  [6] &quot;package:graphics&quot;               &quot;package:grDevices&quot;              &quot;package:utils&quot;                  &quot;package:datasets&quot;               &quot;package:devtools&quot;              
-#&gt; [11] &quot;package:usethis&quot;                &quot;package:methods&quot;                &quot;Autoloads&quot;                      &quot;org:r-lib&quot;                      &quot;package:base&quot;</code></pre>
+#&gt;  [1] &quot;.GlobalEnv&quot;                     &quot;package:datascience.curriculum&quot; &quot;package:rstatix&quot;                &quot;package:cowplot&quot;                &quot;package:ggpubr&quot;                
+#&gt;  [6] &quot;package:forcats&quot;                &quot;package:stringr&quot;                &quot;package:dplyr&quot;                  &quot;package:purrr&quot;                  &quot;package:readr&quot;                 
+#&gt; [11] &quot;package:tidyr&quot;                  &quot;package:tibble&quot;                 &quot;package:ggplot2&quot;                &quot;package:tidyverse&quot;              &quot;devtools_shims&quot;                
+#&gt; [16] &quot;tools:rstudio&quot;                  &quot;package:stats&quot;                  &quot;package:graphics&quot;               &quot;package:grDevices&quot;              &quot;package:utils&quot;                 
+#&gt; [21] &quot;package:datasets&quot;               &quot;package:devtools&quot;               &quot;package:usethis&quot;                &quot;package:methods&quot;                &quot;Autoloads&quot;                     
+#&gt; [26] &quot;org:r-lib&quot;                      &quot;package:base&quot;</code></pre>
 <p>Since the global environment gets wiped out every time you change projects or restart R, you have to have a way to save what you want in permanent storage and to recreate the rest as needed from code. We will discuss this more when we talk about building packages.</p>
 </div>
 <div id="renv-environment" class="section level2">
@@ -305,7 +309,7 @@ gert::git_push()
 <li><p>Install renv if you haven’t already.</p></li>
 <li><p>Initiate renv in your new project.</p></li>
 <li><p>Use <code>renv::install()</code> to install “tidyverse”.</p></li>
-<li><p>Try attaching the packages to your session using <code>library()</code>. If there are missing package dependencies (other packages that these three depend on) install those as well.</p></li>
+<li><p>Try attaching the tidyverse package to your session using <code>library()</code>. If there are missing package dependencies install those as well.</p></li>
 <li><p>Extra credit: save your commands from 4, 5 and 6 to dependencies.R, then add, commit, and push to your github site.</p></li>
 </ol>
 </div>

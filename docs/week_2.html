@@ -226,7 +226,7 @@ read_csv(file = &quot;https://raw.githubusercontent.com/blaserlab/datascience.cu
 #&gt; 10 10                   4.9         3.1          1.5         0.1 setosa 
 #&gt; # … with 140 more rows</code></pre>
 <p>The string “fddddc” tells R to interpret the columns as “factor”, “double” or “character”.</p>
-<p>You should always check that the data types are correct when you import your data in order to prevent errors.</p>
+<p><strong>You should always check that the data types are correct when you import your data in order to prevent errors.</strong></p>
 <div id="more-on-data-types" class="section level3">
 <h3>More on data types</h3>
 <ul>
@@ -263,7 +263,7 @@ demo_data
 </div>
 <div id="data-structures" class="section level2">
 <h2>Data structures</h2>
-<p>Dataframes and tibbles are essentially lists of vectors with some rules attached. Ignoring the rules, what are lists and vectors?</p>
+<p>Dataframes and tibbles are essentially lists of vectors with some rules attached. So what are lists and vectors?</p>
 <p>A vector is the fundamental data structure in R. It is a collection of data values, all of which must be the same data type.</p>
 <p>You can make your own vector directly in R like so:</p>
 <pre class="r"><code># a numeric vector
@@ -284,41 +284,20 @@ c(1, &quot;b&quot;, &quot;charlie&quot;)
 <p>In a dataframe or a tibble, each column is a vector.</p>
 <p>We can use some R operators to extract the columns as vectors.</p>
 <pre class="r"><code># extract a column by position
-demo_data[[2]]
-#&gt;   [1] 5.1 4.9 4.7 4.6 5.0 5.4 4.6 5.0 4.4 4.9 5.4 4.8 4.8 4.3 5.8 5.7 5.4 5.1 5.7 5.1 5.4 5.1 4.6 5.1 4.8 5.0 5.0 5.2 5.2 4.7 4.8 5.4 5.2 5.5 4.9 5.0 5.5 4.9 4.4 5.1 5.0 4.5 4.4 5.0 5.1 4.8 5.1 4.6
-#&gt;  [49] 5.3 5.0 7.0 6.4 6.9 5.5 6.5 5.7 6.3 4.9 6.6 5.2 5.0 5.9 6.0 6.1 5.6 6.7 5.6 5.8 6.2 5.6 5.9 6.1 6.3 6.1 6.4 6.6 6.8 6.7 6.0 5.7 5.5 5.5 5.8 6.0 5.4 6.0 6.7 6.3 5.6 5.5 5.5 6.1 5.8 5.0 5.6 5.7
-#&gt;  [97] 5.7 6.2 5.1 5.7 6.3 5.8 7.1 6.3 6.5 7.6 4.9 7.3 6.7 7.2 6.5 6.4 6.8 5.7 5.8 6.4 6.5 7.7 7.7 6.0 6.9 5.6 7.7 6.3 6.7 7.2 6.2 6.1 6.4 7.2 7.4 7.9 6.4 6.3 6.1 7.7 6.3 6.4 6.0 6.9 6.7 6.9 5.8 6.8
-#&gt; [145] 6.7 6.7 6.3 6.5 6.2 5.9
+# the head command prints the first few values only
+# omit head() if you want the whole thing
+head(demo_data[[2]])
+#&gt; [1] 5.1 4.9 4.7 4.6 5.0 5.4
 
 # extract a column by name
-demo_data[[&quot;Species&quot;]]
-#&gt;   [1] &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;    
-#&gt;  [15] &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;    
-#&gt;  [29] &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;    
-#&gt;  [43] &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot;
-#&gt;  [57] &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot;
-#&gt;  [71] &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot;
-#&gt;  [85] &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot;
-#&gt;  [99] &quot;versicolor&quot; &quot;versicolor&quot; &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot; 
-#&gt; [113] &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot; 
-#&gt; [127] &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot; 
-#&gt; [141] &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;
+head(demo_data[[&quot;Species&quot;]])
+#&gt; [1] &quot;setosa&quot; &quot;setosa&quot; &quot;setosa&quot; &quot;setosa&quot; &quot;setosa&quot; &quot;setosa&quot;
 
 # another way to extract a column by name
-demo_data$Species
-#&gt;   [1] &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;    
-#&gt;  [15] &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;    
-#&gt;  [29] &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;    
-#&gt;  [43] &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;setosa&quot;     &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot;
-#&gt;  [57] &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot;
-#&gt;  [71] &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot;
-#&gt;  [85] &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot; &quot;versicolor&quot;
-#&gt;  [99] &quot;versicolor&quot; &quot;versicolor&quot; &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot; 
-#&gt; [113] &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot; 
-#&gt; [127] &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot; 
-#&gt; [141] &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;  &quot;virginica&quot;</code></pre>
+head(demo_data$Species)
+#&gt; [1] &quot;setosa&quot; &quot;setosa&quot; &quot;setosa&quot; &quot;setosa&quot; &quot;setosa&quot; &quot;setosa&quot;</code></pre>
 <p>Usually you want to use the <code>$</code> operator to extract a column by name.</p>
-<p>A list is a more general form of data object. It can hold any type of valid R object. This is how you make a list:</p>
+<p>A list is a more general form of data object. It can hold any combination of R data types. This is how you make a list:</p>
 <pre class="r"><code># make the list
 demo_list &lt;- list(1, &quot;b&quot;, &quot;charlie&quot;)
 
@@ -433,7 +412,10 @@ c(1, 2) + c(1, 2, 3)
 #&gt; [1] TRUE
 
 1 != 3
-#&gt; [1] TRUE</code></pre>
+#&gt; [1] TRUE
+
+2 &lt;= 1
+#&gt; [1] FALSE</code></pre>
 </div>
 <div id="dplyr" class="section level2">
 <h2>Dplyr</h2>
@@ -441,11 +423,11 @@ c(1, 2) + c(1, 2, 3)
 <p>Dplyr functions are pipe-friendly, meaning that they can be chained in a way that reduces redundant text in your code or saving intermediate values which can cause problems. For this you use the pipe operator <code>%&gt;%</code>.</p>
 <p>Dplyr functions are also vectorized so they are computationally efficient and can be used on tables with hundreds of thousands of rows.</p>
 <pre class="r"><code># add a new column with mutate
+# then group by a useful categorical variable
+# then summarize the new value we calculated by mean according to group
 demo_data %&gt;%
   mutate(sepal_l_w = Sepal.Length + Sepal.Width) %&gt;%
-# group by a useful categorial variable
   group_by(Species) %&gt;%
-# summarize the new value we calculated by mean according to group
   summarise(mean_sepal_l_w = mean(sepal_l_w))
 #&gt; # A tibble: 3 × 2
 #&gt;   Species    mean_sepal_l_w
@@ -453,7 +435,7 @@ demo_data %&gt;%
 #&gt; 1 setosa               8.43
 #&gt; 2 versicolor           8.71
 #&gt; 3 virginica            9.56</code></pre>
-<p>You can use any built in or custom function in mutate or summarise. Functions for mutate must return a vector of the same length as the input vector; functions for summarise must return a vector of length 1.</p>
+<p>You can use any built-in or custom function in mutate or summarise. Functions for mutate must return a vector of the same length as the input vector; functions for summarise must return a vector of length 1.</p>
 <p>Sometimes you may find it useful to select or de-select columns from a tibble:</p>
 <pre class="r"><code># return a tibble without the observation column
 demo_data %&gt;%
@@ -610,7 +592,7 @@ left_join(sepal_data, petal_data)
 <li>try running the example code here in your own project</li>
 <li>take data from your own experiments, reformat by hand in a csv if necessary and read into R</li>
 <li>explore different data manipulations with base R and dplyr functions</li>
-<li>try comparing groups using simple statistical tests like t.test and wilcox.test. Hint: you just need to feed numeric vectors with your data into these functions.</li>
+<li>try comparing groups using simple statistical tests like <code>t.test()</code> and <code>wilcox.test()</code>. Hint: you just need to feed numeric vectors with your data into these functions.</li>
 </ul>
 </div>
 

@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 
 ## ----eval=FALSE------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ## # create a project called rclass_example in your home directory
-## usethis::create_project("rclass_example")
+## usethis::create_project("~/rclass_example")
 ## 
 ## # generate a standard license file for your work
 ## usethis::use_mit_license("Brad Blaser")

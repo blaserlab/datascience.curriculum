@@ -203,6 +203,7 @@ bb_renv_datapkg(<path to directory containing data package>)
 requireData(<name of the data package without version number>)
 
 ```
+
 The bb_renv_datapkg function will go to the directory where your data lives, check for the latest version, and install it if necessary.  This is the recommended way to go because you almost always want the latest version and you don't want to waste time installing it if necessary.  You can also install it with ```renv::install()``` though.  
 
 The requireData command is what loads the digital pointers into your R session.  Check out the environment dropdown menu to see for yourself.

@@ -46,13 +46,15 @@ c(1, "b", "charlie")
 
 ## --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # extract a column by position
-demo_data[[2]]
+# the head command prints the first few values only
+# omit head() if you want the whole thing
+head(demo_data[[2]])
 
 # extract a column by name
-demo_data[["Species"]]
+head(demo_data[["Species"]])
 
 # another way to extract a column by name
-demo_data$Species
+head(demo_data$Species)
 
 
 
@@ -114,15 +116,17 @@ c(1, 2) + c(1, 2, 3)
 
 1 != 3
 
+2 <= 1
+
 
 
 ## --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # add a new column with mutate
+# then group by a useful categorical variable
+# then summarize the new value we calculated by mean according to group
 demo_data %>%
   mutate(sepal_l_w = Sepal.Length + Sepal.Width) %>%
-# group by a useful categorial variable
   group_by(Species) %>%
-# summarize the new value we calculated by mean according to group
   summarise(mean_sepal_l_w = mean(sepal_l_w))
 
 

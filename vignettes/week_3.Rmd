@@ -117,9 +117,34 @@ two_averages(x = c(1, 2, 3, 4, 5.5))
 You don't have to provide names for your return list but in many cases it is helpful.  You can notice here that I used ```x``` to represent the argument of the function.  Since this is a private variable only used within the scope of the function I am free to do this any time I want in the context of my global environment.
 
 
+## Conditionals
+
+Conditional statements (if/then/else) are particularly useful inside your custom functions.  Use them to provide logic to your function or to catch errors.
+
+```{r}
+unsafe_divide <- function(x, y) {
+  result <- x/y
+  return(result)
+}
+
+# returns Infinity which is not a useful value
+unsafe_divide(x = 1, y = 0)
+
+safe_divide <- function(x, y) {
+  if (y == 0) {
+    result <- "You can't divide by 0"
+  } else {
+    result <- x/y
+  }
+  return(result)
+}
+
+safe_divide(x = 1, y = 0)
+```
+
 ## Map/Apply
 
-You should never repeat yourself when performing an analysis.  Copy/pasting code is error prone.  It is better to encode a method for the computer to do the repitition.
+You should never repeat yourself when performing an analysis.  Copy/pasting code is error prone.  It is better to encode a method for the computer to do the repetition.
 
 There are a few mechanisms to do this.  You may be familiar with [for loops](https://www.statmethods.net/management/controlstructures.html).  We won't be discussing these because they have a number of disadvantages, one of which is that they tend to operate in the global environment which can cause scope issues as discussed above.
 
@@ -186,7 +211,7 @@ The map family has a number of variants that return the result in the form of ve
 
 ## Plotting
 
-Plotting results is a major feature of what we do in the sciences.  There are priciples for effective visual representation of [data](https://www.edwardtufte.com/tufte/books_vdqi). Generally you will want to start by making graphics look like they look in a high-quality publication.  You may be able to achieve this with an interactive program like GraphPad or Excel.  R will let you do this in a programmatic way but with greater control and better aesthetics.  Eventually you will be able to make more sophisticated graphics not possible in other programs.
+Plotting results is a major feature of what we do in the sciences.  There are principles for effective visual representation of [data](https://www.edwardtufte.com/tufte/books_vdqi). Generally you will want to start by making graphics look like they look in a high-quality publication.  You may be able to achieve this with an interactive program like GraphPad or Excel.  R will let you do this in a programmatic way but with greater control and better aesthetics.  Eventually you will be able to make more sophisticated graphics not possible in other programs.
 
 The purpose of this lecture is not to tell you what is aesthetically best but rather to teach you how to control the aesthetics of the plots you are making to suit your own circumstances.
 
@@ -286,7 +311,7 @@ You can also set your own custom scales:
 
 ```{r}
 ggplot(data = iris, mapping = aes(x = Species, y = Sepal.Length, color = Species, fill = Species)) +
-  geom_jitter(shape = 21, alpha = 0.4, size = 3) +
+  geom_jitter(shape = 21, alpha = 0.4, size = 2) +
   stat_summary(fun.data = mean_se, 
                geom = "crossbar", 
                color = "black", 
@@ -309,7 +334,7 @@ Finally you can change the look of the axes, labels and legends.  There are many
 ```{r}
 library(cowplot)
 ggplot(data = iris, mapping = aes(x = Species, y = Sepal.Length, color = Species, fill = Species)) +
-  geom_jitter(shape = 21, alpha = 0.4, size = 3) +
+  geom_jitter(shape = 21, alpha = 0.4, size = 2) +
   stat_summary(fun.data = mean_se, 
                geom = "crossbar", 
                color = "black", 
@@ -327,6 +352,7 @@ ggplot(data = iris, mapping = aes(x = Species, y = Sepal.Length, color = Species
   theme(legend.position = "none")
 
 ```
+
 Keeping your plot functions organized in this way is a good idea so you can quickly go back and change things when necessary.
 
 
@@ -347,9 +373,10 @@ t.test(x  = iris %>%
 
 
 ```
+
 What is happening here is that we are filtering the dataset twice (once for each group we want to compare) and then pulling the value from the resulting dataframe as a numerical vector.  This is fed into the t.test function.
 
-You may wish to use a more concise method:
+For me, the base function above is painful both to type and to read.  You may wish to use a more concise method:
 
 ```{r}
 library(rstatix)

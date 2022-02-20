@@ -58,7 +58,7 @@ The function you use to install packages is ```install.packages("<package name>"
 
 Once you have installed a package its functions are available to be called using the package name followed by 2 colons such as ```blaseRtools::bb_var_umap(cds)```. But this is not always the best way to go.  
 
-You may need functions from one package for a different package to work.  To make these available you need to run ```library("<package name>")```.  This will attach all of the functions from that package to your session.   
+To make all of the functions from a package available, you need to run ```library("<package name>")```.  This will attach all of the functions from that package to your session.   
 
 Beware of attaching more packages than you actually need though because there could be "namespace conflicts".  This happens when the same term applies to two different functions from two different packages.  R picks one and goes with it without clearly indicating that it is doing so.  This is a common source of errors.
 
@@ -68,6 +68,8 @@ A project is a self-contained group of files for your R data analysis.  This sho
 
 Projects automatically define their working directory to be the root of the projects.  That means you can reference any file in the root directory by typing its name like so: "file.R".  If that file was one directory down, it would be "directory/file.R". There is almost no reason ever to change this behavior.
 
+Packages are self-contained.  You can put them where you want and move them without breaking anything inside.
+
 You always want to be working in a project.
 
 ### Setting up a project
@@ -76,7 +78,7 @@ The best way to do this is through automated commands, rather than through the p
 
 ```{r eval=FALSE}
 # create a project called rclass_example in your home directory
-usethis::create_project("rclass_example")
+usethis::create_project("~/rclass_example")
 
 # generate a standard license file for your work 
 usethis::use_mit_license("Brad Blaser")
@@ -206,6 +208,6 @@ This is a pretty slick way to save your progress without leaving R.
 
 5.  Use ```renv::install()``` to install "tidyverse".
 
-6.  Try attaching the packages to your session using ```library()```.  If there are missing package dependencies (other packages that these three depend on) install those as well.
+6.  Try attaching the tidyverse package to your session using ```library()```.  If there are missing package dependencies install those as well.
 
 7.  Extra credit:  save your commands from 4, 5 and 6 to dependencies.R, then add, commit, and push to your github site.

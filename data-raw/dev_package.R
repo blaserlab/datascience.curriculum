@@ -15,15 +15,26 @@
 document()
 
 # make the documents for the website
-purrr::walk(.x = list.files(path = "vignettes", pattern = "*.Rmd", full.names = FALSE),
-     .f = function(x) {
-       rmarkdown::render(input = file.path("vignettes", x), output_dir = "docs", output_format = "html_document")
-       rfile <- stringr::str_replace(x, ".Rmd", ".R")
-       knitr::purl(input = file.path("vignettes", x), output = file.path("docs", rfile))
-     })
+purrr::walk(
+        .x = list.files(
+                path = "vignettes",
+                pattern = "*.Rmd",
+                full.names = FALSE
+        ),
+        .f = function(x) {
+                rmarkdown::render(
+                        input = file.path("vignettes", x),
+                        output_dir = "docs",
+                        output_format = "html_document"
+                )
+                rfile <- stringr::str_replace(x, ".Rmd", ".R")
+                knitr::purl(input = file.path("vignettes", x),
+                            output = file.path("docs", rfile))
+        }
+)
 
 # commit and push
-gert::git_commit_all("added gert code block")
+gert::git_commit_all("edits to all lectures")
 gert::git_push()
 
 devtools::install_github("blaserlab/datascience.curriculum", build_vignettes = T, force = TRUE)
