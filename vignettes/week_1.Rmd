@@ -86,7 +86,7 @@ usethis::use_readme_md()
 
 # use git and set up a private remote repository on github
 # these will fail unless you have git installed on your computer and 
-# have a github account.
+# have a github account. See below
 usethis::use_git()
 usethis::use_github(private = TRUE)
 ```
@@ -141,7 +141,7 @@ I keep all of my R scripts in a directory called "R".  The root directory of the
 
 You want to try to use git and github.  There is a vast array of resources for you to read about git and troubleshoot issues.  Briefly, it is a program that tracks changes to text files.  Since all of the code you will write is text-based this is a great resource for you to keep track of your progress on your work.
 
-Git tracks changes to files in a repository and github is simply a website that hosts a copy of your repository on the web.  This is how you will share your work with journal reviewers and editors and others.
+Git tracks changes to files in a group of files known as a repository.  The way we are using it here, your project is the repository.  Github is simply a website that hosts a copy of your repository on the web.  This is how you will share your work with journal reviewers and editors and others.
 
 ### Setting up github from R
 
@@ -162,7 +162,7 @@ usethis::edit_r_environ()
 
 The necessary permissions should be set automatically by these commands.  By default, the token expires after 30 days, but you can override this.  
 
-Assuming the commands above have run properly you should be ready to use git and github.  Working in the terminal is the recommended approach.  It is just easier.
+Assuming the commands above have run properly you should be ready to use git and github.  Rstudio provides a graphical interface for working with git which I find difficult to use.  Working in the terminal is easier and gives you access to all options for branching, merging and checking out old versions of your code.
 
 The basic rules are these:
 
@@ -176,6 +176,22 @@ I have a standard [.gitignore](https://github.com/blaserlab/development/blob/mai
 If you run into problems, the error messages are usually informative.  If you have trouble understanding an error or it isn't helpful, just google it.
 
 Git is designed to facilitate collaboration and there are many strategies for handling this.  This subject is outside the scope of this course, but if you would like additional information for my recommended practices please let me know.
+
+One common use-case for git for the single user is to "un-delete" files.  You can do this as long as the files were previously committed.  To go back in time and recover the previously committed version, run ```git log``` to review your commit history.  Add and commit any outstanding changes to your repository as outlined above.  Then run ```git checkout <commit id>``` to rewind the state of your repository to the desired commit.  Copy the file(s) you want to resurrect to a location external to the repository. Run ```git switch -``` to go back to your latest commit.  Make your changes and go from there.
+
+If you are using git, it is important to be comfortable with using these commands in the terminal.  However, there is a nice package called "gert" which lets you control git from the R console or using scripted commands.  
+
+```{r eval = FALSE}
+# make sure all work is saved
+# add and commit all outstanding changes in one step
+gert::git_commit_all("commit message here")
+
+# push your changes to github 
+gert::git_push()
+
+```
+
+This is a pretty slick way to save your progress without leaving R.
 
 
 ## Exercises

@@ -18,13 +18,12 @@ document()
 purrr::walk(.x = list.files(path = "vignettes", pattern = "*.Rmd", full.names = FALSE),
      .f = function(x) {
        rmarkdown::render(input = file.path("vignettes", x), output_dir = "docs", output_format = "html_document")
-       rfile <- str_replace(x, ".Rmd", ".R")
+       rfile <- stringr::str_replace(x, ".Rmd", ".R")
        knitr::purl(input = file.path("vignettes", x), output = file.path("docs", rfile))
      })
 
 # commit and push
-gert::git_add("*")
-gert::git_commit("edited readme")
+gert::git_commit_all("added gert code block")
 gert::git_push()
 
 devtools::install_github("blaserlab/datascience.curriculum", build_vignettes = T, force = TRUE)

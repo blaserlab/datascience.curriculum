@@ -33,6 +33,7 @@ To review, if you have a function or piece of data in your global environment wi
 But let's say early in an analysis script I choose to represent a piece of data with the variable name ```x```. This is probably not a wise choice, since ```x``` is a commonly used name.  Maybe later in the script I represent a different piece of data with the the variable name ```x```.  This overwrites the old version because they were created with the same scope, i.e. the global environment.  Finally when I want to use ```x``` I could make an error because I didn't realize that I had referred to it twice in my analysis script.
 
 There are ways to protect against this:
+
 * use pipes to avoid saving intermediate values (see previous lecture)
 * use unique and informative variable names for the things you must save
 * use functional programming techniques (this lecture)

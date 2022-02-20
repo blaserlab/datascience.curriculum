@@ -23,7 +23,7 @@ knitr::opts_chunk$set(
 ## 
 ## # use git and set up a private remote repository on github
 ## # these will fail unless you have git installed on your computer and
-## # have a github account.
+## # have a github account. See below
 ## usethis::use_git()
 ## usethis::use_github(private = TRUE)
 
@@ -56,5 +56,15 @@ search()
 ## # if you encounter errors you may have an old token stored elsewhere on your system.
 ## # to fix this, run this command, delete the PAT line, save, restart R and try again.
 ## usethis::edit_r_environ()
+## 
+
+
+## ----eval = FALSE----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## # make sure all work is saved
+## # add and commit all outstanding changes in one step
+## gert::git_commit_all("commit message here")
+## 
+## # push your changes to github
+## gert::git_push()
 ## 
 
