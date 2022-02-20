@@ -327,6 +327,7 @@ ggplot(data = iris, mapping = aes(x = Species, y = Sepal.Length, color = Species
                     aesthetics = c("fill", "color"))
 
 ```
+
 Finally you can change the look of the axes, labels and legends.  There are many different lines of code you can use to do this, most of which start with ```theme()```.  I usually prefer to start with a preset theme which looks nice for almost all plots.  We can also get rid of the legend which doesn't help much in this case:
 
 
