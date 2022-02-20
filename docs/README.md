@@ -33,9 +33,11 @@ The course assumes no prior knowledge of R.  It is designed for biologists with 
 
 Before the first class you must have [R](https://cran.rstudio.com/) and [Rstudio](https://www.rstudio.com/products/rstudio/download/#download) installed on your computer.  [Git](http://git-scm.com/downloads) is recommended.  
 
+You should also register for a free [github](https://github.com/) account.  You can find all of the course materials at the [course github site](https://github.com/blaserlab/datascience.curriculum).
+
 ### Course structure
 
-As you see from the topics below, this class starts from the basics and moves through somewhat advanced topics.  There will be no formal homework or assignments, but you are expected to be comfortable with the topics previously presented by the time the next class arrives and to read the course material in advance.  If there are things that don't make sense or are causing you trouble at first, I encourage you to try to figure them out using Google.  This is the best way to learn.  
+As you see from the topics below, this workshop starts from the basics and moves through somewhat advanced topics.  There will be no formal homework or assignments, but you are expected to be comfortable with the topics previously presented by the time the next class arrives and to read the course material in advance.  If there are things that don't make sense or are causing you trouble at first, I encourage you to try to figure them out using Google.  This is the best way to learn.  
 
 **Because of the virtual format we won't be able to stop and troubleshoot individual issues during class.**  If we are moving too fast or too slow for the class we can change pace as necessary.
 
@@ -47,7 +49,9 @@ Each lesson will be structured in the following way:
 * 25-30 min for me to demonstrate the concepts in the day's lecture
 * 20-25 min for discussion and additional Q&A that arise.
 
-All of the code is available at the course website.  You should try running everything on your own in the days following our class.  Then try extending what you learn to your own data.
+All of the code is available at the course website.  You should try running everything on your own.  Then try extending what you learn to your own data.
+
+For questions that arise between courses, please post them in the [issues section of the github repository for the course](https://github.com/blaserlab/datascience.curriculum/issues).  This way others can learn from questions that have been asked previously.  
 
 ### Topics
 
