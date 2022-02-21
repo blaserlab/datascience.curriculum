@@ -34,7 +34,7 @@ purrr::walk(
 )
 
 # commit and push
-gert::git_commit_all("updated readme")
+gert::git_commit_all("edited section on Renv")
 gert::git_push()
 
 devtools::install_github("blaserlab/datascience.curriculum", build_vignettes = T, force = TRUE)

@@ -120,9 +120,9 @@ On occasion you will write an R script that depends on a specific version of a p
 
 The way around this is to use Renv to control package versions.  This can cause some headaches but is generally worth the trouble.
 
-What happens is Renv discovers all of the packages you use in your code, copies or newly installs those pieces of software into a directory within the project, and then maintains a list, called a lockfile, of all the versions of all the packages being used.
+What happens is Renv discovers all of the packages you use in your code and copies or newly installs those pieces of software into a cache directory on your system which is hard to find.  Then it puts links to those packages within your project.  Finally it maintains a list, called a lockfile, of all the versions of all the packages being used.
 
-This action changes the package library for your project to the renv directory within the project itslef.  
+When you update a package in your project, Renv links to the new version if available in the cache, or installs it in the cache first if necessary.  If you find something has broken, the old version of the package is still available so you can go back to it if necessary.  This gives you a great deal of control over the software used in your analysis.
 
 ```{r eval=FALSE}
 # initiate an Renv environment in a new project
@@ -131,7 +131,7 @@ renv::init()
 # install packages listed in the lockfile
 renv::restore()
 
-# install any packages that get missed
+# install any packages that get missed by init()
 renv::install()
 ```
 

@@ -231,12 +231,13 @@ usethis::use_github(private = TRUE)</code></pre>
 <p>R maintains many different environments concurrently. Each package you attach with the <code>library</code> command gets its own environment. The term “global” is even more confusing because it is not really global in the sense that it encompasses all other environments. Rather, it is the highest priority environment. If you enter a variable name into R, it always looks in the global environment first and then goes down the line until it hits the package:base environment. So if I write a function in my R script called “mean” that for some reason calculates the median of a set of numbers (not a great idea), R will store that in the global environment. Later on if I ask R to use the “mean” function, it will use the version from the global environment and not the version from the base environment. It will calculate the median instead of the mean in this case.</p>
 <pre class="r"><code># produce a list of all environments
 search()
-#&gt;  [1] &quot;.GlobalEnv&quot;                     &quot;package:datascience.curriculum&quot; &quot;package:rstatix&quot;                &quot;package:cowplot&quot;                &quot;package:ggpubr&quot;                
-#&gt;  [6] &quot;package:forcats&quot;                &quot;package:stringr&quot;                &quot;package:dplyr&quot;                  &quot;package:purrr&quot;                  &quot;package:readr&quot;                 
-#&gt; [11] &quot;package:tidyr&quot;                  &quot;package:tibble&quot;                 &quot;package:ggplot2&quot;                &quot;package:tidyverse&quot;              &quot;devtools_shims&quot;                
-#&gt; [16] &quot;tools:rstudio&quot;                  &quot;package:stats&quot;                  &quot;package:graphics&quot;               &quot;package:grDevices&quot;              &quot;package:utils&quot;                 
-#&gt; [21] &quot;package:datasets&quot;               &quot;package:devtools&quot;               &quot;package:usethis&quot;                &quot;package:methods&quot;                &quot;Autoloads&quot;                     
-#&gt; [26] &quot;org:r-lib&quot;                      &quot;package:base&quot;</code></pre>
+#&gt;  [1] &quot;.GlobalEnv&quot;                     &quot;package:datascience.curriculum&quot; &quot;package:rstatix&quot;                &quot;package:cowplot&quot;               
+#&gt;  [5] &quot;package:ggpubr&quot;                 &quot;package:forcats&quot;                &quot;package:stringr&quot;                &quot;package:dplyr&quot;                 
+#&gt;  [9] &quot;package:purrr&quot;                  &quot;package:readr&quot;                  &quot;package:tidyr&quot;                  &quot;package:tibble&quot;                
+#&gt; [13] &quot;package:ggplot2&quot;                &quot;package:tidyverse&quot;              &quot;devtools_shims&quot;                 &quot;package:devtools&quot;              
+#&gt; [17] &quot;package:usethis&quot;                &quot;org:r-lib&quot;                      &quot;tools:rstudio&quot;                  &quot;package:stats&quot;                 
+#&gt; [21] &quot;package:graphics&quot;               &quot;package:grDevices&quot;              &quot;package:utils&quot;                  &quot;package:datasets&quot;              
+#&gt; [25] &quot;package:methods&quot;                &quot;Autoloads&quot;                      &quot;org:r-lib&quot;                      &quot;package:base&quot;</code></pre>
 <p>Since the global environment gets wiped out every time you change projects or restart R, you have to have a way to save what you want in permanent storage and to recreate the rest as needed from code. We will discuss this more when we talk about building packages.</p>
 </div>
 <div id="renv-environment" class="section level2">
@@ -244,15 +245,15 @@ search()
 <p>The final sense of environment you need to know relates to package versions.</p>
 <p>On occasion you will write an R script that depends on a specific version of a package, but breaks if you were to update that package to a newer version.</p>
 <p>The way around this is to use Renv to control package versions. This can cause some headaches but is generally worth the trouble.</p>
-<p>What happens is Renv discovers all of the packages you use in your code, copies or newly installs those pieces of software into a directory within the project, and then maintains a list, called a lockfile, of all the versions of all the packages being used.</p>
-<p>This action changes the package library for your project to the renv directory within the project itslef.</p>
+<p>What happens is Renv discovers all of the packages you use in your code and copies or newly installs those pieces of software into a cache directory on your system which is hard to find. Then it puts links to those packages within your project. Finally it maintains a list, called a lockfile, of all the versions of all the packages being used.</p>
+<p>When you update a package in your project, Renv links to the new version if available in the cache, or installs it in the cache first if necessary. If you find something has broken, the old version of the package is still available so you can go back to it if necessary. This gives you a great deal of control over the software used in your analysis.</p>
 <pre class="r"><code># initiate an Renv environment in a new project
 renv::init()
 
 # install packages listed in the lockfile
 renv::restore()
 
-# install any packages that get missed
+# install any packages that get missed by init()
 renv::install()</code></pre>
 </div>
 <div id="project-organization" class="section level2">
