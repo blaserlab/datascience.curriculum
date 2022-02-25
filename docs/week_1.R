@@ -45,18 +45,31 @@ search()
 
 
 ## ----eval = FALSE----------------------------------------------------------------------------------------------------------------------------------------------
-## # make sure you have an account and are signed in
+## # make sure you have a github account
+## # https://github.com/join
+## 
+## # install git
+## ## Windows ->  https://git-scm.com/download/win
+## ## Mac     ->  https://git-scm.com/download/mac
+## ## Linux   ->  https://git-scm.com/download/linux
+## 
+## # configure git in Rstudio
+## usethis::use_git_config(user.name = "YourName", user.email = "your@mail.com")
 ## 
 ## # create a personal access token at the github website
+## # set the expiration date as desired
+## # permissions should be set automatically
 ## usethis::create_github_token()
 ## 
 ## # run this and enter your token at the prompt
 ## gitcreds::gitcreds_set()
 ## 
-## # if you encounter errors you may have an old token stored elsewhere on your system.
-## # to fix this, run this command, delete the PAT line, save, restart R and try again.
+## # if you have trouble accessing github, you may need to edit the .Renviron file
+## # run this
 ## usethis::edit_r_environ()
-## 
+## # store your personal access token on  new line with: GITHUB_PAT=xxxyyyzzz
+## # press enter and then save
+## # restart R
 
 
 ## ----eval = FALSE----------------------------------------------------------------------------------------------------------------------------------------------
