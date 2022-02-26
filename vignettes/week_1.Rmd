@@ -235,7 +235,7 @@ This is a pretty slick way to save your progress without leaving R.
 
 1.  Use the code blocks from this vignette to make a new R project on your system.  Modify as necessary.  If you have trouble with the git commands omit them for now.
 
-2.  Make an R script called "dependencies.R".  Put it in a directory in your new project called "R".
+2.  Save R scripts:  "R/dev.R", "R/dependencies.R", "R/configs.R" 
 
 3.  Install renv if you haven't already.
 
@@ -245,4 +245,4 @@ This is a pretty slick way to save your progress without leaving R.
 
 6.  Try attaching the tidyverse package to your session using ```library()```.  If there are missing package dependencies install those as well.
 
-7.  Extra credit:  save your commands from 4, 5 and 6 to dependencies.R, then add, commit, and push to your github site.
+7.  Extra credit:  save your commands on the appropriate scripts, then add, commit, and push to your github site.
