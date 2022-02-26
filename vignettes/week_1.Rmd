@@ -50,9 +50,23 @@ Packages are most often stored and distributed as compressed binary files via st
 
 **What happens when we "install" packages?**
 
-R downloads the compressed file and then unpacks it in a library directory on your computer or server.  You can find the original source files if you know where your R package library is stored (more on this when we discuss Renv).  If you want to know how a function is working, this is one way to find it.
+R downloads the compressed file and then unpacks it in a library directory on your computer or server.  Then the functions and data are available for you to use in your R project.
 
-The function you use to install packages is ```install.packages("<package name>")```.  This is most useful for official CRAN packages. For a more versatile tool, install renv with ```install.packages("renv")``` and then run ```renv::install("<package name>")```.  Using install from Renv will handle CRAN, bioconductor (prefix package name with bioc::), github, and local sources pretty easily, so this is the recommended approach.
+```{r eval=FALSE}
+# the base function you use to install packages is...
+install.packages("<package name>")
+
+# install the usethis and renv packages which we will be using in this lecture
+install.packages("usethis")
+install.packages("renv")
+
+# use renv for a more versatile installer 
+renv::install("<package name>")
+
+```
+
+
+The base install function is most useful for official CRAN packages.  Using install from Renv will handle CRAN, bioconductor (prefix package name with bioc::), github, and local sources pretty easily, so this is the recommended approach.
 
 **If you ever get an error that says a function or package is unavailable, the first thing you want to do is make sure the package is installed.**  You may not recognize what it is but it may be required by another package you wish to use.  This is called a dependency.
 
@@ -114,15 +128,19 @@ Since the global environment gets wiped out every time you change projects or re
 
 ## Renv environment
 
-The final sense of environment you need to know relates to package versions.
+The Renv environment refers to a version-controlled set of R packages that are specifically installed in an R project.  It is analogous to a conda environment in Python.
+
+Why do you want to deal with this?
 
 On occasion you will write an R script that depends on a specific version of a package, but breaks if you were to update that package to a newer version.
 
+Or perhaps you want to share the project with a collaborator who has a different set of packages installed on their system which may produce errors or different results than the packages you are working with.
+
 The way around this is to use Renv to control package versions.  This can cause some headaches but is generally worth the trouble.
 
-What happens is Renv discovers all of the packages you use in your code and copies or newly installs those pieces of software into a cache directory on your system which is hard to find.  Then it puts links to those packages within your project.  Finally it maintains a list, called a lockfile, of all the versions of all the packages being used.
+What happens is Renv discovers all of the packages you use in your code and copies or newly installs those pieces of software into a cache directory on your system.  This is usually difficult to find but this is not a problem because Renv knows how to find it.  Then Renv puts links to the cache into your project, rather than the software itself.  This keeps the disk-space footprint of the project very small.  Finally it maintains a list, called a lockfile, of all the versions of all the packages being used by the project.  Each project will have its own library of Renv links and its own lockfile.
 
-When you update a package in your project, Renv links to the new version if available in the cache, or installs it in the cache first if necessary.  If you find something has broken, the old version of the package is still available so you can go back to it if necessary.  This gives you a great deal of control over the software used in your analysis.
+When you update a package in your project, Renv links to the new version if available in the cache, or installs it in the cache first if necessary.  If you find something has broken after the update, the old version of the package is still available so you can go back to it if necessary.  This gives you a great deal of control over the software used in your analysis.
 
 ```{r eval=FALSE}
 # initiate an Renv environment in a new project
@@ -131,13 +149,15 @@ renv::init()
 # install packages listed in the lockfile
 renv::restore()
 
-# install any packages that get missed by init()
+# update or install new packages
 renv::install()
 ```
 
 ## Project organization
 
-I keep all of my R scripts in a directory called "R".  The root directory of the project I reserve for files related to the "software development" aspect of the project.  This is relatively flexible for simple data analysis projects; the rules become more strict when we build packages.   
+I keep all of my R scripts in a directory called "R".  Within this I make scripts for setting up the project (```dev.R```), managing packages and attaching libraries (```dependencies.R```), and setting up aesthetic and input/output configurations (```configs.R```).  The main analysis scripts for the project will go in the R folder and may go in subdirectories if there are a lot of them.  This arrangement is very flexible for simple data analysis projects; the rules become more strict when we build packages.
+
+I avoid putting any new files in the root directory of the project after it is set up and reserve this for the configuration files generated by the usethis package. 
 
 ## Extra credit:  Basic git operation for the single user
 
@@ -168,16 +188,18 @@ usethis::create_github_token()
 gitcreds::gitcreds_set()
 
 # if you have trouble accessing github, you may need to edit the .Renviron file
-# run this
+# this is the third usage of the term environment (sorry)
+# to edit this file, run 
 usethis::edit_r_environ()
 # store your personal access token on  new line with: GITHUB_PAT=xxxyyyzzz
-# press enter and then save
+# press enter to generate a new line and then save
 # restart R
+# only do this if you are having trouble connecting to github from R
 ```
 
 The necessary permissions should be set automatically by these commands.  By default, the token expires after 30 days, but you can override this.  
 
-Assuming the commands above have run properly you should be ready to use git and github.  Rstudio provides a graphical interface for working with git which I find difficult to use.  Working in the terminal is easier and gives you access to all options for branching, merging and checking out old versions of your code.
+Assuming the commands above have run properly you should be ready to use git and github.  Rstudio provides a graphical interface for working with git which I find inconventient to use.  Working in the terminal is easier and gives you access to all options for branching, merging and checking out old versions of your code.
 
 The basic rules are these:
 

@@ -225,6 +225,22 @@ save(demo_iris_data,
 </div>
 <div id="setting-up-the-package" class="section level2">
 <h2>Setting up the package</h2>
+<p>First you might want to update your R</p>
+<pre class="r"><code>options(
+  usethis.full_name = &quot;Jane Doe&quot;,
+  usethis.protocol  = &quot;ssh&quot;,
+  usethis.description = list(
+    &quot;Authors@R&quot; = utils::person(
+        &quot;Jane&quot;, &quot;Doe&quot;,
+        email = &quot;jane@example.com&quot;,
+        role = c(&quot;aut&quot;, &quot;cre&quot;),
+        comment = c(ORCID = &quot;JANE&#39;S-ORCID-ID&quot;)
+    ),
+    Version = &quot;0.0.0.9000&quot;
+  ),
+  usethis.destdir = &quot;~/the/place/where/I/keep/my/R/projects&quot;,
+  usethis.overwrite = TRUE
+)</code></pre>
 <p>I have the following lines saved in a script that I use whenever I make a new data package.</p>
 <pre class="r"><code># create the package and make it the active project 
 usethis::create_package(&quot;datascience.demopkg&quot;)

@@ -1,8 +1,8 @@
-## ----setup, include=FALSE--------------------------------------------------------------------------------------------------------------------------------------
+## ----setup, include=FALSE--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 library(datascience.curriculum)
 
 
-## ---- include = FALSE------------------------------------------------------------------------------------------------------------------------------------------
+## ---- include = FALSE------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -11,7 +11,20 @@ knitr::opts_chunk$set(
 )
 
 
-## ----eval=FALSE------------------------------------------------------------------------------------------------------------------------------------------------
+## ----eval=FALSE------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## # the base function you use to install packages is...
+## install.packages("<package name>")
+## 
+## # install the usethis and renv packages which we will be using in this lecture
+## install.packages("usethis")
+## install.packages("renv")
+## 
+## # use renv for a more versatile installer
+## renv::install("<package name>")
+## 
+
+
+## ----eval=FALSE------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ## # create a project called rclass_example in your home directory
 ## usethis::create_project("~/rclass_example")
 ## 
@@ -28,23 +41,23 @@ knitr::opts_chunk$set(
 ## usethis::use_github(private = TRUE)
 
 
-## --------------------------------------------------------------------------------------------------------------------------------------------------------------
+## --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # produce a list of all environments
 search()
 
 
-## ----eval=FALSE------------------------------------------------------------------------------------------------------------------------------------------------
+## ----eval=FALSE------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ## # initiate an Renv environment in a new project
 ## renv::init()
 ## 
 ## # install packages listed in the lockfile
 ## renv::restore()
 ## 
-## # install any packages that get missed by init()
+## # update or install new packages
 ## renv::install()
 
 
-## ----eval = FALSE----------------------------------------------------------------------------------------------------------------------------------------------
+## ----eval = FALSE----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ## # make sure you have a github account
 ## # https://github.com/join
 ## 
@@ -65,14 +78,16 @@ search()
 ## gitcreds::gitcreds_set()
 ## 
 ## # if you have trouble accessing github, you may need to edit the .Renviron file
-## # run this
+## # this is the third usage of the term environment (sorry)
+## # to edit this file, run
 ## usethis::edit_r_environ()
 ## # store your personal access token on  new line with: GITHUB_PAT=xxxyyyzzz
-## # press enter and then save
+## # press enter to generate a new line and then save
 ## # restart R
+## # only do this if you are having trouble connecting to github from R
 
 
-## ----eval = FALSE----------------------------------------------------------------------------------------------------------------------------------------------
+## ----eval = FALSE----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ## # make sure all work is saved
 ## # add and commit all outstanding changes in one step
 ## gert::git_commit_all("commit message here")
