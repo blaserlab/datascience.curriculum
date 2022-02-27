@@ -58,6 +58,7 @@ For questions that arise between courses, please post them in the [issues sectio
 ####	[Week 1:  Setting up your computing environment](week_1.html)
 
 * [Week 1 R script](https://raw.githubusercontent.com/blaserlab/datascience.curriculum/main/docs/week_1.R)
+* [Week 1 notes](https://www.evernote.com/shard/s324/sh/0b431e36-fc49-8163-d1d6-5d04594b5107/e1404e72838937606a8f26cb73bd0761)
 * Content
   * R and Rstudio
   * Packages
@@ -71,6 +72,7 @@ For questions that arise between courses, please post them in the [issues sectio
 ####     [Week 2:  Basics of working with data in R](week_2.html)
 
 * [Week 2 R script](https://raw.githubusercontent.com/blaserlab/datascience.curriculum/main/docs/week_2.R)
+* [Week 2 notes](https://www.evernote.com/shard/s324/sh/5402171c-c4e7-a782-155d-4c345d3a4693/a18be152aa533a76bc9e57b93d6f7ba4)
 * Content
   * Data Format
   * Input and Data Types
