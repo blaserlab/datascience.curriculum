@@ -170,7 +170,7 @@ pre code {
 
 <div id="introduction" class="section level2">
 <h2>Introduction</h2>
-<p>Today we discuss fundamentals of working with data in R. This lecture borrows from <a href="http://swcarpentry.github.io/swc-releases/2017.08/r-novice-inflammation/">Software Carpentry</a> which you may find to be a useful resource for additional learning.</p>
+<p>Today we discuss fundamentals of working with data in R.</p>
 <p>There is always more than one way to accomplish the task of reading, analyzing and plotting data. My perspective is that this should be accomplished with computer code that is easy to read and error-resistant. In my opinion, the “tidyverse” family of packages achieve this goal moreso than “base” R functions or other packages a large percentage of the time. So I will mostly show you the tidyverse way.</p>
 </div>
 <div id="data-formatting" class="section level2">
@@ -420,14 +420,14 @@ c(1, 2) + c(1, 2, 3)
 <div id="dplyr" class="section level2">
 <h2>Dplyr</h2>
 <p>Dplyr is a part of the tidyverse packages. This is what you will use for data transformations prior to statistical testing or plotting.</p>
-<p>Dplyr functions are pipe-friendly, meaning that they can be chained in a way that reduces redundant text in your code or saving intermediate values which can cause problems. For this you use the pipe operator <code>%&gt;%</code>.</p>
+<p>Dplyr functions are pipe-friendly, meaning that they can be chained in a way that reduces redundant text in your code or saving intermediate values which can cause problems. For this you use the pipe operator <code>%&gt;%</code> or <code>|&gt;</code>. The latter is a new version which I find preferable but requires R version 4.1 or later. Either will work for all of the code we demonstrate here.</p>
 <p>Dplyr functions are also vectorized so they are computationally efficient and can be used on tables with hundreds of thousands of rows.</p>
 <pre class="r"><code># add a new column with mutate
 # then group by a useful categorical variable
 # then summarize the new value we calculated by mean according to group
-demo_data %&gt;%
-  mutate(sepal_l_w = Sepal.Length + Sepal.Width) %&gt;%
-  group_by(Species) %&gt;%
+demo_data |&gt;
+  mutate(sepal_l_w = Sepal.Length + Sepal.Width) |&gt;
+  group_by(Species) |&gt;
   summarise(mean_sepal_l_w = mean(sepal_l_w))
 #&gt; # A tibble: 3 × 2
 #&gt;   Species    mean_sepal_l_w
@@ -438,7 +438,7 @@ demo_data %&gt;%
 <p>You can use any built-in or custom function in mutate or summarise. Functions for mutate must return a vector of the same length as the input vector; functions for summarise must return a vector of length 1.</p>
 <p>Sometimes you may find it useful to select or de-select columns from a tibble:</p>
 <pre class="r"><code># return a tibble without the observation column
-demo_data %&gt;%
+demo_data |&gt;
   select(-observation)
 #&gt; # A tibble: 150 × 5
 #&gt;    Sepal.Length Sepal.Width Petal.Length Petal.Width Species
@@ -455,7 +455,7 @@ demo_data %&gt;%
 #&gt; 10          4.9         3.1          1.5         0.1 setosa 
 #&gt; # … with 140 more rows
 # return a tibble with only the Species and Sepal.Length columns
-demo_data %&gt;%
+demo_data |&gt;
   select(c(Species, Sepal.Length))
 #&gt; # A tibble: 150 × 2
 #&gt;    Species Sepal.Length
@@ -473,7 +473,7 @@ demo_data %&gt;%
 #&gt; # … with 140 more rows</code></pre>
 <p>Use <code>filter</code> to select rows based on conditional test(s):</p>
 <pre class="r"><code># filter rows satisfying a logical test
-demo_data %&gt;%
+demo_data |&gt;
   filter(Species == &quot;setosa&quot;)
 #&gt; # A tibble: 50 × 6
 #&gt;    observation Sepal.Length Sepal.Width Petal.Length Petal.Width Species
@@ -490,7 +490,7 @@ demo_data %&gt;%
 #&gt; 10 10                   4.9         3.1          1.5         0.1 setosa 
 #&gt; # … with 40 more rows
 
-demo_data %&gt;%
+demo_data |&gt;
   filter(Species %in% c(&quot;setosa&quot;, &quot;versicolor&quot;))
 #&gt; # A tibble: 100 × 6
 #&gt;    observation Sepal.Length Sepal.Width Petal.Length Petal.Width Species
@@ -508,7 +508,7 @@ demo_data %&gt;%
 #&gt; # … with 90 more rows</code></pre>
 <p>In some cases it may be useful to have the data in “long form” as opposed to “wide form”. Here you use <code>pivot_longer</code> and you are going to tell R which columns to convert to long form. These should all be of the same type because they will end up in the same column. The selected column names get repeated in a “name” column and the values end up in a “value” column. The columns you don’t select will be retained as additional attributes for the values.</p>
 <pre class="r"><code># pivot from wide form to long form
-long_data &lt;- demo_data %&gt;%
+long_data &lt;- demo_data |&gt;
   pivot_longer(cols = c(Sepal.Length,  Sepal.Width, Petal.Length, Petal.Width))
 long_data
 #&gt; # A tibble: 600 × 4
@@ -527,7 +527,7 @@ long_data
 #&gt; # … with 590 more rows
 
 # pivot back to wide form
-long_data %&gt;%
+long_data |&gt;
   pivot_wider(names_from = &quot;name&quot;, values_from = &quot;value&quot;)
 #&gt; # A tibble: 150 × 6
 #&gt;    observation Species Sepal.Length Sepal.Width Petal.Length Petal.Width
@@ -546,8 +546,8 @@ long_data %&gt;%
 <p>Sometimes you have two tibbles with related information you want to join together. This is a powerful tool for adding new attributes onto existing data.</p>
 <pre class="r"><code># make two smaller tables
 sepal_data &lt;-
-  demo_data %&gt;%
-  group_by(Species) %&gt;%
+  demo_data |&gt;
+  group_by(Species) |&gt;
   summarise(mean_sepal_l = mean(Sepal.Length), mean_sepal_w = mean(Sepal.Width))
 sepal_data
 #&gt; # A tibble: 3 × 3
@@ -558,8 +558,8 @@ sepal_data
 #&gt; 3 virginica          6.59         2.97
 
 petal_data &lt;-
-  demo_data %&gt;%
-  group_by(Species) %&gt;%
+  demo_data |&gt;
+  group_by(Species) |&gt;
   summarise(mean_petal_l = mean(Petal.Length), mean_petal_w = mean(Petal.Width))
 petal_data
 #&gt; # A tibble: 3 × 3

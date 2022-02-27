@@ -364,11 +364,11 @@ This is not a biostatistics course, but you will probably want to know how to pe
 R can perform a large number of statistical tests with base functions:
 
 ```{r}
-t.test(x  = iris %>% 
-         filter(Species == "setosa") %>%
+t.test(x  = iris |> 
+         filter(Species == "setosa") |>
          pull(Sepal.Length),
-       y = iris %>%
-         filter(Species == "versicolor") %>%
+       y = iris |>
+         filter(Species == "versicolor") |>
          pull(Sepal.Length), 
        var.equal = FALSE)
 
@@ -382,12 +382,12 @@ For me, the base function above is painful both to type and to read.  You may wi
 ```{r}
 library(rstatix)
 # print out a table of descriptive values
-iris %>%
-  group_by(Species) %>%
+iris |>
+  group_by(Species) |>
   get_summary_stats()
 
 # do the t-test
-iris %>%
+iris |>
   t_test(formula = Sepal.Length ~ Species)
 
 ```

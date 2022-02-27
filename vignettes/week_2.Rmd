@@ -23,7 +23,7 @@ library(datascience.curriculum)
 
 ## Introduction
 
-Today we discuss fundamentals of working with data in R.  This lecture borrows from [Software Carpentry](http://swcarpentry.github.io/swc-releases/2017.08/r-novice-inflammation/) which you may find to be a useful resource for additional learning.
+Today we discuss fundamentals of working with data in R.  
 
 There is always more than one way to accomplish the task of reading, analyzing and plotting data.  My perspective is that this should be accomplished with computer code that is easy to read and error-resistant.  In my opinion, the "tidyverse" family of packages achieve this goal moreso than "base" R functions or other packages a large percentage of the time.  So I will mostly show you the tidyverse way.
 
@@ -211,7 +211,7 @@ Logical operators return a value of TRUE or FALSE.
 
 Dplyr is a part of the tidyverse packages.  This is what you will use for data transformations prior to statistical testing or plotting.
 
-Dplyr functions are pipe-friendly, meaning that they can be chained in a way that reduces redundant text in your code or saving intermediate values which can cause problems.  For this you use the pipe operator ```%>%```.
+Dplyr functions are pipe-friendly, meaning that they can be chained in a way that reduces redundant text in your code or saving intermediate values which can cause problems.  For this you use the pipe operator ```%>%``` or ```|>```.  The latter is a new version which I find preferable but requires R version 4.1 or later.  Either will work for all of the code we demonstrate here. 
 
 Dplyr functions are also vectorized so they are computationally efficient and can be used on tables with hundreds of thousands of rows.
 
@@ -219,9 +219,9 @@ Dplyr functions are also vectorized so they are computationally efficient and ca
 # add a new column with mutate
 # then group by a useful categorical variable
 # then summarize the new value we calculated by mean according to group
-demo_data %>%
-  mutate(sepal_l_w = Sepal.Length + Sepal.Width) %>%
-  group_by(Species) %>%
+demo_data |>
+  mutate(sepal_l_w = Sepal.Length + Sepal.Width) |>
+  group_by(Species) |>
   summarise(mean_sepal_l_w = mean(sepal_l_w))
 
 ```
@@ -232,10 +232,10 @@ Sometimes you may find it useful to select or de-select columns from a tibble:
 
 ```{r}
 # return a tibble without the observation column
-demo_data %>%
+demo_data |>
   select(-observation)
 # return a tibble with only the Species and Sepal.Length columns
-demo_data %>%
+demo_data |>
   select(c(Species, Sepal.Length))
 ```
 
@@ -243,10 +243,10 @@ Use ```filter``` to select rows based on conditional test(s):
 
 ```{r}
 # filter rows satisfying a logical test
-demo_data %>%
+demo_data |>
   filter(Species == "setosa")
 
-demo_data %>%
+demo_data |>
   filter(Species %in% c("setosa", "versicolor"))
 
 ```
@@ -255,12 +255,12 @@ In some cases it may be useful to have the data in "long form" as opposed to "wi
 
 ```{r}
 # pivot from wide form to long form
-long_data <- demo_data %>%
+long_data <- demo_data |>
   pivot_longer(cols = c(Sepal.Length,  Sepal.Width, Petal.Length, Petal.Width))
 long_data
 
 # pivot back to wide form
-long_data %>%
+long_data |>
   pivot_wider(names_from = "name", values_from = "value")
 
 ```
@@ -270,14 +270,14 @@ Sometimes you have two tibbles with related information you want to join togethe
 ```{r}
 # make two smaller tables
 sepal_data <-
-  demo_data %>%
-  group_by(Species) %>%
+  demo_data |>
+  group_by(Species) |>
   summarise(mean_sepal_l = mean(Sepal.Length), mean_sepal_w = mean(Sepal.Width))
 sepal_data
 
 petal_data <-
-  demo_data %>%
-  group_by(Species) %>%
+  demo_data |>
+  group_by(Species) |>
   summarise(mean_petal_l = mean(Petal.Length), mean_petal_w = mean(Petal.Width))
 petal_data
 

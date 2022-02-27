@@ -170,7 +170,14 @@ pre code {
 
 <div id="introduction" class="section level2">
 <h2>Introduction</h2>
-<p>This course will focus on what I believe are the essential skills necessary for a laboratory-based scienties to use R and Rstudio in an effective way. There are many other detailed resources out there for you. <a href="https://software-carpentry.org/lessons/previous/">Software carpentry</a> has very good tutorials for R, python, git and working with the command line. These are good if you want to extend your knowledge beyond what we cover here. I will try to show you what I view as best data practices for rigorous and reproducible biological research.</p>
+<p>This course will focus on what I believe are the essential skills necessary for a laboratory-based scienties to use R and Rstudio in an effective way. There are many other detailed resources out there for you.</p>
+<ul>
+<li><a href="https://software-carpentry.org/lessons/previous/">Software carpentry</a> has very good tutorials for R, python, git and working with the command line.<br />
+</li>
+<li><a href="https://r4ds.had.co.nz/">R for data science</a> is a book written by Hadley Wickham who wrote much of the software we use in R</li>
+<li><a href="https://moderndive.com/">Modern dive</a> is focused on modeling if you are interested in more clinical data sets</li>
+</ul>
+<p>These and many others are good resources if you want to extend your knowledge beyond what we cover here.</p>
 <p>Learning R at times will seem like learning a foreign language. You will make errors. <strong>Always remember that you will never be the first person to encounter an error. Learn how to google the error message and 99% of the time you will find your answer in the first 3 hits</strong>. This is how you learn.</p>
 </div>
 <div id="r-and-rstudio" class="section level2">
@@ -241,10 +248,11 @@ usethis::use_github(private = TRUE)</code></pre>
 <p>R maintains many different environments concurrently. Each package you attach with the <code>library</code> command gets its own environment. The term “global” is even more confusing because it is not really global in the sense that it encompasses all other environments. Rather, it is the highest priority environment. If you enter a variable name into R, it always looks in the global environment first and then goes down the line until it hits the package:base environment. So if I write a function in my R script called “mean” that for some reason calculates the median of a set of numbers (not a great idea), R will store that in the global environment. Later on if I ask R to use the “mean” function, it will use the version from the global environment and not the version from the base environment. It will calculate the median instead of the mean in this case.</p>
 <pre class="r"><code># produce a list of all environments
 search()
-#&gt;  [1] &quot;.GlobalEnv&quot;                     &quot;.conflicts&quot;                     &quot;devtools_shims&quot;                 &quot;package:datascience.curriculum&quot; &quot;tools:rstudio&quot;                 
-#&gt;  [6] &quot;package:stats&quot;                  &quot;package:graphics&quot;               &quot;package:grDevices&quot;              &quot;package:utils&quot;                  &quot;package:datasets&quot;              
-#&gt; [11] &quot;package:conflicted&quot;             &quot;package:devtools&quot;               &quot;package:usethis&quot;                &quot;package:methods&quot;                &quot;Autoloads&quot;                     
-#&gt; [16] &quot;org:r-lib&quot;                      &quot;package:base&quot;</code></pre>
+#&gt;  [1] &quot;.GlobalEnv&quot;                     &quot;.conflicts&quot;                     &quot;devtools_shims&quot;                 &quot;package:datascience.curriculum&quot;
+#&gt;  [5] &quot;tools:rstudio&quot;                  &quot;package:stats&quot;                  &quot;package:graphics&quot;               &quot;package:grDevices&quot;             
+#&gt;  [9] &quot;package:utils&quot;                  &quot;package:datasets&quot;               &quot;package:conflicted&quot;             &quot;package:devtools&quot;              
+#&gt; [13] &quot;package:usethis&quot;                &quot;package:methods&quot;                &quot;Autoloads&quot;                      &quot;org:r-lib&quot;                     
+#&gt; [17] &quot;package:base&quot;</code></pre>
 <p>Since the global environment gets wiped out every time you change projects or restart R, you have to have a way to save what you want in permanent storage and to recreate the rest as needed from code. We will discuss this more when we talk about building packages.</p>
 </div>
 <div id="renv-environment" class="section level2">
@@ -331,7 +339,7 @@ gert::git_push()
 <h2>Exercises</h2>
 <ol style="list-style-type: decimal">
 <li><p>Use the code blocks from this vignette to make a new R project on your system. Modify as necessary. If you have trouble with the git commands omit them for now.</p></li>
-<li><p>Save R scripts: “R/dev.R”, “R/dependencies.R”, “R/configs.R”</p></li>
+<li><p>Save new R scripts: “R/dev.R”, “R/dependencies.R”, “R/configs.R”. Add commands for setting up the project and interacting with git to dev.R. Add commands for installing and loading packages to dependencies.R. Leave configs.R blank for now.</p></li>
 <li><p>Install renv if you haven’t already.</p></li>
 <li><p>Initiate renv in your new project.</p></li>
 <li><p>Use <code>renv::install()</code> to install “tidyverse”.</p></li>

@@ -22,7 +22,13 @@ knitr::opts_chunk$set(
 
 ## Introduction
 
-This course will focus on what I believe are the essential skills necessary for a laboratory-based scienties to use R and Rstudio in an effective way.  There are many other detailed resources out there for you.  [Software carpentry](https://software-carpentry.org/lessons/previous/) has very good tutorials for R, python, git and working with the command line.  These are good if you want to extend your knowledge beyond what we cover here.  I will try to show you what I view as best data practices for rigorous and reproducible biological research.  
+This course will focus on what I believe are the essential skills necessary for a laboratory-based scienties to use R and Rstudio in an effective way.  There are many other detailed resources out there for you.  
+
+* [Software carpentry](https://software-carpentry.org/lessons/previous/) has very good tutorials for R, python, git and working with the command line.  
+* [R for data science](https://r4ds.had.co.nz/) is a book written by Hadley Wickham who wrote much of the software we use in R
+* [Modern dive](https://moderndive.com/) is focused on modeling if you are interested in more clinical data sets 
+
+These and many others are good resources if you want to extend your knowledge beyond what we cover here.    
 
 Learning R at times will seem like learning a foreign language.  You will make errors.  **Always remember that you will never be the first person to encounter an error.  Learn how to google the error message and 99% of the time you will find your answer in the first 3 hits**.  This is how you learn. 
 
@@ -235,7 +241,7 @@ This is a pretty slick way to save your progress without leaving R.
 
 1.  Use the code blocks from this vignette to make a new R project on your system.  Modify as necessary.  If you have trouble with the git commands omit them for now.
 
-2.  Save R scripts:  "R/dev.R", "R/dependencies.R", "R/configs.R" 
+2.  Save new R scripts:  "R/dev.R", "R/dependencies.R", "R/configs.R".  Add commands for setting up the project and interacting with git to dev.R.  Add commands for installing and loading packages to dependencies.R.  Leave configs.R blank for now. 
 
 3.  Install renv if you haven't already.
 
