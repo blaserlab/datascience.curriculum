@@ -11,7 +11,7 @@ The goals of this course are for you to become comfortable with the R statistica
 * Rstudio for interacting with R
 * git for version control
 * github to share your work
-* R package development to keep your code and data separate
+* R package development to keep your code and data separate and organized
 
 ### Specific Objectives
 
@@ -55,7 +55,7 @@ For questions that arise between courses, please post them in the [issues sectio
 
 ### Topics
 
-####	[Week 1:  Setting up your computing environment](week_1.html)
+####	[Week 1:  Setting up your computing environment](week_1.html) - March 30, 10-11 AM ET
 
 * [Week 1 R script](https://raw.githubusercontent.com/blaserlab/datascience.curriculum/main/docs/week_1.R)
 * [Week 1 notes](https://www.evernote.com/shard/s324/sh/0b431e36-fc49-8163-d1d6-5d04594b5107/e1404e72838937606a8f26cb73bd0761)
@@ -69,7 +69,7 @@ For questions that arise between courses, please post them in the [issues sectio
   * Project organization
   * Basic Git for the single user
 
-####     [Week 2:  Basics of working with data in R](week_2.html)
+####     [Week 2:  Basics of working with data in R](week_2.html) - April 6, 10-11 AM ET
 
 * [Week 2 R script](https://raw.githubusercontent.com/blaserlab/datascience.curriculum/main/docs/week_2.R)
 * [Week 2 notes](https://www.evernote.com/shard/s324/sh/5402171c-c4e7-a782-155d-4c345d3a4693/a18be152aa533a76bc9e57b93d6f7ba4)
@@ -82,7 +82,7 @@ For questions that arise between courses, please post them in the [issues sectio
   * Data Operations
   * Dplyr
   
-####	[Week 3:  More advanced concepts in R](week_3.html)
+####	[Week 3:  More advanced concepts in R](week_3.html) - April 13, 10-11 AM ET
 
 * [Week 3 R script](https://raw.githubusercontent.com/blaserlab/datascience.curriculum/main/docs/week_3.R)
 * Content
@@ -93,7 +93,7 @@ For questions that arise between courses, please post them in the [issues sectio
   * Plotting
   * Statistical Testing
 
-####	[Week 4: blaseRtools scRNA-seq tutorial 1](https://blaserlab.github.io/blaseRtools/pages/scRNAseq.html)
+####	[Week 4: blaseRtools scRNA-seq tutorial 1](https://blaserlab.github.io/blaseRtools/pages/scRNAseq.html) - April 27, 10-11 AM ET
 
 * [Week 4/5 R script](https://raw.githubusercontent.com/blaserlab/blaseRtools/master/docs/pages/scRNAseq.R)
 * Content
@@ -109,7 +109,7 @@ For questions that arise between courses, please post them in the [issues sectio
   * Label Transfer
 
 
-####	[Week 5: blaseRtools scRNA-seq tutorial 2](https://blaserlab.github.io/blaseRtools/pages/scRNAseq.html)
+####	[Week 5: blaseRtools scRNA-seq tutorial 2](https://blaserlab.github.io/blaseRtools/pages/scRNAseq.html) - May 4, 10-11 AM ET
 
 * [Week 4/5 R script](https://raw.githubusercontent.com/blaserlab/blaseRtools/master/docs/pages/scRNAseq.R)
 * Content
@@ -120,7 +120,7 @@ For questions that arise between courses, please post them in the [issues sectio
     * Pseudobulk
     * Regression
 
-#### [Week 6:  Building and using data packages](week_6.html)
+#### [Week 6:  Building and using data packages](week_6.html) - May 11, 10-11 AM ET
 
 * [Week 6 R script](https://raw.githubusercontent.com/blaserlab/datascience.curriculum/main/docs/week_6.R)
 * Content
