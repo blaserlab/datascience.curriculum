@@ -4,6 +4,8 @@ This course is designed to help you improve your data management skills.  The sk
 
 Did you ever see a figure you made last year but can't remember how you made it?  Understanding the principles we cover here will help you and others reproduce and extend your work. 
 
+To sign up: email bradley.blaser@osumc.edu and include "workshop" in the subject line.
+
 ### Goals
 
 The goals of this course are for you to become comfortable with the R statistical computing language and associated computational technology: 
