@@ -12,7 +12,7 @@
 # use_vignette("week_6")
 
 
-document()
+devtools::document()
 
 # make the documents for the website
 purrr::walk(
@@ -34,7 +34,8 @@ purrr::walk(
 )
 
 # commit and push
-gert::git_commit_all("updated readme")
+gert::git_add("*")
+gert::git_commit_all("updated git section")
 gert::git_push()
 
 devtools::install_github("blaserlab/datascience.curriculum", build_vignettes = T, force = TRUE)

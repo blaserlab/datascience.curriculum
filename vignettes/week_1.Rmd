@@ -197,11 +197,13 @@ gitcreds::gitcreds_set()
 # this is the third usage of the term environment (sorry)
 # to edit this file, run 
 usethis::edit_r_environ()
-# store your personal access token on  new line with: GITHUB_PAT=xxxyyyzzz
+# if there is a line there starting GITHUB_PAT=xxx, it may be interfering with your credentials.  Delete it.
 # press enter to generate a new line and then save
 # restart R
-# only do this if you are having trouble connecting to github from R
 ```
+If you happen to be working on a linux system, you will need to run this line at the terminal:
+
+```git config --global credential.helper 'cache --timeout=1000000000'```
 
 The necessary permissions should be set automatically by these commands.  By default, the token expires after 30 days, but you can override this.  
 
@@ -226,7 +228,10 @@ If you are using git, it is important to be comfortable with using these command
 
 ```{r eval = FALSE}
 # make sure all work is saved
-# add and commit all outstanding changes in one step
+# add your work
+gert::git_add("*") # adds all unstaged files
+
+# commit your work
 gert::git_commit_all("commit message here")
 
 # push your changes to github 
