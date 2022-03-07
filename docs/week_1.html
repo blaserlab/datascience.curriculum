@@ -254,6 +254,7 @@ if (window.hljs) {
 
 
 
+
 <style type="text/css">
 .main-container {
   max-width: 940px;
@@ -274,6 +275,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -443,7 +447,8 @@ install.packages(&quot;usethis&quot;)
 install.packages(&quot;renv&quot;)
 
 # use renv for a more versatile installer 
-renv::install(&quot;&lt;package name&gt;&quot;)
+# install the blaseRtemplates package which we will use in this lecture
+renv::install(&quot;blaserlab/blaseRtemplates&quot;)
 </code></pre>
 <p>The base install function is most useful for official CRAN packages.
 Using install from Renv will handle CRAN, bioconductor (prefix package
@@ -456,7 +461,7 @@ required by another package you wish to use. This is called a
 dependency.</p>
 <p>Once you have installed a package its functions are available to be
 called using the package name followed by 2 colons such as
-<code>blaseRtools::bb_var_umap(cds)</code>. But this is not always the
+<code>dplyr::filter(mtcars, cyl == 6)</code>. But this is not always the
 best way to go.</p>
 <p>To make all of the functions from a package available, you need to
 run <code>library(&quot;&lt;package name&gt;&quot;)</code>. This will attach all
@@ -466,6 +471,8 @@ because there could be “namespace conflicts”. This happens when the same
 term applies to two different functions from two different packages. R
 picks one and goes with it without clearly indicating that it is doing
 so. This is a common source of errors.</p>
+<p>Later on we will see how to use the “conflicted” package to help warn
+us of those errors before they cause a problem.</p>
 </div>
 <div id="projects" class="section level2">
 <h2>Projects</h2>
@@ -478,33 +485,54 @@ of the projects. That means you can reference any file in the root
 directory by typing its name like so: “file.R”. If that file was one
 directory down, it would be “directory/file.R”. There is almost no
 reason ever to change this behavior.</p>
-<p>Packages are self-contained. You can put them where you want and move
-them without breaking anything inside.</p>
 <p>You always want to be working in a project.</p>
 <div id="setting-up-a-project" class="section level3">
 <h3>Setting up a project</h3>
 <p>The best way to do this is through automated commands, rather than
-through the program menus. I have these lines saved in a script I always
-use to initialize a project. This way all of my projects are structured
-the same way.</p>
+through the program menus. This way the packages are set up in a
+consisten manner, every time. Then when you have to revisit a project
+after months and months, it is easy to navigate.</p>
+<p>I wrote a small package, called “blaseRtemplates” to skeletonize my R
+projects. You can also use the “usethis” package. The function
+<code>blaseRtemplates::initialize_project()</code> is very similar to a
+core function from usethis with a few extra features. Once the project
+is initialized we switch over to “usethis” functions.</p>
 <pre class="r"><code># create a project called rclass_example in your home directory
-usethis::create_project(&quot;~/rclass_example&quot;)
+blaseRtemplates::initialize_project(&quot;~/rclass_example&quot;)</code></pre>
+<p>That function will create the skeletonized project, activate it and
+restart your session within it.</p>
+<p>The following lines are taken directly from one of files created,
+“R/inititialization.R”:</p>
+<pre class="r"><code># after running the initialization command, run these lines once to set up
+# your project in a consistent manner.
+# private github repos can be made public via the web interface
 
-# generate a standard license file for your work 
-usethis::use_mit_license(&quot;Brad Blaser&quot;)
+# make a software license
+usethis::use_mit_license(&quot;&lt;your name here&gt;&quot;)
 
-# generate a readme file so you can document your work
+# generate a readme file to explain your work
 usethis::use_readme_md()
 
-# use git and set up a private remote repository on github
-# these will fail unless you have git installed on your computer and 
-# have a github account. See below
+# generate a news file to document updates to your package
+usethis::use_news_md()
+
+# initialize git
 usethis::use_git()
-usethis::use_github(private = TRUE)</code></pre>
-<p>You can open or close projects by selecting from the dropdown menu in
-the top right of Rstudio</p>
+
+# initialize github
+usethis::use_github(private = TRUE)
+
+# modify git ignore file
+usethis::use_git_ignore(c(&quot;*.rda&quot;, &quot;local_configs.R&quot;))
+</code></pre>
+<p>After you run this script, you should delete it. See below for
+setting up git and github for the first time.</p>
+<p>Rstudio keeps track of your recent projectrs; you can open or close
+projects by selecting from the dropdown menu in the top right of
+Rstudio.</p>
 <p>Be aware: any time you close or switch projects, the R session is
-restarted and you will lose all objects in your Global Environment.</p>
+restarted and you will lose all objects not saved to disk, for example
+your Global Environment.</p>
 </div>
 </div>
 <div id="global-environment" class="section level2">
@@ -532,13 +560,9 @@ not the version from the base environment. It will calculate the median
 instead of the mean in this case.</p>
 <pre class="r"><code># produce a list of all environments
 search()
-#&gt;  [1] &quot;.GlobalEnv&quot;                     &quot;package:datascience.curriculum&quot; &quot;package:rstatix&quot;                &quot;package:cowplot&quot;               
-#&gt;  [5] &quot;package:ggpubr&quot;                 &quot;package:forcats&quot;                &quot;package:stringr&quot;                &quot;package:dplyr&quot;                 
-#&gt;  [9] &quot;package:purrr&quot;                  &quot;package:readr&quot;                  &quot;package:tidyr&quot;                  &quot;package:tibble&quot;                
-#&gt; [13] &quot;package:ggplot2&quot;                &quot;package:tidyverse&quot;              &quot;devtools_shims&quot;                 &quot;tools:rstudio&quot;                 
-#&gt; [17] &quot;package:stats&quot;                  &quot;package:graphics&quot;               &quot;package:grDevices&quot;              &quot;package:utils&quot;                 
-#&gt; [21] &quot;package:datasets&quot;               &quot;package:methods&quot;                &quot;Autoloads&quot;                      &quot;org:r-lib&quot;                     
-#&gt; [25] &quot;package:base&quot;</code></pre>
+#&gt;  [1] &quot;.GlobalEnv&quot;                     &quot;devtools_shims&quot;                 &quot;package:datascience.curriculum&quot; &quot;tools:rstudio&quot;                  &quot;package:stats&quot;                 
+#&gt;  [6] &quot;package:graphics&quot;               &quot;package:grDevices&quot;              &quot;package:utils&quot;                  &quot;package:datasets&quot;               &quot;package:methods&quot;               
+#&gt; [11] &quot;Autoloads&quot;                      &quot;org:r-lib&quot;                      &quot;package:base&quot;</code></pre>
 <p>Since the global environment gets wiped out every time you change
 projects or restart R, you have to have a way to save what you want in
 permanent storage and to recreate the rest as needed from code. We will
@@ -549,7 +573,7 @@ discuss this more when we talk about building packages.</p>
 <p>The Renv environment refers to a version-controlled set of R packages
 that are specifically installed in an R project. It is analogous to a
 conda environment in Python.</p>
-<p>Why do you want to deal with this?</p>
+<p>Why do you want to deal with another environment concept??</p>
 <p>On occasion you will write an R script that depends on a specific
 version of a package, but breaks if you were to update that package to a
 newer version.</p>
@@ -584,17 +608,26 @@ renv::install()</code></pre>
 </div>
 <div id="project-organization" class="section level2">
 <h2>Project organization</h2>
-<p>I keep all of my R scripts in a directory called “R”. Within this I
-make scripts for setting up the project (<code>dev.R</code>), managing
-packages and attaching libraries (<code>dependencies.R</code>), and
-setting up aesthetic and input/output configurations
-(<code>configs.R</code>). The main analysis scripts for the project will
+<p>I keep all of my R scripts in a directory called “R”. If you
+initialized your project with
+<code>blaseRtemplates::initialize_project()</code>, in addition to
+<code>initialize.R</code>, you will have scripts labeled:</p>
+<ul>
+<li><code>dependencies.R</code>: use this for installing packages into
+your renv environment and attaching them to your session</li>
+<li><code>configs.R</code>: use this for setting graphical and aesthetic
+parameters. I also use this for resolving function name conflicts.</li>
+<li><code>local_configs.R</code>: only necessary if you are
+collaborating via git. If so, each collaborator may wish to have
+personal configuration settings which are not shared. A common example
+is for figure and table output to personal directories. Leave blank if
+working on your own.</li>
+</ul>
+<p>In addition to this, the main analysis scripts for the project will
 go in the R folder and may go in subdirectories if there are a lot of
-them. This arrangement is very flexible for simple data analysis
+them. Other file types, such as *.Rmd, would go in their own folder
+named Rmd/. This arrangement is very flexible for simple data analysis
 projects; the rules become more strict when we build packages.</p>
-<p>I avoid putting any new files in the root directory of the project
-after it is set up and reserve this for the configuration files
-generated by the usethis package.</p>
 </div>
 <div id="extra-credit-basic-git-operation-for-the-single-user" class="section level2">
 <h2>Extra credit: Basic git operation for the single user</h2>
@@ -639,6 +672,11 @@ usethis::edit_r_environ()
 <p>If you happen to be working on a linux system, you will need to run
 this line at the terminal:</p>
 <p><code>git config --global credential.helper &#39;cache --timeout=1000000000&#39;</code></p>
+<p>You may also want to run this line to set the default editor to
+“nano”.</p>
+<p><code>git config --global core.editor &quot;nano -w&quot;</code></p>
+<p>At some point, git will open a text editor and ask you to make some
+edits. Unless you prefer Vim or emacs you should start with nano.</p>
 <p>The necessary permissions should be set automatically by these
 commands. By default, the token expires after 30 days, but you can
 override this.</p>
@@ -660,9 +698,7 @@ to save or “commit” your work. For the message, try to explain what the
 changes represent in just a few words.</li>
 <li>run <code>git push</code> to send the changes up to github.</li>
 </ul>
-<p>I have a standard <a href="https://github.com/blaserlab/development/blob/main/.gitignore">.gitignore</a>
-file which you can use to prevent accidentally committing .rda files.
-Just save it in the top level directory of your git-enabled project.</p>
+<p>That is it!</p>
 <p>If you run into problems, the error messages are usually informative.
 If you have trouble understanding an error or it isn’t helpful, just
 google it.</p>
@@ -680,6 +716,11 @@ repository to the desired commit. Copy the file(s) you want to resurrect
 to a location external to the repository. Run <code>git switch -</code>
 to go back to your latest commit. Make your changes and go from
 there.</p>
+<p>Even easier: go to your github site for that repo. Click on clock
+icon labled “commits” (which helpfully includes a “back in time” arrow).
+Then select from the list of commits (versions). Click browse files and
+find what you were looking for. You can even click on the raw version to
+copy and paste directly back into R studio.</p>
 <p>If you are using git, it is important to be comfortable with using
 these commands in the terminal. However, there is a nice package called
 “gert” which lets you control git from the R console or using scripted
@@ -696,6 +737,9 @@ gert::git_push()
 </code></pre>
 <p>This is a pretty slick way to save your progress without leaving
 R.</p>
+<p>Rstudio offers a built-in git gui which I find to be a bit difficult
+to use. Other gui-based programs include the very highly-rated <a href="https://www.gitkraken.com/">git kraken</a>, and <a href="https://www.sourcetreeapp.com/">sourcetree</a> if you are
+interested in an alternative to the one offered by R studio.</p>
 </div>
 </div>
 <div id="exercises" class="section level2">
@@ -704,18 +748,15 @@ R.</p>
 <li><p>Use the code blocks from this vignette to make a new R project on
 your system. Modify as necessary. If you have trouble with the git
 commands omit them for now.</p></li>
-<li><p>Save new R scripts: “R/dev.R”, “R/dependencies.R”, “R/configs.R”.
-Add commands for setting up the project and interacting with git to
-dev.R. Add commands for installing and loading packages to
-dependencies.R. Leave configs.R blank for now.</p></li>
-<li><p>Install renv if you haven’t already.</p></li>
-<li><p>Initiate renv in your new project.</p></li>
-<li><p>Use <code>renv::install()</code> to install “tidyverse”.</p></li>
-<li><p>Try attaching the tidyverse package to your session using
-<code>library()</code>. If there are missing package dependencies
-install those as well.</p></li>
-<li><p>Extra credit: save your commands on the appropriate scripts, then
-add, commit, and push to your github site.</p></li>
+<li><p>Explore the scripts in the R directory.</p></li>
+<li><p>Try running the code in dependencies.R to install some
+recommended packages.</p></li>
+<li><p>Try adding the line
+<code>renv::install(blaserlab/blaseRtools)</code> and installing this
+package. Warning: it has a lot of dependencies and may take a long time
+to finish.</p></li>
+<li><p>Extra credit: save your work, then add, commit, and push to your
+github site.</p></li>
 </ol>
 </div>
 

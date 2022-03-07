@@ -1,8 +1,8 @@
-## ----setup, include=FALSE-------------------------------------------------------------------------------------------------------------------------------------------
+## ----setup, include=FALSE----------------------------------------------------------------------------------------------------------------------------------------------------------------
 library(datascience.curriculum)
 
 
-## ---- include = FALSE-----------------------------------------------------------------------------------------------------------------------------------------------
+## ---- include = FALSE--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -11,7 +11,7 @@ knitr::opts_chunk$set(
 )
 
 
-## ----eval=FALSE-----------------------------------------------------------------------------------------------------------------------------------------------------
+## ----eval=FALSE--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ## # the base function you use to install packages is...
 ## install.packages("<package name>")
 ## 
@@ -20,33 +20,47 @@ knitr::opts_chunk$set(
 ## install.packages("renv")
 ## 
 ## # use renv for a more versatile installer
-## renv::install("<package name>")
+## # install the blaseRtemplates package which we will use in this lecture
+## renv::install("blaserlab/blaseRtemplates")
 ## 
 
 
-## ----eval=FALSE-----------------------------------------------------------------------------------------------------------------------------------------------------
+## ----eval=FALSE--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ## # create a project called rclass_example in your home directory
-## usethis::create_project("~/rclass_example")
+## blaseRtemplates::initialize_project("~/rclass_example")
+
+
+## ----eval=FALSE--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## # after running the initialization command, run these lines once to set up
+## # your project in a consistent manner.
+## # private github repos can be made public via the web interface
 ## 
-## # generate a standard license file for your work
-## usethis::use_mit_license("Brad Blaser")
+## # make a software license
+## usethis::use_mit_license("<your name here>")
 ## 
-## # generate a readme file so you can document your work
+## # generate a readme file to explain your work
 ## usethis::use_readme_md()
 ## 
-## # use git and set up a private remote repository on github
-## # these will fail unless you have git installed on your computer and
-## # have a github account. See below
+## # generate a news file to document updates to your package
+## usethis::use_news_md()
+## 
+## # initialize git
 ## usethis::use_git()
+## 
+## # initialize github
 ## usethis::use_github(private = TRUE)
+## 
+## # modify git ignore file
+## usethis::use_git_ignore(c("*.rda", "local_configs.R"))
+## 
 
 
-## -------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # produce a list of all environments
 search()
 
 
-## ----eval=FALSE-----------------------------------------------------------------------------------------------------------------------------------------------------
+## ----eval=FALSE--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ## # initiate an Renv environment in a new project
 ## renv::init()
 ## 
@@ -57,7 +71,7 @@ search()
 ## renv::install()
 
 
-## ----eval = FALSE---------------------------------------------------------------------------------------------------------------------------------------------------
+## ----eval = FALSE------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ## # make sure you have a github account
 ## # https://github.com/join
 ## 
@@ -86,7 +100,7 @@ search()
 ## # restart R
 
 
-## ----eval = FALSE---------------------------------------------------------------------------------------------------------------------------------------------------
+## ----eval = FALSE------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ## # make sure all work is saved
 ## # add your work
 ## gert::git_add("*") # adds all unstaged files
