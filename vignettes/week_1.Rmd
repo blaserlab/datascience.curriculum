@@ -287,6 +287,6 @@ Rstudio offers a built-in git gui which I find to be a bit difficult to use.  Ot
 
 3.  Try running the code in dependencies.R to install some recommended packages.
 
-4.  Try adding the line ```renv::install(blaserlab/blaseRtools)``` and installing this package.  Warning:  it has a lot of dependencies and may take a long time to finish.
+4.  Try adding the line ```renv::install("blaserlab/blaseRtools")``` and installing this package.  Warning:  it has a lot of dependencies and may take a long time to finish.
 
 5.  Extra credit:  save your work, then add, commit, and push to your github site.
