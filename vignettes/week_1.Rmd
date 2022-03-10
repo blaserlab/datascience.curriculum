@@ -22,7 +22,7 @@ knitr::opts_chunk$set(
 
 ## Introduction
 
-This course will focus on what I believe are the essential skills necessary for a laboratory-based scienties to use R and Rstudio in an effective way.  There are many other detailed resources out there for you.  
+This course will focus on what I believe are the essential skills necessary for a laboratory-based scientist to use R and Rstudio in an effective way.  There are many other detailed resources out there for you.  
 
 * [Software carpentry](https://software-carpentry.org/lessons/previous/) has very good tutorials for R, python, git and working with the command line.  
 * [R for data science](https://r4ds.had.co.nz/) is a book written by Hadley Wickham who wrote much of the software we use in R
@@ -56,17 +56,15 @@ Packages are most often stored and distributed as compressed binary files via st
 
 **What happens when we "install" packages?**
 
-R downloads the compressed file and then unpacks it in a library directory on your computer or server.  Then the functions and data are available for you to use in your R project.
+R downloads the compressed file and then unpacks it in a library directory on your computer or server.  Then the functions and data are available for you to use in your R project.  A manual for each object in the package is generated and can be viewed in the help panel. Access these with ```?<object name>``` e.g. ```?mean```.  Vignettes may also be available.  Vignettes are tutorials that show you how to use the functions in a package, often with example data.  These are best accessed by navigating through the package menu.  Click on the package name and near the top you will see any available vignettes.  
 
 ```{r eval=FALSE}
 # the base function you use to install packages is...
 install.packages("<package name>")
 
-# install the usethis and renv packages which we will be using in this lecture
-install.packages("usethis")
+# install the renv package which is a more versatile installer 
 install.packages("renv")
 
-# use renv for a more versatile installer 
 # install the blaseRtemplates package which we will use in this lecture
 renv::install("blaserlab/blaseRtemplates")
 
@@ -119,8 +117,9 @@ usethis::use_mit_license("<your name here>")
 # generate a readme file to explain your work
 usethis::use_readme_md()
 
-# generate a news file to document updates to your package
-usethis::use_news_md()
+# *** Only if developing a package ***
+# uncomment and run to generate a news file to document updates.
+# usethis::use_news_md()
 
 # initialize git
 usethis::use_git()
@@ -128,9 +127,8 @@ usethis::use_git()
 # initialize github
 usethis::use_github(private = TRUE)
 
-# modify git ignore file
-usethis::use_git_ignore(c("*.rda", "local_configs.R"))
 
+### Delete this file after initializing the project! ###
 ```
 
 After you run this script, you should delete it.  See below for setting up git and github for the first time.
@@ -171,14 +169,17 @@ What happens is Renv discovers all of the packages you use in your code and copi
 When you update a package in your project, Renv links to the new version if available in the cache, or installs it in the cache first if necessary.  If you find something has broken after the update, the old version of the package is still available so you can go back to it if necessary.  This gives you a great deal of control over the software used in your analysis.
 
 ```{r eval=FALSE}
-# initiate an Renv environment in a new project
-renv::init()
+# set up the renv from scratch
 
-# install packages listed in the lockfile
-renv::restore()
+# renv::init()
 
-# update or install new packages
-renv::install()
+# restore the renv from the lockfile
+
+# renv::restore()
+
+# save the current renv to the lockfile
+
+# renv::snapshot()
 ```
 
 ## Project organization
@@ -188,7 +189,8 @@ I keep all of my R scripts in a directory called "R".  If you initialized your p
 
 * ```dependencies.R```:  use this for installing packages into your renv environment and attaching them to your session
 * ```configs.R```:  use this for setting graphical and aesthetic parameters.  I also use this for resolving function name conflicts.
-* ```local_configs.R```: only necessary if you are collaborating via git.  If so, each collaborator may wish to have personal configuration settings which are not shared.  A common example is for figure and table output to personal directories.  Leave blank if working on your own.
+* ```local_configs.R```: only necessary if you are collaborating via git (optional).  If so, each collaborator may wish to have personal configuration settings which are not shared.  A common example is for figure and table output to personal directories.  Leave blank if working on your own.
+* ```git_commands.R```:  only necessary if you are using git (recommended).  The commands here will allow you to handle 99% of git interactions via R in a scripted way.
 
 In addition to this, the main analysis scripts for the project will go in the R folder and may go in subdirectories if there are a lot of them.  Other file types, such as *.Rmd, would go in their own folder named Rmd/.  This arrangement is very flexible for simple data analysis projects; the rules become more strict when we build packages.
 
@@ -198,9 +200,11 @@ You want to try to use git and github.  There is a vast array of resources for y
 
 Git tracks changes to files in a group of files known as a repository.  The way we are using it here, your project is the repository.  Github is simply a website that hosts a copy of your repository on the web.  This is how you will share your work with journal reviewers and editors and others.
 
-### Setting up git and github from R
 
 ```{r eval = FALSE}
+## Setting up git and github from R
+# You should only need to run these commands once.
+#
 # make sure you have a github account
 # https://github.com/join
 
@@ -218,21 +222,20 @@ usethis::use_git_config(user.name = "YourName", user.email = "your@mail.com")
 usethis::create_github_token()
 
 # run this and enter your token at the prompt
-gitcreds::gitcreds_set()
+blaseRtemplates::gitcreds_set()
 
 # if you have trouble accessing github, you may need to edit the .Renviron file
 # this is the third usage of the term environment (sorry)
-# to edit this file, run 
+# to edit this file, run
 usethis::edit_r_environ()
-# if there is a line there starting GITHUB_PAT=xxx, it may be interfering with your credentials.  Delete it.
+# if there is a line there starting GITHUB_PAT=xxx,
+# it may be interfering with your credentials.  Delete it.
 # press enter to generate a new line and then save
 # restart R
+
 ```
-If you happen to be working on a linux system, you will need to run this line at the terminal:
 
-```git config --global credential.helper 'cache --timeout=1000000000'```
-
-You may also want to run this line to set the default editor to "nano".  
+You may also want to run this line in the terminal to set the default editor to "nano".  
 
 ```git config --global core.editor "nano -w"```
 
@@ -240,44 +243,66 @@ At some point, git will open a text editor and ask you to make some edits.  Unle
 
 The necessary permissions should be set automatically by these commands.  By default, the token expires after 30 days, but you can override this.  
 
-Assuming the commands above have run properly you should be ready to use git and github.  Rstudio provides a graphical interface for working with git which I find inconventient to use.  Working in the terminal is easier and gives you access to all options for branching, merging and checking out old versions of your code.
+Assuming the commands above have run properly you should be ready to use git and github.  You can interact with git in at least 4 different ways:
 
-The basic rules are these:
+* via scripted commands on ```R/git_commands.R```
+* using the Git pane in Rstudio
+* using the terminal
+* using a third-party git client such as [git kraken](https://www.gitkraken.com/) or [sourcetree](https://www.sourcetreeapp.com/)
 
-* when you have reached a convenient "save point" for your work, in the terminal run ```git add .```  Git scans everything you did and indexes the changes to all of your files.
-* run ```git status``` to check and be sure you haven't accidentally added large binary files (like images, r data files etc).  You should only have text-based files like .csv, .R, or .Rmd
-* run ```git commit -m "<insert a brief message here>"``` to save or "commit" your work.  For the message, try to explain what the changes represent in just a few words.
-* run ```git push``` to send the changes up to github.
+My recommended approach for new users is to use the scripted git commands to control what is happening and to use the Git pane to monitor the status of your repository.  Just remember to hit the refresh icon if things look strange in the Git panel.
+
+At times you will need to use the terminal to fix conflicts, but this should only happen if you are collaborating with git.
+
+Many people use third-party apps, but these have their own learning curve.
+
+The basic process for using Git as a single user is this:
+
+* save all of your open files
+* check the status of your repository so you know what files have changed
+* add them to the Git index of files
+* commit them to create a save point for all of the files in your project
+* push the commit to the remote repository (github)
+
+Here are the commands from ```git_commands.R```
+
+```{r eval = FALSE}
+# basic everyday commands for all git users -------------------------------
+ 
+gert::git_status()
+gert::git_add("*")
+gert::git_commit("a short comment describing the changes made")
+blaseRtemplates::git_push_all()
+
+```
 
 That is it!
 
 If you run into problems, the error messages are usually informative.  If you have trouble understanding an error or it isn't helpful, just google it.
 
-Git is designed to facilitate collaboration and there are many strategies for handling this.  This subject is outside the scope of this course, but if you would like additional information for my recommended practices please let me know.
+One common use-case for git for the single user is to "un-delete" files.  You can do this as long as the files were previously committed.  To go back in time and recover the previously committed version, in the terminal run ```git log``` to review your commit history.  Add and commit any outstanding changes to your repository as outlined above.  Then run ```git checkout <commit id>``` to rewind the state of your repository to the desired commit.  Copy the file(s) you want to resurrect to a location external to the repository. Run ```git switch -``` to go back to your latest commit.  Make your changes and go from there.
 
-One common use-case for git for the single user is to "un-delete" files.  You can do this as long as the files were previously committed.  To go back in time and recover the previously committed version, run ```git log``` to review your commit history.  Add and commit any outstanding changes to your repository as outlined above.  Then run ```git checkout <commit id>``` to rewind the state of your repository to the desired commit.  Copy the file(s) you want to resurrect to a location external to the repository. Run ```git switch -``` to go back to your latest commit.  Make your changes and go from there.
+Here is a way that is even easier and doesn't require using the terminal:  go to your github site for that repo.  Click on clock icon labled "commits" (which helpfully includes a "back in time" arrow).  Then select from the list of commits (versions).  Click browse files and find what you were looking for.  You can even click on the raw version to copy and paste directly back into R studio.
 
-Even easier:  go to your github site for that repo.  Click on clock icon labled "commits" (which helpfully includes a "back in time" arrow).  Then select from the list of commits (versions).  Click browse files and find what you were looking for.  You can even click on the raw version to copy and paste directly back into R studio.
+Here's a more complicated situation most of us can relate to:
 
-If you are using git, it is important to be comfortable with using these commands in the terminal.  However, there is a nice package called "gert" which lets you control git from the R console or using scripted commands.  
+* You submit your beautiful manuscript to Journal A
+* Journal A bounces it right back to you
+* You reformat all of the figures for your paper in R and submit it to Journal B
+* Journal B is more interested, and they send it out for review and 6 weeks later reject it.
+* You decide to submit to Journal C which has similar figure formatting as does Journal A.
+* What do you do? 
 
-```{r eval = FALSE}
-# make sure all work is saved
-# add your work
-gert::git_add("*") # adds all unstaged files
+```{r}
+# run these commands to rewind to a prior "good" commit ----------------------
 
-# commit your work
-gert::git_commit_all("commit message here")
-
-# push your changes to github 
-gert::git_push()
+# make sure git status is "clean" (all changes committed) before rewinding
+# gert::git_log() #find the id of the good commit
+# blaseRtemplates::git_rewind_to(commit = "<good commit id>")
 
 ```
 
-This is a pretty slick way to save your progress without leaving R.
-
-Rstudio offers a built-in git gui which I find to be a bit difficult to use.  Other gui-based programs include the very highly-rated [git kraken](https://www.gitkraken.com/), and [sourcetree](https://www.sourcetreeapp.com/) if you are interested in an alternative to the one offered by R studio.
-
+Hopefully you have a commit in your git log with the message "submitted to Journal A".  You select that id (the long character string) and provide it to the ```blaseRtemplates::git_rewind_to()``` function.  This function will generate a new commit that reverses all of your changes from present, back to the indicated commit.  Nothing is lost or overwritten in the process of going back in time.  The only thing that happens is that inverse changes are applied.  So if you need to go to Journal D (which is formatted like Journal B) you can always do that later.  
 
 ## Exercises
 

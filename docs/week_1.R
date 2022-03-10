@@ -1,8 +1,8 @@
-## ----setup, include=FALSE----------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----setup, include=FALSE----------------------------------------------------------------------------------------------------------------
 library(datascience.curriculum)
 
 
-## ---- include = FALSE--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ---- include = FALSE--------------------------------------------------------------------------------------------------------------------
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -11,26 +11,24 @@ knitr::opts_chunk$set(
 )
 
 
-## ----eval=FALSE--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----eval=FALSE--------------------------------------------------------------------------------------------------------------------------
 ## # the base function you use to install packages is...
 ## install.packages("<package name>")
 ## 
-## # install the usethis and renv packages which we will be using in this lecture
-## install.packages("usethis")
+## # install the renv package which is a more versatile installer
 ## install.packages("renv")
 ## 
-## # use renv for a more versatile installer
 ## # install the blaseRtemplates package which we will use in this lecture
 ## renv::install("blaserlab/blaseRtemplates")
 ## 
 
 
-## ----eval=FALSE--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----eval=FALSE--------------------------------------------------------------------------------------------------------------------------
 ## # create a project called rclass_example in your home directory
 ## blaseRtemplates::initialize_project("~/rclass_example")
 
 
-## ----eval=FALSE--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----eval=FALSE--------------------------------------------------------------------------------------------------------------------------
 ## # after running the initialization command, run these lines once to set up
 ## # your project in a consistent manner.
 ## # private github repos can be made public via the web interface
@@ -41,8 +39,9 @@ knitr::opts_chunk$set(
 ## # generate a readme file to explain your work
 ## usethis::use_readme_md()
 ## 
-## # generate a news file to document updates to your package
-## usethis::use_news_md()
+## # *** Only if developing a package ***
+## # uncomment and run to generate a news file to document updates.
+## # usethis::use_news_md()
 ## 
 ## # initialize git
 ## usethis::use_git()
@@ -50,28 +49,33 @@ knitr::opts_chunk$set(
 ## # initialize github
 ## usethis::use_github(private = TRUE)
 ## 
-## # modify git ignore file
-## usethis::use_git_ignore(c("*.rda", "local_configs.R"))
 ## 
+## ### Delete this file after initializing the project! ###
 
 
-## ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----------------------------------------------------------------------------------------------------------------------------------------
 # produce a list of all environments
 search()
 
 
-## ----eval=FALSE--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-## # initiate an Renv environment in a new project
-## renv::init()
+## ----eval=FALSE--------------------------------------------------------------------------------------------------------------------------
+## # set up the renv from scratch
 ## 
-## # install packages listed in the lockfile
-## renv::restore()
+## # renv::init()
 ## 
-## # update or install new packages
-## renv::install()
+## # restore the renv from the lockfile
+## 
+## # renv::restore()
+## 
+## # save the current renv to the lockfile
+## 
+## # renv::snapshot()
 
 
-## ----eval = FALSE------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----eval = FALSE------------------------------------------------------------------------------------------------------------------------
+## ## Setting up git and github from R
+## # You should only need to run these commands once.
+## #
 ## # make sure you have a github account
 ## # https://github.com/join
 ## 
@@ -89,26 +93,34 @@ search()
 ## usethis::create_github_token()
 ## 
 ## # run this and enter your token at the prompt
-## gitcreds::gitcreds_set()
+## blaseRtemplates::gitcreds_set()
 ## 
 ## # if you have trouble accessing github, you may need to edit the .Renviron file
 ## # this is the third usage of the term environment (sorry)
 ## # to edit this file, run
 ## usethis::edit_r_environ()
-## # if there is a line there starting GITHUB_PAT=xxx, it may be interfering with your credentials.  Delete it.
+## # if there is a line there starting GITHUB_PAT=xxx,
+## # it may be interfering with your credentials.  Delete it.
 ## # press enter to generate a new line and then save
 ## # restart R
+## 
 
 
-## ----eval = FALSE------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-## # make sure all work is saved
-## # add your work
-## gert::git_add("*") # adds all unstaged files
+## ----eval = FALSE------------------------------------------------------------------------------------------------------------------------
+## # basic everyday commands for all git users -------------------------------
 ## 
-## # commit your work
-## gert::git_commit_all("commit message here")
+## gert::git_status()
+## gert::git_add("*")
+## gert::git_commit("a short comment describing the changes made")
+## blaseRtemplates::git_push_all()
 ## 
-## # push your changes to github
-## gert::git_push()
-## 
+
+
+## ----------------------------------------------------------------------------------------------------------------------------------------
+# run these commands to rewind to a prior "good" commit ----------------------
+
+# make sure git status is "clean" (all changes committed) before rewinding
+# gert::git_log() #find the id of the good commit
+# blaseRtemplates::git_rewind_to(commit = "<good commit id>")
+
 
