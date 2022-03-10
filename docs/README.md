@@ -33,9 +33,16 @@ Once you have completed this course you should be able to:
 
 The course assumes no prior knowledge of R.  It is designed for biologists with an interest in analyzing high-dimensional and/or computationally-intensive data.  The only prerequisites are a basic understanding of biological experimental design (controls, biological replicates, technical replicates, etc.) and a computer.
 
-Before the first class you must have [R](https://cran.rstudio.com/) and [Rstudio](https://www.rstudio.com/products/rstudio/download/#download) installed on your computer.  [Git](http://git-scm.com/downloads) is recommended.  If you are running on a Windows-based system, you will also need to install [Rtools](https://cran.r-project.org/bin/windows/Rtools/rtools40.html) in order to build your own packages and install packages from source code (e.g. github).  
+Before the first class you should have these programs installed and ideally updated to the latest versions: 
 
-You should also register for a free [github](https://github.com/) account.  You can find all of the course materials at the [course github site](https://github.com/blaserlab/datascience.curriculum).
+* [R](https://cran.rstudio.com/) (critical)
+* [Rstudio](https://www.rstudio.com/products/rstudio/download/#download) (critical)  
+* [Git](http://git-scm.com/downloads) (recommended)
+* [Rtools](https://cran.r-project.org/bin/windows/Rtools/rtools40.html) (Windows only)
+
+See this helpful [installation guide](https://jennhuck.github.io/workshops/install_update_R.html).  Some or all of these installations may require admin rights; if so plan to contact your IT department.
+
+You should also register for a free [github](https://github.com/) account.  
 
 ### Course structure
 
