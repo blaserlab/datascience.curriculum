@@ -515,7 +515,7 @@ restart your session within it.</p>
 usethis::use_mit_license(&quot;&lt;your name here&gt;&quot;)
 
 # generate a readme file to explain your work
-usethis::use_readme_md()
+usethis::use_readme_md(open = FALSE)
 
 # *** Only if developing a package ***
 # uncomment and run to generate a news file to document updates.
@@ -564,13 +564,10 @@ not the version from the base environment. It will calculate the median
 instead of the mean in this case.</p>
 <pre class="r"><code># produce a list of all environments
 search()
-#&gt;  [1] &quot;.GlobalEnv&quot;                     &quot;package:datascience.curriculum&quot; &quot;package:rstatix&quot;                &quot;package:cowplot&quot;               
-#&gt;  [5] &quot;package:ggpubr&quot;                 &quot;package:forcats&quot;                &quot;package:stringr&quot;                &quot;package:dplyr&quot;                 
-#&gt;  [9] &quot;package:purrr&quot;                  &quot;package:readr&quot;                  &quot;package:tidyr&quot;                  &quot;package:tibble&quot;                
-#&gt; [13] &quot;package:ggplot2&quot;                &quot;package:tidyverse&quot;              &quot;devtools_shims&quot;                 &quot;tools:rstudio&quot;                 
-#&gt; [17] &quot;package:stats&quot;                  &quot;package:graphics&quot;               &quot;package:grDevices&quot;              &quot;package:utils&quot;                 
-#&gt; [21] &quot;package:datasets&quot;               &quot;package:methods&quot;                &quot;Autoloads&quot;                      &quot;org:r-lib&quot;                     
-#&gt; [25] &quot;package:base&quot;</code></pre>
+#&gt;  [1] &quot;.GlobalEnv&quot;                     &quot;devtools_shims&quot;                 &quot;package:datascience.curriculum&quot; &quot;tools:rstudio&quot;                 
+#&gt;  [5] &quot;package:stats&quot;                  &quot;package:graphics&quot;               &quot;package:grDevices&quot;              &quot;package:utils&quot;                 
+#&gt;  [9] &quot;package:datasets&quot;               &quot;package:methods&quot;                &quot;Autoloads&quot;                      &quot;org:r-lib&quot;                     
+#&gt; [13] &quot;package:base&quot;</code></pre>
 <p>Since the global environment gets wiped out every time you change
 projects or restart R, you have to have a way to save what you want in
 permanent storage and to recreate the rest as needed from code. We will
@@ -599,12 +596,17 @@ the disk-space footprint of the project very small. Finally it maintains
 a list, called a lockfile, of all the versions of all the packages being
 used by the project. Each project will have its own library of Renv
 links and its own lockfile.</p>
-<p>When you update a package in your project, Renv links to the new
-version if available in the cache, or installs it in the cache first if
-necessary. If you find something has broken after the update, the old
-version of the package is still available so you can go back to it if
-necessary. This gives you a great deal of control over the software used
-in your analysis.</p>
+<p>There are two ways to install packages into your project:</p>
+<ul>
+<li><p><code>renv::install()</code> goes to the repository or github
+site and downloads a new or updated copy into your cache, then links the
+latest version into your project. Can be very slow and
+frustrating</p></li>
+<li><p><code>renv::hydrate()</code> gets the latest version available
+from your cache and links that one. Always faster than install but won’t
+update and will give you an error if you don’t have it on your system
+already.</p></li>
+</ul>
 <pre class="r"><code># set up the renv from scratch
 
 # renv::init()
@@ -615,7 +617,29 @@ in your analysis.</p>
 
 # save the current renv to the lockfile
 
-# renv::snapshot()</code></pre>
+# renv::snapshot()
+
+
+# package installation ----------------------------------------------------
+
+# use renv::hydrate() to link packages already in your cache into this project
+# use renv::install() to update or install new packages and then link them
+
+# renv::hydrate(&quot;&lt;package name&gt;&quot;)
+# renv::install(&quot;&lt;package name&gt;&quot;) # CRAN packages
+# renv::install(&quot;bioc::&lt;package name&gt;&quot;) # bioconductor packages
+# renv::install(&quot;&lt;repo/package name&gt;&quot;) # github source packages
+
+# load and attach packages ------------------------------------------------
+
+library(&quot;conflicted&quot;)
+library(&quot;tidyverse&quot;)
+library(&quot;gert&quot;)</code></pre>
+<ul>
+<li>tip: When you run renv::init(), anything inside
+<code>library()</code> will get hydrated. So if you have packages you
+use all the time, add them in there.</li>
+</ul>
 </div>
 <div id="project-organization" class="section level2">
 <h2>Project organization</h2>

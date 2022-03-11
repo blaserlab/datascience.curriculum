@@ -37,7 +37,7 @@ knitr::opts_chunk$set(
 ## usethis::use_mit_license("<your name here>")
 ## 
 ## # generate a readme file to explain your work
-## usethis::use_readme_md()
+## usethis::use_readme_md(open = FALSE)
 ## 
 ## # *** Only if developing a package ***
 ## # uncomment and run to generate a news file to document updates.
@@ -70,6 +70,23 @@ search()
 ## # save the current renv to the lockfile
 ## 
 ## # renv::snapshot()
+## 
+## 
+## # package installation ----------------------------------------------------
+## 
+## # use renv::hydrate() to link packages already in your cache into this project
+## # use renv::install() to update or install new packages and then link them
+## 
+## # renv::hydrate("<package name>")
+## # renv::install("<package name>") # CRAN packages
+## # renv::install("bioc::<package name>") # bioconductor packages
+## # renv::install("<repo/package name>") # github source packages
+## 
+## # load and attach packages ------------------------------------------------
+## 
+## library("conflicted")
+## library("tidyverse")
+## library("gert")
 
 
 ## ----eval = FALSE------------------------------------------------------------------------------------------------------------------------

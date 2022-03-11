@@ -115,7 +115,7 @@ The following lines are taken directly from one of files created, "R/inititializ
 usethis::use_mit_license("<your name here>")
 
 # generate a readme file to explain your work
-usethis::use_readme_md()
+usethis::use_readme_md(open = FALSE)
 
 # *** Only if developing a package ***
 # uncomment and run to generate a news file to document updates.
@@ -166,7 +166,13 @@ The way around this is to use Renv to control package versions.  This can cause 
 
 What happens is Renv discovers all of the packages you use in your code and copies or newly installs those pieces of software into a cache directory on your system.  This is usually difficult to find but this is not a problem because Renv knows how to find it.  Then Renv puts links to the cache into your project, rather than the software itself.  This keeps the disk-space footprint of the project very small.  Finally it maintains a list, called a lockfile, of all the versions of all the packages being used by the project.  Each project will have its own library of Renv links and its own lockfile.
 
-When you update a package in your project, Renv links to the new version if available in the cache, or installs it in the cache first if necessary.  If you find something has broken after the update, the old version of the package is still available so you can go back to it if necessary.  This gives you a great deal of control over the software used in your analysis.
+
+There are two ways to install packages into your project:  
+
+* ```renv::install()``` goes to the repository or github site and downloads a new or updated copy into your cache, then links the latest version into your project.  Can be very slow and frustrating
+
+* ```renv::hydrate()``` gets the latest version available from your cache and links that one.  Always faster than install but won't update and will give you an error if you don't have it on your system already. 
+
 
 ```{r eval=FALSE}
 # set up the renv from scratch
@@ -180,7 +186,26 @@ When you update a package in your project, Renv links to the new version if avai
 # save the current renv to the lockfile
 
 # renv::snapshot()
+
+
+# package installation ----------------------------------------------------
+
+# use renv::hydrate() to link packages already in your cache into this project
+# use renv::install() to update or install new packages and then link them
+
+# renv::hydrate("<package name>")
+# renv::install("<package name>") # CRAN packages
+# renv::install("bioc::<package name>") # bioconductor packages
+# renv::install("<repo/package name>") # github source packages
+
+# load and attach packages ------------------------------------------------
+
+library("conflicted")
+library("tidyverse")
+library("gert")
 ```
+
+* tip:  When you run renv::init(), anything inside ```library()``` will get hydrated.  So if you have packages you use all the time, add them in there.
 
 ## Project organization
 
