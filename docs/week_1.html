@@ -564,10 +564,9 @@ not the version from the base environment. It will calculate the median
 instead of the mean in this case.</p>
 <pre class="r"><code># produce a list of all environments
 search()
-#&gt;  [1] &quot;.GlobalEnv&quot;                     &quot;devtools_shims&quot;                 &quot;package:datascience.curriculum&quot; &quot;tools:rstudio&quot;                 
-#&gt;  [5] &quot;package:stats&quot;                  &quot;package:graphics&quot;               &quot;package:grDevices&quot;              &quot;package:utils&quot;                 
-#&gt;  [9] &quot;package:datasets&quot;               &quot;package:methods&quot;                &quot;Autoloads&quot;                      &quot;org:r-lib&quot;                     
-#&gt; [13] &quot;package:base&quot;</code></pre>
+#&gt;  [1] &quot;.GlobalEnv&quot;                     &quot;devtools_shims&quot;                 &quot;package:datascience.curriculum&quot; &quot;tools:rstudio&quot;                  &quot;package:stats&quot;                 
+#&gt;  [6] &quot;package:graphics&quot;               &quot;package:grDevices&quot;              &quot;package:utils&quot;                  &quot;package:datasets&quot;               &quot;package:methods&quot;               
+#&gt; [11] &quot;Autoloads&quot;                      &quot;org:r-lib&quot;                      &quot;package:base&quot;</code></pre>
 <p>Since the global environment gets wiped out every time you change
 projects or restart R, you have to have a way to save what you want in
 permanent storage and to recreate the rest as needed from code. We will
@@ -596,49 +595,43 @@ the disk-space footprint of the project very small. Finally it maintains
 a list, called a lockfile, of all the versions of all the packages being
 used by the project. Each project will have its own library of Renv
 links and its own lockfile.</p>
-<p>There are two ways to install packages into your project:</p>
-<ul>
-<li><p><code>renv::install()</code> goes to the repository or github
-site and downloads a new or updated copy into your cache, then links the
-latest version into your project. Can be very slow and
-frustrating</p></li>
-<li><p><code>renv::hydrate()</code> gets the latest version available
-from your cache and links that one. Always faster than install but won’t
-update and will give you an error if you don’t have it on your system
-already.</p></li>
-</ul>
-<pre class="r"><code># set up the renv from scratch
+<pre class="r"><code># renv --------------------------------------------------------------------
 
-# renv::init()
+# set up the renv from scratch
+
+# renv::init(bioconductor = TRUE)
 
 # restore the renv from the lockfile
 
 # renv::restore()
 
-# save the current renv to the lockfile
-
-# renv::snapshot()
 
 
 # package installation ----------------------------------------------------
 
-# use renv::hydrate() to link packages already in your cache into this project
-# use renv::install() to update or install new packages and then link them
+# # Try this first...it&#39;s faster:
+# blaseRtemplates::easy_install(&quot;&lt;package name&gt;&quot;, how = &quot;link_from_cache&quot;)
 
-# renv::hydrate(&quot;&lt;package name&gt;&quot;)
-# renv::install(&quot;&lt;package name&gt;&quot;) # CRAN packages
-# renv::install(&quot;bioc::&lt;package name&gt;&quot;) # bioconductor packages
-# renv::install(&quot;&lt;repo/package name&gt;&quot;) # github source packages
+# # If you need a new package or an update, try this:
+# blaseRtemplates::easy_install(&quot;&lt;package name&gt;&quot;, how = &quot;new_or_update&quot;)
+
+# # If you are installing from a &quot;tarball&quot;, use this:
+# blaseRtemplates::easy_install(&quot;/path/to/tarball.tar.gz&quot;)
+
+# # use &quot;bioc::&lt;package name&gt;&quot; for bioconductor packages
+# # use &quot;&lt;repo/package name&gt;&quot; for github source packages
 
 # load and attach packages ------------------------------------------------
 
+library(&quot;blaseRtemplates&quot;)
 library(&quot;conflicted&quot;)
 library(&quot;tidyverse&quot;)
-library(&quot;gert&quot;)</code></pre>
+library(&quot;gert&quot;)
+</code></pre>
 <ul>
 <li>tip: When you run renv::init(), anything inside
-<code>library()</code> will get hydrated. So if you have packages you
-use all the time, add them in there.</li>
+<code>library()</code> will get installed into your project. So if you
+have packages you use all the time, add them in there.</li>
 </ul>
 </div>
 <div id="project-organization" class="section level2">
