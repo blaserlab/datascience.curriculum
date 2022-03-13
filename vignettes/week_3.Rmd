@@ -211,11 +211,11 @@ The map family has a number of variants that return the result in the form of ve
 
 ## Plotting
 
-Plotting results is a major feature of what we do in the sciences.  There are principles for effective visual representation of [data](https://www.edwardtufte.com/tufte/books_vdqi). Generally you will want to start by making graphics look like they look in a high-quality publication.  You may be able to achieve this with an interactive program like GraphPad or Excel.  R will let you do this in a programmatic way but with greater control and better aesthetics.  Eventually you will be able to make more sophisticated graphics not possible in other programs.
+Plotting results is a major feature of what we do in the sciences.  There are principles for effective visual representation of [data](https://www.edwardtufte.com/tufte/books_vdqi). There are many [resources](https://r-graphics.org/) for you to use for effectively presenting your data in R.  Generally though you will want to start by making graphics look like they look in a high-quality publication.  Google is your best way to find out how to make any plot in R.  
+
+You may be able to get comparable results with an interactive program like GraphPad or Excel.  R will let you work in a programmatic way (letting the computer do the work for you), with greater control, and better aesthetics.  Eventually you will be able to make more sophisticated graphics not possible in other programs.
 
 The purpose of this lecture is not to tell you what is aesthetically best but rather to teach you how to control the aesthetics of the plots you are making to suit your own circumstances.
-
-There are vast resources available for you to learn more on this subject.  Google is your best reference.
 
 ## Plot framework
 

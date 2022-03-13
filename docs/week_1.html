@@ -564,9 +564,10 @@ not the version from the base environment. It will calculate the median
 instead of the mean in this case.</p>
 <pre class="r"><code># produce a list of all environments
 search()
-#&gt;  [1] &quot;.GlobalEnv&quot;                     &quot;devtools_shims&quot;                 &quot;package:datascience.curriculum&quot; &quot;tools:rstudio&quot;                  &quot;package:stats&quot;                 
-#&gt;  [6] &quot;package:graphics&quot;               &quot;package:grDevices&quot;              &quot;package:utils&quot;                  &quot;package:datasets&quot;               &quot;package:methods&quot;               
-#&gt; [11] &quot;Autoloads&quot;                      &quot;org:r-lib&quot;                      &quot;package:base&quot;</code></pre>
+#&gt;  [1] &quot;.GlobalEnv&quot;                     &quot;devtools_shims&quot;                 &quot;package:datascience.curriculum&quot; &quot;tools:rstudio&quot;                 
+#&gt;  [5] &quot;package:stats&quot;                  &quot;package:graphics&quot;               &quot;package:grDevices&quot;              &quot;package:utils&quot;                 
+#&gt;  [9] &quot;package:datasets&quot;               &quot;package:methods&quot;                &quot;Autoloads&quot;                      &quot;org:r-lib&quot;                     
+#&gt; [13] &quot;package:base&quot;</code></pre>
 <p>Since the global environment gets wiped out every time you change
 projects or restart R, you have to have a way to save what you want in
 permanent storage and to recreate the rest as needed from code. We will
