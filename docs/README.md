@@ -39,8 +39,11 @@ Before the first class you should have these programs installed and ideally upda
 * [Rstudio](https://www.rstudio.com/products/rstudio/download/#download) (critical)  
 * [Git](http://git-scm.com/downloads) (recommended)
 * [Rtools](https://cran.r-project.org/bin/windows/Rtools/rtools40.html) (Windows only)
+* [Xcode command line tools](https://www.evernote.com/shard/s324/sh/4a8f8452-b624-52d9-ffb7-114d5a501e95/698b49f231396e798a93b9b9d1ebe9c5) (Mac only)
 
-See this helpful [installation guide](https://jennhuck.github.io/workshops/install_update_R.html).  Some or all of these installations may require admin rights; if so plan to contact your IT department.
+Windows and Mac users:  see this [note](https://www.evernote.com/shard/s324/sh/4a8f8452-b624-52d9-ffb7-114d5a501e95/698b49f231396e798a93b9b9d1ebe9c5) on installing these tools.
+
+See this helpful [installation guide](https://jennhuck.github.io/workshops/install_update_R.html) for a step by step approach.  Some or all of these installations may require admin rights; if so plan to contact your IT department.
 
 You should also register for a free [github](https://github.com/) account.  
 
