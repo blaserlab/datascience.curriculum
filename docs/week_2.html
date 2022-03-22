@@ -464,7 +464,7 @@ you import your data in order to prevent errors.</strong></p>
 <h3>More on data types</h3>
 <ul>
 <li>character: any string of valid alphanumeric characters. Carries no
-order or quantitative value</li>
+order or quantitative value besides “alphanumeric” order</li>
 <li>numeric/double: any real number</li>
 <li>integer: any integer, a subset of the real numbers</li>
 <li>factor: factors are essentially characters bound to integer values.
@@ -653,7 +653,8 @@ c(1, 2) + c(2, 3)
 
 # this gives a warning if the recycling doesn&#39;t work out evenly
 c(1, 2) + c(1, 2, 3)
-#&gt; Warning in c(1, 2) + c(1, 2, 3): longer object length is not a multiple of shorter object length
+#&gt; Warning in c(1, 2) + c(1, 2, 3): longer object length is not a multiple of shorter object
+#&gt; length
 #&gt; [1] 2 4 4</code></pre>
 <p>You can read more about arithmetic and logical operators <a href="https://www.statmethods.net/management/operators.html">here</a>.</p>
 <p>Logical operators return a value of TRUE or FALSE.</p>
@@ -667,6 +668,9 @@ c(1, 2) + c(1, 2, 3)
 #&gt; [1] TRUE
 
 2 &lt;= 1
+#&gt; [1] FALSE
+
+&quot;apple&quot; == &quot;banana&quot;
 #&gt; [1] FALSE</code></pre>
 </div>
 <div id="dplyr" class="section level2">

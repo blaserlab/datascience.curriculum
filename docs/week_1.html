@@ -564,9 +564,13 @@ not the version from the base environment. It will calculate the median
 instead of the mean in this case.</p>
 <pre class="r"><code># produce a list of all environments
 search()
-#&gt;  [1] &quot;.GlobalEnv&quot;                     &quot;devtools_shims&quot;                 &quot;package:datascience.curriculum&quot; &quot;tools:rstudio&quot;                  &quot;package:stats&quot;                 
-#&gt;  [6] &quot;package:graphics&quot;               &quot;package:grDevices&quot;              &quot;package:utils&quot;                  &quot;package:datasets&quot;               &quot;package:methods&quot;               
-#&gt; [11] &quot;Autoloads&quot;                      &quot;org:r-lib&quot;                      &quot;package:base&quot;</code></pre>
+#&gt;  [1] &quot;.GlobalEnv&quot;                     &quot;devtools_shims&quot;                
+#&gt;  [3] &quot;package:datascience.curriculum&quot; &quot;tools:rstudio&quot;                 
+#&gt;  [5] &quot;package:stats&quot;                  &quot;package:graphics&quot;              
+#&gt;  [7] &quot;package:grDevices&quot;              &quot;package:utils&quot;                 
+#&gt;  [9] &quot;package:datasets&quot;               &quot;package:methods&quot;               
+#&gt; [11] &quot;Autoloads&quot;                      &quot;org:r-lib&quot;                     
+#&gt; [13] &quot;package:base&quot;</code></pre>
 <p>Since the global environment gets wiped out every time you change
 projects or restart R, you have to have a way to save what you want in
 permanent storage and to recreate the rest as needed from code. We will
@@ -804,9 +808,9 @@ commands omit them for now.</p></li>
 <li><p>Try running the code in dependencies.R to install some
 recommended packages.</p></li>
 <li><p>Try adding the line
-<code>renv::install(&quot;blaserlab/blaseRtools&quot;)</code> and installing this
-package. Warning: it has a lot of dependencies and may take a long time
-to finish.</p></li>
+<code>blaseRtemplates::install(&quot;blaserlab/blaseRtools&quot;, how = &quot;new_or_update&quot;)</code>
+and installing this package. Warning: it has a lot of dependencies and
+may take a long time to finish.</p></li>
 <li><p>Extra credit: save your work, then add, commit, and push to your
 github site.</p></li>
 </ol>
