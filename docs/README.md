@@ -72,6 +72,7 @@ For questions that arise between courses, please post them in the [issues sectio
 * [Week 1 R script](https://raw.githubusercontent.com/blaserlab/datascience.curriculum/main/docs/week_1.R)
 * [Week 1 notes](https://www.evernote.com/shard/s324/sh/0b431e36-fc49-8163-d1d6-5d04594b5107/e1404e72838937606a8f26cb73bd0761)
 * [Week 1 video](https://osu.zoom.us/rec/share/xv-C734O2cKKi1q-6_nTxjYJpHKecjIjAEVDu24tV3kiJQgFfxmdRehgRHBZalZI.bBeOho8kZhff569h)
+* **If you are interested in collaborating via git (advanced), see this [link](https://www.evernote.com/shard/s324/sh/8f178cfc-120a-477e-8064-93ee3191b763/4624ac97a2e7bb8906826e28d84ab350) for instructions**
 * Content
   * R and Rstudio
   * Packages
