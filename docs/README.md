@@ -65,6 +65,8 @@ All of the code is available at the course website.  You should try running ever
 
 For questions that arise between courses, please post them in the [issues section of the github repository for the course](https://github.com/blaserlab/datascience.curriculum/issues).  This way others can learn from questions that have been asked previously.  
 
+**[Follow along with the workshop project on github](https://github.com/blaserlab/workshop_project)**
+
 ### Topics
 
 ####	[Week 1:  Setting up your computing environment](week_1.html) - March 30, 10-11 AM ET
@@ -87,6 +89,7 @@ For questions that arise between courses, please post them in the [issues sectio
 
 * [Week 2 R script](https://raw.githubusercontent.com/blaserlab/datascience.curriculum/main/docs/week_2.R)
 * [Week 2 notes](https://www.evernote.com/shard/s324/sh/5402171c-c4e7-a782-155d-4c345d3a4693/a18be152aa533a76bc9e57b93d6f7ba4)
+* [Week 2 video](https://osu.zoom.us/rec/share/wvkEiUJB8m489VmI3VLs30E7e60k8rhKVkHO6rF26Pog8K0L21Wq4Hh1p5n_VPc.KqZtGrWVKr-PzbIv)
 * Content
   * Data Format
   * Input and Data Types
