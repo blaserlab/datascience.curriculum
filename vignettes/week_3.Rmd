@@ -400,4 +400,5 @@ rstatix is a useful package for extending the base statistical functions of R.
 * read in data from your own work, plot it with ggplot and perform statistical testing. Try using some different geoms:  ```geom_jitter()``` and ```geom_col()``` are the most useful. 
 * use ```readr::write_csv()``` to write out a table of statistical results and ```cowplot::save_plot()``` to save your plot
 * use ```purrr::map()``` to apply a function iteratively
+* Extra credit:  use ```cowplot::plot_grid()``` to compose multiple plots into a figure
 

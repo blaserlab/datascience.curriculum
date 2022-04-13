@@ -102,7 +102,7 @@ For questions that arise between courses, please post them in the [issues sectio
 ####	[Week 3:  More advanced concepts in R](week_3.html) - April 13, 10-11 AM ET
 
 * [Week 3 R script](https://raw.githubusercontent.com/blaserlab/datascience.curriculum/main/docs/week_3.R)
-* [Week 2 notes](https://www.evernote.com/l/AUQTYqvjygVOtoHwhhYSsdvSea104UlAMuc/)
+* [Week 3 notes](https://www.evernote.com/l/AUQTYqvjygVOtoHwhhYSsdvSea104UlAMuc/)
 * Content
   * Scope
   * Writing Custom Functions
