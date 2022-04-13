@@ -103,6 +103,7 @@ For questions that arise between courses, please post them in the [issues sectio
 
 * [Week 3 R script](https://raw.githubusercontent.com/blaserlab/datascience.curriculum/main/docs/week_3.R)
 * [Week 3 notes](https://www.evernote.com/l/AUQTYqvjygVOtoHwhhYSsdvSea104UlAMuc/)
+* [Week 3 video](https://urldefense.com/v3/__https://osu.zoom.us/rec/share/ZEhcpx_FWikqGsXR8p8ObwJNf4HVKoxhE8CoBY8kOLVSTYIFifmEyU5M6459OQ4s.X2lXC0U2Cyu52NFp__;!!KGKeukY!gzD-noKMoFxS4s0LIa6mU2K71T9VzWwdwRVxHNy1BdZ-PsQMC7xj6zzzO0J7zIyV$)
 * [Cheat sheets](https://www.rstudio.com/resources/cheatsheets/)
 * [R color brewer](https://r-graph-gallery.com/38-rcolorbrewers-palettes.html)
 * [R graphics cookbook](https://r-graphics.org/)

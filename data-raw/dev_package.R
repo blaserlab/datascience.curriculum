@@ -35,7 +35,7 @@ purrr::walk(
 
 # commit and push
 gert::git_add("*")
-gert::git_commit_all("updated links for week 3")
+gert::git_commit_all("added week 3 video link")
 gert::git_push()
 
 devtools::install_github("blaserlab/datascience.curriculum", build_vignettes = T, force = TRUE)
