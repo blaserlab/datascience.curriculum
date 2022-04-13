@@ -103,6 +103,9 @@ For questions that arise between courses, please post them in the [issues sectio
 
 * [Week 3 R script](https://raw.githubusercontent.com/blaserlab/datascience.curriculum/main/docs/week_3.R)
 * [Week 3 notes](https://www.evernote.com/l/AUQTYqvjygVOtoHwhhYSsdvSea104UlAMuc/)
+* [Cheat sheets](https://www.rstudio.com/resources/cheatsheets/)
+* [R color brewer](https://r-graph-gallery.com/38-rcolorbrewers-palettes.html)
+* [R graphics cookbook](https://r-graphics.org/)
 * Content
   * Scope
   * Writing Custom Functions
