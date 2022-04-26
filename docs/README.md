@@ -118,6 +118,7 @@ For questions that arise between courses, please post them in the [issues sectio
 ####	[Week 4: blaseRtools scRNA-seq tutorial 1](https://blaserlab.github.io/blaseRtools/pages/scRNAseq.html) - April 27, 10-11 AM ET
 
 * [Week 4/5 R script](https://raw.githubusercontent.com/blaserlab/blaseRtools/master/docs/pages/scRNAseq.R)
+* [Week 4/5 notes](https://www.evernote.com/shard/s324/sh/e993c8a7-2cfb-3675-fe5f-54590d070398/fb9661c178c8f9b1c51f41a5dfa5ede1)
 * Content
   * Data Management
   * Preprocessing Data in the Cloud
