@@ -119,6 +119,11 @@ For questions that arise between courses, please post them in the [issues sectio
 
 * [Week 4/5 R script](https://raw.githubusercontent.com/blaserlab/blaseRtools/master/docs/pages/scRNAseq.R)
 * [Week 4/5 notes](https://www.evernote.com/shard/s324/sh/e993c8a7-2cfb-3675-fe5f-54590d070398/fb9661c178c8f9b1c51f41a5dfa5ede1)
+* [Week 4 video](https://osu.zoom.us/rec/share/zJig5Qlpm22z40nx-qChztI6pEFHOk05zeglzwCCBFHApuMXUtdeIlqk1QLrOk1s.Mi5xwwLkG64IVIyA)
+* 10X Datasets
+  * You will have to register your email address to download.
+  * [Chromium controller](https://www.10xgenomics.com/resources/datasets/500-human-pbm-cs-3-lt-v-3-1-chromium-controller-3-1-low-6-1-0)
+  * [Chromium X](https://www.10xgenomics.com/resources/datasets/500-human-pbm-cs-3-lt-v-3-1-chromium-x-3-1-low-6-1-0)
 * Content
   * Data Management
   * Preprocessing Data in the Cloud
