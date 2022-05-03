@@ -11,6 +11,8 @@
 # use_vignette("week_3")
 # use_vignette("week_6")
 
+# renv::init()
+
 
 devtools::document()
 
@@ -35,7 +37,7 @@ purrr::walk(
 
 # commit and push
 gert::git_add("*")
-gert::git_commit_all("added week 4 notes link")
+gert::git_commit_all("added week 5 notes link")
 gert::git_push()
 
 devtools::install_github("blaserlab/datascience.curriculum", build_vignettes = T, force = TRUE)

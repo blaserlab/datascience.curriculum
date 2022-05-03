@@ -118,7 +118,7 @@ For questions that arise between courses, please post them in the [issues sectio
 ####	[Week 4: blaseRtools scRNA-seq tutorial 1](https://blaserlab.github.io/blaseRtools/pages/scRNAseq.html) - April 27, 10-11 AM ET
 
 * [Week 4/5 R script](https://raw.githubusercontent.com/blaserlab/blaseRtools/master/docs/pages/scRNAseq.R)
-* [Week 4/5 notes](https://www.evernote.com/shard/s324/sh/e993c8a7-2cfb-3675-fe5f-54590d070398/fb9661c178c8f9b1c51f41a5dfa5ede1)
+* [Week 4 notes](https://www.evernote.com/shard/s324/sh/e993c8a7-2cfb-3675-fe5f-54590d070398/fb9661c178c8f9b1c51f41a5dfa5ede1)
 * [Week 4 video](https://osu.zoom.us/rec/share/zJig5Qlpm22z40nx-qChztI6pEFHOk05zeglzwCCBFHApuMXUtdeIlqk1QLrOk1s.Mi5xwwLkG64IVIyA)
 * 10X Datasets
   * You will have to register your email address to download.
@@ -140,8 +140,8 @@ For questions that arise between courses, please post them in the [issues sectio
 ####	[Week 5: blaseRtools scRNA-seq tutorial 2](https://blaserlab.github.io/blaseRtools/pages/scRNAseq.html) - May 4, 10-11 AM ET
 
 * [Week 4/5 R script](https://raw.githubusercontent.com/blaserlab/blaseRtools/master/docs/pages/scRNAseq.R)
+* [Week 5 notes](https://www.evernote.com/shard/s324/sh/32463353-3063-e0b2-62f5-32984bf8561c/9d78ec55ac1fb059d9307e0c6aa99c7c)
 * Content
-  * Cell Assignments
   * UMAP Plots
   * Gene Dotplots
   * Differential Gene Expression
