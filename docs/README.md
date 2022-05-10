@@ -141,6 +141,7 @@ For questions that arise between courses, please post them in the [issues sectio
 
 * [Week 4/5 R script](https://raw.githubusercontent.com/blaserlab/blaseRtools/master/docs/pages/scRNAseq.R)
 * [Week 5 notes](https://www.evernote.com/shard/s324/sh/32463353-3063-e0b2-62f5-32984bf8561c/9d78ec55ac1fb059d9307e0c6aa99c7c)
+* [Week 5 video](https://osu.zoom.us/rec/share/1BEGQ5O09zOzo5eoBXOVWMSPUT-ifKX2S5z_sCxBlvrJ3BDV96V2H3YD0I46gjpB.kuQswaSdmzmQEdwV)
 * Content
   * UMAP Plots
   * Gene Dotplots
@@ -151,6 +152,7 @@ For questions that arise between courses, please post them in the [issues sectio
 #### [Week 6:  Building and using data packages](week_6.html) - May 11, 10-11 AM ET
 
 * [Week 6 R script](https://raw.githubusercontent.com/blaserlab/datascience.curriculum/main/docs/week_6.R)
+* [Week 6 R notes](https://www.evernote.com/shard/s324/sh/64e27cb7-ff1c-255b-317e-00b4edf02f41/ef04a166bf3000be2e80a9390df8fe56)
 * Content
   * Saving R Objects
   * Setting up the Package
