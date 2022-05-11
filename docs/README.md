@@ -153,6 +153,7 @@ For questions that arise between courses, please post them in the [issues sectio
 
 * [Week 6 R script](https://raw.githubusercontent.com/blaserlab/datascience.curriculum/main/docs/week_6.R)
 * [Week 6 R notes](https://www.evernote.com/shard/s324/sh/64e27cb7-ff1c-255b-317e-00b4edf02f41/ef04a166bf3000be2e80a9390df8fe56)
+* [Week 6 video](https://osu.zoom.us/rec/share/VzvwhgrKt4-zUwae8tnM2ncx3-aQD5A5ujWkGTSFPXbLPzD0cP-BXt5mEewXLxsO.hKm-EiXCB5HsjqIl)
 * Content
   * Saving R Objects
   * Setting up the Package
