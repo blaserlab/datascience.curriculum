@@ -163,4 +163,9 @@ For questions that arise between courses, please post them in the [issues sectio
   * Documentation
   * Finishing Up
   * Loading the Data Package
-  
+
+#### [Course Evaluation](https://github.com/blaserlab/datascience.curriculum/raw/main/inst/extdata/datascience_workshop_eval.pdf)
+* Thanks for attending
+* I appreciate feedback on things that are or are not working.  
+* Your comments will help improve the course for next year
+* Please email to [bradley.blaser@osumc.edu](mailto:bradley.blaser@osumc.edu?subject=datascience%20workshop%202022%evaluation)
