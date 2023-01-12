@@ -1,3 +1,17 @@
+### Note
+
+The curriculum and lecture dates for the 2023 offering of this course are being updated.  Please stay tuned! 
+
+The videos from the 2022 offering have been moved to youtube.  Here are the links:
+
+* [Week 1 video](https://youtu.be/OgtNK2Swf_M)
+* [Week 2 video](https://youtu.be/xd31XSOqw1w)
+* [Week 3 video](https://youtu.be/7_JAzVUXMV4)
+* [Week 4 video](https://youtu.be/8gunF7WCuvg)
+* [Week 5 video](https://youtu.be/t560L3BH3Cs)
+* [Week 6 video](https://youtu.be/eCD16CsUR2Y)
+
+
 ### Welcome to the Computational Data Analysis Workshop
 
 This course is designed to help you improve your data management skills.  The skills you will learn can be used for everything from straightforward measurements of biological data to high-dimensional data like scRNA-seq.  
@@ -73,7 +87,6 @@ For questions that arise between courses, please post them in the [issues sectio
 
 * [Week 1 R script](https://raw.githubusercontent.com/blaserlab/datascience.curriculum/main/docs/week_1.R)
 * [Week 1 notes](https://www.evernote.com/shard/s324/sh/0b431e36-fc49-8163-d1d6-5d04594b5107/e1404e72838937606a8f26cb73bd0761)
-* [Week 1 video](https://osu.zoom.us/rec/share/xv-C734O2cKKi1q-6_nTxjYJpHKecjIjAEVDu24tV3kiJQgFfxmdRehgRHBZalZI.bBeOho8kZhff569h)
 * **If you are interested in collaborating via git (advanced), see this [link](https://www.evernote.com/shard/s324/sh/8f178cfc-120a-477e-8064-93ee3191b763/4624ac97a2e7bb8906826e28d84ab350) for instructions**
 * Content
   * R and Rstudio
@@ -89,7 +102,6 @@ For questions that arise between courses, please post them in the [issues sectio
 
 * [Week 2 R script](https://raw.githubusercontent.com/blaserlab/datascience.curriculum/main/docs/week_2.R)
 * [Week 2 notes](https://www.evernote.com/shard/s324/sh/5402171c-c4e7-a782-155d-4c345d3a4693/a18be152aa533a76bc9e57b93d6f7ba4)
-* [Week 2 video](https://osu.zoom.us/rec/share/wvkEiUJB8m489VmI3VLs30E7e60k8rhKVkHO6rF26Pog8K0L21Wq4Hh1p5n_VPc.KqZtGrWVKr-PzbIv)
 * Content
   * Data Format
   * Input and Data Types
@@ -103,7 +115,6 @@ For questions that arise between courses, please post them in the [issues sectio
 
 * [Week 3 R script](https://raw.githubusercontent.com/blaserlab/datascience.curriculum/main/docs/week_3.R)
 * [Week 3 notes](https://www.evernote.com/l/AUQTYqvjygVOtoHwhhYSsdvSea104UlAMuc/)
-* [Week 3 video](https://urldefense.com/v3/__https://osu.zoom.us/rec/share/ZEhcpx_FWikqGsXR8p8ObwJNf4HVKoxhE8CoBY8kOLVSTYIFifmEyU5M6459OQ4s.X2lXC0U2Cyu52NFp__;!!KGKeukY!gzD-noKMoFxS4s0LIa6mU2K71T9VzWwdwRVxHNy1BdZ-PsQMC7xj6zzzO0J7zIyV$)
 * [Cheat sheets](https://www.rstudio.com/resources/cheatsheets/)
 * [R color brewer](https://r-graph-gallery.com/38-rcolorbrewers-palettes.html)
 * [R graphics cookbook](https://r-graphics.org/)
@@ -119,7 +130,6 @@ For questions that arise between courses, please post them in the [issues sectio
 
 * [Week 4/5 R script](https://raw.githubusercontent.com/blaserlab/blaseRtools/master/docs/pages/scRNAseq.R)
 * [Week 4 notes](https://www.evernote.com/shard/s324/sh/e993c8a7-2cfb-3675-fe5f-54590d070398/fb9661c178c8f9b1c51f41a5dfa5ede1)
-* [Week 4 video](https://osu.zoom.us/rec/share/zJig5Qlpm22z40nx-qChztI6pEFHOk05zeglzwCCBFHApuMXUtdeIlqk1QLrOk1s.Mi5xwwLkG64IVIyA)
 * 10X Datasets
   * You will have to register your email address to download.
   * [Chromium controller](https://www.10xgenomics.com/resources/datasets/500-human-pbm-cs-3-lt-v-3-1-chromium-controller-3-1-low-6-1-0)
@@ -141,7 +151,6 @@ For questions that arise between courses, please post them in the [issues sectio
 
 * [Week 4/5 R script](https://raw.githubusercontent.com/blaserlab/blaseRtools/master/docs/pages/scRNAseq.R)
 * [Week 5 notes](https://www.evernote.com/shard/s324/sh/32463353-3063-e0b2-62f5-32984bf8561c/9d78ec55ac1fb059d9307e0c6aa99c7c)
-* [Week 5 video](https://osu.zoom.us/rec/share/1BEGQ5O09zOzo5eoBXOVWMSPUT-ifKX2S5z_sCxBlvrJ3BDV96V2H3YD0I46gjpB.kuQswaSdmzmQEdwV)
 * Content
   * UMAP Plots
   * Gene Dotplots
@@ -153,7 +162,6 @@ For questions that arise between courses, please post them in the [issues sectio
 
 * [Week 6 R script](https://raw.githubusercontent.com/blaserlab/datascience.curriculum/main/docs/week_6.R)
 * [Week 6 R notes](https://www.evernote.com/shard/s324/sh/64e27cb7-ff1c-255b-317e-00b4edf02f41/ef04a166bf3000be2e80a9390df8fe56)
-* [Week 6 video](https://osu.zoom.us/rec/share/VzvwhgrKt4-zUwae8tnM2ncx3-aQD5A5ujWkGTSFPXbLPzD0cP-BXt5mEewXLxsO.hKm-EiXCB5HsjqIl)
 * Content
   * Saving R Objects
   * Setting up the Package
