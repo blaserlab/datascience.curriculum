@@ -1,3 +1,5 @@
+### Data Science for Lab Scientists
+
 ### Note
 
 Dates for the 2023 course:
