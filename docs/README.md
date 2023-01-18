@@ -1,6 +1,17 @@
 ### Note
 
-The curriculum and lecture dates for the 2023 offering of this course are being updated.  Please stay tuned! 
+Dates for the 2023 course:
+
+* April 12
+* April 19
+* April 26
+* May 3
+* May 10
+* May 17
+
+These are all Wednesday mornings.  Time will be 10-11 AM.  Format will be Zoom Webinar.
+
+The curriculum for the 2023 offering of this course is being updated.  Please stay tuned! 
 
 The videos from the 2022 offering have been moved to youtube.  Here are the links:
 
