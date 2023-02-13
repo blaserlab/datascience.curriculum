@@ -1,8 +1,8 @@
 ---
-title: "Week 3"
+title: "Week 3:  Next Level R"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{week_3}
+  %\VignetteIndexEntry{Week 3:  Next Level R}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

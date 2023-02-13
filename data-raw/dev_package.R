@@ -1,17 +1,9 @@
-# package setup
-# library(usethis)
-# create_package("/workspace/workspace_pipelines/datascience.curriculum")
-# use_mit_license("Brad Blaser")
-# use_readme_md()
-# use_news_md()
-# use_git()
-# use_github(private = TRUE)
-# use_vignette("week_1")
-# use_vignette("week_2")
-# use_vignette("week_3")
-# use_vignette("week_6")
+# Run once to configure package to use pkgdown
+usethis::use_pkgdown()
+# Run to build the website
+pkgdown::build_site()
+usethis::use_pkgdown_github_pages()
 
-# renv::init()
 
 
 devtools::document()
