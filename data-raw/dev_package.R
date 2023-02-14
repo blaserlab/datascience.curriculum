@@ -3,7 +3,6 @@ usethis::use_pkgdown()
 # Run to build the website
 pkgdown::build_site(install = TRUE)
 usethis::use_pkgdown_github_pages()
-pkgdown::build_site_github_pages(install = TRUE)
 
 
 devtools::document()
