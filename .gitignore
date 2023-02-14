@@ -11,4 +11,3 @@ inst/data-raw/git_commands.R
 inst/data-raw/regenerated_git_commands.R
 *.png
 *.pdf
-docs
