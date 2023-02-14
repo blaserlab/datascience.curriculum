@@ -1,0 +1,10 @@
+pandoc: 2.19.2
+pkgdown: 2.0.7
+pkgdown_sha: ~
+articles:
+  week_1: week_1.html
+  week_2: week_2.html
+  week_3: week_3.html
+  week_6: week_6.html
+last_built: 2023-02-14T09:40Z
+
