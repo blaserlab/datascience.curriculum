@@ -59,8 +59,254 @@
   </div>
 </nav><div class="container template-home">
 <div class="row">
-  <main id="main" class="col-md-9">
-What the package does (one paragraph).
+  <main id="main" class="col-md-9"><div class="section level3">
+<h3 id="notes">Notes<a class="anchor" aria-label="anchor" href="#notes"></a>
+</h3>
+<p>Dates for the 2023 course:</p>
+<ul>
+<li>April 12</li>
+<li>April 19</li>
+<li>April 26</li>
+<li>May 3</li>
+<li>May 10</li>
+<li>May 17</li>
+</ul>
+<p>These are all Wednesday mornings. Time will be 10-11 AM. Format will be Zoom Webinar.</p>
+<p>The curriculum for the 2023 offering of this course is being updated. Please stay tuned!</p>
+<p>The videos from the 2022 offering have been moved to youtube. Here are the links:</p>
+<ul>
+<li><a href="https://youtu.be/OgtNK2Swf_M" class="external-link">Week 1 video</a></li>
+<li><a href="https://youtu.be/xd31XSOqw1w" class="external-link">Week 2 video</a></li>
+<li><a href="https://youtu.be/7_JAzVUXMV4" class="external-link">Week 3 video</a></li>
+<li><a href="https://youtu.be/8gunF7WCuvg" class="external-link">Week 4 video</a></li>
+<li><a href="https://youtu.be/t560L3BH3Cs" class="external-link">Week 5 video</a></li>
+<li><a href="https://youtu.be/eCD16CsUR2Y" class="external-link">Week 6 video</a></li>
+</ul>
+</div>
+<div class="section level3">
+<h3 id="welcome-to-the-computational-data-analysis-workshop">Welcome to the Computational Data Analysis Workshop<a class="anchor" aria-label="anchor" href="#welcome-to-the-computational-data-analysis-workshop"></a>
+</h3>
+<p>This course is designed to help you improve your data management skills. The skills you will learn can be used for everything from straightforward measurements of biological data to high-dimensional data like scRNA-seq.</p>
+<p>Did you ever see a figure you made last year but can’t remember how you made it? Understanding the principles we cover here will help you and others reproduce and extend your work.</p>
+<p>To sign up: email <a href="mailto:bradley.blaser@osumc.edu?subject=datascience%20workshop%202022">bradley.blaser@osumc.edu</a>.</p>
+</div>
+<div class="section level3">
+<h3 id="goals">Goals<a class="anchor" aria-label="anchor" href="#goals"></a>
+</h3>
+<p>The goals of this course are for you to become comfortable with the R statistical computing language and associated computational technology:</p>
+<ul>
+<li>Rstudio for interacting with R</li>
+<li>git for version control</li>
+<li>github to share your work</li>
+<li>R package development to keep your code and data separate and organized</li>
+</ul>
+</div>
+<div class="section level3">
+<h3 id="specific-objectives">Specific Objectives<a class="anchor" aria-label="anchor" href="#specific-objectives"></a>
+</h3>
+<p>Once you have completed this course you should be able to:</p>
+<ul>
+<li>understand the difference between analysis code and source data</li>
+<li>properly format data for efficient computation</li>
+<li>generate a table of descriptive statistics for data from a typical biological experiment</li>
+<li>perform statistical testing as appropriate</li>
+<li>generate publication-quality plots using ggplot</li>
+<li>perform basic analysis of single cell RNA sequencing data</li>
+<li>compile processed source data into an R data package</li>
+<li>use basic version control functions to track and document changes to your analysis</li>
+<li>publish your code so reviewers can understand how you arrived at your results</li>
+</ul>
+</div>
+<div class="section level3">
+<h3 id="prerequisites">Prerequisites<a class="anchor" aria-label="anchor" href="#prerequisites"></a>
+</h3>
+<p>The course assumes no prior knowledge of R. It is designed for biologists with an interest in analyzing high-dimensional and/or computationally-intensive data. The only prerequisites are a basic understanding of biological experimental design (controls, biological replicates, technical replicates, etc.) and a computer.</p>
+<p>Before the first class you should have these programs installed and ideally updated to the latest versions:</p>
+<ul>
+<li>
+<a href="https://cran.rstudio.com/" class="external-link">R</a> (critical)</li>
+<li>
+<a href="https://www.rstudio.com/products/rstudio/download/#download" class="external-link">Rstudio</a> (critical)</li>
+<li>
+<a href="http://git-scm.com/downloads" class="external-link">Git</a> (recommended)</li>
+<li>
+<a href="https://cran.r-project.org/bin/windows/Rtools/rtools40.html" class="external-link">Rtools</a> (Windows only)</li>
+<li>
+<a href="https://www.evernote.com/shard/s324/sh/4a8f8452-b624-52d9-ffb7-114d5a501e95/698b49f231396e798a93b9b9d1ebe9c5" class="external-link">Xcode command line tools</a> (Mac only)</li>
+</ul>
+<p>Windows and Mac users: see this <a href="https://www.evernote.com/shard/s324/sh/4a8f8452-b624-52d9-ffb7-114d5a501e95/698b49f231396e798a93b9b9d1ebe9c5" class="external-link">note</a> on installing these tools.</p>
+<p>See this helpful <a href="https://jennhuck.github.io/workshops/install_update_R.html" class="external-link">installation guide</a> for a step by step approach. Some or all of these installations may require admin rights; if so plan to contact your IT department.</p>
+<p>You should also register for a free <a href="https://github.com/" class="external-link">github</a> account.</p>
+</div>
+<div class="section level3">
+<h3 id="course-structure">Course structure<a class="anchor" aria-label="anchor" href="#course-structure"></a>
+</h3>
+<p>As you see from the topics below, this workshop starts from the basics and moves through somewhat advanced topics. There will be no formal homework or assignments, but you are expected to be comfortable with the topics previously presented by the time the next class arrives and to read the course material in advance. If there are things that don’t make sense or are causing you trouble at first, I encourage you to try to figure them out using Google. This is the best way to learn.</p>
+<p><strong>Because of the virtual format we won’t be able to stop and troubleshoot individual issues during class.</strong> If we are moving too fast or too slow for the class we can change pace as necessary.</p>
+<p>Each lesson will be conducted using code and data that is publicly available and computationally tractable so you should be able to work on your own.</p>
+<p>Each lesson will be structured in the following way:</p>
+<ul>
+<li>5 min for people to log in and enter any pre-existing questions they have in the Q&amp;A. These can be questions from the prior week or questions about the current day’s material. I will cover what I can during the lecture period.</li>
+<li>25-30 min for me to demonstrate the concepts in the day’s lecture</li>
+<li>20-25 min for discussion and additional Q&amp;A that arise.</li>
+</ul>
+<p>All of the code is available at the course website. You should try running everything on your own. Then try extending what you learn to your own data.</p>
+<p>For questions that arise between courses, please post them in the <a href="https://github.com/blaserlab/datascience.curriculum/issues" class="external-link">issues section of the github repository for the course</a>. This way others can learn from questions that have been asked previously.</p>
+<p><strong><a href="https://github.com/blaserlab/workshop_project" class="external-link">Follow along with the workshop project on github</a></strong></p>
+</div>
+<div class="section level3">
+<h3 id="topics">Topics<a class="anchor" aria-label="anchor" href="#topics"></a>
+</h3>
+<div class="section level4">
+<h4 id="week-1-setting-up-your-computing-environment---march-30-10-11-am-et">
+<a href="week_1.html">Week 1: Setting up your computing environment</a> - March 30, 10-11 AM ET<a class="anchor" aria-label="anchor" href="#week-1-setting-up-your-computing-environment---march-30-10-11-am-et"></a>
+</h4>
+<ul>
+<li><a href="https://raw.githubusercontent.com/blaserlab/datascience.curriculum/main/docs/week_1.R" class="external-link">Week 1 R script</a></li>
+<li><a href="https://www.evernote.com/shard/s324/sh/0b431e36-fc49-8163-d1d6-5d04594b5107/e1404e72838937606a8f26cb73bd0761" class="external-link">Week 1 notes</a></li>
+<li><strong>If you are interested in collaborating via git (advanced), see this <a href="https://www.evernote.com/shard/s324/sh/8f178cfc-120a-477e-8064-93ee3191b763/4624ac97a2e7bb8906826e28d84ab350" class="external-link">link</a> for instructions</strong></li>
+<li>Content
+<ul>
+<li>R and Rstudio</li>
+<li>Packages</li>
+<li>Projects</li>
+<li>Setting up a Project</li>
+<li>Global Environment</li>
+<li>Renv environments</li>
+<li>Project organization</li>
+<li>Basic Git for the single user</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section level4">
+<h4 id="week-2-basics-of-working-with-data-in-r---april-6-10-11-am-et">
+<a href="week_2.html">Week 2: Basics of working with data in R</a> - April 6, 10-11 AM ET<a class="anchor" aria-label="anchor" href="#week-2-basics-of-working-with-data-in-r---april-6-10-11-am-et"></a>
+</h4>
+<ul>
+<li><a href="https://raw.githubusercontent.com/blaserlab/datascience.curriculum/main/docs/week_2.R" class="external-link">Week 2 R script</a></li>
+<li><a href="https://www.evernote.com/shard/s324/sh/5402171c-c4e7-a782-155d-4c345d3a4693/a18be152aa533a76bc9e57b93d6f7ba4" class="external-link">Week 2 notes</a></li>
+<li>Content
+<ul>
+<li>Data Format</li>
+<li>Input and Data Types</li>
+<li>Variable Assignment</li>
+<li>Data Structures</li>
+<li>Subsetting Data</li>
+<li>Data Operations</li>
+<li>Dplyr</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section level4">
+<h4 id="week-3-more-advanced-concepts-in-r---april-13-10-11-am-et">
+<a href="week_3.html">Week 3: More advanced concepts in R</a> - April 13, 10-11 AM ET<a class="anchor" aria-label="anchor" href="#week-3-more-advanced-concepts-in-r---april-13-10-11-am-et"></a>
+</h4>
+<ul>
+<li><a href="https://raw.githubusercontent.com/blaserlab/datascience.curriculum/main/docs/week_3.R" class="external-link">Week 3 R script</a></li>
+<li><a href="https://www.evernote.com/l/AUQTYqvjygVOtoHwhhYSsdvSea104UlAMuc/" class="external-link">Week 3 notes</a></li>
+<li><a href="https://www.rstudio.com/resources/cheatsheets/" class="external-link">Cheat sheets</a></li>
+<li><a href="https://r-graph-gallery.com/38-rcolorbrewers-palettes.html" class="external-link">R color brewer</a></li>
+<li><a href="https://r-graphics.org/" class="external-link">R graphics cookbook</a></li>
+<li>Content
+<ul>
+<li>Scope</li>
+<li>Writing Custom Functions</li>
+<li>Conditionals</li>
+<li>Map/Apply</li>
+<li>Plotting</li>
+<li>Statistical Testing</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section level4">
+<h4 id="week-4-blasertools-scrna-seq-tutorial-1---april-27-10-11-am-et">
+<a href="https://blaserlab.github.io/blaseRtools/pages/scRNAseq.html" class="external-link">Week 4: blaseRtools scRNA-seq tutorial 1</a> - April 27, 10-11 AM ET<a class="anchor" aria-label="anchor" href="#week-4-blasertools-scrna-seq-tutorial-1---april-27-10-11-am-et"></a>
+</h4>
+<ul>
+<li><a href="https://raw.githubusercontent.com/blaserlab/blaseRtools/master/docs/pages/scRNAseq.R" class="external-link">Week 4/5 R script</a></li>
+<li><a href="https://www.evernote.com/shard/s324/sh/e993c8a7-2cfb-3675-fe5f-54590d070398/fb9661c178c8f9b1c51f41a5dfa5ede1" class="external-link">Week 4 notes</a></li>
+<li>10X Datasets
+<ul>
+<li>You will have to register your email address to download.</li>
+<li><a href="https://www.10xgenomics.com/resources/datasets/500-human-pbm-cs-3-lt-v-3-1-chromium-controller-3-1-low-6-1-0" class="external-link">Chromium controller</a></li>
+<li><a href="https://www.10xgenomics.com/resources/datasets/500-human-pbm-cs-3-lt-v-3-1-chromium-x-3-1-low-6-1-0" class="external-link">Chromium X</a></li>
+</ul>
+</li>
+<li>Content
+<ul>
+<li>Data Management</li>
+<li>Preprocessing Data in the Cloud</li>
+<li>Loading Data into the cellDataSet</li>
+<li>QC</li>
+<li>Merging</li>
+<li>Dimension Reduction</li>
+<li>Batch Correction</li>
+<li>Clustering</li>
+<li>Gene Modules</li>
+<li>Label Transfer</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section level4">
+<h4 id="week-5-blasertools-scrna-seq-tutorial-2---may-4-10-11-am-et">
+<a href="https://blaserlab.github.io/blaseRtools/pages/scRNAseq.html" class="external-link">Week 5: blaseRtools scRNA-seq tutorial 2</a> - May 4, 10-11 AM ET<a class="anchor" aria-label="anchor" href="#week-5-blasertools-scrna-seq-tutorial-2---may-4-10-11-am-et"></a>
+</h4>
+<ul>
+<li><a href="https://raw.githubusercontent.com/blaserlab/blaseRtools/master/docs/pages/scRNAseq.R" class="external-link">Week 4/5 R script</a></li>
+<li><a href="https://www.evernote.com/shard/s324/sh/32463353-3063-e0b2-62f5-32984bf8561c/9d78ec55ac1fb059d9307e0c6aa99c7c" class="external-link">Week 5 notes</a></li>
+<li>Content
+<ul>
+<li>UMAP Plots</li>
+<li>Gene Dotplots</li>
+<li>Differential Gene Expression
+<ul>
+<li>Pseudobulk</li>
+<li>Regression</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section level4">
+<h4 id="week-6-building-and-using-data-packages---may-11-10-11-am-et">
+<a href="week_6.html">Week 6: Building and using data packages</a> - May 11, 10-11 AM ET<a class="anchor" aria-label="anchor" href="#week-6-building-and-using-data-packages---may-11-10-11-am-et"></a>
+</h4>
+<ul>
+<li><a href="https://raw.githubusercontent.com/blaserlab/datascience.curriculum/main/docs/week_6.R" class="external-link">Week 6 R script</a></li>
+<li><a href="https://www.evernote.com/shard/s324/sh/64e27cb7-ff1c-255b-317e-00b4edf02f41/ef04a166bf3000be2e80a9390df8fe56" class="external-link">Week 6 R notes</a></li>
+<li>Content
+<ul>
+<li>Saving R Objects</li>
+<li>Setting up the Package</li>
+<li>Adding Data</li>
+<li>Adding Code</li>
+<li>Including Raw Data</li>
+<li>Documentation</li>
+<li>Finishing Up</li>
+<li>Loading the Data Package</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section level4">
+<h4 id="course-evaluation">
+<a href="https://github.com/blaserlab/datascience.curriculum/raw/main/inst/extdata/datascience_workshop_eval.pdf" class="external-link">Course Evaluation</a><a class="anchor" aria-label="anchor" href="#course-evaluation"></a>
+</h4>
+<ul>
+<li>Thanks for attending</li>
+<li>I appreciate feedback on things that are or are not working.</li>
+<li>Your comments will help improve the course for next year</li>
+<li>Please email to <a href="mailto:bradley.blaser@osumc.edu?subject=datascience%20workshop%202022%evaluation">bradley.blaser@osumc.edu</a>
+</li>
+</ul>
+</div>
+</div>
+
   </main><aside class="col-md-3"><div class="license">
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
