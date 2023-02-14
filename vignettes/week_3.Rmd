@@ -9,6 +9,9 @@ vignette: >
 
 ```{r setup, include=FALSE}
 library(datascience.curriculum)
+install.packages("ggpubr")
+install.packages("cowplot")
+install.packages("rstatix")
 ```
 
 ```{r, include = FALSE}
