@@ -45,7 +45,7 @@ Data should exist as a fixed, unchanging file on your hard drive.  You want to r
 
 ```{r}
 # attach the packages we will need
-library(tidyverse)
+library("tidyverse")
 # read in an example data file
 # or substitute a file path to your own data
 read_csv(file = "https://raw.githubusercontent.com/blaserlab/datascience.curriculum/main/inst/extdata/demo_iris_data.csv")
