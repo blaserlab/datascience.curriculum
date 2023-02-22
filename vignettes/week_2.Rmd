@@ -85,7 +85,7 @@ demo_data
 
 The left arrow operator stores the data in the global environment under the name "demo_data". 
 
-Any valid R object (data, functions etc) can be stored under a variable name.  By default they will be stored in the global environment.  If you save something else with the same name in the same environment it will overwrite the old value without checking, asking or notifying you.
+Any valid R object (data, functions etc) can be stored under a variable name.  By default they will be stored in the global environment.  The global environment is the "workspace" where every value you save is held in memory.  If you save something else with the same name in the same environment it will overwrite the old value without checking, asking or notifying you.
 
 ## Data structures
 
@@ -216,7 +216,7 @@ Logical operators return a value of TRUE or FALSE.
 
 Dplyr is a part of the tidyverse packages.  This is what you will use for data transformations prior to statistical testing or plotting.
 
-Dplyr functions are pipe-friendly, meaning that they can be chained in a way that reduces redundant text in your code or saving intermediate values which can cause problems.  For this you use the pipe operator ```%>%``` or ```|>```.  The latter is a new version which I find preferable but requires R version 4.1 or later.  Either will work for all of the code we demonstrate here. 
+Dplyr functions are pipe-friendly, meaning that they can be chained in a way that reduces redundant text in your code or saving intermediate values which can cause problems.  For this you use the pipe operator ```|>```.
 
 Dplyr functions are also vectorized so they are computationally efficient and can be used on tables with hundreds of thousands of rows.
 
@@ -304,5 +304,7 @@ For more information on these operations see this useful [cheat sheet](https://w
 
 * try running the example code here in your own project
 * take data from your own experiments, reformat by hand in a csv if necessary and read into R
+    * hint:  you can upload directly from R studio using the up-arrow icon on the files tab
 * explore different data manipulations with base R and dplyr functions
-* try comparing groups using simple statistical tests like ```t.test()``` and ```wilcox.test()```.  Hint:  you just need to feed numeric vectors with your data into these functions.
+* try comparing groups using simple statistical tests like ```t.test()``` and ```wilcox.test()```.    
+    * hint:  you just need to feed numeric vectors with your data into these functions.

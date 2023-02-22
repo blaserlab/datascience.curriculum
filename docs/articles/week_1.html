@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">datascience.curriculum</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9001</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9002</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -108,8 +108,9 @@ hits</strong>. This is how you learn.</p>
 <div class="section level2">
 <h2 id="r-and-rstudio">R and Rstudio<a class="anchor" aria-label="anchor" href="#r-and-rstudio"></a>
 </h2>
-<p>R is a statistical programming language. Rstudio is known as an
-integrated development environment or IDE.</p>
+<p>R is a statistical programming language that runs as a computer
+program. Rstudio is known as an integrated development environment or
+IDE. It is the standard way humans interact with the R program.</p>
 <p>Rstudio provides two main ways of interacting with R: directly via
 the R Console and via R scripts.</p>
 <ul>
@@ -143,55 +144,6 @@ don’t carry on with incorrect data.</strong></p>
 <p>Rstudio provides a number of standard panes that display useful
 information. We will review these in class or you can explore them on
 your own.</p>
-</div>
-<div class="section level2">
-<h2 id="packages">Packages<a class="anchor" aria-label="anchor" href="#packages"></a>
-</h2>
-<p>Packages are chunks of code and/or data that people have written and
-made available to us to use. The main reason we use R is that there is a
-large library of useful packages for the biological sciences that we can
-build our work on, all of which are free to use.</p>
-<p>Packages are most often stored and distributed via standard
-repositories. The most common are <a href="https://cran.r-project.org/" class="external-link">CRAN</a>, <a href="https://r-universe.dev/search/" class="external-link">R-universe</a>, and <a href="https://www.bioconductor.org/" class="external-link">Bioconductor</a>. Packages can also
-be distributed as source code (text based files), usually via
-github.</p>
-<p><strong>What happens when we “install” packages?</strong></p>
-<p>R downloads the compressed file and then unpacks it in a library
-directory on your computer or server. IF you are installing from source
-code (most linux computers or github repositories), then the code needs
-to be turned into a set of binary instructions for the computer to use,
-a process called compiling. This is what the Xcode (Mac) and RTools
-(Win) programs do.</p>
-<p>Every time you start an R session, a set of commands is run that
-points R to one or more library directories. This is how R finds the
-commands you ask it to use. Unfortunately, it can be difficult to find
-where these directories live, depending on your installation. To help
-with this, I have developed a package management system, called
-blaseRtemplates, that we will use in this course (see below).</p>
-<p><strong>How do I use a function?</strong></p>
-<p>Once you have installed a package, its functions are available to be
-called using the package name followed by 2 colons such as
-<code>dplyr::filter(mtcars, cyl == 6)</code>. But this is not always the
-best way to go.</p>
-<p>To make all of the functions from a package available, you need to
-run <code><a href="https://rdrr.io/r/base/library.html" class="external-link">library("&lt;package name&gt;")</a></code>. This will attach all
-of the functions from that package to your session. Then you can just
-use the function name without the package prefix.</p>
-<p>Beware of attaching more packages than you actually need though
-because there could be “namespace conflicts”. This happens when the same
-term applies to two different functions from two different packages. R
-picks one and goes with it without clearly indicating that it is doing
-so. This is a common source of errors.</p>
-<p>Later on we will see how to use the “conflicted” package to help warn
-us of those errors before they cause a problem.</p>
-<p><strong>Where do I look for help with R functions?</strong></p>
-<p>A manual for each function in an R package is generated and can be
-viewed in the help panel in RStudio. Access these with
-<code>?&lt;object name&gt;</code> e.g. <code><a href="https://rdrr.io/r/base/mean.html" class="external-link">?mean</a></code>. Vignettes may
-also be available. Vignettes are long-form articles that show you how to
-use the functions in a package together, often with example data. These
-are best accessed by navigating through the package menu. Click on the
-package name and near the top you will see any available vignettes.</p>
 </div>
 <div class="section level2">
 <h2 id="setting-up-your-system">Setting up your system<a class="anchor" aria-label="anchor" href="#setting-up-your-system"></a>
@@ -385,8 +337,56 @@ projects; the rules become more strict when we build packages.</p>
 </div>
 </div>
 <div class="section level2">
-<h2 id="installing-packages">Installing packages<a class="anchor" aria-label="anchor" href="#installing-packages"></a>
+<h2 id="packages">Packages<a class="anchor" aria-label="anchor" href="#packages"></a>
 </h2>
+<p>Packages are chunks of code and/or data that people have written and
+made available to us to use. The main reason we use R is that there is a
+large library of useful packages for the biological sciences that we can
+build our work on, all of which are free to use.</p>
+<p>Packages are most often stored and distributed via standard
+repositories. The most common are <a href="https://cran.r-project.org/" class="external-link">CRAN</a>, <a href="https://r-universe.dev/search/" class="external-link">R-universe</a>, and <a href="https://www.bioconductor.org/" class="external-link">Bioconductor</a>. Packages can also
+be distributed as source code (text based files), usually via
+github.</p>
+<p><strong>What happens when we “install” packages?</strong></p>
+<p>R downloads the compressed file and then unpacks it in a library
+directory on your computer or server. IF you are installing from source
+code (most linux computers or github repositories), then the code needs
+to be turned into a set of binary instructions for the computer to use,
+a process called compiling. This is what the Xcode (Mac) and RTools
+(Win) programs do.</p>
+<p>Every time you start an R session, a set of commands is run that
+points R to one or more library directories. This is how R finds the
+commands you ask it to use. Unfortunately, it can be difficult to find
+where these directories live, depending on your installation. To help
+with this, I have developed a package management system, called
+blaseRtemplates, that we will use in this course (see below).</p>
+<p><strong>How do I use a function?</strong></p>
+<p>Once you have installed a package, its functions are available to be
+called using the package name followed by 2 colons such as
+<code>dplyr::filter(mtcars, cyl == 6)</code>. But this is not always the
+best way to go.</p>
+<p>To make all of the functions from a package available, you need to
+run <code><a href="https://rdrr.io/r/base/library.html" class="external-link">library("&lt;package name&gt;")</a></code>. This will attach all
+of the functions from that package to your session. Then you can just
+use the function name without the package prefix.</p>
+<p>Beware of attaching more packages than you actually need though
+because there could be “namespace conflicts”. This happens when the same
+term applies to two different functions from two different packages. R
+picks one and goes with it without clearly indicating that it is doing
+so. This is a common source of errors.</p>
+<p>Later on we will see how to use the “conflicted” package to help warn
+us of those errors before they cause a problem.</p>
+<p><strong>Where do I look for help with R functions?</strong></p>
+<p>A manual for each function in an R package is generated and can be
+viewed in the help panel in RStudio. Access these with
+<code>?&lt;object name&gt;</code> e.g. <code><a href="https://rdrr.io/r/base/mean.html" class="external-link">?mean</a></code>. Vignettes may
+also be available. Vignettes are long-form articles that show you how to
+use the functions in a package together, often with example data. These
+are best accessed by navigating through the package menu. Click on the
+package name and near the top you will see any available vignettes.</p>
+<div class="section level3">
+<h3 id="installing-packages">Installing packages<a class="anchor" aria-label="anchor" href="#installing-packages"></a>
+</h3>
 <p>As mentioned above, blaseRtemplates-based projects use a user-project
 library that is linked to specific package versions in the main cache.
 This way, each project you start can use its own set of packages without
@@ -423,6 +423,7 @@ there will be one for each user. These files indicate all available and
 actively used packages in the R code. This file is meant to be tracked
 by git and so can provide version control and reproducibility for the
 packages used in your project.</p>
+</div>
 <div class="section level3">
 <h3 id="get-a-new-project-library">Get a new project library<a class="anchor" aria-label="anchor" href="#get-a-new-project-library"></a>
 </h3>
@@ -577,18 +578,22 @@ later.</p>
 <h2 id="exercises">Exercises<a class="anchor" aria-label="anchor" href="#exercises"></a>
 </h2>
 <ol style="list-style-type: decimal">
-<li><p>Use the code blocks from this vignette to make a new R project on
-your system. Modify as necessary. If you have trouble with the git
-commands, skip them for now.</p></li>
+<li>
+<p>Use the code blocks from this vignette to make a new R project on
+your system and for extra credit push it to github.</p>
+<ul>
+<li>First, establish the blaseRtemplates installation</li>
+<li>Next create a new project</li>
+<li>Connect your system to your github account using the git_commands.R
+script</li>
+<li>Last, run through the initialization script and delete it</li>
+</ul>
+</li>
 <li><p>Explore the scripts in the R directory.</p></li>
 <li><p>Try running the code in dependencies.R to install some
 recommended packages.</p></li>
-<li><p>Try adding the line
-<code>blaseRtemplates::easy_install("blaserlab/blaseRtools", how = "new_or_update")</code>
-and installing this package. Warning: it has a lot of dependencies and
-may take a long time to finish.</p></li>
-<li><p>Extra credit: save your work, then add, commit, and push to your
-github site.</p></li>
+<li><p>For more extra credit: save your work, then add, commit, and push
+to your github site.</p></li>
 </ol>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

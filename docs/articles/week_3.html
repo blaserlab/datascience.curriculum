@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">datascience.curriculum</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9001</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9002</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -91,13 +91,12 @@ error-resistant.</p>
 <p>Scope is a concept in computer science that has to do with how the
 names and values of variables relate to each other. It refers to the
 part of a program where the name of a variable representing a piece of
-data or a function is valid. We already discussed this in Week 1 when we
-talked about environments.</p>
-<p>To review, if you have a function or piece of data in your global
-environment with the same name as a different function or piece of data
-in a certain package, R will have to decide which you are referring to
-when you put that name in your code. In this case, the global
-environment takes priority.</p>
+data or a function is valid.</p>
+<p>If you have a function or piece of data in your global environment
+with the same name as a different function or piece of data in a certain
+package, R will have to decide which you are referring to when you put
+that name in your code. In this case, the global environment takes
+priority.</p>
 <p>But let’s say early in an analysis script I choose to represent a
 piece of data with the variable name <code>x</code>. This is probably
 not a wise choice, since <code>x</code> is a commonly used name. Maybe
@@ -335,9 +334,9 @@ them like this.</p>
 <span><span class="co">#&gt; [[3]]</span></span>
 <span><span class="co">#&gt; [1] "The final result is 4 cherries"</span></span></code></pre></div>
 <p>The first of these examples is much more easily (and quickly)
-accomplished with vectorized math. But as you can see, things get more
-complicated and at some point you need to write a custom function to
-create the output you want.</p>
+accomplished with vectorized math. But as you can see, things can get
+more complicated and at some point you may want to write a custom
+function to create the output you want.</p>
 <p>The map family has a number of variants that return the result in the
 form of vectors or dataframes, depending on what the output is.</p>
 </div>

@@ -59,7 +59,8 @@ In summary, the benefits of using a data package are:
 * Your processed data is linked to the code used to generate it
 * All processed data and code are in a single file that can be distributed and used by collaborators or reviewers
 * Data objects are documented so you have a better chance of recalling what they are and how they were generated at any point in the future
-* Data objects are version-controlled and not easy to change inadvertently.  
+* Data objects are version-controlled and not easy to change inadvertently.
+* Data versions and analysis code versions are linked, so you can always recreate the state of your project from any prior commit.
 
 
 ## Saving R objects
@@ -86,13 +87,11 @@ save(demo_iris_data,
 
 ```
 
-The bzip2 compression algorithm is usually the most efficient.  Sometimes gzip may produce smaller files. 
-
 At this point you could just stop and then read in the data later when needed using ```load("data/demo_iris_data.rda")```.  But it is better to put this into a package and then install the package in your project for the reasons mentioned above.
 
 ## Setting up the package
 
-First you might want to update your R 
+First you might want to update your .Rprofile.  This will add your contact info to the package. 
 
 ```{r eval = FALSE}
 options(

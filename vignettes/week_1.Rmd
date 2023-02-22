@@ -35,7 +35,7 @@ Learning R at times will seem like learning a foreign language.  You will make e
 
 ## R and Rstudio
 
-R is a statistical programming language.  Rstudio is known as an integrated development environment or IDE.  
+R is a statistical programming language that runs as a computer program.  Rstudio is known as an integrated development environment or IDE.  It is the standard way humans interact with the R program.  
 
 Rstudio provides two main ways of interacting with R:  directly via the R Console and via R scripts.
 
@@ -48,33 +48,6 @@ Rstudio provides two main ways of interacting with R:  directly via the R Consol
   **You always want your programs to error in obvious ways so you don't carry on with incorrect data.**
 
 Rstudio provides a number of standard panes that display useful information.  We will review these in class or you can explore them on your own.
-
-## Packages
-
-Packages are chunks of code and/or data that people have written and made available to us to use. The main reason we use R is that there is a large library of useful packages for the biological sciences that we can build our work on, all of which are free to use. 
-
-Packages are most often stored and distributed via standard repositories.  The most common are [CRAN](https://cran.r-project.org/), [R-universe](https://r-universe.dev/search/), and [Bioconductor](https://www.bioconductor.org/).  Packages can also be distributed as source code (text based files), usually via github. 
-
-**What happens when we "install" packages?**
-
-R downloads the compressed file and then unpacks it in a library directory on your computer or server.  IF you are installing from source code (most linux computers or github repositories), then the code needs to be turned into a set of binary instructions for the computer to use, a process called compiling.  This is what the Xcode (Mac) and RTools (Win) programs do.
-
-Every time you start an R session, a set of commands is run that points R to one or more library directories.  This is how R finds the commands you ask it to use. Unfortunately, it can be difficult to find where these directories live, depending on your installation.  To help with this, I have developed a package management system, called blaseRtemplates, that we will use in this course (see below).
-
-
-**How do I use a function?**
-
-Once you have installed a package, its functions are available to be called using the package name followed by 2 colons such as ```dplyr::filter(mtcars, cyl == 6)```. But this is not always the best way to go.  
-
-To make all of the functions from a package available, you need to run ```library("<package name>")```.  This will attach all of the functions from that package to your session.  Then you can just use the function name without the package prefix. 
-
-Beware of attaching more packages than you actually need though because there could be "namespace conflicts".  This happens when the same term applies to two different functions from two different packages.  R picks one and goes with it without clearly indicating that it is doing so.  This is a common source of errors.
-
-Later on we will see how to use the "conflicted" package to help warn us of those errors before they cause a problem. 
-
-**Where do I look for help with R functions?**
-
-A manual for each function in an R package is generated and can be viewed in the help panel in RStudio. Access these with ```?<object name>``` e.g. ```?mean```.  Vignettes may also be available.  Vignettes are long-form articles that show you how to use the functions in a package together, often with example data.  These are best accessed by navigating through the package menu.  Click on the package name and near the top you will see any available vignettes.  
 
 ## Setting up your system
 
@@ -204,7 +177,33 @@ I keep all of my R scripts in a directory called "R".  If you initialized your p
 
 In addition to this, the main analysis scripts for the project will go in the R folder and may go in subdirectories if there are a lot of them.  Other file types, such as *.Rmd, would go in their own folder named Rmd/.  This arrangement is very flexible for simple data analysis projects; the rules become more strict when we build packages.
 
-## Installing packages
+## Packages
+
+Packages are chunks of code and/or data that people have written and made available to us to use. The main reason we use R is that there is a large library of useful packages for the biological sciences that we can build our work on, all of which are free to use. 
+
+Packages are most often stored and distributed via standard repositories.  The most common are [CRAN](https://cran.r-project.org/), [R-universe](https://r-universe.dev/search/), and [Bioconductor](https://www.bioconductor.org/).  Packages can also be distributed as source code (text based files), usually via github. 
+
+**What happens when we "install" packages?**
+
+R downloads the compressed file and then unpacks it in a library directory on your computer or server.  IF you are installing from source code (most linux computers or github repositories), then the code needs to be turned into a set of binary instructions for the computer to use, a process called compiling.  This is what the Xcode (Mac) and RTools (Win) programs do.
+
+Every time you start an R session, a set of commands is run that points R to one or more library directories.  This is how R finds the commands you ask it to use. Unfortunately, it can be difficult to find where these directories live, depending on your installation.  To help with this, I have developed a package management system, called blaseRtemplates, that we will use in this course (see below).
+
+**How do I use a function?**
+
+Once you have installed a package, its functions are available to be called using the package name followed by 2 colons such as ```dplyr::filter(mtcars, cyl == 6)```. But this is not always the best way to go.  
+
+To make all of the functions from a package available, you need to run ```library("<package name>")```.  This will attach all of the functions from that package to your session.  Then you can just use the function name without the package prefix. 
+
+Beware of attaching more packages than you actually need though because there could be "namespace conflicts".  This happens when the same term applies to two different functions from two different packages.  R picks one and goes with it without clearly indicating that it is doing so.  This is a common source of errors.
+
+Later on we will see how to use the "conflicted" package to help warn us of those errors before they cause a problem. 
+
+**Where do I look for help with R functions?**
+
+A manual for each function in an R package is generated and can be viewed in the help panel in RStudio. Access these with ```?<object name>``` e.g. ```?mean```.  Vignettes may also be available.  Vignettes are long-form articles that show you how to use the functions in a package together, often with example data.  These are best accessed by navigating through the package menu.  Click on the package name and near the top you will see any available vignettes.  
+
+### Installing packages
 
 As mentioned above, blaseRtemplates-based projects use a user-project library that is linked to specific package versions in the main cache.  This way, each project you start can use its own set of packages without duplication of the actual software.  The best way to install packages in this format is this:
 
@@ -351,12 +350,14 @@ Hopefully you have a commit in your git log with the message "submitted to Journ
 
 ## Exercises
 
-1.  Use the code blocks from this vignette to make a new R project on your system.  Modify as necessary.  If you have trouble with the git commands, skip them for now.
+1.  Use the code blocks from this vignette to make a new R project on your system and for extra credit push it to github.  
+    * First, establish the blaseRtemplates installation
+    * Next create a new project
+    * Connect your system to your github account using the git_commands.R script
+    * Last, run through the initialization script and delete it
 
 2.  Explore the scripts in the R directory. 
 
 3.  Try running the code in dependencies.R to install some recommended packages.
 
-4.  Try adding the line ```blaseRtemplates::easy_install("blaserlab/blaseRtools", how = "new_or_update")``` and installing this package.  Warning:  it has a lot of dependencies and may take a long time to finish.
-
-5.  Extra credit:  save your work, then add, commit, and push to your github site.
+4.  For more extra credit:  save your work, then add, commit, and push to your github site.

@@ -44,13 +44,13 @@ The goals of this course are for you to become comfortable with the R statistica
 
 Once you have completed this course you should be able to:
 
-* understand the difference between analysis code and source data
 * properly format data for efficient computation
 * generate a table of descriptive statistics for data from a typical biological experiment
 * perform statistical testing as appropriate
 * generate publication-quality plots using ggplot
 * perform basic analysis of single cell RNA sequencing data
 * compile processed source data into an R data package
+* understand the difference between analysis code and source data
 * use basic version control functions to track and document changes to your analysis
 * publish your code so reviewers can understand how you arrived at your results
 
@@ -62,12 +62,14 @@ Before the first class you should make sure your computer is ready to go.  Broad
 
 * You can use your personal computer.  Most/all of the software we use in the course is available for Mac and PC and will run directly on your machine.  If you own the computer, just install the programs below.  If it is a lab computer, have your IT admin install the programs.
 * You may have access to a lab server running R.  This will be linux-based and will run everything we will be using in the course. 
-* You can register for the course at the Ohio Supercomputing Center.  Details to follow.  
+* You can register for the course at the Ohio Supercomputing Center.  Details will be sent by email.  
 * You can use an existing academic account at the Ohio Supercomputing center.  The cost for what we will be doing will be tiny and this has the advantage of being a computing environment you may already be familiar with and have used/will use for your work.
 
 R studio cloud (now Posit cloud) is not a great option for the course or for your academic research.  It is subscription-based and the rates are exorbitant compared to what you will pay at a supercomputing center at your academic institution. 
 
-Here are links to the programs we will be using:
+The best computing option for this class will be what you wish to use for your own research projects.
+
+If you wish to work on your local computer, here are links to the programs we will be using:
 
 * [R](https://cran.rstudio.com/) (critical)
 * [Rstudio](https://www.rstudio.com/products/rstudio/download/#download) (critical)
@@ -83,9 +85,7 @@ You should also register for a free [github](https://github.com/) account.  Choo
 
 As you see from the topics below, this workshop starts from the basics and moves through somewhat advanced topics.  There will be no formal homework or assignments, but you will want to be comfortable with the topics previously presented by the time the next class arrives and to read the course material in advance.  If there are things that don't make sense or are causing you trouble at first, I encourage you to try to figure them out using Google and Stack Overflow.  This is the best way to learn.  Your questions or problems will have been encountered before.
 
-**Because of the virtual format we won't be able to stop and troubleshoot individual issues during class.**  If we are moving too fast or too slow for the class we can change pace as necessary.  If you have questions, comments or problems getting things to work, and we don't get to them by the end of class, you can post these issues [here](https://github.com/blaserlab/datascience.curriculum/issues).  You probably aren't the only person with that question/problem, so posting them in this forum will benefit others.
-
-Each lesson will be conducted using code and data that is publicly available and computationally tractable so you should be able to work on your own.
+**Because of the virtual format we won't be able to stop and troubleshoot individual issues during class.**   If you have questions, comments or problems getting things to work, and we don't get to them by the end of class, you can post these issues [here](https://github.com/blaserlab/datascience.curriculum/issues).  You probably aren't the only person with that question/problem, so posting them in this forum will benefit others.
 
 Each lesson will be structured in the following way:
 
@@ -99,7 +99,7 @@ All of the code is available at the course website.  You should try running ever
 
 ### Topics
 
-This course covers a relatively wide range of topics which may be intimidating for new R users.  Don't worry if you don't get it all the first time through. The courses will be recorded and the code and notes will be published for your reference, so you can go back and review what you may have missed.   
+This course covers a relatively wide range of topics which may be intimidating for new R users.  Don't worry if you don't get it all the first time through. The lectures will be recorded and the code and notes will be published for your reference, so you can go back and review what you may have missed.   
 
 The first three lectures will present some basics in using R.  The last three will be more advanced.
 
@@ -112,11 +112,9 @@ Even intermediate-level users with some pre-existing experience using R will lik
 * [Week 1 notes](https://www.evernote.com/shard/s324/sh/0b431e36-fc49-8163-d1d6-5d04594b5107/e1404e72838937606a8f26cb73bd0761)
 * Content
   * R and Rstudio
-  * Packages
+  * blaseRtemplates
   * Projects
-  * Setting up a Project
-  * Global Environment
-  * Project organization
+  * Packages
   * Basic Git for the single user
 
 ####     [Week 2:  Basics of working with data in R](week_2.html) - April 19, 10-11 AM ET

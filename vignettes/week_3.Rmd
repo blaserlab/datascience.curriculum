@@ -29,9 +29,9 @@ This lecture introduces more advanced concepts in R.  You should have some level
 
 ## Scope
 
-Scope is a concept in computer science that has to do with how the names and values of variables relate to each other.  It refers to the part of a program where the name of a variable representing a piece of data or a function is valid.  We already discussed this in Week 1 when we talked about environments.
+Scope is a concept in computer science that has to do with how the names and values of variables relate to each other.  It refers to the part of a program where the name of a variable representing a piece of data or a function is valid.  
 
-To review, if you have a function or piece of data in your global environment with the same name as a different function or piece of data in a certain package, R will have to decide which you are referring to when you put that name in your code.  In this case, the global environment takes priority.
+If you have a function or piece of data in your global environment with the same name as a different function or piece of data in a certain package, R will have to decide which you are referring to when you put that name in your code.  In this case, the global environment takes priority.
 
 But let's say early in an analysis script I choose to represent a piece of data with the variable name ```x```. This is probably not a wise choice, since ```x``` is a commonly used name.  Maybe later in the script I represent a different piece of data with the the variable name ```x```.  This overwrites the old version because they were created with the same scope, i.e. the global environment.  Finally when I want to use ```x``` I could make an error because I didn't realize that I had referred to it twice in my analysis script.
 
@@ -208,7 +208,7 @@ pmap(
 
 ```
 
-The first of these examples is much more easily (and quickly) accomplished with vectorized math.  But as you can see, things get more complicated and at some point you need to write a custom function to create the output you want.  
+The first of these examples is much more easily (and quickly) accomplished with vectorized math.  But as you can see, things can get more complicated and at some point you may want to write a custom function to create the output you want.  
 
 The map family has a number of variants that return the result in the form of vectors or dataframes, depending on what the output is.
 

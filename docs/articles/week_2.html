@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">datascience.curriculum</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9001</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9002</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -218,9 +218,10 @@ simple variable names.</p>
 under the name “demo_data”.</p>
 <p>Any valid R object (data, functions etc) can be stored under a
 variable name. By default they will be stored in the global environment.
-If you save something else with the same name in the same environment it
-will overwrite the old value without checking, asking or notifying
-you.</p>
+The global environment is the “workspace” where every value you save is
+held in memory. If you save something else with the same name in the
+same environment it will overwrite the old value without checking,
+asking or notifying you.</p>
 </div>
 <div class="section level2">
 <h2 id="data-structures">Data structures<a class="anchor" aria-label="anchor" href="#data-structures"></a>
@@ -408,9 +409,7 @@ for data transformations prior to statistical testing or plotting.</p>
 <p>Dplyr functions are pipe-friendly, meaning that they can be chained
 in a way that reduces redundant text in your code or saving intermediate
 values which can cause problems. For this you use the pipe operator
-<code>%&gt;%</code> or <code>|&gt;</code>. The latter is a new version
-which I find preferable but requires R version 4.1 or later. Either will
-work for all of the code we demonstrate here.</p>
+<code>|&gt;</code>.</p>
 <p>Dplyr functions are also vectorized so they are computationally
 efficient and can be used on tables with hundreds of thousands of
 rows.</p>
@@ -612,12 +611,21 @@ sheet</a>.</p>
 <ul>
 <li>try running the example code here in your own project</li>
 <li>take data from your own experiments, reformat by hand in a csv if
-necessary and read into R</li>
+necessary and read into R
+<ul>
+<li>hint: you can upload directly from R studio using the up-arrow icon
+on the files tab</li>
+</ul>
+</li>
 <li>explore different data manipulations with base R and dplyr
 functions</li>
 <li>try comparing groups using simple statistical tests like
-<code><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test()</a></code> and <code><a href="https://rdrr.io/r/stats/wilcox.test.html" class="external-link">wilcox.test()</a></code>. Hint: you just
-need to feed numeric vectors with your data into these functions.</li>
+<code><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test()</a></code> and <code><a href="https://rdrr.io/r/stats/wilcox.test.html" class="external-link">wilcox.test()</a></code>.
+<ul>
+<li>hint: you just need to feed numeric vectors with your data into
+these functions.</li>
+</ul>
+</li>
 </ul>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
