@@ -26,10 +26,29 @@ break                                                                     #
 # create a working branch for your day's work
 blaseRtemplates::git_easy_branch(branch = "brad_working")
 
+pkgdown::build_site(install = TRUE)
+purrr::walk(
+        .x = list.files(
+                path = "vignettes",
+                pattern = "*.Rmd",
+                full.names = FALSE
+        ),
+        .f = function(x) {
+                # rmarkdown::render(
+                #         input = file.path("vignettes", x),
+                #         output_dir = "docs",
+                #         output_format = "html_document"
+                # )
+                rfile <- stringr::str_replace(x, ".Rmd", ".R")
+                knitr::purl(input = file.path("vignettes", x),
+                            output = file.path("docs", rfile))
+        }
+)
+
 # save, add and commit your work but don't push
 blaseRtemplates::write_project_library_catalog()
 gert::git_add("*")
-gert::git_commit("added quotes to library command")
+gert::git_commit("")
 
 # frequently update your working branch from main or master branch
 # this will first update main or master from remote

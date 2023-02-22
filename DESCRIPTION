@@ -1,6 +1,6 @@
 Package: datascience.curriculum
-Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9000
+Title: Data Science 2023
+Version: 0.0.0.9001
 Authors@R: 
     person("Brad", "Blaser", , "bradley.blaser@osumc.edu", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-3168-5423"))

@@ -1,4 +1,12 @@
-### Notes
+### Welcome to the Computational Data Analysis Workshop
+
+This course is designed to help you improve your data management skills.  The skills you will learn can be used for everything from straightforward measurements of biological data to high-dimensional data like scRNA-seq.
+
+Did you ever see a figure you made last year but can't remember how you made it?  Do you need to write a Data Sharing Plan for an NIH grant but don't know where to begin?  Understanding the principles we cover here will help you and others reproduce and extend your work.
+
+To sign up: email [bradley.blaser@osumc.edu](mailto:bradley.blaser@osumc.edu?subject=datascience%20workshop%202023).
+
+### Updates:
 
 Dates for the 2023 course:
 
@@ -11,7 +19,7 @@ Dates for the 2023 course:
 
 These are all Wednesday mornings.  Time will be 10-11 AM.  Format will be Zoom Webinar.
 
-The curriculum for the 2023 offering of this course is being updated.  Please stay tuned!
+The curriculum for the 2023 offering of this course is stil being updated.  Please stay tuned!
 
 The videos from the 2022 offering have been moved to youtube.  Here are the links:
 
@@ -22,14 +30,6 @@ The videos from the 2022 offering have been moved to youtube.  Here are the link
 * [Week 5 video](https://youtu.be/t560L3BH3Cs)
 * [Week 6 video](https://youtu.be/eCD16CsUR2Y)
 
-
-### Welcome to the Computational Data Analysis Workshop
-
-This course is designed to help you improve your data management skills.  The skills you will learn can be used for everything from straightforward measurements of biological data to high-dimensional data like scRNA-seq.
-
-Did you ever see a figure you made last year but can't remember how you made it?  Understanding the principles we cover here will help you and others reproduce and extend your work.
-
-To sign up: email [bradley.blaser@osumc.edu](mailto:bradley.blaser@osumc.edu?subject=datascience%20workshop%202022).
 
 ### Goals
 
@@ -58,58 +58,68 @@ Once you have completed this course you should be able to:
 
 The course assumes no prior knowledge of R.  It is designed for biologists with an interest in analyzing high-dimensional and/or computationally-intensive data.  The only prerequisites are a basic understanding of biological experimental design (controls, biological replicates, technical replicates, etc.) and a computer.
 
-Before the first class you should have these programs installed and ideally updated to the latest versions:
+Before the first class you should make sure your computer is ready to go.  Broadly speaking, there are several computing options to choose from.
+
+* You can use your personal computer.  Most/all of the software we use in the course is available for Mac and PC and will run directly on your machine.  If you own the computer, just install the programs below.  If it is a lab computer, have your IT admin install the programs.
+* You may have access to a lab server running R.  This will be linux-based and will run everything we will be using in the course. 
+* You can register for the course at the Ohio Supercomputing Center.  Details to follow.  
+* You can use an existing academic account at the Ohio Supercomputing center.  The cost for what we will be doing will be tiny and this has the advantage of being a computing environment you may already be familiar with and have used/will use for your work.
+
+R studio cloud (now Posit cloud) is not a great option for the course or for your academic research.  It is subscription-based and the rates are exorbitant compared to what you will pay at a supercomputing center at your academic institution. 
+
+Here are links to the programs we will be using:
 
 * [R](https://cran.rstudio.com/) (critical)
 * [Rstudio](https://www.rstudio.com/products/rstudio/download/#download) (critical)
 * [Git](http://git-scm.com/downloads) (recommended)
-* [Rtools](https://cran.r-project.org/bin/windows/Rtools/rtools40.html) (Windows only)
+* [Rtools](https://cran.r-project.org/bin/windows/Rtools/rtools42/rtools.html) (Windows only)
 * [Xcode command line tools](https://www.evernote.com/shard/s324/sh/4a8f8452-b624-52d9-ffb7-114d5a501e95/698b49f231396e798a93b9b9d1ebe9c5) (Mac only)
 
 Windows and Mac users:  see this [note](https://www.evernote.com/shard/s324/sh/4a8f8452-b624-52d9-ffb7-114d5a501e95/698b49f231396e798a93b9b9d1ebe9c5) on installing these tools.
 
-See this helpful [installation guide](https://jennhuck.github.io/workshops/install_update_R.html) for a step by step approach.  Some or all of these installations may require admin rights; if so plan to contact your IT department.
-
-You should also register for a free [github](https://github.com/) account.
+You should also register for a free [github](https://github.com/) account.  Choose a name that you would be OK with putting in a publication.
 
 ### Course structure
 
-As you see from the topics below, this workshop starts from the basics and moves through somewhat advanced topics.  There will be no formal homework or assignments, but you are expected to be comfortable with the topics previously presented by the time the next class arrives and to read the course material in advance.  If there are things that don't make sense or are causing you trouble at first, I encourage you to try to figure them out using Google.  This is the best way to learn.
+As you see from the topics below, this workshop starts from the basics and moves through somewhat advanced topics.  There will be no formal homework or assignments, but you will want to be comfortable with the topics previously presented by the time the next class arrives and to read the course material in advance.  If there are things that don't make sense or are causing you trouble at first, I encourage you to try to figure them out using Google and Stack Overflow.  This is the best way to learn.  Your questions or problems will have been encountered before.
 
-**Because of the virtual format we won't be able to stop and troubleshoot individual issues during class.**  If we are moving too fast or too slow for the class we can change pace as necessary.
+**Because of the virtual format we won't be able to stop and troubleshoot individual issues during class.**  If we are moving too fast or too slow for the class we can change pace as necessary.  If you have questions, comments or problems getting things to work, and we don't get to them by the end of class, you can post these issues [here](https://github.com/blaserlab/datascience.curriculum/issues).  You probably aren't the only person with that question/problem, so posting them in this forum will benefit others.
 
 Each lesson will be conducted using code and data that is publicly available and computationally tractable so you should be able to work on your own.
 
 Each lesson will be structured in the following way:
 
 * 5 min for people to log in and enter any pre-existing questions they have in the Q&A.  These can be questions from the prior week or questions about the current day's material.  I will cover what I can during the lecture period.
-* 25-30 min for me to demonstrate the concepts in the day's lecture
-* 20-25 min for discussion and additional Q&A that arise.
+* 45 min for me to demonstrate the concepts in the day's lecture
+* 10 min for discussion and additional Q&A that arise.
 
 All of the code is available at the course website.  You should try running everything on your own.  Then try extending what you learn to your own data.
 
-For questions that arise between courses, please post them in the [issues section of the github repository for the course](https://github.com/blaserlab/datascience.curriculum/issues).  This way others can learn from questions that have been asked previously.
-
-**[Follow along with the workshop project on github](https://github.com/blaserlab/workshop_project)**
+**[Follow along with the workshop project on github](https://github.com/blaserlab/workshop_project_2023)**
 
 ### Topics
 
-####	[Week 1:  Setting up your computing environment](week_1.html) - March 30, 10-11 AM ET
+This course covers a relatively wide range of topics which may be intimidating for new R users.  Don't worry if you don't get it all the first time through. The courses will be recorded and the code and notes will be published for your reference, so you can go back and review what you may have missed.   
+
+The first three lectures will present some basics in using R.  The last three will be more advanced.
+
+Even intermediate-level users with some pre-existing experience using R will likely learn some helpful information in the early lectures.
+
+
+####	[Week 1:  Setting up your computing environment](week_1.html) - April 12, 10-11 AM ET
 
 * [Week 1 R script](https://raw.githubusercontent.com/blaserlab/datascience.curriculum/main/docs/week_1.R)
 * [Week 1 notes](https://www.evernote.com/shard/s324/sh/0b431e36-fc49-8163-d1d6-5d04594b5107/e1404e72838937606a8f26cb73bd0761)
-* **If you are interested in collaborating via git (advanced), see this [link](https://www.evernote.com/shard/s324/sh/8f178cfc-120a-477e-8064-93ee3191b763/4624ac97a2e7bb8906826e28d84ab350) for instructions**
 * Content
   * R and Rstudio
   * Packages
   * Projects
   * Setting up a Project
   * Global Environment
-  * Renv environments
   * Project organization
   * Basic Git for the single user
 
-####     [Week 2:  Basics of working with data in R](week_2.html) - April 6, 10-11 AM ET
+####     [Week 2:  Basics of working with data in R](week_2.html) - April 19, 10-11 AM ET
 
 * [Week 2 R script](https://raw.githubusercontent.com/blaserlab/datascience.curriculum/main/docs/week_2.R)
 * [Week 2 notes](https://www.evernote.com/shard/s324/sh/5402171c-c4e7-a782-155d-4c345d3a4693/a18be152aa533a76bc9e57b93d6f7ba4)
@@ -122,7 +132,7 @@ For questions that arise between courses, please post them in the [issues sectio
   * Data Operations
   * Dplyr
 
-####	[Week 3:  More advanced concepts in R](week_3.html) - April 13, 10-11 AM ET
+####	[Week 3:  More advanced concepts in R](week_3.html) - April 26, 10-11 AM ET
 
 * [Week 3 R script](https://raw.githubusercontent.com/blaserlab/datascience.curriculum/main/docs/week_3.R)
 * [Week 3 notes](https://www.evernote.com/l/AUQTYqvjygVOtoHwhhYSsdvSea104UlAMuc/)
@@ -137,7 +147,7 @@ For questions that arise between courses, please post them in the [issues sectio
   * Plotting
   * Statistical Testing
 
-####	[Week 4: blaseRtools scRNA-seq tutorial 1](https://blaserlab.github.io/blaseRtools/pages/scRNAseq.html) - April 27, 10-11 AM ET
+####	[Week 4: blaseRtools scRNA-seq tutorial 1](https://blaserlab.github.io/blaseRtools/pages/scRNAseq.html) - May 3, 10-11 AM ET
 
 * [Week 4/5 R script](https://raw.githubusercontent.com/blaserlab/blaseRtools/master/docs/pages/scRNAseq.R)
 * [Week 4 notes](https://www.evernote.com/shard/s324/sh/e993c8a7-2cfb-3675-fe5f-54590d070398/fb9661c178c8f9b1c51f41a5dfa5ede1)
@@ -158,7 +168,7 @@ For questions that arise between courses, please post them in the [issues sectio
   * Label Transfer
 
 
-####	[Week 5: blaseRtools scRNA-seq tutorial 2](https://blaserlab.github.io/blaseRtools/pages/scRNAseq.html) - May 4, 10-11 AM ET
+####	[Week 5: blaseRtools scRNA-seq tutorial 2](https://blaserlab.github.io/blaseRtools/pages/scRNAseq.html) - May 10, 10-11 AM ET
 
 * [Week 4/5 R script](https://raw.githubusercontent.com/blaserlab/blaseRtools/master/docs/pages/scRNAseq.R)
 * [Week 5 notes](https://www.evernote.com/shard/s324/sh/32463353-3063-e0b2-62f5-32984bf8561c/9d78ec55ac1fb059d9307e0c6aa99c7c)
@@ -169,7 +179,7 @@ For questions that arise between courses, please post them in the [issues sectio
     * Pseudobulk
     * Regression
 
-#### [Week 6:  Building and using data packages](week_6.html) - May 11, 10-11 AM ET
+#### [Week 6:  Building and using data packages](week_6.html) - May 17, 10-11 AM ET
 
 * [Week 6 R script](https://raw.githubusercontent.com/blaserlab/datascience.curriculum/main/docs/week_6.R)
 * [Week 6 R notes](https://www.evernote.com/shard/s324/sh/64e27cb7-ff1c-255b-317e-00b4edf02f41/ef04a166bf3000be2e80a9390df8fe56)
@@ -187,4 +197,4 @@ For questions that arise between courses, please post them in the [issues sectio
 * Thanks for attending
 * I appreciate feedback on things that are or are not working.
 * Your comments will help improve the course for next year
-* Please email to [bradley.blaser@osumc.edu](mailto:bradley.blaser@osumc.edu?subject=datascience%20workshop%202022%evaluation)
+* Please email to [bradley.blaser@osumc.edu](mailto:bradley.blaser@osumc.edu?subject=datascience%20workshop%202023%evaluation)
