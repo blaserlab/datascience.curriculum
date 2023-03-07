@@ -220,8 +220,7 @@ Instead we use functions from a couple of packages to load the data into your R 
 
 ```{r eval = FALSE}
 # load the packages we need
-library("blaseRtools")
-library("lazyData")
+library(blaseRtemplates)
 
 # install the data package
 bb_renv_datapkg(<path to directory containing data package>)
