@@ -1,8 +1,8 @@
-## ----setup, include=FALSE---------------------------------------------------------------------------
+## ----setup, include=FALSE------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 library(datascience.curriculum)
 
 
-## ---- include = FALSE-------------------------------------------------------------------------------
+## ---- include = FALSE----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -12,25 +12,47 @@ knitr::opts_chunk$set(
 )
 
 
-## ---------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 install.packages('blaseRtemplates', repos = c('https://blaserlab.r-universe.dev'))
 
 
-## ---------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 library("blaseRtemplates")
 establish_new_bt(cache_path = "<some_directory>/r_4_2_cache", project_path = "<some_directory>/projects")
 
 
-## ---------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # create a project called rclass_project_2023 in your projects directory
 blaseRtemplates::initialize_project("<projects directory>/rclass_project_2023")
 
 
-## ---------------------------------------------------------------------------------------------------
-# after running the initialization command, run these lines once to set up
-# your project in a consistent manner.
-# private github repos can be made public via the web interface
+## ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# make sure you have a github account
+# https://github.com/join
 
+# install git
+## Windows ->  https://git-scm.com/download/win
+## Mac     ->  https://git-scm.com/download/mac
+## Linux   ->  https://git-scm.com/download/linux
+
+# configure git in Rstudio
+usethis::use_git_config(user.name = "YourName",
+                        user.email = "your@mail.com")
+
+# create a personal access token at the github website
+# set the expiration date as desired (no expiration date)
+# permissions should be set automatically.  
+usethis::create_github_token()
+
+# run this and enter your token at the prompt
+blaseRtemplates::gitcreds_set()
+
+# Run the following once per user to collaborate smoothly
+blaseRtemplates::setup_git_collab()
+
+
+
+## ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # make a software license
 usethis::use_mit_license("<your name here>")
 
@@ -51,33 +73,7 @@ usethis::use_github(private = TRUE)
 ### Delete this file after initializing the project! ###
 
 
-## ---------------------------------------------------------------------------------------------------
-# make sure you have a github account
-# https://github.com/join
-
-# install git
-## Windows ->  https://git-scm.com/download/win
-## Mac     ->  https://git-scm.com/download/mac
-## Linux   ->  https://git-scm.com/download/linux
-
-# configure git in Rstudio
-usethis::use_git_config(user.name = "YourName",
-                        user.email = "your@mail.com")
-
-# create a personal access token at the github website
-# set the expiration date as desired (no expiration date)
-# permissions should be set automatically.  Then run:
-usethis::create_github_token()
-
-# run this and enter your token at the prompt
-blaseRtemplates::gitcreds_set()
-
-# Run the following once per user to collaborate smoothly
-blaseRtemplates::setup_git_collab()
-
-
-
-## ----eval = FALSE-----------------------------------------------------------------------------------
+## ----eval = FALSE--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ## # basic everyday commands for all git users -------------------------------
 ## 
 ## gert::git_status()
@@ -87,7 +83,7 @@ blaseRtemplates::setup_git_collab()
 ## 
 
 
-## ---------------------------------------------------------------------------------------------------
+## ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # run these commands to rewind to a prior "good" commit ----------------------
 
 # make sure git status is "clean" (all changes committed) before rewinding

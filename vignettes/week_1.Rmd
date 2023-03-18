@@ -139,34 +139,7 @@ blaseRtemplates::initialize_project("<projects directory>/rclass_project_2023")
 
 That function will create the skeletonized project, activate it and restart your session within it.
 
-The following lines are taken directly from one of files created, "R/inititialization.R".  You should run these when you start up the project the first time:
-
-```{r}
-# after running the initialization command, run these lines once to set up
-# your project in a consistent manner.
-# private github repos can be made public via the web interface
-
-# make a software license
-usethis::use_mit_license("<your name here>")
-
-# generate a readme file to explain your work
-usethis::use_readme_md(open = FALSE)
-
-# *** Only if developing a package ***
-# uncomment and run to generate a news file to document updates.
-# usethis::use_news_md()
-
-# initialize git
-usethis::use_git()
-
-# initialize github
-usethis::use_github(private = TRUE)
-
-
-### Delete this file after initializing the project! ###
-```
-
-After you run this script, you should delete it.  See below for setting up git and github for the first time.
+That's it.  There are a few more steps if you want to use git.  See extra credit below.  If you don't want to use git, you can delete "R/initialization.R" now.
 
 ### Project organization
 
@@ -267,6 +240,9 @@ You want to try to use git and github.  There is a vast array of resources for y
 
 Git tracks changes to files in a group of files known as a repository.  The way we are using it here, your project is the repository.  Github is simply a website that hosts a copy of your repository on the web.  This is how you will share your work with journal reviewers and editors and others.
 
+### Setting up git and github for the first time on a system
+
+There are some things you need to do to connect git, github and R for the first time.  These lines are included at the bottom of the file, "R/git_commands.R".  They start out in every project and I usually leave them in there.  Sometimes there are connection issues with github and you have to run these again to get new credentials.
 
 ```{r}
 # make sure you have a github account
@@ -283,7 +259,7 @@ usethis::use_git_config(user.name = "YourName",
 
 # create a personal access token at the github website
 # set the expiration date as desired (no expiration date)
-# permissions should be set automatically.  Then run:
+# permissions should be set automatically.  
 usethis::create_github_token()
 
 # run this and enter your token at the prompt
@@ -293,11 +269,42 @@ blaseRtemplates::gitcreds_set()
 blaseRtemplates::setup_git_collab()
 
 ```
-Connecting/authenticating to github is the most difficult part of all of this.  The keychain program used by ```gitcreds_set()``` may not be available or working on all systems.  As a workaround, you can replace the line in your .Renviron file, GITHUB_PAT=gitcreds::gitcreds_get(use_cache = FALSE)$password, with GITHUB_PAT=<your token>.  There is a small security risk to this if someone were to gain access to your .Renviron file. So proceed with caution.
 
-The necessary permissions should be set automatically by these commands.  By default, the token expires after 30 days, but you can override this.  
 
-Assuming the commands above have run properly you should be ready to use git and github.  You can interact with git in at least 4 different ways:
+Connecting/authenticating to github is the most difficult part of all of this.  The keychain program used by ```gitcreds_set()``` may not be available or working on all systems.  As a workaround, you can replace the line in your .Renviron file, GITHUB_PAT=gitcreds::gitcreds_get(use_cache = FALSE)$password, with GITHUB_PAT=your_token.  There is a small security risk to this if someone were to gain access to your .Renviron file. So proceed with caution.
+
+The necessary permissions should be set automatically by these commands.  By default, the token expires after 30 days, but you can override this which is what I usually do.  
+
+### Set up your project to use git and github
+
+The following lines are taken directly from "R/initialization.R".  You should run these when you start up the project the first time:
+
+```{r}
+# make a software license
+usethis::use_mit_license("<your name here>")
+
+# generate a readme file to explain your work
+usethis::use_readme_md(open = FALSE)
+
+# *** Only if developing a package ***
+# uncomment and run to generate a news file to document updates.
+# usethis::use_news_md()
+
+# initialize git
+usethis::use_git()
+
+# initialize github
+usethis::use_github(private = TRUE)
+
+
+### Delete this file after initializing the project! ###
+```
+
+After you run this script, you can delete it.  
+
+### Using git and github
+
+You can interact with git in at least 4 different ways:
 
 * via scripted commands on ```R/git_commands.R```
 * using the Git pane in Rstudio
@@ -334,9 +341,7 @@ That is it!
 
 If you run into problems, the error messages are usually informative.  If you have trouble understanding an error or it isn't helpful, just google it.
 
-One common use-case for git for the single user is to "un-delete" files.  You can do this as long as the files were previously committed.  To go back in time and recover the previously committed version, first make a commit to create a save point and then in the terminal run ```git log``` to review your commit history.  Add and commit any outstanding changes to your repository as outlined above.  Then run ```git checkout <commit id>``` to rewind the state of your repository to the desired commit.  Copy the file(s) you want to resurrect to a location external to the repository. Run ```git switch -``` to go back to your latest commit.  Make your changes and go from there.
-
-Here is a way that is even easier and doesn't require using the terminal:  go to your github site for that repo.  Click on clock icon labled "commits" (which helpfully includes a "back in time" arrow).  Then select from the list of commits (versions).  Click browse files and find what you were looking for.  You can even click on the raw version to copy and paste directly back into R studio.
+One common use-case for git for the single user is to "un-delete" files.  The easiest way is to go to your github site for that repo.  Click on clock icon labeled "commits" (which helpfully includes a "back in time" arrow).  Then select from the list of commits (versions).  Click browse files and find what you were looking for.  Click on the raw version to copy and paste directly back into R studio.
 
 Here's a more complicated situation most of us can relate to:
 
