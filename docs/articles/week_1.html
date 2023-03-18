@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">datascience.curriculum</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9004</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9005</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -144,6 +144,17 @@ don’t carry on with incorrect data.</strong></p>
 <p>Rstudio provides a number of standard panes that display useful
 information. We will review these in class or you can explore them on
 your own.</p>
+<p>By default, R studio gives you the option to save your workspace data
+when you close out a session and then to reload your workspace from that
+file the next time you start to work. This is generally not a good idea,
+for reasons we will see. It wastes time loading and quitting sessions
+and you want to be explicit in what objects you are saving, if and when
+you save them.</p>
+<p>To turn this off, go to the Rstudio menu bar, select Tools, then
+Global Options. Make the following selections in the pop-up window:</p>
+<div class="figure">
+<img src="images/rstudio_opts.png" style="width:100.0%" alt=""><p class="caption">R studio workspace options</p>
+</div>
 </div>
 <div class="section level2">
 <h2 id="setting-up-your-system">Setting up your system<a class="anchor" aria-label="anchor" href="#setting-up-your-system"></a>
@@ -272,13 +283,9 @@ project root.</p>
 through the program menus. This way the packages are set up in a
 consistent manner, every time. Then when you have to revisit a project
 after months and months, it is easy to navigate.</p>
-<ol style="list-style-type: decimal">
-<li><p>Choose the directory you want the project to live in.</p></li>
-<li><p>Run</p></li>
-</ol>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># create a project called rclass_example in your home directory</span></span>
-<span><span class="fu">blaseRtemplates</span><span class="fu">::</span><span class="fu"><a href="https://blaserlab.github.io/blaseRtemplates/reference/initialize_project.html" class="external-link">initialize_project</a></span><span class="op">(</span><span class="st">"~/rclass_example"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># create a project called rclass_project_2023 in your home directory</span></span>
+<span><span class="fu">blaseRtemplates</span><span class="fu">::</span><span class="fu"><a href="https://blaserlab.github.io/blaseRtemplates/reference/initialize_project.html" class="external-link">initialize_project</a></span><span class="op">(</span><span class="st">"&lt;rstudio projects directory&gt;/rclass_project_2023"</span><span class="op">)</span></span></code></pre></div>
 <p>That function will create the skeletonized project, activate it and
 restart your session within it.</p>
 <p>The following lines are taken directly from one of files created,

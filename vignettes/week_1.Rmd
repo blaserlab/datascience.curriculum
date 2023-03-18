@@ -49,6 +49,13 @@ Rstudio provides two main ways of interacting with R:  directly via the R Consol
 
 Rstudio provides a number of standard panes that display useful information.  We will review these in class or you can explore them on your own.
 
+By default, R studio gives you the option to save your workspace data when you close out a session and then to reload your workspace from that file the next time you start to work.  This is generally not a good idea, for reasons we will see.  It wastes time loading and quitting sessions and you want to be explicit in what objects you are saving, if and when you save them.
+
+To turn this off, go to the Rstudio menu bar, select Tools, then Global Options.  Make the following selections in the pop-up window:
+
+![R studio workspace options](images/rstudio_opts.png){ width=100% }
+
+
 ## Setting up your system
 
 I recommend this approach to setting up your R installation.  In comparison to other methods, the blaseRtemplates method provides greater transparency and reproducibility and an improved user experience (faster, fewer confusing messages).  But your mileage may vary.
@@ -125,14 +132,9 @@ You always want to be working in a project.
 
 The best way to do this is through automated commands, rather than through the program menus.  This way the packages are set up in a consistent manner, every time.  Then when you have to revisit a project after months and months, it is easy to navigate.
 
-
-1.  Choose the directory you want the project to live in.
-
-2.  Run
-
 ```{r}
-# create a project called rclass_example in your home directory
-blaseRtemplates::initialize_project("~/rclass_example")
+# create a project called rclass_project_2023 in your home directory
+blaseRtemplates::initialize_project("<rstudio projects directory>/rclass_project_2023")
 ```
 
 That function will create the skeletonized project, activate it and restart your session within it.

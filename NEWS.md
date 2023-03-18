@@ -1,3 +1,7 @@
+# datascience.curriculum 0.0.0.9005
+
+* updated week 1
+
 # datascience.curriculum 0.0.0.9003
 
 * updated links and edits to README
