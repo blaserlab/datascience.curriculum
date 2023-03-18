@@ -133,8 +133,8 @@ You always want to be working in a project.
 The best way to do this is through automated commands, rather than through the program menus.  This way the packages are set up in a consistent manner, every time.  Then when you have to revisit a project after months and months, it is easy to navigate.
 
 ```{r}
-# create a project called rclass_project_2023 in your home directory
-blaseRtemplates::initialize_project("<rstudio projects directory>/rclass_project_2023")
+# create a project called rclass_project_2023 in your projects directory
+blaseRtemplates::initialize_project("<projects directory>/rclass_project_2023")
 ```
 
 That function will create the skeletonized project, activate it and restart your session within it.

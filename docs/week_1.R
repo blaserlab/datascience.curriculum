@@ -22,8 +22,8 @@ establish_new_bt(cache_path = "<some_directory>/r_4_2_cache", project_path = "<s
 
 
 ## ---------------------------------------------------------------------------------------------------
-# create a project called rclass_project_2023 in your home directory
-blaseRtemplates::initialize_project("<rstudio projects directory>/rclass_project_2023")
+# create a project called rclass_project_2023 in your projects directory
+blaseRtemplates::initialize_project("<projects directory>/rclass_project_2023")
 
 
 ## ---------------------------------------------------------------------------------------------------
