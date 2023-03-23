@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">datascience.curriculum</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9006</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9007</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -174,7 +174,7 @@ your project for the reasons mentioned above.</p>
 <div class="section level2">
 <h2 id="setting-up-the-package">Setting up the package<a class="anchor" aria-label="anchor" href="#setting-up-the-package"></a>
 </h2>
-<p>First you might want to update your .Rprofile. This will add your
+<p>First you might want to update your ~/.Rprofile. This will add your
 contact info to the package.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span></span>
@@ -192,29 +192,65 @@ contact info to the package.</p>
 <span>  usethis.destdir <span class="op">=</span> <span class="st">"~/the/place/where/I/keep/my/R/projects"</span>,</span>
 <span>  usethis.overwrite <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p>I have the following lines saved in a script that I use whenever I
-make a new data package.</p>
+<p>Then use the dedicated function from blaseRtemplates to set up the
+package project.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># create the package and make it the active project </span></span>
-<span><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/create_package.html" class="external-link">create_package</a></span><span class="op">(</span><span class="st">"datascience.demopkg"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># make a license file</span></span>
-<span><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/licenses.html" class="external-link">use_mit_license</a></span><span class="op">(</span><span class="st">"Brad Blaser"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># make a readme file.  Use this to explain how to install and use your data package.</span></span>
-<span><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/use_readme_rmd.html" class="external-link">use_readme_md</a></span><span class="op">(</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># make a news file.  Use this to make notes on changes between versions of your data package.</span></span>
-<span><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/use_news_md.html" class="external-link">use_news_md</a></span><span class="op">(</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># initialize git and github (recommended)</span></span>
-<span><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/use_git.html" class="external-link">use_git</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/use_github.html" class="external-link">use_github</a></span><span class="op">(</span>private <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p>These commands will set up a very specific file and folder structure
-in your project.</p>
-<div class="figure">
-<img src="images/package_structure.png" style="width:100.0%" alt=""><p class="caption">Package structure</p>
-</div>
+<code class="sourceCode R"><span><span class="fu">blaseRtemplates</span><span class="fu">::</span><span class="fu"><a href="https://blaserlab.github.io/blaseRtemplates/reference/initialize_package.html" class="external-link">initialize_package</a></span><span class="op">(</span>path <span class="op">=</span> <span class="st">"~/r_projects/workshop.data"</span><span class="op">)</span></span></code></pre></div>
+<p>As with a regular project, you want to make a readme and set it up to
+use git using the initialization script:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># make a software license </span></span>
+<span><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/licenses.html" class="external-link">use_mit_license</a></span><span class="op">(</span><span class="st">"&lt;your name here&gt;"</span><span class="op">)</span> </span>
+<span><span class="co"># generate a readme file to explain your work </span></span>
+<span><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/use_readme_rmd.html" class="external-link">use_readme_md</a></span><span class="op">(</span>open <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> </span>
+<span><span class="co"># *** Only if developing a package *** </span></span>
+<span><span class="co"># uncomment and run to generate a news file to document updates. </span></span>
+<span><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/use_news_md.html" class="external-link">use_news_md</a></span><span class="op">(</span><span class="op">)</span> </span>
+<span><span class="co"># set your default branch to "main" for git init </span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/system.html" class="external-link">system</a></span><span class="op">(</span><span class="st">"git config --global init.defaultBranch main"</span><span class="op">)</span> </span>
+<span><span class="co"># initialize git </span></span>
+<span><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/use_git.html" class="external-link">use_git</a></span><span class="op">(</span><span class="op">)</span> </span>
+<span><span class="co"># initialize github </span></span>
+<span><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/use_github.html" class="external-link">use_github</a></span><span class="op">(</span>private <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> </span>
+<span><span class="co">### Delete this file after initializing the project! ###</span></span></code></pre></div>
+<p>A package is like a project but with a few additional requirements,
+like a DESCRIPTION file. The initialize_package function will set that
+up for you. Here is how it will look when you are done:</p>
+<pre><code>.
+|-- blaser.park.datapkg.Rproj
+|-- data
+|   |-- cds_heme_combined.rda
+|   |-- cds_heme_combined_tm.csv
+|   `-- human_hsc_pseudobulk_res.rda
+|-- DESCRIPTION
+|-- inst
+|   |-- data-raw
+|   |   |-- git_commands.R
+|   |   |-- hsc_pseudobulk.R
+|   |   `-- reprocess_cds.R
+|   `-- extdata
+|       |-- cds_marrow_heme_models
+|       |   |-- file_index.rds
+|       |   |-- rdd_pca_transform_model.rds
+|       |   |-- rdd_umap_transform_model_annoy.idx
+|       |   |-- rdd_umap_transform_model.rds
+|       |   `-- rdd_umap_transform_model_umap.idx
+|       `-- gene_targets.csv
+|-- library_catalogs
+|   `-- blas02_blaser.park.datapkg.tsv
+|-- LICENSE
+|-- LICENSE.md
+|-- man
+|   |-- cds_heme_combined.Rd
+|   `-- human_hsc_pseudobulk_res.Rd
+|-- NAMESPACE
+|-- NEWS.md
+|-- R
+|   `-- data.R
+`-- README.md
+
+8 directories, 23 files
+</code></pre>
 <p>Some important things to note</p>
 <ul>
 <li>DESCRIPTION: This is the file that indicates to R that this is a
@@ -239,11 +275,8 @@ be left alone.</li>
 </h2>
 <p>This is very simple. Just move the data directory from the analysis
 project into the root directory of the new data package. If you are
-editing an existing package, just copy the new .rda files. You can only
+editing an existing package, just move the new .rda files. You can only
 have 1 data directory.</p>
-<div class="figure">
-<img src="images/data_directory.png" style="width:100.0%" alt=""><p class="caption">Data directory added</p>
-</div>
 </div>
 <div class="section level2">
 <h2 id="adding-data-processing-code">Adding data-processing code<a class="anchor" aria-label="anchor" href="#adding-data-processing-code"></a>
@@ -254,10 +287,6 @@ This code should go in a new directory called “data-raw”. This is an
 unfortunate name because there is no data in there, only code.</p>
 <p>You need to enclose this in a directory called “inst”. Everything in
 the inst directory gets installed with your package.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.create</a></span><span class="op">(</span><span class="st">"inst"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.create</a></span><span class="op">(</span><span class="st">"inst/data-raw"</span><span class="op">)</span></span>
-<span><span class="co"># now move the data processing scripts into data-raw</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="option-include-raw-data">Option: include raw data<a class="anchor" aria-label="anchor" href="#option-include-raw-data"></a>
 </h3>
@@ -273,32 +302,30 @@ there.</p>
 <p>All objects in your data folder need to have a documentation entry.
 Documentation is done in a structured text language called Roxygen which
 is very easy to work with.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># make a data.R file</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/files.html" class="external-link">file.create</a></span><span class="op">(</span><span class="st">"R/data.R"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># make sure the "sinew" package is installed and attached</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/yonicd/sinew" class="external-link">"sinew"</a></span><span class="op">)</span></span></code></pre></div>
-<p>This will give you an “Addin” to Rstudio.</p>
-<div class="figure">
-<img src="images/sinew.png" style="width:100.0%" alt=""><p class="caption">Sinew addin</p>
-</div>
-<p>The best way to go from here is to</p>
-<ul>
-<li>load all of your new data objects into the global environment. In
-this case there is only 1.</li>
-<li>type the name in your data.R script</li>
-<li>highlight the entire name of the object</li>
-<li>click Addins &gt; createOxygen</li>
-<li>you should get this:</li>
-</ul>
+<p>The easiest way to start is with annotating a simple data frame. The
+<code>sinew</code> package will help you get the format correct.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="co"># install sinew if you don't have it</span></span>
+<span><span class="fu">sinew</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/sinew/man/makeOxygen.html" class="external-link">makeOxygen</a></span><span class="op">(</span><span class="va">demo_iris_data</span><span class="op">)</span></span></code></pre></div>
+<p>Copy this from the console then just fill in the blanks. Usually the
+most important things are to have a clear, descriptive, unique title and
+then in the description line, to describe how the data was generated and
+where to find the code for it. For example: This is a standard data set
+distributed with R, with modifications. See
+data-raw/file_with_code_you_used.R.</p>
+<p>Sinew only works for data frames and functions. If you want to
+document other types of objects, you can just copy/paste the format.</p>
 </div>
 <div class="section level2">
 <h2 id="finish-up-the-data-package">Finish up the data package<a class="anchor" aria-label="anchor" href="#finish-up-the-data-package"></a>
 </h2>
-<p>Now you need to tell R to generate the documentation files and build
-the binary data package.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<p>Make sure you remember to increment the version of the data in the
+DESCRIPTION file. Then jot a few notes about what changed in
+NEWS.md.</p>
+<p>Finally you need to tell R to generate the documentation files and
+build the binary data package.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># generate the formatted documentation manuals</span></span>
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/document.html" class="external-link">document</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
@@ -314,10 +341,10 @@ You want to be sure to increment your version number each time you make
 changes so you don’t overwrite old versions of your data. It is always
 good to be able to go back in time if needed.</p>
 <p>The package can easily be shared inside your firewall with local
-collaborators. For external collaborators or reviewers, OSU provides
-access to the <a href="https://datadryad.org/stash/" class="external-link">Dryad</a> data
-repository. There is a very straightforward web interface and the option
-to keep data private until the manuscript is published.</p>
+collaborators. For external collaborators or reviewers, you can use
+things like Mendeley, Zotero, and Dryad to share large data packages.
+Each has a straightforward web interface and the option to keep data
+private until the manuscript is published.</p>
 </div>
 <div class="section level2">
 <h2 id="installing-the-data-package">Installing the Data Package<a class="anchor" aria-label="anchor" href="#installing-the-data-package"></a>
@@ -334,21 +361,15 @@ address to an area on your hard drive. When you ask R to reference those
 data with you code, it is then loaded into memory to be used. This has
 the additional advantage of reducing memory requirements for your
 work.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load the packages we need</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(blaseRtemplates)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># install the data package</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">bb_renv_datapkg</span>(<span class="sc">&lt;</span>path to directory containing data package<span class="sc">&gt;</span>)</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="fu">requireData</span>(<span class="sc">&lt;</span>name of the data package without version number<span class="sc">&gt;</span>)</span></code></pre></div>
-<p>The bb_renv_datapkg function will go to the directory where your data
-lives, check for the latest version, and install it if necessary. This
-is the recommended way to go because you almost always want the latest
-version and you don’t want to waste time installing it if necessary. You
-can also install it with <code><a href="https://rstudio.github.io/renv/reference/install.html" class="external-link">renv::install()</a></code> though.</p>
-<p>The requireData command is what loads the digital pointers into your
-R session. Check out the environment dropdown menu to see for
-yourself.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># install the data package</span></span>
+<span><span class="fu">blaseRtemplates</span><span class="fu">::</span><span class="fu"><a href="https://blaserlab.github.io/blaseRtemplates/reference/project_data.html" class="external-link">project_data</a></span><span class="op">(</span><span class="st">"path/to/directory/containing/data"</span><span class="op">)</span></span></code></pre></div>
+<p>The function will go to the directory where your data lives, check
+for the latest version, and install it if necessary. This is the
+recommended way to go because you almost always want the latest version
+and you don’t want to waste time installing it if necessary.</p>
+<p>Then the function loads the digital pointers into your R session.
+Check out the environment dropdown menu to see for yourself.</p>
 </div>
 <div class="section level2">
 <h2 id="exercises">Exercises<a class="anchor" aria-label="anchor" href="#exercises"></a>
@@ -360,7 +381,7 @@ your data and making figures for a manuscript or presentation.</p>
 the processing code you used</li>
 <li>Save it to a network (archival) drive</li>
 <li>Load the data package back into your project using
-<code>bb_renv_datapkg()</code> and <code>requireData()</code>.</li>
+<code><a href="https://blaserlab.github.io/blaseRtemplates/reference/project_data.html" class="external-link">blaseRtemplates::project_data()</a></code>.</li>
 </ul>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

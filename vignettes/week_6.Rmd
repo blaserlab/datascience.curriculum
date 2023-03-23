@@ -91,7 +91,7 @@ At this point you could just stop and then read in the data later when needed us
 
 ## Setting up the package
 
-First you might want to update your .Rprofile.  This will add your contact info to the package. 
+First you might want to update your ~/.Rprofile.  This will add your contact info to the package. 
 
 ```{r eval = FALSE}
 options(
@@ -111,31 +111,70 @@ options(
 )
 ```
 
-I have the following lines saved in a script that I use whenever I make a new data package.
+Then use the dedicated function from blaseRtemplates to set up the package project.
 
 ```{r eval = FALSE}
-# create the package and make it the active project 
-usethis::create_package("datascience.demopkg")
-
-# make a license file
-usethis::use_mit_license("Brad Blaser")
-
-# make a readme file.  Use this to explain how to install and use your data package.
-usethis::use_readme_md()
-
-# make a news file.  Use this to make notes on changes between versions of your data package.
-usethis::use_news_md()
-
-# initialize git and github (recommended)
-usethis::use_git()
-usethis::use_github(private = TRUE)
-
+blaseRtemplates::initialize_package(path = "~/r_projects/workshop.data")
 ```
 
-These commands will set up a very specific file and folder structure in your project.  
+As with a regular project, you want to make a readme and set it up to use git using the initialization script:
 
-![Package structure](images/package_structure.png){ width=100% }
+```{r eval = FALSE}
+# make a software license 
+usethis::use_mit_license("<your name here>") 
+# generate a readme file to explain your work 
+usethis::use_readme_md(open = FALSE) 
+# *** Only if developing a package *** 
+# uncomment and run to generate a news file to document updates. 
+usethis::use_news_md() 
+# set your default branch to "main" for git init 
+system("git config --global init.defaultBranch main") 
+# initialize git 
+usethis::use_git() 
+# initialize github 
+usethis::use_github(private = TRUE) 
+### Delete this file after initializing the project! ###
+```
 
+A package is like a project but with a few additional requirements, like a DESCRIPTION file.  The initialize_package function will set that up for you.  Here is how it will look when you are done:  
+
+```
+.
+|-- blaser.park.datapkg.Rproj
+|-- data
+|   |-- cds_heme_combined.rda
+|   |-- cds_heme_combined_tm.csv
+|   `-- human_hsc_pseudobulk_res.rda
+|-- DESCRIPTION
+|-- inst
+|   |-- data-raw
+|   |   |-- git_commands.R
+|   |   |-- hsc_pseudobulk.R
+|   |   `-- reprocess_cds.R
+|   `-- extdata
+|       |-- cds_marrow_heme_models
+|       |   |-- file_index.rds
+|       |   |-- rdd_pca_transform_model.rds
+|       |   |-- rdd_umap_transform_model_annoy.idx
+|       |   |-- rdd_umap_transform_model.rds
+|       |   `-- rdd_umap_transform_model_umap.idx
+|       `-- gene_targets.csv
+|-- library_catalogs
+|   `-- blas02_blaser.park.datapkg.tsv
+|-- LICENSE
+|-- LICENSE.md
+|-- man
+|   |-- cds_heme_combined.Rd
+|   `-- human_hsc_pseudobulk_res.Rd
+|-- NAMESPACE
+|-- NEWS.md
+|-- R
+|   `-- data.R
+`-- README.md
+
+8 directories, 23 files
+
+```
 Some important things to note
 
 * DESCRIPTION:  This is the file that indicates to R that this is a package.  The most important line for you to interact with is version.  Every time you make a new version of the package (add, delete or edit data), you should increment the version number.  Title and description can be edited to provide a general description of the purpose of the package but these are not critical.  You should leave the other lines as-is.
@@ -144,11 +183,11 @@ Some important things to note
 * README.md and NEWS.md are text files you can edit as described above.
 * The other files mostly boilerplate configuration files which should be left alone.
 
+
 ## Adding data
 
-This is very simple.  Just move the data directory from the analysis project into the root directory of the new data package.  If you are editing an existing package, just copy the new .rda files.  You can only have 1 data directory.
+This is very simple.  Just move the data directory from the analysis project into the root directory of the new data package.  If you are editing an existing package, just move the new .rda files.  You can only have 1 data directory.
 
-![Data directory added](images/data_directory.png){ width=100% }
 
 ## Adding data-processing code
 
@@ -156,11 +195,6 @@ It is good to keep the processed data with the code you used to process it.  Tha
 
 You need to enclose this in a directory called "inst".  Everything in the inst directory gets installed with your package.
 
-```{r eval = FALSE}
-dir.create("inst")
-dir.create("inst/data-raw")
-# now move the data processing scripts into data-raw
-```
 
 ### Option:  include raw data
 
@@ -170,33 +204,27 @@ If you want to actually include the raw data or other files with your package, m
 
 Documenting your data is useful to yourself and others.  
 
-All objects in your data folder need to have a documentation entry.  Documentation is done in a structured text language called Roxygen which is very easy to work with.
+All objects in your data folder need to have a documentation entry.  Documentation is done in a structured text language called Roxygen which is very easy to work with.  
+
+The easiest way to start is with annotating a simple data frame.  The ```sinew``` package will help you get the format correct.  
 
 ```{r eval = FALSE}
-# make a data.R file
-file.create("R/data.R")
 
-# make sure the "sinew" package is installed and attached
-library("sinew")
+# install sinew if you don't have it
+sinew::makeOxygen(demo_iris_data)
 
 ```
 
-This will give you an "Addin" to Rstudio.  
+Copy this from the console then just fill in the blanks.  Usually the most important things are to have a clear, descriptive, unique title and then in the description line, to describe how the data was generated and where to find the code for it.  For example:  This is a standard data set distributed with R, with modifications.  See data-raw/file_with_code_you_used.R.
 
-![Sinew addin](images/sinew.png){ width=100% }
+Sinew only works for data frames and functions.  If you want to document other types of objects, you can just copy/paste the format.
 
-
-The best way to go from here is to 
-
-* load all of your new data objects into the global environment.  In this case there is only 1.
-* type the name in your data.R script
-* highlight the entire name of the object
-* click Addins > createOxygen
-* you should get this:
 
 ## Finish up the data package
 
-Now you need to tell R to generate the documentation files and build the binary data package.
+Make sure you remember to increment the version of the data in the DESCRIPTION file.  Then jot a few notes about what changed in NEWS.md. 
+
+Finally you need to tell R to generate the documentation files and build the binary data package.
 
 ```{r eval=FALSE}
 # generate the formatted documentation manuals
@@ -208,9 +236,10 @@ devtools::document()
 devtools::build()
 
 ```
+
 That's it.  When you run the last command, a .tar.gz file will be generated in the directory enclosing your data package code.  You can move that wherever you like.  Better yet you can provide a file path where R will save the binary package.  I usually save to network storage.  You want to be sure to increment your version number each time you make changes so you don't overwrite old versions of your data.  It is always good to be able to go back in time if needed.
 
-The package can easily be shared inside your firewall with local collaborators.  For external collaborators or reviewers, OSU provides access to the [Dryad](https://datadryad.org/stash/) data repository.  There is a very straightforward web interface and the option to keep data private until the manuscript is published.
+The package can easily be shared inside your firewall with local collaborators.  For external collaborators or reviewers, you can use things like Mendeley, Zotero, and Dryad to share large data packages.  Each has a straightforward web interface and the option to keep data private until the manuscript is published.
 
 ##  Installing the Data Package
 
@@ -219,19 +248,13 @@ The packages we make may be a little different from typical R packages.  They ha
 Instead we use functions from a couple of packages to load the data into your R session as a digital "pointer".  Until you ask R to reference a particular data item, it will reside in memory as a tiny digital address to an area on your hard drive.  When you ask R to reference those data with you code, it is then loaded into memory to be used.   This has the additional advantage of reducing memory requirements for your work. 
 
 ```{r eval = FALSE}
-# load the packages we need
-library(blaseRtemplates)
-
 # install the data package
-bb_renv_datapkg(<path to directory containing data package>)
-
-requireData(<name of the data package without version number>)
-
+blaseRtemplates::project_data("path/to/directory/containing/data")
 ```
 
-The bb_renv_datapkg function will go to the directory where your data lives, check for the latest version, and install it if necessary.  This is the recommended way to go because you almost always want the latest version and you don't want to waste time installing it if necessary.  You can also install it with ```renv::install()``` though.  
+The function will go to the directory where your data lives, check for the latest version, and install it if necessary.  This is the recommended way to go because you almost always want the latest version and you don't want to waste time installing it if necessary.  
 
-The requireData command is what loads the digital pointers into your R session.  Check out the environment dropdown menu to see for yourself.
+Then the function loads the digital pointers into your R session.  Check out the environment dropdown menu to see for yourself.
 
 ## Exercises
 
@@ -239,8 +262,7 @@ By now you should be comfortable setting up an R project, analyzing your data an
 
 * Make an R data package with your own processed experimental data and the processing code you used
 * Save it to a network (archival) drive
-* Load the data package back into your project using ```bb_renv_datapkg()``` and ```requireData()```.
-
+* Load the data package back into your project using ```blaseRtemplates::project_data()```.
 
 
 

@@ -1,4 +1,4 @@
-## ----setup, include=FALSE------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----setup, include=FALSE-------------------------------------------------------------------------------------------------------
 library(datascience.curriculum)
 # options(repos = c(
 #   blaserlab = 'https://blaserlab.r-universe.dev',
@@ -9,7 +9,7 @@ library(datascience.curriculum)
 # install.packages("blaseRtools")
 
 
-## ---- include = FALSE----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ---- include = FALSE-----------------------------------------------------------------------------------------------------------
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 )
 
 
-## ----eval = FALSE--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----eval = FALSE---------------------------------------------------------------------------------------------------------------
 ## # some demo data to save
 ## demo_iris_data <- iris
 ## 
@@ -33,7 +33,7 @@ knitr::opts_chunk$set(
 ## 
 
 
-## ----eval = FALSE--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----eval = FALSE---------------------------------------------------------------------------------------------------------------
 ## options(
 ##   usethis.full_name = "Jane Doe",
 ##   usethis.protocol  = "ssh",
@@ -51,41 +51,35 @@ knitr::opts_chunk$set(
 ## )
 
 
-## ----eval = FALSE--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-## # create the package and make it the active project
-## usethis::create_package("datascience.demopkg")
-## 
-## # make a license file
-## usethis::use_mit_license("Brad Blaser")
-## 
-## # make a readme file.  Use this to explain how to install and use your data package.
-## usethis::use_readme_md()
-## 
-## # make a news file.  Use this to make notes on changes between versions of your data package.
+## ----eval = FALSE---------------------------------------------------------------------------------------------------------------
+## blaseRtemplates::initialize_package(path = "~/r_projects/workshop.data")
+
+
+## ----eval = FALSE---------------------------------------------------------------------------------------------------------------
+## # make a software license
+## usethis::use_mit_license("<your name here>")
+## # generate a readme file to explain your work
+## usethis::use_readme_md(open = FALSE)
+## # *** Only if developing a package ***
+## # uncomment and run to generate a news file to document updates.
 ## usethis::use_news_md()
-## 
-## # initialize git and github (recommended)
+## # set your default branch to "main" for git init
+## system("git config --global init.defaultBranch main")
+## # initialize git
 ## usethis::use_git()
+## # initialize github
 ## usethis::use_github(private = TRUE)
+## ### Delete this file after initializing the project! ###
+
+
+## ----eval = FALSE---------------------------------------------------------------------------------------------------------------
+## 
+## # install sinew if you don't have it
+## sinew::makeOxygen(demo_iris_data)
 ## 
 
 
-## ----eval = FALSE--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-## dir.create("inst")
-## dir.create("inst/data-raw")
-## # now move the data processing scripts into data-raw
-
-
-## ----eval = FALSE--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-## # make a data.R file
-## file.create("R/data.R")
-## 
-## # make sure the "sinew" package is installed and attached
-## library("sinew")
-## 
-
-
-## ----eval=FALSE----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## ----eval=FALSE-----------------------------------------------------------------------------------------------------------------
 ## # generate the formatted documentation manuals
 ## devtools::document()
 ## 
@@ -96,13 +90,7 @@ knitr::opts_chunk$set(
 ## 
 
 
-## ----eval = FALSE--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-## # load the packages we need
-## library(blaseRtemplates)
-## 
+## ----eval = FALSE---------------------------------------------------------------------------------------------------------------
 ## # install the data package
-## bb_renv_datapkg(<path to directory containing data package>)
-## 
-## requireData(<name of the data package without version number>)
-## 
+## blaseRtemplates::project_data("path/to/directory/containing/data")
 

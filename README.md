@@ -93,8 +93,6 @@ Each lesson will be structured in the following way:
 
 ### 2023 Curriculum
 
-**The curriculum for the 2023 offering of this workshop is still being updated.  Please stay tuned!**
-
 This course covers a relatively wide range of topics which may be intimidating for new R users.  Don't worry if you don't get it all the first time through. The lectures will be recorded and the code and notes will be published for your reference, so you can go back and review what you may have missed.   
 
 The first three lectures will present some basics in using R.  The last three will be more advanced.
