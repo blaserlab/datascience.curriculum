@@ -58,7 +58,7 @@ To turn this off, go to the Rstudio menu bar, select Tools, then Global Options.
 
 ## Setting up your system
 
-I recommend this approach to setting up your R installation.  In comparison to other methods, the blaseRtemplates method provides greater transparency and reproducibility and an improved user experience (faster, fewer confusing messages).  But your mileage may vary.
+I recommend this approach to setting up your R installation.  In comparison to other methods, the blaseRtemplates method provides greater transparency and reproducibility and an improved user experience (faster, fewer confusing messages).  
 
 First, install the blaseRtemplates package using whatever package installer you currently use. Assuming the base install function, run:
 
@@ -79,7 +79,7 @@ What will this do?
 -   It will not overwrite existing directories and will fail when an existing installation is already present in the same location.\
 -   The only modification outside of the provided directory is to the .Renviron file. If you have existing configurations in your .Renviron file, they will only be changed if they are conflicting. If this is problematic, then you should archive your .Renviron file before running. The new .Renviron file will cause R to use the new .Rprofile in the cache directory and skip existing user- and project-level .Rprofiles.
 
-Briefly, when R starts a new session, it looks for a series of files to configure itself. This configuration includes environment variables (in the .Renviron file) and any desired R code (in the .Rprofile file). As included in this function, these configurations only affect user experience i.e. they should not affect the results produced by your code. By user experience I mean connection to the proper package libraries and repositories and some safeguards to prevent working outside of projects.
+When R starts a new session, it looks for a series of files to configure itself. This configuration includes environment variables (in the .Renviron file) and any desired R code (in the .Rprofile file). As included in this function, these configurations only affect user experience i.e. they should not affect the results produced by your code. By user experience I mean connection to the proper package libraries and repositories and some safeguards to prevent working outside of projects.
 
 For more information on how R starts, see [this link.](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Startup.html "R startup").
 
@@ -128,9 +128,11 @@ Projects automatically define their working directory to be the root of the proj
 
 You always want to be working in a project.
 
+Another way to think about your project is this:  it is a big set of scripted instructions that converts your data into figures, tables and other useful documents that you can directly use in your thesis or manuscript.  These instructions are all in the form of text documents that reside in the project.  Nothing besides these text-based instructions should be in your project and no critical instructions should be saved external to your project.  **You will want to use GIT to track your changes to these instructions over time and GITHUB to share them with collaborators, journal reviewers, and the scientific community.**  THe blaseRtemplates project structure will help you do all of this in a sensible way.
+
 ### Setting up a project
 
-The best way to do this is through automated commands, rather than through the program menus.  This way the packages are set up in a consistent manner, every time.  Then when you have to revisit a project after months and months, it is easy to navigate.
+The best way to do this is through automated commands, rather than through the program menus.  This way every package is set up in a consistent manner, every time.  Then when you have to revisit a project after months and months, it is easy to navigate.
 
 ```{r}
 # create a project called rclass_project_2023 in your projects directory
@@ -139,102 +141,19 @@ blaseRtemplates::initialize_project("<projects directory>/rclass_project_2023")
 
 That function will create the skeletonized project, activate it and restart your session within it.
 
-That's it.  There are a few more steps if you want to use git.  See extra credit below.  If you don't want to use git, you can delete "R/initialization.R" now.
 
 ### Project organization
 
-I keep all of my R scripts in a directory called "R".  If you initialized your project with ```blaseRtemplates::initialize_project()```, in addition to ```initialize.R```, you will have scripts labeled:  
+I keep all of my R scripts in a directory called "R".  If you initialized your project with ```blaseRtemplates::initialize_project()```, you will have scripts named:  
 
-
-* ```dependencies.R```:  use this for installing packages into your renv environment and attaching them to your session
+*```initialization.R```:  use this for setting up your project to use git and github    
+* ```dependencies.R```:  use this for loading data and attaching packages to your session
 * ```configs.R```:  use this for setting graphical and aesthetic parameters.  I also use this for resolving function name conflicts.
-* ```git_commands.R```:  only necessary if you are using git (recommended).  The commands here will allow you to handle 99% of git interactions via R in a scripted way.
+* ```git_commands.R```:  the commands here will allow you to handle 99% of git interactions via R in a scripted way.
 
 In addition to this, the main analysis scripts for the project will go in the R folder and may go in subdirectories if there are a lot of them.  Other file types, such as *.Rmd, would go in their own folder named Rmd/.  This arrangement is very flexible for simple data analysis projects; the rules become more strict when we build packages.
 
-## Packages
-
-Packages are chunks of code and/or data that people have written and made available to us to use. The main reason we use R is that there is a large library of useful packages for the biological sciences that we can build our work on, all of which are free to use. 
-
-Packages are most often stored and distributed via standard repositories.  The most common are [CRAN](https://cran.r-project.org/), [R-universe](https://r-universe.dev/search/), and [Bioconductor](https://www.bioconductor.org/).  Packages can also be distributed as source code (text based files), usually via github. 
-
-**What happens when we "install" packages?**
-
-R downloads the compressed file and then unpacks it in a library directory on your computer or server.  IF you are installing from source code (most linux computers or github repositories), then the code needs to be turned into a set of binary instructions for the computer to use, a process called compiling.  This is what the Xcode (Mac) and RTools (Win) programs do.
-
-Every time you start an R session, a set of commands is run that points R to one or more library directories.  This is how R finds the commands you ask it to use. Unfortunately, it can be difficult to find where these directories live, depending on your installation.  To help with this, I have developed a package management system, called blaseRtemplates, that we will use in this course (see below).
-
-**How do I use a function?**
-
-Once you have installed a package, its functions are available to be called using the package name followed by 2 colons such as ```dplyr::filter(mtcars, cyl == 6)```. But this is not always the best way to go.  
-
-To make all of the functions from a package available, you need to run ```library("<package name>")```.  This will attach all of the functions from that package to your session.  Then you can just use the function name without the package prefix. 
-
-Beware of attaching more packages than you actually need though because there could be "namespace conflicts".  This happens when the same term applies to two different functions from two different packages.  R picks one and goes with it without clearly indicating that it is doing so.  This is a common source of errors.
-
-Later on we will see how to use the "conflicted" package to help warn us of those errors before they cause a problem. 
-
-**Where do I look for help with R functions?**
-
-A manual for each function in an R package is generated and can be viewed in the help panel in RStudio. Access these with ```?<object name>``` e.g. ```?mean```.  Vignettes may also be available.  Vignettes are long-form articles that show you how to use the functions in a package together, often with example data.  These are best accessed by navigating through the package menu.  Click on the package name and near the top you will see any available vignettes.  
-
-### Installing packages
-
-As mentioned above, blaseRtemplates-based projects use a user-project library that is linked to specific package versions in the main cache.  This way, each project you start can use its own set of packages without duplication of the actual software.  The best way to install packages in this format is this:
-
-* Install a new package or get the latest version from a repository
-
-``` r
-blaseRtemplates::install_one_package(package = "<package_name>", how = "new_or_update")
-```
-
-* Get a fresh link to the newest version available in the cache
-
-``` r
-blaseRtemplates::install_one_package(package = "<package_name>", how = "link_from_cache")
-```
-
-* Get a specific version from the cache
-
-``` r
-blaseRtemplates::install_one_package(package = "<package_name>", how = "link_from_cache", which_version = "1.0.0")
-```
-
-* Versioned package installations are supported for cran only.  If unavailable, the latest version will be installed.
-
-``` r
-blaseRtemplates::install_one_package(package = "<cran_package_name>", how = "new_or_update", which_version = "1.0.0")
-
-```
-
-You can find a human-readable table with all of the packages in the cache at BLASERTEMPLATES_CACHE_ROOT/package_catalog.tsv.  Each package in the cache is "hashed".  This means that even if there are two different versions of the same package that share the same version number, you can still tell them apart and install the one you need.
-
-This shouldn't happen but it can if someone updates a package but forgets to increment the version number.   
-
-* Install a specific hash of a package 
-
-``` r
-blaseRtemplates::install_one_package(package = "<cran_package_name>", how = "new_or_update", which_hash = "72f8712f97416089ade12df29386b80b")
-
-```
-
-You can find a human-readable table with all of the packages used by a given project in the library_catalogs directory of the project.  There is at least one file in there.  For projects collaborating through git, there will be one for each user.  These files indicate all available and actively used packages in the R code.  This file is meant to be tracked by git and so can provide version control and reproducibility for the packages used in your project.  If you and a collaborator are getting different results or errors, you can use this to see exactly which package set you are working with.  
-
-### Get a new project library
-
-You can use this function to replace the entire project library with a new one.  By default, the function will install the newest version of each package available available in the cache. 
-
-``` r
-blaseRtemplates::get_new_library()
-```
-
-Say, however, you want to adopt the entire package library used by a collaborator on the project (or one from your past self, retrieved from git), supply their project library catalog as the argument to ```get_new_library()```.
-
-``` r
-blaseRtemplates::get_new_library("library_catalogs/<file>.tsv")
-```
-
-## Extra credit:  Basic git operation for the single user
+### Git and github
 
 You want to try to use git and github.  There is a vast array of resources for you to read about git and troubleshoot issues.  Briefly, it is a program that tracks changes to text files.  Since all of the code you will write is text-based this is a great resource for you to keep track of your progress on your work.
 
@@ -311,9 +230,9 @@ You can interact with git in at least 4 different ways:
 * using the terminal
 * using a third-party git client such as [git kraken](https://www.gitkraken.com/) or [sourcetree](https://www.sourcetreeapp.com/)
 
-My recommended approach for new users is to use the scripted git commands to control what is happening and to use the Git pane to monitor the status of your repository.  Just remember to hit the refresh icon if things look strange in the Git panel.
+My recommended approach is to use the scripted git commands to control what is happening and to use the Git pane to monitor the status of your repository.  Just remember to hit the refresh icon if things look strange in the Git panel.
 
-At times you will need to use the terminal to fix conflicts, but this should only happen if you are collaborating with git.
+On rare occasions you may need to use the terminal to fix conflicts, but this should only happen if you are collaborating with git.
 
 Many people use third-party apps, but these have their own learning curve.
 
@@ -363,6 +282,90 @@ Here's a more complicated situation most of us can relate to:
 
 Hopefully you have a commit in your git log with the message "submitted to Journal A".  You select that id (the long character string) and provide it to the ```blaseRtemplates::git_rewind_to()``` function.  This function will generate a new commit that reverses all of your changes from present, back to the indicated commit.  Nothing is lost or overwritten in the process of going back in time.  The only thing that happens is that inverse changes are applied.  So if you need to go to Journal D (which is formatted like Journal B) you can always do that later.  
 
+## Packages
+
+Packages are chunks of code and/or data that people have written and made available to us to use. The main reason we use R is that there is a large library of useful packages for the biological sciences that we can build our work on, all of which are free to use. 
+
+Packages are most often stored and distributed via standard repositories.  The most common are [CRAN](https://cran.r-project.org/), [R-universe](https://r-universe.dev/search/), and [Bioconductor](https://www.bioconductor.org/).  Packages can also be distributed as source code (text based files), usually via github. 
+
+**What happens when we "install" packages?**
+
+R downloads the compressed file and then unpacks it in a library directory on your computer or server.  IF you are installing from source code (most linux computers or github repositories), then the code needs to be turned into a set of binary instructions for the computer to use, a process called compiling.  This is what the Xcode (Mac) and RTools (Win) programs do.
+
+Every time you start an R session, a set of commands is run that points R to one or more library directories.  This is how R finds the commands you ask it to use. Unfortunately, it can be difficult to find where these directories live, depending on your installation.  BlaseRtemplates helps manage this.
+
+**How do I use a function?**
+
+Once you have installed a package, its functions are available to be called using the package name followed by 2 colons such as ```dplyr::filter(mtcars, cyl == 6)```. But this is not always the best way to go.  
+
+To make all of the functions from a package available, you need to run ```library("<package name>")```.  This will attach all of the functions from that package to your session.  Then you can just use the function name without the package prefix. 
+
+Beware of attaching more packages than you actually need though because there could be "namespace conflicts".  This happens when the same term applies to two different functions from two different packages.  R picks one and goes with it without clearly indicating that it is doing so.  This is a common source of errors.
+
+Later on we will see how to use the "conflicted" package to help warn us of those errors before they cause a problem. 
+
+**Where do I look for help with R functions?**
+
+A manual for each function in an R package is generated and can be viewed in the help panel in RStudio. Access these with ```?<object name>``` e.g. ```?mean```.  Vignettes may also be available.  Vignettes are long-form articles that show you how to use the functions in a package together, often with example data.  These are best accessed by navigating through the package menu.  Click on the package name and near the top you will see any available vignettes.  
+
+### Installing packages
+
+As mentioned above, blaseRtemplates-based projects use a user-project library that is linked to specific package versions in the main cache.  This way, each project you start can use its own set of packages without duplication of the actual software. Also, if you update a package in project B, it doesn't update the package in project A.  Why is this good?  Because unintentional updates may "break" an older project which is something you want to avoid.
+
+The best way to install packages using blaseRtemplates is this:
+
+* Install a new package or get the latest version from a repository
+
+``` r
+blaseRtemplates::install_one_package(package = "<package_name>", how = "new_or_update")
+```
+
+* Get a fresh link to the newest version available in the cache
+
+``` r
+blaseRtemplates::install_one_package(package = "<package_name>", how = "link_from_cache")
+```
+
+* Get a specific version from the cache
+
+``` r
+blaseRtemplates::install_one_package(package = "<package_name>", how = "link_from_cache", which_version = "1.0.0")
+```
+
+* Versioned package installations are supported for cran only.  If unavailable, the latest version will be installed.
+
+``` r
+blaseRtemplates::install_one_package(package = "<cran_package_name>", how = "new_or_update", which_version = "1.0.0")
+
+```
+
+You can find a human-readable table with all of the packages in the cache at BLASERTEMPLATES_CACHE_ROOT/package_catalog.tsv.  Each package in the cache is "hashed".  This means that even if there are two different versions of the same package that share the same version number, you can still tell them apart and install the one you need.
+
+This shouldn't happen but it can if someone updates a package but forgets to increment the version number.   
+
+* Install a specific hash of a package 
+
+``` r
+blaseRtemplates::install_one_package(package = "<cran_package_name>", how = "new_or_update", which_hash = "72f8712f97416089ade12df29386b80b")
+
+```
+
+You can find a human-readable table with all of the packages used by a given project in the library_catalogs directory of the project.  There is at least one file in there.  For projects collaborating through git, there will be one for each user.  These files indicate all available and actively used packages in the R code.  This file is meant to be tracked by git and so can provide version control and reproducibility for the packages used in your project.  If you and a collaborator are getting different results or errors, you can use this to see exactly which package set you are working with.  
+
+### Get a new project library
+
+You can use this function to replace the entire project library with a new one.  By default, the function will install the newest version of each package available available in the cache. 
+
+``` r
+blaseRtemplates::get_new_library()
+```
+
+Say, however, you want to adopt the entire package library used by a collaborator on the project (or one from your past self, retrieved from git), supply their project library catalog as the argument to ```get_new_library()```.
+
+``` r
+blaseRtemplates::get_new_library("library_catalogs/<file>.tsv")
+```
+
 ## Exercises
 
 1.  Use the code blocks from this vignette to make a new R project on your system and for extra credit push it to github.  
@@ -375,4 +378,4 @@ Hopefully you have a commit in your git log with the message "submitted to Journ
 
 3.  Try running the code in dependencies.R to install some recommended packages.
 
-4.  For more extra credit:  save your work, then add, commit, and push to your github site.
+4.  Save your work, then add, commit, and push to your github site.

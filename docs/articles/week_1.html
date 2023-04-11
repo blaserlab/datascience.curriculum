@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">datascience.curriculum</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9007</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9008</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -162,7 +162,7 @@ Global Options. Make the following selections in the pop-up window:</p>
 <p>I recommend this approach to setting up your R installation. In
 comparison to other methods, the blaseRtemplates method provides greater
 transparency and reproducibility and an improved user experience
-(faster, fewer confusing messages). But your mileage may vary.</p>
+(faster, fewer confusing messages).</p>
 <p>First, install the blaseRtemplates package using whatever package
 installer you currently use. Assuming the base install function,
 run:</p>
@@ -189,10 +189,10 @@ The new .Renviron file will cause R to use the new .Rprofile in the
 cache directory and skip existing user- and project-level
 .Rprofiles.</li>
 </ul>
-<p>Briefly, when R starts a new session, it looks for a series of files
-to configure itself. This configuration includes environment variables
-(in the .Renviron file) and any desired R code (in the .Rprofile file).
-As included in this function, these configurations only affect user
+<p>When R starts a new session, it looks for a series of files to
+configure itself. This configuration includes environment variables (in
+the .Renviron file) and any desired R code (in the .Rprofile file). As
+included in this function, these configurations only affect user
 experience i.e. they should not affect the results produced by your
 code. By user experience I mean connection to the proper package
 libraries and repositories and some safeguards to prevent working
@@ -276,11 +276,22 @@ directory down, it would be “directory/file.R”. There is almost no good
 reason ever to change your working directory to something other than the
 project root.</p>
 <p>You always want to be working in a project.</p>
+<p>Another way to think about your project is this: it is a big set of
+scripted instructions that converts your data into figures, tables and
+other useful documents that you can directly use in your thesis or
+manuscript. These instructions are all in the form of text documents
+that reside in the project. Nothing besides these text-based
+instructions should be in your project and no critical instructions
+should be saved external to your project. <strong>You will want to use
+GIT to track your changes to these instructions over time and GITHUB to
+share them with collaborators, journal reviewers, and the scientific
+community.</strong> THe blaseRtemplates project structure will help you
+do all of this in a sensible way.</p>
 <div class="section level3">
 <h3 id="setting-up-a-project">Setting up a project<a class="anchor" aria-label="anchor" href="#setting-up-a-project"></a>
 </h3>
 <p>The best way to do this is through automated commands, rather than
-through the program menus. This way the packages are set up in a
+through the program menus. This way every package is set up in a
 consistent manner, every time. Then when you have to revisit a project
 after months and months, it is easy to navigate.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
@@ -288,155 +299,30 @@ after months and months, it is easy to navigate.</p>
 <span><span class="fu">blaseRtemplates</span><span class="fu">::</span><span class="fu"><a href="https://blaserlab.github.io/blaseRtemplates/reference/initialize_project.html" class="external-link">initialize_project</a></span><span class="op">(</span><span class="st">"&lt;projects directory&gt;/rclass_project_2023"</span><span class="op">)</span></span></code></pre></div>
 <p>That function will create the skeletonized project, activate it and
 restart your session within it.</p>
-<p>That’s it. There are a few more steps if you want to use git. See
-extra credit below. If you don’t want to use git, you can delete
-“R/initialization.R” now.</p>
 </div>
 <div class="section level3">
 <h3 id="project-organization">Project organization<a class="anchor" aria-label="anchor" href="#project-organization"></a>
 </h3>
 <p>I keep all of my R scripts in a directory called “R”. If you
 initialized your project with
-<code><a href="https://blaserlab.github.io/blaseRtemplates/reference/initialize_project.html" class="external-link">blaseRtemplates::initialize_project()</a></code>, in addition to
-<code>initialize.R</code>, you will have scripts labeled:</p>
-<ul>
-<li>
-<code>dependencies.R</code>: use this for installing packages into
-your renv environment and attaching them to your session</li>
-<li>
-<code>configs.R</code>: use this for setting graphical and aesthetic
-parameters. I also use this for resolving function name conflicts.</li>
-<li>
-<code>git_commands.R</code>: only necessary if you are using git
-(recommended). The commands here will allow you to handle 99% of git
-interactions via R in a scripted way.</li>
-</ul>
+<code><a href="https://blaserlab.github.io/blaseRtemplates/reference/initialize_project.html" class="external-link">blaseRtemplates::initialize_project()</a></code>, you will have
+scripts named:</p>
+<p><em><code>initialization.R</code>: use this for setting up your
+project to use git and github<br></em> <code>dependencies.R</code>: use this for loading data and
+attaching packages to your session * <code>configs.R</code>: use this
+for setting graphical and aesthetic parameters. I also use this for
+resolving function name conflicts. * <code>git_commands.R</code>: the
+commands here will allow you to handle 99% of git interactions via R in
+a scripted way.</p>
 <p>In addition to this, the main analysis scripts for the project will
 go in the R folder and may go in subdirectories if there are a lot of
 them. Other file types, such as *.Rmd, would go in their own folder
 named Rmd/. This arrangement is very flexible for simple data analysis
 projects; the rules become more strict when we build packages.</p>
 </div>
-</div>
-<div class="section level2">
-<h2 id="packages">Packages<a class="anchor" aria-label="anchor" href="#packages"></a>
-</h2>
-<p>Packages are chunks of code and/or data that people have written and
-made available to us to use. The main reason we use R is that there is a
-large library of useful packages for the biological sciences that we can
-build our work on, all of which are free to use.</p>
-<p>Packages are most often stored and distributed via standard
-repositories. The most common are <a href="https://cran.r-project.org/" class="external-link">CRAN</a>, <a href="https://r-universe.dev/search/" class="external-link">R-universe</a>, and <a href="https://www.bioconductor.org/" class="external-link">Bioconductor</a>. Packages can also
-be distributed as source code (text based files), usually via
-github.</p>
-<p><strong>What happens when we “install” packages?</strong></p>
-<p>R downloads the compressed file and then unpacks it in a library
-directory on your computer or server. IF you are installing from source
-code (most linux computers or github repositories), then the code needs
-to be turned into a set of binary instructions for the computer to use,
-a process called compiling. This is what the Xcode (Mac) and RTools
-(Win) programs do.</p>
-<p>Every time you start an R session, a set of commands is run that
-points R to one or more library directories. This is how R finds the
-commands you ask it to use. Unfortunately, it can be difficult to find
-where these directories live, depending on your installation. To help
-with this, I have developed a package management system, called
-blaseRtemplates, that we will use in this course (see below).</p>
-<p><strong>How do I use a function?</strong></p>
-<p>Once you have installed a package, its functions are available to be
-called using the package name followed by 2 colons such as
-<code>dplyr::filter(mtcars, cyl == 6)</code>. But this is not always the
-best way to go.</p>
-<p>To make all of the functions from a package available, you need to
-run <code><a href="https://rdrr.io/r/base/library.html" class="external-link">library("&lt;package name&gt;")</a></code>. This will attach all
-of the functions from that package to your session. Then you can just
-use the function name without the package prefix.</p>
-<p>Beware of attaching more packages than you actually need though
-because there could be “namespace conflicts”. This happens when the same
-term applies to two different functions from two different packages. R
-picks one and goes with it without clearly indicating that it is doing
-so. This is a common source of errors.</p>
-<p>Later on we will see how to use the “conflicted” package to help warn
-us of those errors before they cause a problem.</p>
-<p><strong>Where do I look for help with R functions?</strong></p>
-<p>A manual for each function in an R package is generated and can be
-viewed in the help panel in RStudio. Access these with
-<code>?&lt;object name&gt;</code> e.g. <code><a href="https://rdrr.io/r/base/mean.html" class="external-link">?mean</a></code>. Vignettes may
-also be available. Vignettes are long-form articles that show you how to
-use the functions in a package together, often with example data. These
-are best accessed by navigating through the package menu. Click on the
-package name and near the top you will see any available vignettes.</p>
 <div class="section level3">
-<h3 id="installing-packages">Installing packages<a class="anchor" aria-label="anchor" href="#installing-packages"></a>
+<h3 id="git-and-github">Git and github<a class="anchor" aria-label="anchor" href="#git-and-github"></a>
 </h3>
-<p>As mentioned above, blaseRtemplates-based projects use a user-project
-library that is linked to specific package versions in the main cache.
-This way, each project you start can use its own set of packages without
-duplication of the actual software. The best way to install packages in
-this format is this:</p>
-<ul>
-<li>Install a new package or get the latest version from a
-repository</li>
-</ul>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">blaseRtemplates</span><span class="fu">::</span><span class="fu"><a href="https://blaserlab.github.io/blaseRtemplates/reference/install_one_package.html" class="external-link">install_one_package</a></span><span class="op">(</span>package <span class="op">=</span> <span class="st">"&lt;package_name&gt;"</span>, how <span class="op">=</span> <span class="st">"new_or_update"</span><span class="op">)</span></span></code></pre></div>
-<ul>
-<li>Get a fresh link to the newest version available in the cache</li>
-</ul>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">blaseRtemplates</span><span class="fu">::</span><span class="fu"><a href="https://blaserlab.github.io/blaseRtemplates/reference/install_one_package.html" class="external-link">install_one_package</a></span><span class="op">(</span>package <span class="op">=</span> <span class="st">"&lt;package_name&gt;"</span>, how <span class="op">=</span> <span class="st">"link_from_cache"</span><span class="op">)</span></span></code></pre></div>
-<ul>
-<li>Get a specific version from the cache</li>
-</ul>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">blaseRtemplates</span><span class="fu">::</span><span class="fu"><a href="https://blaserlab.github.io/blaseRtemplates/reference/install_one_package.html" class="external-link">install_one_package</a></span><span class="op">(</span>package <span class="op">=</span> <span class="st">"&lt;package_name&gt;"</span>, how <span class="op">=</span> <span class="st">"link_from_cache"</span>, which_version <span class="op">=</span> <span class="st">"1.0.0"</span><span class="op">)</span></span></code></pre></div>
-<ul>
-<li>Versioned package installations are supported for cran only. If
-unavailable, the latest version will be installed.</li>
-</ul>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">blaseRtemplates</span><span class="fu">::</span><span class="fu"><a href="https://blaserlab.github.io/blaseRtemplates/reference/install_one_package.html" class="external-link">install_one_package</a></span><span class="op">(</span>package <span class="op">=</span> <span class="st">"&lt;cran_package_name&gt;"</span>, how <span class="op">=</span> <span class="st">"new_or_update"</span>, which_version <span class="op">=</span> <span class="st">"1.0.0"</span><span class="op">)</span></span></code></pre></div>
-<p>You can find a human-readable table with all of the packages in the
-cache at BLASERTEMPLATES_CACHE_ROOT/package_catalog.tsv. Each package in
-the cache is “hashed”. This means that even if there are two different
-versions of the same package that share the same version number, you can
-still tell them apart and install the one you need.</p>
-<p>This shouldn’t happen but it can if someone updates a package but
-forgets to increment the version number.</p>
-<ul>
-<li>Install a specific hash of a package</li>
-</ul>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">blaseRtemplates</span><span class="fu">::</span><span class="fu"><a href="https://blaserlab.github.io/blaseRtemplates/reference/install_one_package.html" class="external-link">install_one_package</a></span><span class="op">(</span>package <span class="op">=</span> <span class="st">"&lt;cran_package_name&gt;"</span>, how <span class="op">=</span> <span class="st">"new_or_update"</span>, which_hash <span class="op">=</span> <span class="st">"72f8712f97416089ade12df29386b80b"</span><span class="op">)</span></span></code></pre></div>
-<p>You can find a human-readable table with all of the packages used by
-a given project in the library_catalogs directory of the project. There
-is at least one file in there. For projects collaborating through git,
-there will be one for each user. These files indicate all available and
-actively used packages in the R code. This file is meant to be tracked
-by git and so can provide version control and reproducibility for the
-packages used in your project. If you and a collaborator are getting
-different results or errors, you can use this to see exactly which
-package set you are working with.</p>
-</div>
-<div class="section level3">
-<h3 id="get-a-new-project-library">Get a new project library<a class="anchor" aria-label="anchor" href="#get-a-new-project-library"></a>
-</h3>
-<p>You can use this function to replace the entire project library with
-a new one. By default, the function will install the newest version of
-each package available available in the cache.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">blaseRtemplates</span><span class="fu">::</span><span class="fu"><a href="https://blaserlab.github.io/blaseRtemplates/reference/get_new_library.html" class="external-link">get_new_library</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p>Say, however, you want to adopt the entire package library used by a
-collaborator on the project (or one from your past self, retrieved from
-git), supply their project library catalog as the argument to
-<code><a href="https://blaserlab.github.io/blaseRtemplates/reference/get_new_library.html" class="external-link">get_new_library()</a></code>.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">blaseRtemplates</span><span class="fu">::</span><span class="fu"><a href="https://blaserlab.github.io/blaseRtemplates/reference/get_new_library.html" class="external-link">get_new_library</a></span><span class="op">(</span><span class="st">"library_catalogs/&lt;file&gt;.tsv"</span><span class="op">)</span></span></code></pre></div>
-</div>
-</div>
-<div class="section level2">
-<h2 id="extra-credit-basic-git-operation-for-the-single-user">Extra credit: Basic git operation for the single user<a class="anchor" aria-label="anchor" href="#extra-credit-basic-git-operation-for-the-single-user"></a>
-</h2>
 <p>You want to try to use git and github. There is a vast array of
 resources for you to read about git and troubleshoot issues. Briefly, it
 is a program that tracks changes to text files. Since all of the code
@@ -447,6 +333,7 @@ repository. The way we are using it here, your project is the
 repository. Github is simply a website that hosts a copy of your
 repository on the web. This is how you will share your work with journal
 reviewers and editors and others.</p>
+</div>
 <div class="section level3">
 <h3 id="setting-up-git-and-github-for-the-first-time-on-a-system">Setting up git and github for the first time on a system<a class="anchor" aria-label="anchor" href="#setting-up-git-and-github-for-the-first-time-on-a-system"></a>
 </h3>
@@ -455,7 +342,7 @@ the first time. These lines are included at the bottom of the file,
 “R/git_commands.R”. They start out in every project and I usually leave
 them in there. Sometimes there are connection issues with github and you
 have to run these again to get new credentials.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># make sure you have a github account</span></span>
 <span><span class="co"># https://github.com/join</span></span>
 <span></span>
@@ -494,7 +381,7 @@ override this which is what I usually do.</p>
 </h3>
 <p>The following lines are taken directly from “R/initialization.R”. You
 should run these when you start up the project the first time:</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># make a software license</span></span>
 <span><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/licenses.html" class="external-link">use_mit_license</a></span><span class="op">(</span><span class="st">"&lt;your name here&gt;"</span><span class="op">)</span></span>
 <span></span>
@@ -527,12 +414,12 @@ should run these when you start up the project the first time:</p>
 <li>using a third-party git client such as <a href="https://www.gitkraken.com/" class="external-link">git kraken</a> or <a href="https://www.sourcetreeapp.com/" class="external-link">sourcetree</a>
 </li>
 </ul>
-<p>My recommended approach for new users is to use the scripted git
-commands to control what is happening and to use the Git pane to monitor
-the status of your repository. Just remember to hit the refresh icon if
-things look strange in the Git panel.</p>
-<p>At times you will need to use the terminal to fix conflicts, but this
-should only happen if you are collaborating with git.</p>
+<p>My recommended approach is to use the scripted git commands to
+control what is happening and to use the Git pane to monitor the status
+of your repository. Just remember to hit the refresh icon if things look
+strange in the Git panel.</p>
+<p>On rare occasions you may need to use the terminal to fix conflicts,
+but this should only happen if you are collaborating with git.</p>
 <p>Many people use third-party apps, but these have their own learning
 curve.</p>
 <p>The basic process for using Git as a single user is this:</p>
@@ -546,7 +433,7 @@ project</li>
 <li>push the commit to the remote repository (github)</li>
 </ul>
 <p>Here are the commands from <code>git_commands.R</code></p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># basic everyday commands for all git users -------------------------------</span></span>
 <span> </span>
 <span><span class="fu">gert</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/gert/reference/git_commit.html" class="external-link">git_status</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -575,7 +462,7 @@ weeks later reject it.</li>
 formatting as does Journal A.</li>
 <li>What do you do?</li>
 </ul>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># run these commands to rewind to a prior "good" commit ----------------------</span></span>
 <span></span>
 <span><span class="co"># make sure git status is "clean" (all changes committed) before rewinding</span></span>
@@ -590,6 +477,124 @@ or overwritten in the process of going back in time. The only thing that
 happens is that inverse changes are applied. So if you need to go to
 Journal D (which is formatted like Journal B) you can always do that
 later.</p>
+</div>
+</div>
+<div class="section level2">
+<h2 id="packages">Packages<a class="anchor" aria-label="anchor" href="#packages"></a>
+</h2>
+<p>Packages are chunks of code and/or data that people have written and
+made available to us to use. The main reason we use R is that there is a
+large library of useful packages for the biological sciences that we can
+build our work on, all of which are free to use.</p>
+<p>Packages are most often stored and distributed via standard
+repositories. The most common are <a href="https://cran.r-project.org/" class="external-link">CRAN</a>, <a href="https://r-universe.dev/search/" class="external-link">R-universe</a>, and <a href="https://www.bioconductor.org/" class="external-link">Bioconductor</a>. Packages can also
+be distributed as source code (text based files), usually via
+github.</p>
+<p><strong>What happens when we “install” packages?</strong></p>
+<p>R downloads the compressed file and then unpacks it in a library
+directory on your computer or server. IF you are installing from source
+code (most linux computers or github repositories), then the code needs
+to be turned into a set of binary instructions for the computer to use,
+a process called compiling. This is what the Xcode (Mac) and RTools
+(Win) programs do.</p>
+<p>Every time you start an R session, a set of commands is run that
+points R to one or more library directories. This is how R finds the
+commands you ask it to use. Unfortunately, it can be difficult to find
+where these directories live, depending on your installation.
+BlaseRtemplates helps manage this.</p>
+<p><strong>How do I use a function?</strong></p>
+<p>Once you have installed a package, its functions are available to be
+called using the package name followed by 2 colons such as
+<code>dplyr::filter(mtcars, cyl == 6)</code>. But this is not always the
+best way to go.</p>
+<p>To make all of the functions from a package available, you need to
+run <code><a href="https://rdrr.io/r/base/library.html" class="external-link">library("&lt;package name&gt;")</a></code>. This will attach all
+of the functions from that package to your session. Then you can just
+use the function name without the package prefix.</p>
+<p>Beware of attaching more packages than you actually need though
+because there could be “namespace conflicts”. This happens when the same
+term applies to two different functions from two different packages. R
+picks one and goes with it without clearly indicating that it is doing
+so. This is a common source of errors.</p>
+<p>Later on we will see how to use the “conflicted” package to help warn
+us of those errors before they cause a problem.</p>
+<p><strong>Where do I look for help with R functions?</strong></p>
+<p>A manual for each function in an R package is generated and can be
+viewed in the help panel in RStudio. Access these with
+<code>?&lt;object name&gt;</code> e.g. <code><a href="https://rdrr.io/r/base/mean.html" class="external-link">?mean</a></code>. Vignettes may
+also be available. Vignettes are long-form articles that show you how to
+use the functions in a package together, often with example data. These
+are best accessed by navigating through the package menu. Click on the
+package name and near the top you will see any available vignettes.</p>
+<div class="section level3">
+<h3 id="installing-packages">Installing packages<a class="anchor" aria-label="anchor" href="#installing-packages"></a>
+</h3>
+<p>As mentioned above, blaseRtemplates-based projects use a user-project
+library that is linked to specific package versions in the main cache.
+This way, each project you start can use its own set of packages without
+duplication of the actual software. Also, if you update a package in
+project B, it doesn’t update the package in project A. Why is this good?
+Because unintentional updates may “break” an older project which is
+something you want to avoid.</p>
+<p>The best way to install packages using blaseRtemplates is this:</p>
+<ul>
+<li>Install a new package or get the latest version from a
+repository</li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">blaseRtemplates</span><span class="fu">::</span><span class="fu"><a href="https://blaserlab.github.io/blaseRtemplates/reference/install_one_package.html" class="external-link">install_one_package</a></span><span class="op">(</span>package <span class="op">=</span> <span class="st">"&lt;package_name&gt;"</span>, how <span class="op">=</span> <span class="st">"new_or_update"</span><span class="op">)</span></span></code></pre></div>
+<ul>
+<li>Get a fresh link to the newest version available in the cache</li>
+</ul>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">blaseRtemplates</span><span class="fu">::</span><span class="fu"><a href="https://blaserlab.github.io/blaseRtemplates/reference/install_one_package.html" class="external-link">install_one_package</a></span><span class="op">(</span>package <span class="op">=</span> <span class="st">"&lt;package_name&gt;"</span>, how <span class="op">=</span> <span class="st">"link_from_cache"</span><span class="op">)</span></span></code></pre></div>
+<ul>
+<li>Get a specific version from the cache</li>
+</ul>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">blaseRtemplates</span><span class="fu">::</span><span class="fu"><a href="https://blaserlab.github.io/blaseRtemplates/reference/install_one_package.html" class="external-link">install_one_package</a></span><span class="op">(</span>package <span class="op">=</span> <span class="st">"&lt;package_name&gt;"</span>, how <span class="op">=</span> <span class="st">"link_from_cache"</span>, which_version <span class="op">=</span> <span class="st">"1.0.0"</span><span class="op">)</span></span></code></pre></div>
+<ul>
+<li>Versioned package installations are supported for cran only. If
+unavailable, the latest version will be installed.</li>
+</ul>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">blaseRtemplates</span><span class="fu">::</span><span class="fu"><a href="https://blaserlab.github.io/blaseRtemplates/reference/install_one_package.html" class="external-link">install_one_package</a></span><span class="op">(</span>package <span class="op">=</span> <span class="st">"&lt;cran_package_name&gt;"</span>, how <span class="op">=</span> <span class="st">"new_or_update"</span>, which_version <span class="op">=</span> <span class="st">"1.0.0"</span><span class="op">)</span></span></code></pre></div>
+<p>You can find a human-readable table with all of the packages in the
+cache at BLASERTEMPLATES_CACHE_ROOT/package_catalog.tsv. Each package in
+the cache is “hashed”. This means that even if there are two different
+versions of the same package that share the same version number, you can
+still tell them apart and install the one you need.</p>
+<p>This shouldn’t happen but it can if someone updates a package but
+forgets to increment the version number.</p>
+<ul>
+<li>Install a specific hash of a package</li>
+</ul>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">blaseRtemplates</span><span class="fu">::</span><span class="fu"><a href="https://blaserlab.github.io/blaseRtemplates/reference/install_one_package.html" class="external-link">install_one_package</a></span><span class="op">(</span>package <span class="op">=</span> <span class="st">"&lt;cran_package_name&gt;"</span>, how <span class="op">=</span> <span class="st">"new_or_update"</span>, which_hash <span class="op">=</span> <span class="st">"72f8712f97416089ade12df29386b80b"</span><span class="op">)</span></span></code></pre></div>
+<p>You can find a human-readable table with all of the packages used by
+a given project in the library_catalogs directory of the project. There
+is at least one file in there. For projects collaborating through git,
+there will be one for each user. These files indicate all available and
+actively used packages in the R code. This file is meant to be tracked
+by git and so can provide version control and reproducibility for the
+packages used in your project. If you and a collaborator are getting
+different results or errors, you can use this to see exactly which
+package set you are working with.</p>
+</div>
+<div class="section level3">
+<h3 id="get-a-new-project-library">Get a new project library<a class="anchor" aria-label="anchor" href="#get-a-new-project-library"></a>
+</h3>
+<p>You can use this function to replace the entire project library with
+a new one. By default, the function will install the newest version of
+each package available available in the cache.</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">blaseRtemplates</span><span class="fu">::</span><span class="fu"><a href="https://blaserlab.github.io/blaseRtemplates/reference/get_new_library.html" class="external-link">get_new_library</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p>Say, however, you want to adopt the entire package library used by a
+collaborator on the project (or one from your past self, retrieved from
+git), supply their project library catalog as the argument to
+<code><a href="https://blaserlab.github.io/blaseRtemplates/reference/get_new_library.html" class="external-link">get_new_library()</a></code>.</p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">blaseRtemplates</span><span class="fu">::</span><span class="fu"><a href="https://blaserlab.github.io/blaseRtemplates/reference/get_new_library.html" class="external-link">get_new_library</a></span><span class="op">(</span><span class="st">"library_catalogs/&lt;file&gt;.tsv"</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -610,8 +615,8 @@ script</li>
 <li><p>Explore the scripts in the R directory.</p></li>
 <li><p>Try running the code in dependencies.R to install some
 recommended packages.</p></li>
-<li><p>For more extra credit: save your work, then add, commit, and push
-to your github site.</p></li>
+<li><p>Save your work, then add, commit, and push to your github
+site.</p></li>
 </ol>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

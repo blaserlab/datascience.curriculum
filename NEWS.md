@@ -1,3 +1,7 @@
+# datascience.curriculum 0.0.0.9008
+
+* updated week 1; reorganized git section
+
 # datascience.curriculum 0.0.0.9006-7
 
 * updated week 2-6
