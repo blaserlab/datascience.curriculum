@@ -4,7 +4,7 @@ This course is designed to help you improve your data management and analysis sk
 
 Did you ever see a figure you made last year but can't remember how you made it?  Do you need to write a Data Sharing Plan for an NIH grant but don't know where to begin?  Understanding the principles we cover here will help you and others reproduce and extend your work.
 
-To sign up: email [bradley.blaser@osumc.edu](mailto:bradley.blaser@osumc.edu?subject=datascience%20workshop%202023).
+The 2023 course has already started, but you can still join in by emailing [bradley.blaser@osumc.edu](mailto:bradley.blaser@osumc.edu?subject=datascience%20workshop%202023).
 
 ### Dates for the 2023 workshop:
 
@@ -15,17 +15,7 @@ To sign up: email [bradley.blaser@osumc.edu](mailto:bradley.blaser@osumc.edu?sub
 * May 10
 * May 17
 
-These are all Wednesday mornings.  Time will be 10-11 AM.  Format will be Zoom Webinar.
-
-### Videos from the 2022 Workshop:
-
-* [Week 1 video](https://youtu.be/OgtNK2Swf_M)
-* [Week 2 video](https://youtu.be/xd31XSOqw1w)
-* [Week 3 video](https://youtu.be/7_JAzVUXMV4)
-* [Week 4 video](https://youtu.be/8gunF7WCuvg)
-* [Week 5 video](https://youtu.be/t560L3BH3Cs)
-* [Week 6 video](https://youtu.be/eCD16CsUR2Y)
-
+These are all Wednesday mornings.  Time will be 10-11 AM.  Format is Zoom Webinar.
 
 ### Goals
 
@@ -89,7 +79,7 @@ Each lesson will be structured in the following way:
 * 45 min for me to demonstrate the concepts in the day's lecture
 * 10 min for discussion and additional Q&A that arise.
 
-**[Follow along with the workshop project on github](https://github.com/blaserlab/workshop_project_2023)**
+**[Follow along with the workshop project on github](https://github.com/blaserlab/rclass_project_2023)**
 
 ### 2023 Curriculum
 
@@ -104,6 +94,7 @@ Even intermediate-level users with some pre-existing experience using R will lik
 
 * [Week 1 R script](https://raw.githubusercontent.com/blaserlab/datascience.curriculum/main/docs/week_1.R)
 * [Week 1 notes](https://www.evernote.com/shard/s324/sh/0b431e36-fc49-8163-d1d6-5d04594b5107/e1404e72838937606a8f26cb73bd0761)
+* [Week 1 video](https://youtu.be/Njv821iskwY)
 * Content
   * R and Rstudio
   * blaseRtemplates
