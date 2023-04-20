@@ -106,7 +106,11 @@ Even intermediate-level users with some pre-existing experience using R will lik
 
 * [Week 2 R script](https://raw.githubusercontent.com/blaserlab/datascience.curriculum/main/docs/week_2.R)
 * [Week 2 notes](https://www.evernote.com/shard/s324/sh/5402171c-c4e7-a782-155d-4c345d3a4693/a18be152aa533a76bc9e57b93d6f7ba4)
+* [Week 2 video part 1](https://youtu.be/SFJVh6vOtMs)
+* [Week 2 video part 2](https://youtu.be/y4c7ZsiEJi0)
 * Content
+  * Review GIT
+  * File system basics
   * Data Format
   * Input and Data Types
   * Variable Assignment
