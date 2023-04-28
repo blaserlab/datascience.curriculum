@@ -123,6 +123,7 @@ Even intermediate-level users with some pre-existing experience using R will lik
 
 * [Week 3 R script](https://raw.githubusercontent.com/blaserlab/datascience.curriculum/main/docs/week_3.R)
 * [Week 3 notes](https://www.evernote.com/l/AUQTYqvjygVOtoHwhhYSsdvSea104UlAMuc/)
+* [Week 3 Video](https://youtu.be/iwgw0IasjRU)
 * [Cheat sheets](https://www.rstudio.com/resources/cheatsheets/)
 * [R color brewer](https://r-graph-gallery.com/38-rcolorbrewers-palettes.html)
 * [R graphics cookbook](https://r-graphics.org/)
