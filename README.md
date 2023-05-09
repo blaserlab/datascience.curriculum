@@ -139,6 +139,7 @@ Even intermediate-level users with some pre-existing experience using R will lik
 
 * [Week 4/5 R script](https://raw.githubusercontent.com/blaserlab/blaseRtools/master/docs/pages/scRNAseq.R)
 * [Week 4 notes](https://www.evernote.com/shard/s324/sh/e993c8a7-2cfb-3675-fe5f-54590d070398/fb9661c178c8f9b1c51f41a5dfa5ede1)
+* [Week 4 Video](https://youtu.be/HT9v8dm-GSQ)
 * 10X Datasets
   * You will have to register your email address to download.
   * [Chromium controller](https://www.10xgenomics.com/resources/datasets/500-human-pbm-cs-3-lt-v-3-1-chromium-controller-3-1-low-6-1-0)
