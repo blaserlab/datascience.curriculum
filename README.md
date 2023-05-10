@@ -161,12 +161,12 @@ Even intermediate-level users with some pre-existing experience using R will lik
 
 * [Week 4/5 R script](https://raw.githubusercontent.com/blaserlab/blaseRtools/master/docs/pages/scRNAseq.R)
 * [Week 5 notes](https://www.evernote.com/shard/s324/sh/32463353-3063-e0b2-62f5-32984bf8561c/9d78ec55ac1fb059d9307e0c6aa99c7c)
+* [Week 5 Video](https://youtu.be/mNUJb1Q2rlo)
 * Content
   * UMAP Plots
-  * Gene Dotplots
+  * Gene Bubbles 
   * Differential Gene Expression
     * Pseudobulk
-    * Regression
 
 #### [Week 6:  Building and using data packages](https://blaserlab.github.io/datascience.curriculum/articles/week_6.html) - May 17, 10-11 AM ET
 
