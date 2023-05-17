@@ -167,11 +167,13 @@ Even intermediate-level users with some pre-existing experience using R will lik
   * Gene Bubbles 
   * Differential Gene Expression
     * Pseudobulk
+  * Differential representation (see week 6 video)
 
 #### [Week 6:  Building and using data packages](https://blaserlab.github.io/datascience.curriculum/articles/week_6.html) - May 17, 10-11 AM ET
 
 * [Week 6 R script](https://raw.githubusercontent.com/blaserlab/datascience.curriculum/main/docs/week_6.R)
-* [Week 6 R notes](https://www.evernote.com/shard/s324/sh/64e27cb7-ff1c-255b-317e-00b4edf02f41/ef04a166bf3000be2e80a9390df8fe56)
+* [Week 6 R notes](https://www.evernote.com/shard/s324/sh/a14accba-0f42-3fba-1e75-861f7c5dfbf7/XAKGvDDK0oEPiiwINhuAbDZl18bP3Lu8nZyuSDy0f1_dttyslS85ivPbuQ)
+* [Week 6 Video](https://youtu.be/WpGIafaYrQc)
 * Content
   * Saving R Objects
   * Setting up the Package

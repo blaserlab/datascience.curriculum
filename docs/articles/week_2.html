@@ -141,7 +141,7 @@ R.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>           8          5           3.4          1.5         0.2 setosa </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>           9          4.4         2.9          1.4         0.2 setosa </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>          10          4.9         3.1          1.5         0.1 setosa </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 140 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 140 more rows</span></span></span></code></pre></div>
 <p>These data are from a collection of sample datasets provided with R.
 As provided, it lacks a useful “key” column, so I added the observation
 column in the first position. The data indicate measurements for various
@@ -170,7 +170,7 @@ data.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 8                    5           3.4          1.5         0.2 setosa </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 9                    4.4         2.9          1.4         0.2 setosa </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 10                   4.9         3.1          1.5         0.1 setosa </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 140 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 140 more rows</span></span></span></code></pre></div>
 <p>The string “fddddc” tells R to interpret the columns as “factor”,
 “double” or “character”.</p>
 <p><strong>You should always check that the data types are correct when
@@ -213,7 +213,7 @@ simple variable names.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 8                    5           3.4          1.5         0.2 setosa </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 9                    4.4         2.9          1.4         0.2 setosa </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 10                   4.9         3.1          1.5         0.1 setosa </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 140 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 140 more rows</span></span></span></code></pre></div>
 <p>The left arrow operator stores the data in the global environment
 under the name “demo_data”.</p>
 <p>Any valid R object (data, functions etc) can be stored under a
@@ -318,7 +318,7 @@ only smaller.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>          5           3.4</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>          4.4         2.9</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>          4.9         3.1</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 140 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 140 more rows</span></span></span>
 <span></span>
 <span><span class="co"># subset a dataframe to get the first and second rows only</span></span>
 <span><span class="va">demo_data</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>,<span class="op">]</span></span>
@@ -343,7 +343,7 @@ only smaller.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> setosa  8          </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> setosa  9          </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> setosa  10         </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 140 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 140 more rows</span></span></span>
 <span></span>
 <span><span class="co"># subset a list to return a smaller list</span></span>
 <span><span class="co"># return the first two elements</span></span>
@@ -450,7 +450,7 @@ a tibble:</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>          5           3.4          1.5         0.2 setosa </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>          4.4         2.9          1.4         0.2 setosa </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>          4.9         3.1          1.5         0.1 setosa </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 140 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 140 more rows</span></span></span>
 <span><span class="co"># return a tibble with only the Species and Sepal.Length columns</span></span>
 <span><span class="va">demo_data</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">Species</span>, <span class="va">Sepal.Length</span><span class="op">)</span><span class="op">)</span></span>
@@ -467,7 +467,7 @@ a tibble:</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> setosa           5  </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> setosa           4.4</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> setosa           4.9</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 140 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 140 more rows</span></span></span></code></pre></div>
 <p>Use <code>filter</code> to select rows based on conditional
 test(s):</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
@@ -487,7 +487,7 @@ test(s):</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 8                    5           3.4          1.5         0.2 setosa </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 9                    4.4         2.9          1.4         0.2 setosa </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 10                   4.9         3.1          1.5         0.1 setosa </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 40 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 40 more rows</span></span></span>
 <span></span>
 <span><span class="va">demo_data</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Species</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"setosa"</span>, <span class="st">"versicolor"</span><span class="op">)</span><span class="op">)</span></span>
@@ -504,7 +504,7 @@ test(s):</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 8                    5           3.4          1.5         0.2 setosa </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 9                    4.4         2.9          1.4         0.2 setosa </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 10                   4.9         3.1          1.5         0.1 setosa </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 90 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 90 more rows</span></span></span></code></pre></div>
 <p>In some cases it may be useful to have the data in “long form” as
 opposed to “wide form”. Here you use <code>pivot_longer</code> and you
 are going to tell R which columns to convert to long form. These should
@@ -530,7 +530,7 @@ additional attributes for the values.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 2           setosa  Petal.Width    0.2</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 3           setosa  Sepal.Length   4.7</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 3           setosa  Sepal.Width    3.2</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 590 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 590 more rows</span></span></span>
 <span></span>
 <span><span class="co"># pivot back to wide form</span></span>
 <span><span class="va">long_data</span> <span class="op">|&gt;</span></span>
@@ -548,7 +548,7 @@ additional attributes for the values.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 8           setosa           5           3.4          1.5         0.2</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 9           setosa           4.4         2.9          1.4         0.2</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 10          setosa           4.9         3.1          1.5         0.1</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 140 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 140 more rows</span></span></span></code></pre></div>
 <p>Sometimes you have two tibbles with related information you want to
 join together. This is a powerful tool for adding new attributes onto
 existing data.</p>
