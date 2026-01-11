@@ -1,4 +1,4 @@
-### Welcome to the Computational Data Analysis Course
+### Welcome to the Blaser Lab Computational Data Analysis Course
 
 This course is designed to help you improve your data management and
 analysis skills. The skills you will learn can be used for everything
