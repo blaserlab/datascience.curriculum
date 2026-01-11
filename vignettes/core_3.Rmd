@@ -1,8 +1,8 @@
 ---
-title: "Week 3:  Next Level R"
+title: "Core Lesson 3:  Next Level R"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Week 3:  Next Level R}
+  %\VignetteIndexEntry{Core Lesson 3:  Next Level R}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -29,7 +29,9 @@ This lecture introduces more advanced concepts in R.  You should have some level
 
 ## Scope
 
-Scope is a concept in computer science that has to do with how the names and values of variables relate to each other.  It refers to the part of a program where the name of a variable representing a piece of data or a function is valid.  
+Scope is a concept in computer science that has to do with how the names and values of objects relate to each other.  It refers to the part of a program where a name representing a piece of data or a function is valid.    
+
+In R, functions are "first-class".  This means they can live alongside data within the same scope.
 
 If you have a function or piece of data in your global environment with the same name as a different function or piece of data in a certain package, R will have to decide which you are referring to when you put that name in your code.  In this case, the global environment takes priority.
 
@@ -37,20 +39,34 @@ But let's say early in an analysis script I choose to represent a piece of data 
 
 There are ways to protect against this:
 
-* use pipes to avoid saving intermediate values (see previous lecture)
+* use pipes to avoid saving intermediate values 
 * use unique and informative variable names for the things you must save
-* use functional programming techniques (this lecture)
-* package processed data (subsequent lecture)
+* use functional programming techniques 
+* package processed data 
 
-In R by default, functions have their own scope, meaning they create their own special transient environment to store names and values of variables which does not affect the global environment.  These values can be passed in as arguments to the function or can be created internally.  When the function is complete, this environment goes away. The function environment is the highest priority environment for that function and therefore is the first place R looks for values. If the value of a variable in the body of the function isn't found it goes up a level in scope, which is usually the global environment (or to the environment of an enclosing function).  This behavior is error-prone and we should try to avoid it.
+In R by default, functions create their own scope when called, meaning they create their own special transient environment to store names and values of variables which does not affect the global environment.  These values can be passed in as arguments to the function or can be created internally.  When the function is complete, this environment goes away. The function environment is the highest priority environment for that function and therefore is the first place R looks for values. If the value of a variable in the body of the function isn't found it goes up a level in scope, which is usually the global environment (or to the environment of an enclosing function).  This behavior is error-prone and we should try to avoid it.
 
 By specifying all of the external variables your function needs as arguments, you force the function to stay within its own scope which is a safer way to go.
 
 Using functional programming practices like this is a safe way to prevent unrecognized errors in your analysis code.
 
-## Writing custom functions
+## Functions
 
-Functions are expressions of code that usually take input values and return output values.  Output is returned to the console or can be assigned to a new variable.  Functions have names and can behave much like other objects in R.  They can be operated on by other functions as we will see later.  Functions can also have side effects, meaning they can produce graphics or write files which are separate from their main outputs.
+Once you have installed a package, its functions are available to be called using the package name followed by 2 colons such as ```dplyr::filter(mtcars, cyl == 6)```. But this is not always the best way to go.  
+
+To make all of the functions from a package available, you need to run ```library("<package name>")```.  This will attach all of the functions from that package to your session.  Then you can just use the function name without the package prefix. 
+
+Beware of attaching more packages than you actually need though because there could be "namespace conflicts".  This happens when the same term applies to two different functions from two different packages.  R picks one and goes with it without clearly indicating that it is doing so.  This is a common source of errors.
+
+Later on we will see how to use the "conflicted" package to help warn us of those errors before they cause a problem. 
+
+**Where do I look for help with R functions?**
+
+A manual for each function in an R package is generated and can be viewed in the help panel in RStudio. Access these with ```?<object name>``` e.g. ```?mean```.  Vignettes may also be available.  Vignettes are long-form articles that show you how to use the functions in a package together, often with example data.  These are best accessed by navigating through the package menu.  Click on the package name and near the top you will see any available vignettes.  
+
+### Writing custom functions
+
+Functions are expressions of code that may take input values and return output values.  Output is returned to the console, can be assigned to a new variable, or in some cases may alter things outside of the scope of the function.  The latter are called side effects.  Writing out a .csv file or saving a plot are common examples of side effects.  
 
 Here is the syntax you must use when writing functions in R:
 
@@ -149,7 +165,7 @@ safe_divide(x = 1, y = 0)
 
 You should never repeat yourself when performing an analysis.  Copy/pasting code is error prone.  It is better to encode a method for the computer to do the repetition.
 
-There are a few mechanisms to do this.  You may be familiar with [for loops](https://www.statmethods.net/management/controlstructures.html).  We won't be discussing these because they have a number of disadvantages, one of which is that they tend to operate in the global environment which can cause scope issues as discussed above.
+There are a few mechanisms to do this.  You may be familiar with [for loops](https://www.statmethods.net/management/controlstructures.html).  We won't be discussing these because they have a number of disadvantages, the worst of which is that they tend to operate in the global environment which can cause scope issues as discussed above.
 
 The best mechanism for doing an iterative procedure is to use the "map" paradigm.  I prefer to use the tidyverse implementation here, from the [purrr package](https://purrr.tidyverse.org/).
 
@@ -214,7 +230,7 @@ The map family has a number of variants that return the result in the form of ve
 
 ## Plotting
 
-Plotting results is a major feature of what we do in the sciences.  There are principles for effective visual representation of [data](https://www.edwardtufte.com/tufte/books_vdqi). There are many [resources](https://r-graphics.org/) for you to use for effectively presenting your data in R.  Generally though you will want to start by making graphics look like they look in a high-quality publication.  Google is your best way to find out how to make any plot in R.  
+Plotting results is a major feature of what we do in the sciences.  There are principles for effective visual representation of [data](https://www.edwardtufte.com/tufte/books_vdqi). There are many [resources](https://r-graphics.org/) for you to use for effectively presenting your data in R.  Generally though you will want to start by making graphics look like they look in a high-quality publication.  
 
 You may be able to get comparable results with an interactive program like GraphPad or Excel.  R will let you work in a programmatic way (letting the computer do the work for you), with greater control, and better aesthetics.  Eventually you will be able to make more sophisticated graphics not possible in other programs.
 

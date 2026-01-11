@@ -1,0 +1,583 @@
+# Core Lesson 2: R Fundamentals
+
+## Introduction
+
+Today we discuss fundamentals of working with data in R.
+
+There is always more than one way to accomplish the task of reading,
+analyzing and plotting data. My perspective is that this should be
+accomplished with computer code that is easy to read and
+error-resistant. In my opinion, the “tidyverse” family of packages
+achieve this goal moreso than “base” R functions or other packages a
+large percentage of the time. So I will mostly show you the tidyverse
+way.
+
+## Data formatting
+
+The best way to make the coding easy is to start by formatting your data
+in a proper way.
+
+There is [theory](https://en.wikipedia.org/wiki/Database_normalization)
+on this if you are interested. In short your data should:
+
+- be in a flat text file format, such as .csv (comma separated values),
+  .tsv (tab separated values) or .txt (plain text) if possible. The file
+  extensions don’t matter for R; they only affect which program reads
+  your file on mac or PC. Unlike excel files, these files can be tracked
+  by git so you know if any changes have been made accidentally.
+- each row represents an observation
+- each column represents a variable or attribute for that observation
+- each column should be a single specific “type”: numeric, integer,
+  factor and character are the most common types we use  
+- each row has a unique “key”. The key can be a single column or a
+  combination of columns as long as it distinguishes each row from every
+  other row.
+
+## Input and data types
+
+Raw data should exist as a fixed, unchanging file on your hard drive.
+You want to read it into R using
+[`readr::read_csv()`](https://readr.tidyverse.org/reference/read_delim.html).
+This is a tidyverse command that reads the file, automatically infers
+data types, and formats the data as a “tibble”. A tibble is related to
+the dataframe from base R but has superior characteristics for almost
+everything we do. Think of it as a programmatic representation of your
+csv file within R.
+
+``` r
+# attach the packages we will need
+library("tidyverse")
+# read in an example data file
+# or substitute a file path to your own data
+readr::read_csv(file = "https://raw.githubusercontent.com/blaserlab/datascience.curriculum/main/inst/extdata/demo_iris_data.csv")
+#> # A tibble: 150 × 6
+#>    observation Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+#>          <dbl>        <dbl>       <dbl>        <dbl>       <dbl> <chr>  
+#>  1           1          5.1         3.5          1.4         0.2 setosa 
+#>  2           2          4.9         3            1.4         0.2 setosa 
+#>  3           3          4.7         3.2          1.3         0.2 setosa 
+#>  4           4          4.6         3.1          1.5         0.2 setosa 
+#>  5           5          5           3.6          1.4         0.2 setosa 
+#>  6           6          5.4         3.9          1.7         0.4 setosa 
+#>  7           7          4.6         3.4          1.4         0.3 setosa 
+#>  8           8          5           3.4          1.5         0.2 setosa 
+#>  9           9          4.4         2.9          1.4         0.2 setosa 
+#> 10          10          4.9         3.1          1.5         0.1 setosa 
+#> # ℹ 140 more rows
+```
+
+These data are from a collection of sample datasets provided with R. As
+provided, it lacks a useful “key” column, so I added the observation
+column in the first position. The data indicate measurements for various
+species of iris flower.
+
+When read into R, the read_csv command infers the data types from the
+values provided and provides a message for you explaining what it has
+done. In this case, they are all correct except for observation. Why?
+Because it has interpreted observation as “dbl” which is another way of
+saying “numeric” which in this case is not really correct. Observation
+is just a serial number of the observations which in this case have an
+inherent order but not a quantitative value. So we can tell R to
+interpret this as a factor which is the R data type for ordered data.
+
+``` r
+readr::read_csv(file = "https://raw.githubusercontent.com/blaserlab/datascience.curriculum/main/inst/extdata/demo_iris_data.csv", col_types = "fddddc")
+#> # A tibble: 150 × 6
+#>    observation Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+#>    <fct>              <dbl>       <dbl>        <dbl>       <dbl> <chr>  
+#>  1 1                    5.1         3.5          1.4         0.2 setosa 
+#>  2 2                    4.9         3            1.4         0.2 setosa 
+#>  3 3                    4.7         3.2          1.3         0.2 setosa 
+#>  4 4                    4.6         3.1          1.5         0.2 setosa 
+#>  5 5                    5           3.6          1.4         0.2 setosa 
+#>  6 6                    5.4         3.9          1.7         0.4 setosa 
+#>  7 7                    4.6         3.4          1.4         0.3 setosa 
+#>  8 8                    5           3.4          1.5         0.2 setosa 
+#>  9 9                    4.4         2.9          1.4         0.2 setosa 
+#> 10 10                   4.9         3.1          1.5         0.1 setosa 
+#> # ℹ 140 more rows
+```
+
+The string “fddddc” tells R to interpret the columns as “factor”,
+“double” or “character”.
+
+**You should always check that the data types are correct when you
+import your data in order to prevent errors.**
+
+### More on data types
+
+- character: any string of valid alphanumeric characters. Carries no
+  order or quantitative value besides “alphanumeric” order
+- numeric/double: any real number
+- integer: any integer, a subset of the real numbers
+- factor: factors are essentially characters bound to integer values.
+  The character part is called a “level”. Factors can be a little tricky
+  but are useful for ordering and reordering categorical data.
+
+## Variable assignment
+
+An important advantage of using a programming language to analyze data
+is the concept of abstraction, or assigning complicated values to simple
+variable names.
+
+``` r
+# assign the data to the variable, demo_data
+# readr::read_csv(file = system.file("extdata/demo_iris_data.csv", package = "datascience.curriculum"))
+demo_data <- readr::read_csv(file = "https://raw.githubusercontent.com/blaserlab/datascience.curriculum/main/inst/extdata/demo_iris_data.csv", col_types = "fddddc")
+demo_data
+#> # A tibble: 150 × 6
+#>    observation Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+#>    <fct>              <dbl>       <dbl>        <dbl>       <dbl> <chr>  
+#>  1 1                    5.1         3.5          1.4         0.2 setosa 
+#>  2 2                    4.9         3            1.4         0.2 setosa 
+#>  3 3                    4.7         3.2          1.3         0.2 setosa 
+#>  4 4                    4.6         3.1          1.5         0.2 setosa 
+#>  5 5                    5           3.6          1.4         0.2 setosa 
+#>  6 6                    5.4         3.9          1.7         0.4 setosa 
+#>  7 7                    4.6         3.4          1.4         0.3 setosa 
+#>  8 8                    5           3.4          1.5         0.2 setosa 
+#>  9 9                    4.4         2.9          1.4         0.2 setosa 
+#> 10 10                   4.9         3.1          1.5         0.1 setosa 
+#> # ℹ 140 more rows
+```
+
+The left arrow operator stores the data in the global environment under
+the name “demo_data”.
+
+Any valid R object (data, functions etc) can be stored under a variable
+name. By default they will be stored in the global environment. The
+global environment is the “workspace” where every value you save is held
+in memory. If you save something else with the same name in the same
+environment it will overwrite the old value without checking, asking or
+notifying you. **For this reason, you need to be very precise when
+adding to or changing the global environment. Avoid the common trap of
+naming things “x”, “df”, “data”, “my_data”. Use informative and specific
+names.**
+
+## Data structures
+
+Dataframes and tibbles are essentially lists of vectors with some rules
+attached. So what are lists and vectors?
+
+A vector is the fundamental data structure in R. It is a collection of
+data values, all of which must be the same data type.
+
+You can make your own vector directly in R like so:
+
+``` r
+# a numeric vector
+c(1, 2, 3)
+#> [1] 1 2 3
+
+# a character vector
+c("a", "b", "c")
+#> [1] "a" "b" "c"
+
+# another character vector
+c("1", "b" ,"charlie")
+#> [1] "1"       "b"       "charlie"
+
+# here 1 gets coerced to a character because a vector must be all the same type
+c(1, "b", "charlie")
+#> [1] "1"       "b"       "charlie"
+```
+
+In a dataframe or a tibble, each column is a vector.
+
+We can use some R operators to extract the columns as vectors.
+
+``` r
+# extract a column by position
+# the head command prints the first few values only
+# omit head() if you want the whole thing
+head(demo_data[[2]])
+#> [1] 5.1 4.9 4.7 4.6 5.0 5.4
+
+# extract a column by name
+head(demo_data[["Species"]])
+#> [1] "setosa" "setosa" "setosa" "setosa" "setosa" "setosa"
+
+# another way to extract a column by name
+head(demo_data$Species)
+#> [1] "setosa" "setosa" "setosa" "setosa" "setosa" "setosa"
+```
+
+Usually you want to use the `$` operator to extract a column by name.
+
+A list is a more general form of data object. It can hold any
+combination of R data types. This is how you make a list:
+
+``` r
+# make the list
+demo_list <- list(1, "b", "charlie")
+
+demo_list
+#> [[1]]
+#> [1] 1
+#> 
+#> [[2]]
+#> [1] "b"
+#> 
+#> [[3]]
+#> [1] "charlie"
+
+# optionally name the elements
+names(demo_list) <- c("a_number", "a_letter", "a_name")
+
+# extract the elements by name
+demo_list$a_number
+#> [1] 1
+demo_list$a_letter
+#> [1] "b"
+demo_list$a_name
+#> [1] "charlie"
+```
+
+Lists are very flexible and useful objects for holding your data.
+
+## Subsetting with base R functions
+
+I think this syntax is suboptimal compared to Dplyr syntax, but for some
+advanced data objects you need to know it.
+
+For subsetting you use a single bracket rather than the double bracket
+for extracting data. This returns an object of the same class, only
+smaller.
+
+``` r
+# subset using dataframe[row,colum] syntax
+# subset a dataframe to get the second and third columns only
+demo_data[,2:3]
+#> # A tibble: 150 × 2
+#>    Sepal.Length Sepal.Width
+#>           <dbl>       <dbl>
+#>  1          5.1         3.5
+#>  2          4.9         3  
+#>  3          4.7         3.2
+#>  4          4.6         3.1
+#>  5          5           3.6
+#>  6          5.4         3.9
+#>  7          4.6         3.4
+#>  8          5           3.4
+#>  9          4.4         2.9
+#> 10          4.9         3.1
+#> # ℹ 140 more rows
+
+# subset a dataframe to get the first and second rows only
+demo_data[1:2,]
+#> # A tibble: 2 × 6
+#>   observation Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+#>   <fct>              <dbl>       <dbl>        <dbl>       <dbl> <chr>  
+#> 1 1                    5.1         3.5          1.4         0.2 setosa 
+#> 2 2                    4.9         3            1.4         0.2 setosa
+
+# subset to include columns by name 
+demo_data[c("Species", "observation")]
+#> # A tibble: 150 × 2
+#>    Species observation
+#>    <chr>   <fct>      
+#>  1 setosa  1          
+#>  2 setosa  2          
+#>  3 setosa  3          
+#>  4 setosa  4          
+#>  5 setosa  5          
+#>  6 setosa  6          
+#>  7 setosa  7          
+#>  8 setosa  8          
+#>  9 setosa  9          
+#> 10 setosa  10         
+#> # ℹ 140 more rows
+
+# subset a list to return a smaller list
+# return the first two elements
+demo_list[1:2]
+#> $a_number
+#> [1] 1
+#> 
+#> $a_letter
+#> [1] "b"
+
+# subset a list by name
+demo_list["a_name"]
+#> $a_name
+#> [1] "charlie"
+```
+
+## Data operations
+
+In R the fundamental data structure is a vector. A single value is a
+vector of length 1. Many functions are optimized to work on the entire
+vector at once.
+
+``` r
+# get the mean of the sepal length
+mean(demo_data$Sepal.Length)
+#> [1] 5.843333
+
+# add two vectors
+c(1, 2) + c(2, 3)
+#> [1] 3 5
+
+# for vectors of unequal length, the smaller vector is "recycled" for each element of the larger vector
+1 + c(1, 2, 3)
+#> [1] 2 3 4
+
+# this gives a warning if the recycling doesn't work out evenly
+c(1, 2) + c(1, 2, 3)
+#> Warning in c(1, 2) + c(1, 2, 3): longer object length is not a multiple of
+#> shorter object length
+#> [1] 2 4 4
+```
+
+You can read more about arithmetic and logical operators
+[here](https://www.statmethods.net/management/operators.html).
+
+Logical operators return a value of TRUE or FALSE.
+
+``` r
+1 > 0
+#> [1] TRUE
+
+2 == 2
+#> [1] TRUE
+
+1 != 3
+#> [1] TRUE
+
+2 <= 1
+#> [1] FALSE
+
+"apple" == "banana"
+#> [1] FALSE
+```
+
+## Dplyr
+
+Dplyr is a part of the tidyverse packages. This is what you will use for
+data transformations prior to statistical testing or plotting.
+
+Dplyr functions are pipe-friendly, meaning that they can be chained in a
+way that reduces redundant text in your code or saving intermediate
+values which can cause problems. For this you use the pipe operator
+`|>`.
+
+Dplyr functions are also vectorized so they are computationally
+efficient and can be used on tables with hundreds of thousands of rows.
+
+``` r
+# add a new column with mutate
+# then group by a useful categorical variable
+# then summarize the new value we calculated by mean according to group
+demo_data |>
+  mutate(sepal_l_w = Sepal.Length + Sepal.Width) |>
+  group_by(Species) |>
+  summarise(mean_sepal_l_w = mean(sepal_l_w))
+#> # A tibble: 3 × 2
+#>   Species    mean_sepal_l_w
+#>   <chr>               <dbl>
+#> 1 setosa               8.43
+#> 2 versicolor           8.71
+#> 3 virginica            9.56
+```
+
+You can use any built-in or custom function in `mutate` or `summarise`.
+Functions for mutate must return a vector of the same length as the
+input vector; functions for summarise must return a vector of length 1.
+
+Sometimes you may find it useful to select or de-select columns from a
+tibble:
+
+``` r
+# return a tibble without the observation column
+demo_data |>
+  select(-observation)
+#> # A tibble: 150 × 5
+#>    Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+#>           <dbl>       <dbl>        <dbl>       <dbl> <chr>  
+#>  1          5.1         3.5          1.4         0.2 setosa 
+#>  2          4.9         3            1.4         0.2 setosa 
+#>  3          4.7         3.2          1.3         0.2 setosa 
+#>  4          4.6         3.1          1.5         0.2 setosa 
+#>  5          5           3.6          1.4         0.2 setosa 
+#>  6          5.4         3.9          1.7         0.4 setosa 
+#>  7          4.6         3.4          1.4         0.3 setosa 
+#>  8          5           3.4          1.5         0.2 setosa 
+#>  9          4.4         2.9          1.4         0.2 setosa 
+#> 10          4.9         3.1          1.5         0.1 setosa 
+#> # ℹ 140 more rows
+# return a tibble with only the Species and Sepal.Length columns
+demo_data |>
+  select(c(Species, Sepal.Length))
+#> # A tibble: 150 × 2
+#>    Species Sepal.Length
+#>    <chr>          <dbl>
+#>  1 setosa           5.1
+#>  2 setosa           4.9
+#>  3 setosa           4.7
+#>  4 setosa           4.6
+#>  5 setosa           5  
+#>  6 setosa           5.4
+#>  7 setosa           4.6
+#>  8 setosa           5  
+#>  9 setosa           4.4
+#> 10 setosa           4.9
+#> # ℹ 140 more rows
+```
+
+Use `filter` to select rows based on conditional test(s):
+
+``` r
+# filter rows satisfying a logical test
+demo_data |>
+  filter(Species == "setosa")
+#> # A tibble: 50 × 6
+#>    observation Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+#>    <fct>              <dbl>       <dbl>        <dbl>       <dbl> <chr>  
+#>  1 1                    5.1         3.5          1.4         0.2 setosa 
+#>  2 2                    4.9         3            1.4         0.2 setosa 
+#>  3 3                    4.7         3.2          1.3         0.2 setosa 
+#>  4 4                    4.6         3.1          1.5         0.2 setosa 
+#>  5 5                    5           3.6          1.4         0.2 setosa 
+#>  6 6                    5.4         3.9          1.7         0.4 setosa 
+#>  7 7                    4.6         3.4          1.4         0.3 setosa 
+#>  8 8                    5           3.4          1.5         0.2 setosa 
+#>  9 9                    4.4         2.9          1.4         0.2 setosa 
+#> 10 10                   4.9         3.1          1.5         0.1 setosa 
+#> # ℹ 40 more rows
+
+demo_data |>
+  filter(Species %in% c("setosa", "versicolor"))
+#> # A tibble: 100 × 6
+#>    observation Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+#>    <fct>              <dbl>       <dbl>        <dbl>       <dbl> <chr>  
+#>  1 1                    5.1         3.5          1.4         0.2 setosa 
+#>  2 2                    4.9         3            1.4         0.2 setosa 
+#>  3 3                    4.7         3.2          1.3         0.2 setosa 
+#>  4 4                    4.6         3.1          1.5         0.2 setosa 
+#>  5 5                    5           3.6          1.4         0.2 setosa 
+#>  6 6                    5.4         3.9          1.7         0.4 setosa 
+#>  7 7                    4.6         3.4          1.4         0.3 setosa 
+#>  8 8                    5           3.4          1.5         0.2 setosa 
+#>  9 9                    4.4         2.9          1.4         0.2 setosa 
+#> 10 10                   4.9         3.1          1.5         0.1 setosa 
+#> # ℹ 90 more rows
+```
+
+In some cases it may be useful to have the data in “long form” as
+opposed to “wide form”. Here you use `pivot_longer` and you are going to
+tell R which columns to convert to long form. These should all be of the
+same type because they will end up in the same column. The selected
+column names get repeated in a “name” column and the values end up in a
+“value” column. The columns you don’t select will be retained as
+additional attributes for the values.
+
+``` r
+# pivot from wide form to long form
+long_data <- demo_data |>
+  pivot_longer(cols = c(Sepal.Length,  Sepal.Width, Petal.Length, Petal.Width))
+long_data
+#> # A tibble: 600 × 4
+#>    observation Species name         value
+#>    <fct>       <chr>   <chr>        <dbl>
+#>  1 1           setosa  Sepal.Length   5.1
+#>  2 1           setosa  Sepal.Width    3.5
+#>  3 1           setosa  Petal.Length   1.4
+#>  4 1           setosa  Petal.Width    0.2
+#>  5 2           setosa  Sepal.Length   4.9
+#>  6 2           setosa  Sepal.Width    3  
+#>  7 2           setosa  Petal.Length   1.4
+#>  8 2           setosa  Petal.Width    0.2
+#>  9 3           setosa  Sepal.Length   4.7
+#> 10 3           setosa  Sepal.Width    3.2
+#> # ℹ 590 more rows
+
+# pivot back to wide form
+long_data |>
+  pivot_wider(names_from = "name", values_from = "value")
+#> # A tibble: 150 × 6
+#>    observation Species Sepal.Length Sepal.Width Petal.Length Petal.Width
+#>    <fct>       <chr>          <dbl>       <dbl>        <dbl>       <dbl>
+#>  1 1           setosa           5.1         3.5          1.4         0.2
+#>  2 2           setosa           4.9         3            1.4         0.2
+#>  3 3           setosa           4.7         3.2          1.3         0.2
+#>  4 4           setosa           4.6         3.1          1.5         0.2
+#>  5 5           setosa           5           3.6          1.4         0.2
+#>  6 6           setosa           5.4         3.9          1.7         0.4
+#>  7 7           setosa           4.6         3.4          1.4         0.3
+#>  8 8           setosa           5           3.4          1.5         0.2
+#>  9 9           setosa           4.4         2.9          1.4         0.2
+#> 10 10          setosa           4.9         3.1          1.5         0.1
+#> # ℹ 140 more rows
+```
+
+Sometimes you have two tibbles with related information you want to join
+together. This is a powerful tool for adding new attributes onto
+existing data.
+
+``` r
+# make two smaller tables
+sepal_data <-
+  demo_data |>
+  group_by(Species) |>
+  summarise(mean_sepal_l = mean(Sepal.Length), mean_sepal_w = mean(Sepal.Width))
+sepal_data
+#> # A tibble: 3 × 3
+#>   Species    mean_sepal_l mean_sepal_w
+#>   <chr>             <dbl>        <dbl>
+#> 1 setosa             5.01         3.43
+#> 2 versicolor         5.94         2.77
+#> 3 virginica          6.59         2.97
+
+petal_data <-
+  demo_data |>
+  group_by(Species) |>
+  summarise(mean_petal_l = mean(Petal.Length), mean_petal_w = mean(Petal.Width))
+petal_data
+#> # A tibble: 3 × 3
+#>   Species    mean_petal_l mean_petal_w
+#>   <chr>             <dbl>        <dbl>
+#> 1 setosa             1.46        0.246
+#> 2 versicolor         4.26        1.33 
+#> 3 virginica          5.55        2.03
+
+# now join them back together
+left_join(sepal_data, petal_data)
+#> # A tibble: 3 × 5
+#>   Species    mean_sepal_l mean_sepal_w mean_petal_l mean_petal_w
+#>   <chr>             <dbl>        <dbl>        <dbl>        <dbl>
+#> 1 setosa             5.01         3.43         1.46        0.246
+#> 2 versicolor         5.94         2.77         4.26        1.33 
+#> 3 virginica          6.59         2.97         5.55        2.03
+```
+
+Some rules for joining:
+
+- you must have at least 1 column with common values to join by. It is
+  better if you have 1 and only 1. The easiest way to do this is make
+  sure that this column has the same name in both tables.
+- you should avoid duplicated values in either of the tables you want to
+  join. Usually you want to keep the “main” data table the same and add
+  on new data. If the new data has duplicate entries it will be
+  duplicated in the output which may cause problems.
+- missing data will be filled in with NA which is usually OK. The order
+  of the data in the two tables doesn’t matter. For `left_join(x, y)`
+  the order of the data in the resulting tibble will be the same as for
+  x with the exception of possible duplications.
+- always check to be sure your join worked OK
+
+For more information on these operations see this useful [cheat
+sheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf).
+
+## Exercises
+
+- try running the example code here in your own project
+- take data from your own experiments, reformat by hand in a csv if
+  necessary and read into R
+  - hint: you can upload directly from R studio using the up-arrow icon
+    on the files tab
+- explore different data manipulations with base R and dplyr functions
+- try comparing groups using simple statistical tests like
+  [`t.test()`](https://rdrr.io/r/stats/t.test.html) and
+  [`wilcox.test()`](https://rdrr.io/r/stats/wilcox.test.html).
+  - hint: you just need to feed numeric vectors with your data into
+    these functions.

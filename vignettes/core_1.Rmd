@@ -1,8 +1,8 @@
 ---
-title: "Week 1:  Setting Up"
+title: "Core Lesson 1:  Setting Up"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Week 1:  Setting Up}
+  %\VignetteIndexEntry{Core Lesson 1:  Setting Up}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -31,11 +31,11 @@ This course will focus on what I believe are the essential skills necessary for 
 
 These and many others are good resources if you want to extend your knowledge beyond what we cover here.    
 
-Learning R at times will seem like learning a foreign language.  You will make errors.  **Always remember that you will never be the first person to encounter an error.  Learn how to google the error message and 99% of the time you will find your answer in the first 3 hits**.  This is how you learn. 
+Learning R at times will seem like learning a foreign language.  You will make errors.  **Start by trying your best and then ask AI for help**.  This is how you learn. 
 
 ## R and Rstudio
 
-R is a statistical programming language that runs as a computer program.  Rstudio is known as an integrated development environment or IDE.  It is the standard way humans interact with the R program.  
+R is a statistical programming language that runs as a computer program.  Rstudio is known as an integrated development environment or IDE.  It is the **best** way for humans to interact with the R program.  
 
 Rstudio provides two main ways of interacting with R:  directly via the R Console and via R scripts.
 
@@ -43,11 +43,13 @@ Rstudio provides two main ways of interacting with R:  directly via the R Consol
   
   **Warning and Error messages will appear in the console.  Always pay attention to what they are saying.** 
 
-* R scripts:  these are text files, usually in the form of <filename>.R.  When you run 1 or more lines, Rstudio feeds them into the console and R follows the commands.  This is good because you always have a plain text record of what you did.  So when you build up a multi-step analysis it is easy to see how you got the end product.  Better than running the whole file line by line is "sourcing" the file.  You can do this by typing Ctrl+Shift+S or clicking the "Source" button in the upper right corner of the source pane (usually top-left) in Rstudio.  Why is this better?  Let's say you left an error in your script.  Maybe the presence of this error changes the final output you are trying to produce.  If you run all of the lines, R will notify you of the error and then keep going.  Easy to miss if this is the only error.  If you source the file, it will stop completely on errors so you don't end up with errors you aren't aware of.
+* R scripts:  these are text files, usually in the form of <filename>.R.  When you run 1 or more lines, Rstudio feeds them into the console and R follows the commands.  This is good because you always have a plain text record of what you did.  So when you build up a multi-step analysis it is easy to see how you got the end product. 
+
+Better than running the whole file line by line is "sourcing" the file.  You can do this by typing Ctrl+Shift+S or clicking the "Source" button in the upper right corner of the source pane (usually top-left) in Rstudio.  Why is this better?  Let's say you left an error in your script.  Maybe the presence of this error changes the final output you are trying to produce.  If you run all of the lines, R will notify you of the error and then keep going.  Easy to miss if this is the only error.  If you source the file, it will stop completely on errors so you don't end up with errors you aren't aware of.
 
   **You always want your programs to error in obvious ways so you don't carry on with incorrect data.**
 
-Rstudio provides a number of standard panes that display useful information.  We will review these in class or you can explore them on your own.
+Rstudio provides a number of standard panes that display useful information.  These work very well out of the box and don't need modification.  They include a source (script) editor, and 3 tabbed windows that give you access to the console, the computer terminal, a graphical file explorer, help information, a plot viewer, a workspace/environment viewer (more on that later), git status etc.
 
 By default, R studio gives you the option to save your workspace data when you close out a session and then to reload your workspace from that file the next time you start to work.  This is generally not a good idea, for reasons we will see.  It wastes time loading and quitting sessions and you want to be explicit in what objects you are saving, if and when you save them.
 
@@ -57,6 +59,8 @@ To turn this off, go to the Rstudio menu bar, select Tools, then Global Options.
 
 
 ## Setting up your system
+
+**Note this section is fairly detailed.  It is recommended if you want to work on your own system.  If you are part of a multiuser system that someone else is managing, you can skip it.**
 
 I recommend this approach to setting up your R installation.  In comparison to other methods, the blaseRtemplates method provides greater transparency and reproducibility and an improved user experience (faster, fewer confusing messages).  
 
@@ -70,7 +74,7 @@ Next, simply run the following command:
 
 ```{r}
 library("blaseRtemplates")
-establish_new_bt(cache_path = "<some_directory>/r_4_2_cache", project_path = "<some_directory>/projects")
+establish_new_bt(cache_path = "<some_directory>/r_4_5_cache", project_path = "<some_directory>/projects")
 ```
 
 What will this do?
@@ -88,7 +92,7 @@ For more information on how R starts, see [this link.](https://stat.ethz.ch/R-ma
     .
     |-- projects
     |   `-- baseproject
-    `-- r_4_2_cache
+    `-- r_4_5_cache
         |-- library
         |-- logs
         |-- source
@@ -101,7 +105,7 @@ First, note that two main subdirectories have been created in one parent directo
 
 -   projects: where your projects should be initialized. They can go anywhere but you should keep them here. The baseproject is created by the establish_new_bt function. If you close a project without moving to a new one or try to start a session outside of a project, it will bounce you here. This prevents undesired operations in e.g. the home directory or elsewhere.
 
--   r_4\_2_cache: This holds all of the inner workings of the blaseRtemplates system.
+-   r_4\_5_cache: This holds all of the inner workings of the blaseRtemplates system.
 
     -   library: The versioned/hashed package binary cache. Each package is stored under the following rubric: name \> version \> hash \> name \> contents. This structure is generated whenever blaseRtemplates installs a new package in any project.
 
@@ -124,9 +128,9 @@ The library directory is initially populated using all packages available to R t
 
 A project is a self-contained group of files for your R data analysis.  This should align conceptually with your experiments.  If you have a set of single cell data and imaging data related to the same scientific concept or paper then it can all go in the same project.
 
-Projects automatically define their working directory to be the root of the projects.  That means you can reference any file in the root directory by typing its name like so: "file.R".  If that file was one directory down, it would be "directory/file.R". There is almost no good reason ever to change your working directory to something other than the project root.
+Projects automatically define their working directory to be the root of the projects.  That means you can reference any file in the root directory by typing its name like so: "file.R".  If that file was one directory down, it would be "directory/file.R". **There is never any reason to change your working directory to something other than the project root.**
 
-You always want to be working in a project.
+You always want to be working in a project.  
 
 Another way to think about your project is this:  it is a big set of scripted instructions that converts your data into figures, tables and other useful documents that you can directly use in your thesis or manuscript.  These instructions are all in the form of text documents that reside in the project.  Nothing besides these text-based instructions should be in your project and no critical instructions should be saved external to your project.  **You will want to use GIT to track your changes to these instructions over time and GITHUB to share them with collaborators, journal reviewers, and the scientific community.**  THe blaseRtemplates project structure will help you do all of this in a sensible way.
 
@@ -141,12 +145,11 @@ blaseRtemplates::initialize_project("<projects directory>/rclass_project_2023")
 
 That function will create the skeletonized project, activate it and restart your session within it.
 
-
 ### Project organization
 
 I keep all of my R scripts in a directory called "R".  If you initialized your project with ```blaseRtemplates::initialize_project()```, you will have scripts named:  
 
-*```initialization.R```:  use this for setting up your project to use git and github    
+* ```initialization.R```:  use this for setting up your project to use git and github    
 * ```dependencies.R```:  use this for loading data and attaching packages to your session
 * ```configs.R```:  use this for setting graphical and aesthetic parameters.  I also use this for resolving function name conflicts.
 * ```git_commands.R```:  the commands here will allow you to handle 99% of git interactions via R in a scripted way.
@@ -258,7 +261,7 @@ blaseRtemplates::git_push_all()
 
 That is it!
 
-If you run into problems, the error messages are usually informative.  If you have trouble understanding an error or it isn't helpful, just google it.
+If you run into problems, the error messages are usually informative.  If you have trouble understanding an error or it isn't helpful, just ask AI.
 
 One common use-case for git for the single user is to "un-delete" files.  The easiest way is to go to your github site for that repo.  Click on clock icon labeled "commits" (which helpfully includes a "back in time" arrow).  Then select from the list of commits (versions).  Click browse files and find what you were looking for.  Click on the raw version to copy and paste directly back into R studio.
 
@@ -284,7 +287,7 @@ Hopefully you have a commit in your git log with the message "submitted to Journ
 
 ## Packages
 
-Packages are chunks of code and/or data that people have written and made available to us to use. The main reason we use R is that there is a large library of useful packages for the biological sciences that we can build our work on, all of which are free to use. 
+Packages are chunks of code and/or data that people have written and made available to us to use. The main reason we use R is that there is a large library of useful packages for the biological sciences that we can build our work on, all of which are free to use. We can also easily package our own data which is a great way to archive and distribute your work. 
 
 Packages are most often stored and distributed via standard repositories.  The most common are [CRAN](https://cran.r-project.org/), [R-universe](https://r-universe.dev/search/), and [Bioconductor](https://www.bioconductor.org/).  Packages can also be distributed as source code (text based files), usually via github. 
 
@@ -292,25 +295,11 @@ Packages are most often stored and distributed via standard repositories.  The m
 
 R downloads the compressed file and then unpacks it in a library directory on your computer or server.  IF you are installing from source code (most linux computers or github repositories), then the code needs to be turned into a set of binary instructions for the computer to use, a process called compiling.  This is what the Xcode (Mac) and RTools (Win) programs do.
 
-Every time you start an R session, a set of commands is run that points R to one or more library directories.  This is how R finds the commands you ask it to use. Unfortunately, it can be difficult to find where these directories live, depending on your installation.  BlaseRtemplates helps manage this.
-
-**How do I use a function?**
-
-Once you have installed a package, its functions are available to be called using the package name followed by 2 colons such as ```dplyr::filter(mtcars, cyl == 6)```. But this is not always the best way to go.  
-
-To make all of the functions from a package available, you need to run ```library("<package name>")```.  This will attach all of the functions from that package to your session.  Then you can just use the function name without the package prefix. 
-
-Beware of attaching more packages than you actually need though because there could be "namespace conflicts".  This happens when the same term applies to two different functions from two different packages.  R picks one and goes with it without clearly indicating that it is doing so.  This is a common source of errors.
-
-Later on we will see how to use the "conflicted" package to help warn us of those errors before they cause a problem. 
-
-**Where do I look for help with R functions?**
-
-A manual for each function in an R package is generated and can be viewed in the help panel in RStudio. Access these with ```?<object name>``` e.g. ```?mean```.  Vignettes may also be available.  Vignettes are long-form articles that show you how to use the functions in a package together, often with example data.  These are best accessed by navigating through the package menu.  Click on the package name and near the top you will see any available vignettes.  
+Every time you start an R session, a set of commands is run that points R to one or more library directories.  This is how R finds the commands you ask it to use. Unfortunately, it can be difficult to find where these directories live and to know which one is being used at any particular time.  blaseRtemplates helps manage this.
 
 ### Installing packages
 
-As mentioned above, blaseRtemplates-based projects use a user-project library that is linked to specific package versions in the main cache.  This way, each project you start can use its own set of packages without duplication of the actual software. Also, if you update a package in project B, it doesn't update the package in project A.  Why is this good?  Because unintentional updates may "break" an older project which is something you want to avoid.
+As mentioned above, blaseRtemplates-based projects use a user-project library that is linked to specific package versions in the main cache.  This way, each project you start can use its own set of packages without duplication of the actual software. More importantly, if you update a package in project B, it doesn't update the package in project A.  Why is this good?  Because unintentional updates may "break" an older project which is something you want to avoid.
 
 The best way to install packages using blaseRtemplates is this:
 

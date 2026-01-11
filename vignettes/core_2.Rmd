@@ -1,8 +1,8 @@
 ---
-title: "Week 2:  R Fundamentals"
+title: "Core Lesson 2:  R Fundamentals"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Week 2:  R Fundamentals}
+  %\VignetteIndexEntry{Core Lesson 2:  R Fundamentals}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -34,15 +34,16 @@ The best way to make the coding easy is to start by formatting your data in a pr
 
 There is [theory](https://en.wikipedia.org/wiki/Database_normalization) on this if you are interested.  In short your data should:
 
-* be in a flat text file format, such as .csv (comma separated values), .tsv (tab separated values) or .txt (plain text).  The file extensions don't matter for R; they only affect which program reads your file on mac or PC.  Unlike excel files, these files can be tracked by git so you know if any changes have been made accidentally.
+* be in a flat text file format, such as .csv (comma separated values), .tsv (tab separated values) or .txt (plain text) if possible.  The file extensions don't matter for R; they only affect which program reads your file on mac or PC.  Unlike excel files, these files can be tracked by git so you know if any changes have been made accidentally.
 * each row represents an observation
 * each column represents a variable or attribute for that observation
 * each column should be a single specific "type":  numeric, integer, factor and character are the most common types we use   
 * each row has a unique "key".  The key can be a single column or a combination of columns as long as it distinguishes each row from every other row.
 
+
 ## Input and data types
 
-Data should exist as a fixed, unchanging file on your hard drive.  You want to read it into R using ```readr::read_csv()```.  This is a tidyverse command that reads the file, automatically infers data types, and formats the data as a "tibble".  A tibble is related to the dataframe from base R but has superior characteristics for almost everything we do.  Think of it as a programmatic representation of your csv file within R.
+Raw data should exist as a fixed, unchanging file on your hard drive.  You want to read it into R using ```readr::read_csv()```.  This is a tidyverse command that reads the file, automatically infers data types, and formats the data as a "tibble".  A tibble is related to the dataframe from base R but has superior characteristics for almost everything we do.  Think of it as a programmatic representation of your csv file within R.
 
 ```{r}
 # attach the packages we will need
@@ -85,7 +86,7 @@ demo_data
 
 The left arrow operator stores the data in the global environment under the name "demo_data". 
 
-Any valid R object (data, functions etc) can be stored under a variable name.  By default they will be stored in the global environment.  The global environment is the "workspace" where every value you save is held in memory.  If you save something else with the same name in the same environment it will overwrite the old value without checking, asking or notifying you.
+Any valid R object (data, functions etc) can be stored under a variable name.  By default they will be stored in the global environment.  The global environment is the "workspace" where every value you save is held in memory.  If you save something else with the same name in the same environment it will overwrite the old value without checking, asking or notifying you.  **For this reason, you need to be very precise when adding to or changing the global environment.  Avoid the common trap of naming things "x", "df", "data", "my_data".  Use informative and specific names.**
 
 ## Data structures
 
@@ -231,7 +232,7 @@ demo_data |>
 
 ```
 
-You can use any built-in or custom function in mutate or summarise.  Functions for mutate must return a vector of the same length as the input vector; functions for summarise must return a vector of length 1. 
+You can use any built-in or custom function in ```mutate``` or ```summarise```.  Functions for mutate must return a vector of the same length as the input vector; functions for summarise must return a vector of length 1. 
 
 Sometimes you may find it useful to select or de-select columns from a tibble:
 

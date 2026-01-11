@@ -1,8 +1,8 @@
 ---
-title: "Week 6:  Packages"
+title: "Core Lesson 4:  Packages"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Week 6:  Packages}
+  %\VignetteIndexEntry{Core Lesson 4:  Packages}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -29,11 +29,11 @@ knitr::opts_chunk$set(
 
 ## Introduction
 
-This lecture is on building R data packages.  This is a relatively advanced topic, but I think it is important and can be learned quickly.  This lecture assumes you have a good working knowledge of R and your computer file system.  You do not need to be an expert in R to do this.
+This lesson is on building R data packages.  This is a relatively advanced topic, but I think it is important and can be learned quickly.  This lecture assumes you have a good working knowledge of R and your computer file system.  You do not need to be an expert in R to do this.
 
 Why would you want to build a data package?  Here are the stages your data will pass through:
 
-* raw data:  should be unchanged after creation.  Can be entirely contained within an R data package if it is a lightweight text file.  Larger files should be archived on a shared network drive.
+* raw data:  should be unchanged after creation.  Can be entirely contained within an R data package if it is a lightweight text file.  Larger files should be stored and backed up on a network drive.
 * processed data: these are data that have been processed into a form that can be used for plotting or statistical analysis with only a few lines of code and a second or two of computation time.
 * analyzed data:  the final tables or figures that convey the results of your experiment to your reader.
 
@@ -46,7 +46,8 @@ Do include:
 * processed tabular data for generating statistics or plots
 * single cell data objects (e.g. cellDataSet or Seurat objects)
 * qc files for single cell analysis
-* genomic ranges objects 
+* Trace, Ape, SummarizedHeatmap objects shown in this course
+* Other bioconductor containers:  SummarizedExperiment, GenomicRanges etc.
 
 Do not include:
 
@@ -62,7 +63,6 @@ In summary, the benefits of using a data package are:
 * Data objects are version-controlled and not easy to change inadvertently.
 * Data versions and analysis code versions are linked, so you can always recreate the state of your project from any prior commit.
 
-
 ## Saving R objects
 
 Once you have identified a data object you would like to put into a package, you first need to save it to disk as a ```.rda``` file.  Usually you are going to be starting from within an analysis project.  Here are some rules/best practices:
@@ -70,7 +70,6 @@ Once you have identified a data object you would like to put into a package, you
 * create a new directory called "data" to hold your data object
 * save only 1 object per file.  R will let you save more but this is not a desirable way to go.
 * give the file the same name as the object.
-* use compression to make the file size as small as possible
 
 ```{r eval = FALSE}
 # some demo data to save
@@ -81,8 +80,7 @@ dir.create("data")
 
 # save the data as a .rda file
 save(demo_iris_data, 
-     file = "data/demo_iris_data.rda", 
-     compress = "bzip2")
+     file = "data/demo_iris_data.rda")
 
 
 ```
@@ -183,18 +181,15 @@ Some important things to note
 * README.md and NEWS.md are text files you can edit as described above.
 * The other files mostly boilerplate configuration files which should be left alone.
 
-
 ## Adding data
 
 This is very simple.  Just move the data directory from the analysis project into the root directory of the new data package.  If you are editing an existing package, just move the new .rda files.  You can only have 1 data directory.
-
 
 ## Adding data-processing code
 
 It is good to keep the processed data with the code you used to process it.  That way if there is a problem you can track it down easily.  This code should go in a new directory called "data-raw".  This is an unfortunate name because there is no data in there, only code.
 
 You need to enclose this in a directory called "inst".  Everything in the inst directory gets installed with your package.
-
 
 ### Option:  include raw data
 
@@ -205,7 +200,6 @@ If you want to actually include the raw data or other files with your package, m
 Documenting your data is useful to yourself and others.  
 
 All objects in your data folder need to have a documentation entry.  Documentation is done in a structured text language called Roxygen which is very easy to work with.  
-
 The easiest way to start is with annotating a simple data frame.  The ```sinew``` package will help you get the format correct.  
 
 ```{r eval = FALSE}
@@ -218,7 +212,6 @@ sinew::makeOxygen(demo_iris_data)
 Copy this from the console then just fill in the blanks.  Usually the most important things are to have a clear, descriptive, unique title and then in the description line, to describe how the data was generated and where to find the code for it.  For example:  This is a standard data set distributed with R, with modifications.  See data-raw/file_with_code_you_used.R.
 
 Sinew only works for data frames and functions.  If you want to document other types of objects, you can just copy/paste the format.
-
 
 ## Finish up the data package
 
@@ -239,7 +232,32 @@ devtools::build()
 
 That's it.  When you run the last command, a .tar.gz file will be generated in the directory enclosing your data package code.  You can move that wherever you like.  Better yet you can provide a file path where R will save the binary package.  I usually save to network storage.  You want to be sure to increment your version number each time you make changes so you don't overwrite old versions of your data.  It is always good to be able to go back in time if needed.
 
-The package can easily be shared inside your firewall with local collaborators.  For external collaborators or reviewers, you can use things like Mendeley, Zotero, and Dryad to share large data packages.  Each has a straightforward web interface and the option to keep data private until the manuscript is published.
+The package can easily be shared inside your firewall with local collaborators.  For external collaborators or reviewers, you can use things like figshare to share large data packages.  Figshare has a straightforward web interface and the option to keep data private until the manuscript is published.
+
+## A note about saving single cell RNA-seq data
+
+Single cell RNA-seq objects have three essential components:  a cell-gene matrix, cell metadata and gene metadata.  Traditionally, cell-gene matrix is held internally as a sparse matrix.  This is very efficient way to store these type of data, although going beyond about 100k cells in an object leads to extended loading times and memory issues.  
+
+A better approach has been developed by Cole Trapnell using the BPCells package.  This stores the cell-gene matrix on disk and reads it when necessary. This skips the loading time and requires a much smaller memory footprint.  Using this approach will allow you to have objects containing millions of cells.
+
+Note 1:  The metadata tables are still held in memory, so for 1 million cells, your cell metadata table and other internal objects will still have 1 million rows in them.  These can take some time and memory.
+
+Note 2:  Seurat objects hold multiple transformed copies of the cell-barcode matrix, e.g. raw counts, log transformed counts, etc.  This is very storage/memory inefficient.  I recommend against using this format whenever possible for the reasons above.
+
+Even though the monocle3 approach is very good, there are some implementation issues.  I have written a wrapper function to save monocle3 objects which you should use:
+
+```{r eval = FALSE}
+blaseRtools::save_monocle_disk(object, data_directory = "data", extdata_directory = "inst/extdata")
+```
+
+This will save your object into the extdata directory, as is required by the monocle3 format.  It will put a placeholder object into the data directory.  Why?
+
+* it allows you to document the object like you would any other data object, described above
+* it prevents namespace conflicts in your package
+
+When you do this, monocle3 will put some temp directories into your project root folder.  Remember to delete those before committing to git.
+
+**Critical:  remember to put inst/extdata into your .gitignore file**  You don't want to try to commit that directory.
 
 ##  Installing the Data Package
 
@@ -249,7 +267,7 @@ Instead we use functions from a couple of packages to load the data into your R 
 
 ```{r eval = FALSE}
 # install the data package
-blaseRtemplates::project_data("path/to/directory/containing/data")
+blaseRtools::project_data("path/to/directory/containing/data")
 ```
 
 The function will go to the directory where your data lives, check for the latest version, and install it if necessary.  This is the recommended way to go because you almost always want the latest version and you don't want to waste time installing it if necessary.  

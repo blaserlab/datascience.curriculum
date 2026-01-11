@@ -1,39 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>/articles/week_1.html</loc>
-  </url>
-  <url>
-    <loc>/articles/week_2.html</loc>
-  </url>
-  <url>
-    <loc>/articles/week_3.html</loc>
-  </url>
-  <url>
-    <loc>/articles/week_6.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/news/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>/404.html</loc></url>
+<url><loc>/LICENSE-text.html</loc></url>
+<url><loc>/LICENSE.html</loc></url>
+<url><loc>/articles/core_1.html</loc></url>
+<url><loc>/articles/core_2.html</loc></url>
+<url><loc>/articles/core_3.html</loc></url>
+<url><loc>/articles/core_4.html</loc></url>
+<url><loc>/articles/index.html</loc></url>
+<url><loc>/articles/week_1.html</loc></url>
+<url><loc>/articles/week_2.html</loc></url>
+<url><loc>/articles/week_3.html</loc></url>
+<url><loc>/articles/week_6.html</loc></url>
+<url><loc>/authors.html</loc></url>
+<url><loc>/deps/font-awesome-6.5.2/html/00Index.html</loc></url>
+<url><loc>/index.html</loc></url>
+<url><loc>/news/index.html</loc></url>
+<url><loc>/reference/index.html</loc></url>
 </urlset>
+

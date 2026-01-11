@@ -1,0 +1,364 @@
+# Core Lesson 4: Packages
+
+## Introduction
+
+This lesson is on building R data packages. This is a relatively
+advanced topic, but I think it is important and can be learned quickly.
+This lecture assumes you have a good working knowledge of R and your
+computer file system. You do not need to be an expert in R to do this.
+
+Why would you want to build a data package? Here are the stages your
+data will pass through:
+
+- raw data: should be unchanged after creation. Can be entirely
+  contained within an R data package if it is a lightweight text file.
+  Larger files should be stored and backed up on a network drive.
+- processed data: these are data that have been processed into a form
+  that can be used for plotting or statistical analysis with only a few
+  lines of code and a second or two of computation time.
+- analyzed data: the final tables or figures that convey the results of
+  your experiment to your reader.
+
+The data package is meant to hold processed data and the code you used
+to generate it from the raw data. Since these two things are related, it
+is natural to keep them together in the same digital file. Often data
+processing is computer resource or time-intensive and so you don’t want
+to repeat it every time you interact with your work. Some analyses (like
+single cell RNAseq dimension reduction) are not absolutely reproducible
+in the strictest sense and so saving a processed data object means you
+are always starting from the same place with your subsequent analysis.
+
+What should and shouldn’t be in a data package? This you will have to
+decide for yourself. There is some overhead (effort) to making a data
+package, so you won’t want to save things that can be very rapidly
+calculated or derived from other data objects. Generally you want a data
+package to be no more than a few GB in size so you may need to be
+selective with what you save. If it takes more than 3-4 seconds to
+calculate data for a table or figure, then I will usually put it in the
+data package. Here are the types of things I do and don’t include
+
+Do include:
+
+- processed tabular data for generating statistics or plots
+- single cell data objects (e.g. cellDataSet or Seurat objects)
+- qc files for single cell analysis
+- Trace, Ape, SummarizedHeatmap objects shown in this course
+- Other bioconductor containers: SummarizedExperiment, GenomicRanges
+  etc.
+
+Do not include:
+
+- raw sequencing data, genomic features files, or cell-barcode matrices
+- subsets of any object already in the data package
+- plots
+
+In summary, the benefits of using a data package are:
+
+- Your processed data is linked to the code used to generate it
+- All processed data and code are in a single file that can be
+  distributed and used by collaborators or reviewers
+- Data objects are documented so you have a better chance of recalling
+  what they are and how they were generated at any point in the future
+- Data objects are version-controlled and not easy to change
+  inadvertently.
+- Data versions and analysis code versions are linked, so you can always
+  recreate the state of your project from any prior commit.
+
+## Saving R objects
+
+Once you have identified a data object you would like to put into a
+package, you first need to save it to disk as a `.rda` file. Usually you
+are going to be starting from within an analysis project. Here are some
+rules/best practices:
+
+- create a new directory called “data” to hold your data object
+- save only 1 object per file. R will let you save more but this is not
+  a desirable way to go.
+- give the file the same name as the object.
+
+``` r
+# some demo data to save
+demo_iris_data <- iris
+
+# make a data directory
+dir.create("data")
+
+# save the data as a .rda file
+save(demo_iris_data, 
+     file = "data/demo_iris_data.rda")
+```
+
+At this point you could just stop and then read in the data later when
+needed using `load("data/demo_iris_data.rda")`. But it is better to put
+this into a package and then install the package in your project for the
+reasons mentioned above.
+
+## Setting up the package
+
+First you might want to update your ~/.Rprofile. This will add your
+contact info to the package.
+
+``` r
+options(
+  usethis.full_name = "Jane Doe",
+  usethis.protocol  = "ssh",
+  usethis.description = list(
+    "Authors@R" = utils::person(
+        "Jane", "Doe",
+        email = "jane@example.com",
+        role = c("aut", "cre"),
+        comment = c(ORCID = "JANE'S-ORCID-ID")
+    ),
+    Version = "0.0.0.9000"
+  ),
+  usethis.destdir = "~/the/place/where/I/keep/my/R/projects",
+  usethis.overwrite = TRUE
+)
+```
+
+Then use the dedicated function from blaseRtemplates to set up the
+package project.
+
+``` r
+blaseRtemplates::initialize_package(path = "~/r_projects/workshop.data")
+```
+
+As with a regular project, you want to make a readme and set it up to
+use git using the initialization script:
+
+``` r
+# make a software license 
+usethis::use_mit_license("<your name here>") 
+# generate a readme file to explain your work 
+usethis::use_readme_md(open = FALSE) 
+# *** Only if developing a package *** 
+# uncomment and run to generate a news file to document updates. 
+usethis::use_news_md() 
+# set your default branch to "main" for git init 
+system("git config --global init.defaultBranch main") 
+# initialize git 
+usethis::use_git() 
+# initialize github 
+usethis::use_github(private = TRUE) 
+### Delete this file after initializing the project! ###
+```
+
+A package is like a project but with a few additional requirements, like
+a DESCRIPTION file. The initialize_package function will set that up for
+you. Here is how it will look when you are done:
+
+    .
+    |-- blaser.park.datapkg.Rproj
+    |-- data
+    |   |-- cds_heme_combined.rda
+    |   |-- cds_heme_combined_tm.csv
+    |   `-- human_hsc_pseudobulk_res.rda
+    |-- DESCRIPTION
+    |-- inst
+    |   |-- data-raw
+    |   |   |-- git_commands.R
+    |   |   |-- hsc_pseudobulk.R
+    |   |   `-- reprocess_cds.R
+    |   `-- extdata
+    |       |-- cds_marrow_heme_models
+    |       |   |-- file_index.rds
+    |       |   |-- rdd_pca_transform_model.rds
+    |       |   |-- rdd_umap_transform_model_annoy.idx
+    |       |   |-- rdd_umap_transform_model.rds
+    |       |   `-- rdd_umap_transform_model_umap.idx
+    |       `-- gene_targets.csv
+    |-- library_catalogs
+    |   `-- blas02_blaser.park.datapkg.tsv
+    |-- LICENSE
+    |-- LICENSE.md
+    |-- man
+    |   |-- cds_heme_combined.Rd
+    |   `-- human_hsc_pseudobulk_res.Rd
+    |-- NAMESPACE
+    |-- NEWS.md
+    |-- R
+    |   `-- data.R
+    `-- README.md
+
+    8 directories, 23 files
+
+Some important things to note
+
+- DESCRIPTION: This is the file that indicates to R that this is a
+  package. The most important line for you to interact with is version.
+  Every time you make a new version of the package (add, delete or edit
+  data), you should increment the version number. Title and description
+  can be edited to provide a general description of the purpose of the
+  package but these are not critical. You should leave the other lines
+  as-is.
+- R/: This directory should contain R files. If you were building a
+  package with functions, this is where they would go. For a data-only
+  package, you will create a single R file here called “data.R”.
+- NAMESPACE: This is not used by data-only packages. Do not edit.
+- README.md and NEWS.md are text files you can edit as described above.
+- The other files mostly boilerplate configuration files which should be
+  left alone.
+
+## Adding data
+
+This is very simple. Just move the data directory from the analysis
+project into the root directory of the new data package. If you are
+editing an existing package, just move the new .rda files. You can only
+have 1 data directory.
+
+## Adding data-processing code
+
+It is good to keep the processed data with the code you used to process
+it. That way if there is a problem you can track it down easily. This
+code should go in a new directory called “data-raw”. This is an
+unfortunate name because there is no data in there, only code.
+
+You need to enclose this in a directory called “inst”. Everything in the
+inst directory gets installed with your package.
+
+### Option: include raw data
+
+If you want to actually include the raw data or other files with your
+package, make a directory called “inst/extdata” and put them in there.
+
+## Documenting data
+
+Documenting your data is useful to yourself and others.
+
+All objects in your data folder need to have a documentation entry.
+Documentation is done in a structured text language called Roxygen which
+is very easy to work with.  
+The easiest way to start is with annotating a simple data frame. The
+`sinew` package will help you get the format correct.
+
+``` r
+
+# install sinew if you don't have it
+sinew::makeOxygen(demo_iris_data)
+```
+
+Copy this from the console then just fill in the blanks. Usually the
+most important things are to have a clear, descriptive, unique title and
+then in the description line, to describe how the data was generated and
+where to find the code for it. For example: This is a standard data set
+distributed with R, with modifications. See
+data-raw/file_with_code_you_used.R.
+
+Sinew only works for data frames and functions. If you want to document
+other types of objects, you can just copy/paste the format.
+
+## Finish up the data package
+
+Make sure you remember to increment the version of the data in the
+DESCRIPTION file. Then jot a few notes about what changed in NEWS.md.
+
+Finally you need to tell R to generate the documentation files and build
+the binary data package.
+
+``` r
+# generate the formatted documentation manuals
+devtools::document()
+
+# optionally you can now commit and push to github using the terminal
+
+# build the binary data package
+devtools::build()
+```
+
+That’s it. When you run the last command, a .tar.gz file will be
+generated in the directory enclosing your data package code. You can
+move that wherever you like. Better yet you can provide a file path
+where R will save the binary package. I usually save to network storage.
+You want to be sure to increment your version number each time you make
+changes so you don’t overwrite old versions of your data. It is always
+good to be able to go back in time if needed.
+
+The package can easily be shared inside your firewall with local
+collaborators. For external collaborators or reviewers, you can use
+things like figshare to share large data packages. Figshare has a
+straightforward web interface and the option to keep data private until
+the manuscript is published.
+
+## A note about saving single cell RNA-seq data
+
+Single cell RNA-seq objects have three essential components: a cell-gene
+matrix, cell metadata and gene metadata. Traditionally, cell-gene matrix
+is held internally as a sparse matrix. This is very efficient way to
+store these type of data, although going beyond about 100k cells in an
+object leads to extended loading times and memory issues.
+
+A better approach has been developed by Cole Trapnell using the BPCells
+package. This stores the cell-gene matrix on disk and reads it when
+necessary. This skips the loading time and requires a much smaller
+memory footprint. Using this approach will allow you to have objects
+containing millions of cells.
+
+Note 1: The metadata tables are still held in memory, so for 1 million
+cells, your cell metadata table and other internal objects will still
+have 1 million rows in them. These can take some time and memory.
+
+Note 2: Seurat objects hold multiple transformed copies of the
+cell-barcode matrix, e.g. raw counts, log transformed counts, etc. This
+is very storage/memory inefficient. I recommend against using this
+format whenever possible for the reasons above.
+
+Even though the monocle3 approach is very good, there are some
+implementation issues. I have written a wrapper function to save
+monocle3 objects which you should use:
+
+``` r
+blaseRtools::save_monocle_disk(object, data_directory = "data", extdata_directory = "inst/extdata")
+```
+
+This will save your object into the extdata directory, as is required by
+the monocle3 format. It will put a placeholder object into the data
+directory. Why?
+
+- it allows you to document the object like you would any other data
+  object, described above
+- it prevents namespace conflicts in your package
+
+When you do this, monocle3 will put some temp directories into your
+project root folder. Remember to delete those before committing to git.
+
+**Critical: remember to put inst/extdata into your .gitignore file** You
+don’t want to try to commit that directory.
+
+## Installing the Data Package
+
+The packages we make may be a little different from typical R packages.
+They have no functions which is somewhat unusual but the biggest
+difference is size. If you are working with single cell data, it is
+likely that the size of your data package will exceed what R can handle
+with its normal mechanisms for loading data.
+
+Instead we use functions from a couple of packages to load the data into
+your R session as a digital “pointer”. Until you ask R to reference a
+particular data item, it will reside in memory as a tiny digital address
+to an area on your hard drive. When you ask R to reference those data
+with you code, it is then loaded into memory to be used. This has the
+additional advantage of reducing memory requirements for your work.
+
+``` r
+# install the data package
+blaseRtools::project_data("path/to/directory/containing/data")
+```
+
+The function will go to the directory where your data lives, check for
+the latest version, and install it if necessary. This is the recommended
+way to go because you almost always want the latest version and you
+don’t want to waste time installing it if necessary.
+
+Then the function loads the digital pointers into your R session. Check
+out the environment dropdown menu to see for yourself.
+
+## Exercises
+
+By now you should be comfortable setting up an R project, analyzing your
+data and making figures for a manuscript or presentation.
+
+- Make an R data package with your own processed experimental data and
+  the processing code you used
+- Save it to a network (archival) drive
+- Load the data package back into your project using
+  `blaseRtemplates::project_data()`.

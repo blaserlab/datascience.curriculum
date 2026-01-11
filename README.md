@@ -1,4 +1,4 @@
-### Welcome to the Computational Data Analysis Workshop
+### Welcome to the Computational Data Analysis Course
 
 This course is designed to help you improve your data management and analysis skills.  The skills you will learn can be used for everything from straightforward measurements of biological data to high-dimensional data like scRNA-seq.
 
@@ -8,14 +8,14 @@ This is a refresh of the 2023 Workshop.  It is no longer being offered as a webi
 
 ### Goals
 
-The goals of this workshop are for you to become comfortable with the R statistical computing language and associated computational technology:
+The goals is for you to become comfortable with the R statistical computing language and associated computational technology:
 
 * Rstudio for interacting with R
 * git for version control
 * github to share your work
 * R package development to keep your code and data separate and organized
 
-### Specific Objectives
+### Core Objectives
 
 Once you have completed this course you should be able to:
 
@@ -23,11 +23,21 @@ Once you have completed this course you should be able to:
 * generate a table of descriptive statistics for data from a typical biological experiment
 * perform statistical testing as appropriate
 * generate publication-quality plots using ggplot
-* perform basic analysis of single cell RNA sequencing data
 * generate an R data package holding processed data
 * understand the difference between raw data, processed data, and analysis code
 * use basic version control functions to track and document changes to your analysis
 * publish your code so reviewers can understand how you arrived at your results
+
+
+### Optional Modules
+
+I have several developed software modules which will be of interest to most.  They aid in the programmatic handling of data we often encounter in biology.  After completing the core modules you should be comfortable with the following:
+
+* scRNA-seq data processing and analysis
+* ranged genomic data (ChIPseq etc.):  Trace
+* making heatmaps:  SummarizedHeatmap
+* programmatic generation of genbank files:  Ape
+* blinding images for unbiased quantification
 
 ### Prerequisites
 
@@ -70,9 +80,9 @@ This course covers a relatively wide range of topics which may be intimidating f
 Even intermediate-level users with some pre-existing experience using R will likely learn some helpful information in the early lectures.
 
 
-####	[Week 1:  Setting up your computing environment](https://blaserlab.github.io/datascience.curriculum/articles/week_1.html)
+####	[Core Lesson 1:  Setting up your computing environment](https://blaserlab.github.io/datascience.curriculum/articles/core_1.html)
 
-* [Week 1 R script](https://raw.githubusercontent.com/blaserlab/datascience.curriculum/main/docs/week_1.R)
+* [Core Lesson 1 R script](https://raw.githubusercontent.com/blaserlab/datascience.curriculum/main/docs/core_1.R)
 * Content
   * R and Rstudio
   * blaseRtemplates
@@ -80,9 +90,9 @@ Even intermediate-level users with some pre-existing experience using R will lik
   * Packages
   * Basic Git for the single user
 
-####     [Week 2:  Basics of working with data in R](https://blaserlab.github.io/datascience.curriculum/articles/week_2.html)
+####  [Core Lesson 2:  Basics of working with data in R](https://blaserlab.github.io/datascience.curriculum/articles/core_2.html)
 
-* [Week 2 R script](https://raw.githubusercontent.com/blaserlab/datascience.curriculum/main/docs/week_2.R)
+* [Core Lesson 2 R script](https://raw.githubusercontent.com/blaserlab/datascience.curriculum/main/docs/core_2.R)
 * Content
   * Review GIT
   * File system basics
@@ -94,9 +104,9 @@ Even intermediate-level users with some pre-existing experience using R will lik
   * Data Operations
   * Dplyr
 
-####	[Week 3:  More advanced concepts in R](https://blaserlab.github.io/datascience.curriculum/articles/week_3.html)
+####	[Core Lesson 3:  More advanced concepts in R](https://blaserlab.github.io/datascience.curriculum/articles/core_3.html)
 
-* [Week 3 R script](https://raw.githubusercontent.com/blaserlab/datascience.curriculum/main/docs/week_3.R)
+* [Core Lesson 3 R script](https://raw.githubusercontent.com/blaserlab/datascience.curriculum/main/docs/core_3.R)
 * [Cheat sheets](https://www.rstudio.com/resources/cheatsheets/)
 * [R color brewer](https://r-graph-gallery.com/38-rcolorbrewers-palettes.html)
 * [R graphics cookbook](https://r-graphics.org/)
@@ -108,9 +118,21 @@ Even intermediate-level users with some pre-existing experience using R will lik
   * Plotting
   * Statistical Testing
 
-####	[Week 4: blaseRtools scRNA-seq tutorial 1](https://blaserlab.github.io/blaseRtools/articles/scRNAseq.html)
+#### [Core Lesson 4:  Building and using data packages](https://blaserlab.github.io/datascience.curriculum/articles/core_4.html)
 
-* [Week 4/5 R script](https://raw.githubusercontent.com/blaserlab/blaseRtools/master/docs/pages/scRNAseq.R)
+* [Core Lesson 4 R script](https://raw.githubusercontent.com/blaserlab/datascience.curriculum/main/docs/core_4.R)
+* Content
+  * Saving R Objects
+  * Setting up the Package
+  * Adding Data
+  * Adding Code
+  * Including Raw Data
+  * Documentation
+  * Finishing Up
+  * Loading the Data Package
+
+####	[Optional Module 1: scRNA-seq tutorial](https://blaserlab.github.io/blaseRtools/articles/scRNAseq.html)
+
 * 10X Datasets
   * You will have to register your email address to download.
   * [Chromium controller](https://www.10xgenomics.com/resources/datasets/500-human-pbm-cs-3-lt-v-3-1-chromium-controller-3-1-low-6-1-0)
@@ -126,30 +148,42 @@ Even intermediate-level users with some pre-existing experience using R will lik
   * Clustering
   * Gene Modules
   * Label Transfer
-
-
-####	[Week 5: blaseRtools scRNA-seq tutorial 2](https://blaserlab.github.io/blaseRtools/articles/scRNAseq.html)
-
-* [Week 4/5 R script](https://raw.githubusercontent.com/blaserlab/blaseRtools/master/docs/pages/scRNAseq.R)
-* Content
   * UMAP Plots
   * Gene Bubbles 
   * Differential Gene Expression
-    * Pseudobulk
-  * Differential representation (see week 6 video)
+  * Differential representation
 
-#### [Week 6:  Building and using data packages](https://blaserlab.github.io/datascience.curriculum/articles/week_6.html)
+####	[Optional Module 2: Ranged Genomic Data tutorial](https://blaserlab.github.io/blaseRtools/articles/trace.html)
 
-* [Week 6 R script](https://raw.githubusercontent.com/blaserlab/datascience.curriculum/main/docs/week_6.R)
 * Content
-  * Saving R Objects
-  * Setting up the Package
-  * Adding Data
-  * Adding Code
-  * Including Raw Data
-  * Documentation
-  * Finishing Up
-  * Loading the Data Package
+  * The Trace Container
+  * Plotting Component Tracks
+    * Trace data
+    * Gene model
+    * Peaks
+    * Links
+    * Axis
+  * Putting the Plot Together
+
+####	[Optional Module 3: Heatmap tutorial](https://blaserlab.github.io/blaseRtools/articles/SummarizedHeatmap.html)
+
+* Content
+  * Constructig a SummarizedHeatmap
+  * Plotting
+    * Main body
+    * Dendrograms
+    * Row and Column Annotations
+    * Highlights
+  * More customization and Variations
+
+####	[Optional Module 4: APE tutorial](https://blaserlab.github.io/blaseRtools/articles/Ape.html)
+
+* Content
+  * Ape Class
+  * I/O
+  * Annotating TF binding sites with FIMO
+
+####	[Optional Module 5: Image blinding tutorial](https://blaserlab.github.io/blaseRtools/articles/blind_images.html)
 
 #### Course Evaluation
 * I appreciate feedback on things that are or are not working.

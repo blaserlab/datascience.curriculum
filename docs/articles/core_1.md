@@ -1,0 +1,565 @@
+# Core Lesson 1: Setting Up
+
+## Introduction
+
+This course will focus on what I believe are the essential skills
+necessary for a laboratory-based scientist to use R and Rstudio in an
+effective way. There are many other detailed resources out there for
+you.
+
+- [Software carpentry](https://software-carpentry.org/lessons/previous/)
+  has very good tutorials for R, python, git and working with the
+  command line.  
+- [R for data science](https://r4ds.had.co.nz/) is a book written by
+  Hadley Wickham who wrote much of the software we use in R
+- [Modern dive](https://moderndive.com/) is focused on modeling if you
+  are interested in more clinical data sets
+
+These and many others are good resources if you want to extend your
+knowledge beyond what we cover here.
+
+Learning R at times will seem like learning a foreign language. You will
+make errors. **Start by trying your best and then ask AI for help**.
+This is how you learn.
+
+## R and Rstudio
+
+R is a statistical programming language that runs as a computer program.
+Rstudio is known as an integrated development environment or IDE. It is
+the **best** way for humans to interact with the R program.
+
+Rstudio provides two main ways of interacting with R: directly via the R
+Console and via R scripts.
+
+- R console: you type in commands and output is usually returned to the
+  console. The commands are logged in a history file if you really need
+  them, but this is inconvenient. A better option is to use scripts.
+
+  **Warning and Error messages will appear in the console. Always pay
+  attention to what they are saying.**
+
+- R scripts: these are text files, usually in the form of .R. When you
+  run 1 or more lines, Rstudio feeds them into the console and R follows
+  the commands. This is good because you always have a plain text record
+  of what you did. So when you build up a multi-step analysis it is easy
+  to see how you got the end product.
+
+Better than running the whole file line by line is “sourcing” the file.
+You can do this by typing Ctrl+Shift+S or clicking the “Source” button
+in the upper right corner of the source pane (usually top-left) in
+Rstudio. Why is this better? Let’s say you left an error in your script.
+Maybe the presence of this error changes the final output you are trying
+to produce. If you run all of the lines, R will notify you of the error
+and then keep going. Easy to miss if this is the only error. If you
+source the file, it will stop completely on errors so you don’t end up
+with errors you aren’t aware of.
+
+**You always want your programs to error in obvious ways so you don’t
+carry on with incorrect data.**
+
+Rstudio provides a number of standard panes that display useful
+information. These work very well out of the box and don’t need
+modification. They include a source (script) editor, and 3 tabbed
+windows that give you access to the console, the computer terminal, a
+graphical file explorer, help information, a plot viewer, a
+workspace/environment viewer (more on that later), git status etc.
+
+By default, R studio gives you the option to save your workspace data
+when you close out a session and then to reload your workspace from that
+file the next time you start to work. This is generally not a good idea,
+for reasons we will see. It wastes time loading and quitting sessions
+and you want to be explicit in what objects you are saving, if and when
+you save them.
+
+To turn this off, go to the Rstudio menu bar, select Tools, then Global
+Options. Make the following selections in the pop-up window:
+
+![R studio workspace options](images/rstudio_opts.png)
+
+R studio workspace options
+
+## Setting up your system
+
+**Note this section is fairly detailed. It is recommended if you want to
+work on your own system. If you are part of a multiuser system that
+someone else is managing, you can skip it.**
+
+I recommend this approach to setting up your R installation. In
+comparison to other methods, the blaseRtemplates method provides greater
+transparency and reproducibility and an improved user experience
+(faster, fewer confusing messages).
+
+First, install the blaseRtemplates package using whatever package
+installer you currently use. Assuming the base install function, run:
+
+``` r
+install.packages('blaseRtemplates', repos = c('https://blaserlab.r-universe.dev'))
+```
+
+Next, simply run the following command:
+
+``` r
+library("blaseRtemplates")
+establish_new_bt(cache_path = "<some_directory>/r_4_5_cache", project_path = "<some_directory>/projects")
+```
+
+What will this do?
+
+- It will create directories where indicated, write a standard .Rprofile
+  document, and modify the user .Renviron file to configure R
+  properly.  
+- It will not overwrite existing directories and will fail when an
+  existing installation is already present in the same location.  
+- The only modification outside of the provided directory is to the
+  .Renviron file. If you have existing configurations in your .Renviron
+  file, they will only be changed if they are conflicting. If this is
+  problematic, then you should archive your .Renviron file before
+  running. The new .Renviron file will cause R to use the new .Rprofile
+  in the cache directory and skip existing user- and project-level
+  .Rprofiles.
+
+When R starts a new session, it looks for a series of files to configure
+itself. This configuration includes environment variables (in the
+.Renviron file) and any desired R code (in the .Rprofile file). As
+included in this function, these configurations only affect user
+experience i.e. they should not affect the results produced by your
+code. By user experience I mean connection to the proper package
+libraries and repositories and some safeguards to prevent working
+outside of projects.
+
+For more information on how R starts, see [this
+link.](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Startup.html "R startup").
+
+### Directory Structure
+
+    .
+    |-- projects
+    |   `-- baseproject
+    `-- r_4_5_cache
+        |-- library
+        |-- logs
+        |-- source
+        |-- user_project
+        |-- dependency_catalog.tsv
+        |-- package_catalog.tsv
+        `-- .Rprofile
+
+First, note that two main subdirectories have been created in one parent
+directory. This is optional and can be specified by the function inputs,
+but for a single user system it is recommended to keep them together for
+the sake of organization.
+
+- projects: where your projects should be initialized. They can go
+  anywhere but you should keep them here. The baseproject is created by
+  the establish_new_bt function. If you close a project without moving
+  to a new one or try to start a session outside of a project, it will
+  bounce you here. This prevents undesired operations in e.g. the home
+  directory or elsewhere.
+
+- r_4_5_cache: This holds all of the inner workings of the
+  blaseRtemplates system.
+
+  - library: The versioned/hashed package binary cache. Each package is
+    stored under the following rubric: name \> version \> hash \> name
+    \> contents. This structure is generated whenever blaseRtemplates
+    installs a new package in any project.
+
+  - logs: collection of .Rhistory files. Rather than 1 endless file
+    (default), blaseRtemplates will store history files for each session
+    by user and date/time
+
+  - source: Package source files. Used by the installer, pak.
+
+  - user_project: A collection of symlinks to versioned/hashed packages
+    in the library. This is identified as the first entry in .libPaths()
+    so it is where R looks first for packages. Why do this? 1. It allows
+    reproducibility. If I update a package for one project, it may break
+    something in an older project. This allows each project to have its
+    own set of packages. (The list of what versions are used is kept as
+    a tsv file within the project, so it is completely portable. Anyone
+    who wants to replicate your code just has to install that list of
+    packages.) 2. It makes the system lightweight. Package code and more
+    significantly, data, is stored in one location and accessible to
+    many projects, according to version.
+
+  - dependency_catalog.tsv: a list of package dependencies by package
+    hash. Speeds up installation when linking packages from the cache to
+    a project.
+
+  - package_catalog.tsv: the master catalog of packages available in the
+    cache.
+
+  - .Rprofile: the Rprofile used on startup, as specified by the new
+    .Renviron file
+
+The library directory is initially populated using all packages
+available to R the local libraries. Depending on what is in those
+libraries, and processing/network speeds, this may take some time.
+
+## Projects
+
+A project is a self-contained group of files for your R data analysis.
+This should align conceptually with your experiments. If you have a set
+of single cell data and imaging data related to the same scientific
+concept or paper then it can all go in the same project.
+
+Projects automatically define their working directory to be the root of
+the projects. That means you can reference any file in the root
+directory by typing its name like so: “file.R”. If that file was one
+directory down, it would be “directory/file.R”. **There is never any
+reason to change your working directory to something other than the
+project root.**
+
+You always want to be working in a project.
+
+Another way to think about your project is this: it is a big set of
+scripted instructions that converts your data into figures, tables and
+other useful documents that you can directly use in your thesis or
+manuscript. These instructions are all in the form of text documents
+that reside in the project. Nothing besides these text-based
+instructions should be in your project and no critical instructions
+should be saved external to your project. **You will want to use GIT to
+track your changes to these instructions over time and GITHUB to share
+them with collaborators, journal reviewers, and the scientific
+community.** THe blaseRtemplates project structure will help you do all
+of this in a sensible way.
+
+### Setting up a project
+
+The best way to do this is through automated commands, rather than
+through the program menus. This way every package is set up in a
+consistent manner, every time. Then when you have to revisit a project
+after months and months, it is easy to navigate.
+
+``` r
+# create a project called rclass_project_2023 in your projects directory
+blaseRtemplates::initialize_project("<projects directory>/rclass_project_2023")
+```
+
+That function will create the skeletonized project, activate it and
+restart your session within it.
+
+### Project organization
+
+I keep all of my R scripts in a directory called “R”. If you initialized
+your project with
+[`blaseRtemplates::initialize_project()`](https://blaserlab.github.io/blaseRtemplates/reference/initialize_project.html),
+you will have scripts named:
+
+- `initialization.R`: use this for setting up your project to use git
+  and github  
+- `dependencies.R`: use this for loading data and attaching packages to
+  your session
+- `configs.R`: use this for setting graphical and aesthetic parameters.
+  I also use this for resolving function name conflicts.
+- `git_commands.R`: the commands here will allow you to handle 99% of
+  git interactions via R in a scripted way.
+
+In addition to this, the main analysis scripts for the project will go
+in the R folder and may go in subdirectories if there are a lot of them.
+Other file types, such as \*.Rmd, would go in their own folder named
+Rmd/. This arrangement is very flexible for simple data analysis
+projects; the rules become more strict when we build packages.
+
+### Git and github
+
+You want to try to use git and github. There is a vast array of
+resources for you to read about git and troubleshoot issues. Briefly, it
+is a program that tracks changes to text files. Since all of the code
+you will write is text-based this is a great resource for you to keep
+track of your progress on your work.
+
+Git tracks changes to files in a group of files known as a repository.
+The way we are using it here, your project is the repository. Github is
+simply a website that hosts a copy of your repository on the web. This
+is how you will share your work with journal reviewers and editors and
+others.
+
+### Setting up git and github for the first time on a system
+
+There are some things you need to do to connect git, github and R for
+the first time. These lines are included at the bottom of the file,
+“R/git_commands.R”. They start out in every project and I usually leave
+them in there. Sometimes there are connection issues with github and you
+have to run these again to get new credentials.
+
+``` r
+# make sure you have a github account
+# https://github.com/join
+
+# install git
+## Windows ->  https://git-scm.com/download/win
+## Mac     ->  https://git-scm.com/download/mac
+## Linux   ->  https://git-scm.com/download/linux
+
+# configure git in Rstudio
+usethis::use_git_config(user.name = "YourName",
+                        user.email = "your@mail.com")
+
+# create a personal access token at the github website
+# set the expiration date as desired (no expiration date)
+# permissions should be set automatically.  
+usethis::create_github_token()
+
+# run this and enter your token at the prompt
+blaseRtemplates::gitcreds_set()
+
+# Run the following once per user to collaborate smoothly
+blaseRtemplates::setup_git_collab()
+```
+
+Connecting/authenticating to github is the most difficult part of all of
+this. The keychain program used by `gitcreds_set()` may not be available
+or working on all systems. As a workaround, you can replace the line in
+your .Renviron file, GITHUB_PAT=gitcreds::gitcreds_get(use_cache =
+FALSE)\$password, with GITHUB_PAT=your_token. There is a small security
+risk to this if someone were to gain access to your .Renviron file. So
+proceed with caution.
+
+The necessary permissions should be set automatically by these commands.
+By default, the token expires after 30 days, but you can override this
+which is what I usually do.
+
+### Set up your project to use git and github
+
+The following lines are taken directly from “R/initialization.R”. You
+should run these when you start up the project the first time:
+
+``` r
+# make a software license
+usethis::use_mit_license("<your name here>")
+
+# generate a readme file to explain your work
+usethis::use_readme_md(open = FALSE)
+
+# *** Only if developing a package ***
+# uncomment and run to generate a news file to document updates.
+# usethis::use_news_md()
+
+# initialize git
+usethis::use_git()
+
+# initialize github
+usethis::use_github(private = TRUE)
+
+
+### Delete this file after initializing the project! ###
+```
+
+After you run this script, you can delete it.
+
+### Using git and github
+
+You can interact with git in at least 4 different ways:
+
+- via scripted commands on `R/git_commands.R`
+- using the Git pane in Rstudio
+- using the terminal
+- using a third-party git client such as [git
+  kraken](https://www.gitkraken.com/) or
+  [sourcetree](https://www.sourcetreeapp.com/)
+
+My recommended approach is to use the scripted git commands to control
+what is happening and to use the Git pane to monitor the status of your
+repository. Just remember to hit the refresh icon if things look strange
+in the Git panel.
+
+On rare occasions you may need to use the terminal to fix conflicts, but
+this should only happen if you are collaborating with git.
+
+Many people use third-party apps, but these have their own learning
+curve.
+
+The basic process for using Git as a single user is this:
+
+- save all of your open files
+- check the status of your repository so you know what files have
+  changed
+- add them to the Git index of files
+- commit them to create a save point for all of the files in your
+  project
+- push the commit to the remote repository (github)
+
+Here are the commands from `git_commands.R`
+
+``` r
+# basic everyday commands for all git users -------------------------------
+ 
+gert::git_status()
+gert::git_add("*")
+gert::git_commit("a short comment describing the changes made")
+blaseRtemplates::git_push_all()
+```
+
+That is it!
+
+If you run into problems, the error messages are usually informative. If
+you have trouble understanding an error or it isn’t helpful, just ask
+AI.
+
+One common use-case for git for the single user is to “un-delete” files.
+The easiest way is to go to your github site for that repo. Click on
+clock icon labeled “commits” (which helpfully includes a “back in time”
+arrow). Then select from the list of commits (versions). Click browse
+files and find what you were looking for. Click on the raw version to
+copy and paste directly back into R studio.
+
+Here’s a more complicated situation most of us can relate to:
+
+- You submit your beautiful manuscript to Journal A
+- Journal A bounces it right back to you
+- You reformat all of the figures for your paper in R and submit it to
+  Journal B
+- Journal B is more interested, and they send it out for review and 6
+  weeks later reject it.
+- You decide to submit to Journal C which has similar figure formatting
+  as does Journal A.
+- What do you do?
+
+``` r
+# run these commands to rewind to a prior "good" commit ----------------------
+
+# make sure git status is "clean" (all changes committed) before rewinding
+# gert::git_log() #find the id of the good commit
+# blaseRtemplates::git_rewind_to(commit = "<good commit id>")
+```
+
+Hopefully you have a commit in your git log with the message “submitted
+to Journal A”. You select that id (the long character string) and
+provide it to the
+[`blaseRtemplates::git_rewind_to()`](https://blaserlab.github.io/blaseRtemplates/reference/git_rewind_to.html)
+function. This function will generate a new commit that reverses all of
+your changes from present, back to the indicated commit. Nothing is lost
+or overwritten in the process of going back in time. The only thing that
+happens is that inverse changes are applied. So if you need to go to
+Journal D (which is formatted like Journal B) you can always do that
+later.
+
+## Packages
+
+Packages are chunks of code and/or data that people have written and
+made available to us to use. The main reason we use R is that there is a
+large library of useful packages for the biological sciences that we can
+build our work on, all of which are free to use. We can also easily
+package our own data which is a great way to archive and distribute your
+work.
+
+Packages are most often stored and distributed via standard
+repositories. The most common are [CRAN](https://cran.r-project.org/),
+[R-universe](https://r-universe.dev/search/), and
+[Bioconductor](https://www.bioconductor.org/). Packages can also be
+distributed as source code (text based files), usually via github.
+
+**What happens when we “install” packages?**
+
+R downloads the compressed file and then unpacks it in a library
+directory on your computer or server. IF you are installing from source
+code (most linux computers or github repositories), then the code needs
+to be turned into a set of binary instructions for the computer to use,
+a process called compiling. This is what the Xcode (Mac) and RTools
+(Win) programs do.
+
+Every time you start an R session, a set of commands is run that points
+R to one or more library directories. This is how R finds the commands
+you ask it to use. Unfortunately, it can be difficult to find where
+these directories live and to know which one is being used at any
+particular time. blaseRtemplates helps manage this.
+
+### Installing packages
+
+As mentioned above, blaseRtemplates-based projects use a user-project
+library that is linked to specific package versions in the main cache.
+This way, each project you start can use its own set of packages without
+duplication of the actual software. More importantly, if you update a
+package in project B, it doesn’t update the package in project A. Why is
+this good? Because unintentional updates may “break” an older project
+which is something you want to avoid.
+
+The best way to install packages using blaseRtemplates is this:
+
+- Install a new package or get the latest version from a repository
+
+``` r
+blaseRtemplates::install_one_package(package = "<package_name>", how = "new_or_update")
+```
+
+- Get a fresh link to the newest version available in the cache
+
+``` r
+blaseRtemplates::install_one_package(package = "<package_name>", how = "link_from_cache")
+```
+
+- Get a specific version from the cache
+
+``` r
+blaseRtemplates::install_one_package(package = "<package_name>", how = "link_from_cache", which_version = "1.0.0")
+```
+
+- Versioned package installations are supported for cran only. If
+  unavailable, the latest version will be installed.
+
+``` r
+blaseRtemplates::install_one_package(package = "<cran_package_name>", how = "new_or_update", which_version = "1.0.0")
+```
+
+You can find a human-readable table with all of the packages in the
+cache at BLASERTEMPLATES_CACHE_ROOT/package_catalog.tsv. Each package in
+the cache is “hashed”. This means that even if there are two different
+versions of the same package that share the same version number, you can
+still tell them apart and install the one you need.
+
+This shouldn’t happen but it can if someone updates a package but
+forgets to increment the version number.
+
+- Install a specific hash of a package
+
+``` r
+blaseRtemplates::install_one_package(package = "<cran_package_name>", how = "new_or_update", which_hash = "72f8712f97416089ade12df29386b80b")
+```
+
+You can find a human-readable table with all of the packages used by a
+given project in the library_catalogs directory of the project. There is
+at least one file in there. For projects collaborating through git,
+there will be one for each user. These files indicate all available and
+actively used packages in the R code. This file is meant to be tracked
+by git and so can provide version control and reproducibility for the
+packages used in your project. If you and a collaborator are getting
+different results or errors, you can use this to see exactly which
+package set you are working with.
+
+### Get a new project library
+
+You can use this function to replace the entire project library with a
+new one. By default, the function will install the newest version of
+each package available available in the cache.
+
+``` r
+blaseRtemplates::get_new_library()
+```
+
+Say, however, you want to adopt the entire package library used by a
+collaborator on the project (or one from your past self, retrieved from
+git), supply their project library catalog as the argument to
+[`get_new_library()`](https://blaserlab.github.io/blaseRtemplates/reference/get_new_library.html).
+
+``` r
+blaseRtemplates::get_new_library("library_catalogs/<file>.tsv")
+```
+
+## Exercises
+
+1.  Use the code blocks from this vignette to make a new R project on
+    your system and for extra credit push it to github.
+
+    - First, establish the blaseRtemplates installation
+    - Next create a new project
+    - Connect your system to your github account using the
+      git_commands.R script
+    - Last, run through the initialization script and delete it
+
+2.  Explore the scripts in the R directory.
+
+3.  Try running the code in dependencies.R to install some recommended
+    packages.
+
+4.  Save your work, then add, commit, and push to your github site.
