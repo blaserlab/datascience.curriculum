@@ -350,7 +350,6 @@ ggplot(data = iris, mapping = aes(x = Species, y = Sepal.Length, color = Species
 Finally you can change the look of the axes, labels and legends.  There are many different lines of code you can use to do this, most of which start with ```theme()```.  I usually prefer to start with a preset theme which looks nice for almost all plots.  We can also get rid of the legend which doesn't help much in this case:
 
 
-
 ```{r}
 library(cowplot)
 ggplot(data = iris, mapping = aes(x = Species, y = Sepal.Length, color = Species, fill = Species)) +
@@ -412,6 +411,41 @@ iris |>
 ```
 
 rstatix is a useful package for extending the base statistical functions of R.
+
+You may have noticed that stat_compare_means uses unadjusted p values.  It is good practice to adjust for multiple comparisons.  In this case, you may wish to use the p.adj values in your plot.  Or you may wish to use p values calculated by some other method, such as a mixed-effects model. 
+
+In this case use rstatix::geom_bracket:
+
+
+```{r}
+
+pvals <- iris |>
+  t_test(formula = Sepal.Length ~ Species) |> 
+  add_significance(p.col = "p.adj")# adds the significance stars
+
+ggplot(data = iris, mapping = aes(x = Species, y = Sepal.Length, color = Species, fill = Species)) +
+  geom_jitter(shape = 21, alpha = 0.4, size = 2) +
+  stat_summary(fun.data = mean_se, 
+               geom = "crossbar", 
+               color = "black", 
+               alpha = 0.2) +
+  geom_bracket(data = pvals,# the tibble holding the significance data we wish to use
+               inherit.aes = FALSE,# ignores aesthetics from the main plot
+               color = "black",
+               aes(label = p.adj.signif,# the column with the values we wish to use
+                   xmin = group1,# the first group of the comparison from pvals
+                   xmax = group2),# the second group of the comparison from pvals 
+               y.position = c(8, 8.25, 8.5)) + 
+  scale_fill_manual(values = c("setosa" = "red3", 
+                               "versicolor" = "green4", 
+                               "virginica" = "blue3"), 
+                    aesthetics = c("fill", "color")) +
+  theme_cowplot() + 
+  theme(legend.position = "none")
+
+```
+
+This is a little more abstract than stat_compare_means, but is more flexible and gives you explicit control of the plot.  Always double check that the groups get interpreted correctly.
 
 ## Exercises
 

@@ -271,3 +271,31 @@ iris |>
   t_test(formula = Sepal.Length ~ Species)
 
 
+
+## ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+pvals <- iris |>
+  t_test(formula = Sepal.Length ~ Species) |> 
+  add_significance(p.col = "p.adj")# adds the significance stars
+
+ggplot(data = iris, mapping = aes(x = Species, y = Sepal.Length, color = Species, fill = Species)) +
+  geom_jitter(shape = 21, alpha = 0.4, size = 2) +
+  stat_summary(fun.data = mean_se, 
+               geom = "crossbar", 
+               color = "black", 
+               alpha = 0.2) +
+  geom_bracket(data = pvals,# the tibble holding the significance data we wish to use
+               inherit.aes = FALSE,# ignores aesthetics from the main plot
+               color = "black",
+               aes(label = p.adj.signif,# the column with the values we wish to use
+                   xmin = group1,# the first group of the comparison from pvals
+                   xmax = group2),# the second group of the comparison from pvals 
+               y.position = c(8, 8.25, 8.5)) + 
+  scale_fill_manual(values = c("setosa" = "red3", 
+                               "versicolor" = "green4", 
+                               "virginica" = "blue3"), 
+                    aesthetics = c("fill", "color")) +
+  theme_cowplot() + 
+  theme(legend.position = "none")
+
+
