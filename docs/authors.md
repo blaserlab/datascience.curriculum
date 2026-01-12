@@ -8,13 +8,13 @@
 ## Citation
 
 Blaser B (2026). *datascience.curriculum: Blaser Lab Data Science Online
-Course*. R package version 0.0.0.9010,
+Course*. R package version 0.0.0.9011,
 <https://blaserlab.github.io/datascience.curriculum/>.
 
     @Manual{,
       title = {datascience.curriculum: Blaser Lab Data Science Online Course},
       author = {Brad Blaser},
       year = {2026},
-      note = {R package version 0.0.0.9010},
+      note = {R package version 0.0.0.9011},
       url = {https://blaserlab.github.io/datascience.curriculum/},
     }

@@ -46,7 +46,7 @@ Once you have completed this course you should be able to:
 
 ### Optional Modules
 
-I have several developed software modules which will be of interest to
+I have developed several software modules which will be of interest to
 most. They aid in the programmatic handling of data we often encounter
 in biology. After completing the core modules you should be comfortable
 with the following:
