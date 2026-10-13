@@ -67,7 +67,7 @@ I recommend this approach to setting up your R installation.  In comparison to o
 First, install the blaseRtemplates package using whatever package installer you currently use. Assuming the base install function, run:
 
 ```{r}
-install.packages('blaseRtemplates', repos = c('https://blaserlab.r-universe.dev'))
+install.packages('blaseRtemplates', repos = c('https://blaserlab.r-universe.dev', 'https://cloud.r-project.org'))
 ```
 
 Next, simply run the following command:

@@ -68,6 +68,7 @@ outputs.
 Here is the syntax you must use when writing functions in R:
 
 ``` r
+
 # simple function to add two numbers
 function_name <- function(argument_1, argument_2) {
   result <- argument_1 + argument_2
@@ -88,6 +89,7 @@ In order to demonstrate the concept of scope from the previous section,
 see this example:
 
 ``` r
+
 
 # both arguments will be contained within the function's scope
 good_sum <- function(addend_1, addend_2) {
@@ -123,6 +125,7 @@ and return the list:
 
 ``` r
 
+
 two_averages <- function(x) {
   # calculate the mean and median
   mean <- mean(x)
@@ -155,6 +158,7 @@ your custom functions. Use them to provide logic to your function or to
 catch errors.
 
 ``` r
+
 unsafe_divide <- function(x, y) {
   result <- x/y
   return(result)
@@ -199,6 +203,7 @@ and should generally be avoided, so even for simple examples I write
 them like this.
 
 ``` r
+
 # attach the packages we will need
 library(tidyverse)
 
@@ -319,6 +324,7 @@ describe dimensions of your data.
 As a simple example:
 
 ``` r
+
 # example data
 as_tibble(iris)
 #> # A tibble: 150 × 5
@@ -348,6 +354,7 @@ of our data, but we haven’t told ggplot how to display it.
 Graphical elements are called geoms:
 
 ``` r
+
 # add a basic geom
 ggplot(data = iris, mapping = aes(x = Species, y = Sepal.Length)) +
   geom_jitter()
@@ -362,6 +369,7 @@ have each Species depicted with a different color to align with a
 graphical theme in your figure.
 
 ``` r
+
 ggplot(data = iris, mapping = aes(x = Species, y = Sepal.Length, color = Species, fill = Species)) +
   geom_jitter(shape = 21, alpha = 0.4, size = 2)
 ```
@@ -372,6 +380,7 @@ For most journals you want to show a measure of central tendency and
 variation like mean +/- sem.
 
 ``` r
+
 ggplot(data = iris, mapping = aes(x = Species, y = Sepal.Length, color = Species, fill = Species)) +
   geom_jitter(shape = 21, alpha = 0.4, size = 2) +
   stat_summary(fun.data = mean_se, 
@@ -386,6 +395,7 @@ Often we want those nice p value indicators. This is tedious to add in R
 directly so we use a helper function from the ggpubr package:
 
 ``` r
+
 library(ggpubr)
 ggplot(data = iris, mapping = aes(x = Species, y = Sepal.Length, color = Species, fill = Species)) +
   geom_jitter(shape = 21, alpha = 0.4, size = 2) +
@@ -405,6 +415,7 @@ ggplot(data = iris, mapping = aes(x = Species, y = Sepal.Length, color = Species
 We can change the default colors using custom scales:
 
 ``` r
+
 ggplot(data = iris, mapping = aes(x = Species, y = Sepal.Length, color = Species, fill = Species)) +
   geom_jitter(shape = 21, alpha = 0.4, size = 2) +
   stat_summary(fun.data = mean_se, 
@@ -427,6 +438,7 @@ brewer](https://www.r-graph-gallery.com/38-rcolorbrewers-palettes.html).
 You can also set your own custom scales:
 
 ``` r
+
 ggplot(data = iris, mapping = aes(x = Species, y = Sepal.Length, color = Species, fill = Species)) +
   geom_jitter(shape = 21, alpha = 0.4, size = 2) +
   stat_summary(fun.data = mean_se, 
@@ -455,6 +467,7 @@ all plots. We can also get rid of the legend which doesn’t help much in
 this case:
 
 ``` r
+
 library(cowplot)
 ggplot(data = iris, mapping = aes(x = Species, y = Sepal.Length, color = Species, fill = Species)) +
   geom_jitter(shape = 21, alpha = 0.4, size = 2) +
@@ -488,6 +501,7 @@ how to perform things like t-tests and wilcox tests on your data.
 R can perform a large number of statistical tests with base functions:
 
 ``` r
+
 t.test(x  = iris |> 
          filter(Species == "setosa") |>
          pull(Sepal.Length),
@@ -517,6 +531,7 @@ For me, the base function above is painful both to type and to read. You
 may wish to use a more concise method:
 
 ``` r
+
 library(rstatix)
 # print out a table of descriptive values
 iris |>

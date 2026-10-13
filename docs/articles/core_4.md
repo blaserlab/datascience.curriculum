@@ -77,6 +77,7 @@ rules/best practices:
 - give the file the same name as the object.
 
 ``` r
+
 # some demo data to save
 demo_iris_data <- iris
 
@@ -99,6 +100,7 @@ First you might want to update your ~/.Rprofile. This will add your
 contact info to the package.
 
 ``` r
+
 options(
   usethis.full_name = "Jane Doe",
   usethis.protocol  = "ssh",
@@ -120,6 +122,7 @@ Then use the dedicated function from blaseRtemplates to set up the
 package project.
 
 ``` r
+
 blaseRtemplates::initialize_package(path = "~/r_projects/workshop.data")
 ```
 
@@ -127,6 +130,7 @@ As with a regular project, you want to make a readme and set it up to
 use git using the initialization script:
 
 ``` r
+
 # make a software license 
 usethis::use_mit_license("<your name here>") 
 # generate a readme file to explain your work 
@@ -227,11 +231,12 @@ Documenting your data is useful to yourself and others.
 
 All objects in your data folder need to have a documentation entry.
 Documentation is done in a structured text language called Roxygen which
-is very easy to work with.  
+is very easy to work with.\
 The easiest way to start is with annotating a simple data frame. The
 `sinew` package will help you get the format correct.
 
 ``` r
+
 
 # install sinew if you don't have it
 sinew::makeOxygen(demo_iris_data)
@@ -256,6 +261,7 @@ Finally you need to tell R to generate the documentation files and build
 the binary data package.
 
 ``` r
+
 # generate the formatted documentation manuals
 devtools::document()
 
@@ -307,6 +313,7 @@ implementation issues. I have written a wrapper function to save
 monocle3 objects which you should use:
 
 ``` r
+
 blaseRtools::save_monocle_disk(object, data_directory = "data", extdata_directory = "inst/extdata")
 ```
 
@@ -340,6 +347,7 @@ with you code, it is then loaded into memory to be used. This has the
 additional advantage of reducing memory requirements for your work.
 
 ``` r
+
 # install the data package
 blaseRtools::project_data("path/to/directory/containing/data")
 ```

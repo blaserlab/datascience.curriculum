@@ -9,7 +9,7 @@ you.
 
 - [Software carpentry](https://software-carpentry.org/lessons/previous/)
   has very good tutorials for R, python, git and working with the
-  command line.  
+  command line.\
 - [R for data science](https://r4ds.had.co.nz/) is a book written by
   Hadley Wickham who wrote much of the software we use in R
 - [Modern dive](https://moderndive.com/) is focused on modeling if you
@@ -87,12 +87,14 @@ First, install the blaseRtemplates package using whatever package
 installer you currently use. Assuming the base install function, run:
 
 ``` r
+
 install.packages('blaseRtemplates', repos = c('https://blaserlab.r-universe.dev'))
 ```
 
 Next, simply run the following command:
 
 ``` r
+
 library("blaseRtemplates")
 establish_new_bt(cache_path = "<some_directory>/r_4_2_cache", project_path = "<some_directory>/projects")
 ```
@@ -100,10 +102,9 @@ establish_new_bt(cache_path = "<some_directory>/r_4_2_cache", project_path = "<s
 What will this do?
 
 - It will create directories where indicated, write a standard .Rprofile
-  document, and modify the user .Renviron file to configure R
-  properly.  
+  document, and modify the user .Renviron file to configure R properly.\
 - It will not overwrite existing directories and will fail when an
-  existing installation is already present in the same location.  
+  existing installation is already present in the same location.\
 - The only modification outside of the provided directory is to the
   .Renviron file. If you have existing configurations in your .Renviron
   file, they will only be changed if they are conflicting. If this is
@@ -226,6 +227,7 @@ consistent manner, every time. Then when you have to revisit a project
 after months and months, it is easy to navigate.
 
 ``` r
+
 # create a project called rclass_project_2023 in your projects directory
 blaseRtemplates::initialize_project("<projects directory>/rclass_project_2023")
 ```
@@ -241,8 +243,8 @@ your project with
 you will have scripts named:
 
 *`initialization.R`: use this for setting up your project to use git and
-github  
-* `dependencies.R`: use this for loading data and attaching packages to
+github\*
+`dependencies.R`: use this for loading data and attaching packages to
 your session \* `configs.R`: use this for setting graphical and
 aesthetic parameters. I also use this for resolving function name
 conflicts. \* `git_commands.R`: the commands here will allow you to
@@ -277,6 +279,7 @@ them in there. Sometimes there are connection issues with github and you
 have to run these again to get new credentials.
 
 ``` r
+
 # make sure you have a github account
 # https://github.com/join
 
@@ -319,6 +322,7 @@ The following lines are taken directly from “R/initialization.R”. You
 should run these when you start up the project the first time:
 
 ``` r
+
 # make a software license
 usethis::use_mit_license("<your name here>")
 
@@ -376,6 +380,7 @@ The basic process for using Git as a single user is this:
 Here are the commands from `git_commands.R`
 
 ``` r
+
 # basic everyday commands for all git users -------------------------------
  
 gert::git_status()
@@ -410,6 +415,7 @@ Here’s a more complicated situation most of us can relate to:
 - What do you do?
 
 ``` r
+
 # run these commands to rewind to a prior "good" commit ----------------------
 
 # make sure git status is "clean" (all changes committed) before rewinding
@@ -502,18 +508,21 @@ The best way to install packages using blaseRtemplates is this:
 - Install a new package or get the latest version from a repository
 
 ``` r
+
 blaseRtemplates::install_one_package(package = "<package_name>", how = "new_or_update")
 ```
 
 - Get a fresh link to the newest version available in the cache
 
 ``` r
+
 blaseRtemplates::install_one_package(package = "<package_name>", how = "link_from_cache")
 ```
 
 - Get a specific version from the cache
 
 ``` r
+
 blaseRtemplates::install_one_package(package = "<package_name>", how = "link_from_cache", which_version = "1.0.0")
 ```
 
@@ -521,6 +530,7 @@ blaseRtemplates::install_one_package(package = "<package_name>", how = "link_fro
   unavailable, the latest version will be installed.
 
 ``` r
+
 blaseRtemplates::install_one_package(package = "<cran_package_name>", how = "new_or_update", which_version = "1.0.0")
 ```
 
@@ -536,6 +546,7 @@ forgets to increment the version number.
 - Install a specific hash of a package
 
 ``` r
+
 blaseRtemplates::install_one_package(package = "<cran_package_name>", how = "new_or_update", which_hash = "72f8712f97416089ade12df29386b80b")
 ```
 
@@ -556,6 +567,7 @@ new one. By default, the function will install the newest version of
 each package available available in the cache.
 
 ``` r
+
 blaseRtemplates::get_new_library()
 ```
 
@@ -565,6 +577,7 @@ git), supply their project library catalog as the argument to
 [`get_new_library()`](https://blaserlab.github.io/blaseRtemplates/reference/get_new_library.html).
 
 ``` r
+
 blaseRtemplates::get_new_library("library_catalogs/<file>.tsv")
 ```
 

@@ -28,7 +28,7 @@ on this if you are interested. In short your data should:
 - each row represents an observation
 - each column represents a variable or attribute for that observation
 - each column should be a single specific “type”: numeric, integer,
-  factor and character are the most common types we use  
+  factor and character are the most common types we use\
 - each row has a unique “key”. The key can be a single column or a
   combination of columns as long as it distinguishes each row from every
   other row.
@@ -45,6 +45,7 @@ everything we do. Think of it as a programmatic representation of your
 csv file within R.
 
 ``` r
+
 # attach the packages we will need
 library("tidyverse")
 # read in an example data file
@@ -81,6 +82,7 @@ inherent order but not a quantitative value. So we can tell R to
 interpret this as a factor which is the R data type for ordered data.
 
 ``` r
+
 readr::read_csv(file = "https://raw.githubusercontent.com/blaserlab/datascience.curriculum/main/inst/extdata/demo_iris_data.csv", col_types = "fddddc")
 #> # A tibble: 150 × 6
 #>    observation Sepal.Length Sepal.Width Petal.Length Petal.Width Species
@@ -121,6 +123,7 @@ is the concept of abstraction, or assigning complicated values to simple
 variable names.
 
 ``` r
+
 # assign the data to the variable, demo_data
 # readr::read_csv(file = system.file("extdata/demo_iris_data.csv", package = "datascience.curriculum"))
 demo_data <- readr::read_csv(file = "https://raw.githubusercontent.com/blaserlab/datascience.curriculum/main/inst/extdata/demo_iris_data.csv", col_types = "fddddc")
@@ -165,6 +168,7 @@ data values, all of which must be the same data type.
 You can make your own vector directly in R like so:
 
 ``` r
+
 # a numeric vector
 c(1, 2, 3)
 #> [1] 1 2 3
@@ -187,6 +191,7 @@ In a dataframe or a tibble, each column is a vector.
 We can use some R operators to extract the columns as vectors.
 
 ``` r
+
 # extract a column by position
 # the head command prints the first few values only
 # omit head() if you want the whole thing
@@ -208,6 +213,7 @@ A list is a more general form of data object. It can hold any
 combination of R data types. This is how you make a list:
 
 ``` r
+
 # make the list
 demo_list <- list(1, "b", "charlie")
 
@@ -245,6 +251,7 @@ for extracting data. This returns an object of the same class, only
 smaller.
 
 ``` r
+
 # subset using dataframe[row,colum] syntax
 # subset a dataframe to get the second and third columns only
 demo_data[,2:3]
@@ -310,6 +317,7 @@ vector of length 1. Many functions are optimized to work on the entire
 vector at once.
 
 ``` r
+
 # get the mean of the sepal length
 mean(demo_data$Sepal.Length)
 #> [1] 5.843333
@@ -335,6 +343,7 @@ You can read more about arithmetic and logical operators
 Logical operators return a value of TRUE or FALSE.
 
 ``` r
+
 1 > 0
 #> [1] TRUE
 
@@ -365,6 +374,7 @@ Dplyr functions are also vectorized so they are computationally
 efficient and can be used on tables with hundreds of thousands of rows.
 
 ``` r
+
 # add a new column with mutate
 # then group by a useful categorical variable
 # then summarize the new value we calculated by mean according to group
@@ -388,6 +398,7 @@ Sometimes you may find it useful to select or de-select columns from a
 tibble:
 
 ``` r
+
 # return a tibble without the observation column
 demo_data |>
   select(-observation)
@@ -427,6 +438,7 @@ demo_data |>
 Use `filter` to select rows based on conditional test(s):
 
 ``` r
+
 # filter rows satisfying a logical test
 demo_data |>
   filter(Species == "setosa")
@@ -472,6 +484,7 @@ column names get repeated in a “name” column and the values end up in a
 additional attributes for the values.
 
 ``` r
+
 # pivot from wide form to long form
 long_data <- demo_data |>
   pivot_longer(cols = c(Sepal.Length,  Sepal.Width, Petal.Length, Petal.Width))
@@ -515,6 +528,7 @@ together. This is a powerful tool for adding new attributes onto
 existing data.
 
 ``` r
+
 # make two smaller tables
 sepal_data <-
   demo_data |>
